@@ -20,6 +20,30 @@ public class Cliente {
         this.PrimerApellido = PrimerApellido;
         this.SegundoApellido = SegundoApellido;
     }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public String getPrimerApellido() {
+        return PrimerApellido;
+    }
+
+    public void setPrimerApellido(String PrimerApellido) {
+        this.PrimerApellido = PrimerApellido;
+    }
+
+    public String getSegundoApellido() {
+        return SegundoApellido;
+    }
+
+    public void setSegundoApellido(String SegundoApellido) {
+        this.SegundoApellido = SegundoApellido;
+    }
     
     
     
