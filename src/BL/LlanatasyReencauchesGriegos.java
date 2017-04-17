@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package llanatasyreencauchesgriegos;
+package BL;
 
 /**
  *
@@ -16,6 +16,7 @@ public class LlanatasyReencauchesGriegos {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.print("hola");
     }
     
 }
