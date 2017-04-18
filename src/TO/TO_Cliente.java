@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package TO;
 
 /**
  *
  * @author michael
  */
-public class DAO_Cliente {
-    
-    public String hola = "";
+public class TO_Cliente {
     
 }
