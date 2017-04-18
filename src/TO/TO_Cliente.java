@@ -11,4 +11,8 @@ package TO;
  */
 public class TO_Cliente {
     
+    public String nombre;
+    public String primerApellido;
+    public String segundoApellido;
+    
 }
