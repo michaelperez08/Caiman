@@ -11,6 +11,4 @@ package DAO;
  */
 public class DAO_Cliente {
     
-    public String hola = "";
-    
 }
