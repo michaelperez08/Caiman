@@ -4,41 +4,50 @@
  * and open the template in the editor.
  */
 package DAO;
-
-import java.sql.Connection;
+ 
 import java.sql.DriverManager;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+ 
 /**
  *
- * @author victoru
+ * @author michael
  */
-public class DAO_Conexion {
+public final class DAO_Conexion {
+ 
     public String servidor = System.getProperty("servidor");
     public String usuarioDB = System.getProperty("usuarioDB");
     public String nombreDB = System.getProperty("nombreDB");
     public String passwordDB = System.getProperty("passwordDB");
-    
+ 
     public DAO_Conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-
+ 
         } catch (ClassNotFoundException e) {
-
+ 
             System.out.println(e.toString());
-
+ 
         }
-
+ 
     }
-    
+ 
     public Connection nuevaConexion() {
         try {
             return DriverManager.getConnection("jdbc:mysql://"+servidor+":3306/"+nombreDB, usuarioDB, passwordDB);
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+ 
+    public boolean probarConeccion() {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://"+servidor+":3306/"+nombreDB, usuarioDB, passwordDB)) {
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Cannot connect the database!"+ e);
+            return false;
+        }
+         
+    }
+ 
 }
