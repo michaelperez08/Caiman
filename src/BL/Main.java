@@ -9,7 +9,7 @@ package BL;
  *
  * @author michael
  */
-public class LlanatasyReencauchesGriegos {
+public class Main {
 
     /**
      * @param args the command line arguments
