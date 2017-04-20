@@ -43,8 +43,8 @@ public final class ConfBD {
                 output = new FileOutputStream(pathCarpProperties + pathArchProperties);
                 prop.setProperty("servidor", "localhost");
                 prop.setProperty("usuarioDB", "root");
-                prop.setProperty("nombreDB", "ClinicaDental");
-                prop.setProperty("passwordDB", "1234");
+                prop.setProperty("nombreDB", "LlantasyReencauchesGriegos");
+                prop.setProperty("passwordDB", "root");
                 prop.store(output, null);
                 leerConfigXML();
             } catch (IOException ex) {
