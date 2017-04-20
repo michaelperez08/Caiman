@@ -85,8 +85,8 @@ public final class ConfBD {
 
     public String[] getDirectoriosPorSO() {
         String os = System.getProperty("os.name").toLowerCase();
-        String[] direccWind = {System.getProperty("user.home") + "\\.expDig", "\\dbconfig.properties"};
-        String[] direccLinux = {System.getProperty("user.home") + "/.expDig", "/dbconfig.properties"};
+        String[] direccWind = {System.getProperty("user.home") + "\\.llyrg-dbconfig", "\\dbconfig.properties"};
+        String[] direccLinux = {System.getProperty("user.home") + "/.llyrg-dbconfig", "/dbconfig.properties"};
         if (os.equals("linux")) {
             return direccLinux;
         } else {
