@@ -9,13 +9,13 @@ package BL;
  *
  * @author michael
  */
-public class Cliente {
+public class BL_Cliente {
     
     String Nombre;
     String PrimerApellido;
     String SegundoApellido;
 
-    public Cliente(String Nombre, String PrimerApellido, String SegundoApellido) {
+    public BL_Cliente(String Nombre, String PrimerApellido, String SegundoApellido) {
         this.Nombre = Nombre;
         this.PrimerApellido = PrimerApellido;
         this.SegundoApellido = SegundoApellido;
