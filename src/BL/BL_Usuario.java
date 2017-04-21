@@ -19,13 +19,11 @@ public class BL_Usuario {
     private int idUsuario;
     private String NombreUsuario;
     private String Contrasena;
-    private boolean Administrador;
  
-    public BL_Usuario(int idUsuario, String NombreUsuario, String Contrasena, boolean Administrador) {
+    public BL_Usuario(int idUsuario, String NombreUsuario, String Contrasena) {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
         this.Contrasena = Contrasena;
-        this.Administrador = Administrador;
     }
  
     public BL_Usuario(String NombreUsuario, String Contrasena) {
@@ -33,10 +31,9 @@ public class BL_Usuario {
         this.Contrasena = Contrasena;
     }
  
-    public BL_Usuario(int idUsuario, String NombreUsuario, boolean Administrador) {
+    public BL_Usuario(int idUsuario, String NombreUsuario) {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
-        this.Administrador = Administrador;
     }
  
     public BL_Usuario() {
@@ -71,25 +68,18 @@ public class BL_Usuario {
         DAO_Usuario daou = new DAO_Usuario();
         TO_Usuario tou = daou.checkLogIn(this.NombreUsuario, this.Contrasena);
         if (tou != null) {
-            return new BL_Usuario(tou.getIdUsuario(), tou.getNombreUsuario(), tou.isAdministrador());
+            return new BL_Usuario(tou.getIdUsuario(), tou.getNombreUsuario());
         } else {
             return null;
         }
  
     }
- 
-    public boolean isAdministrador() {
-        return Administrador;
-    }
- 
-    public void setAdministrador(boolean Administrador) {
-        this.Administrador = Administrador;
-    }
+
 //</editor-fold>
  
-    public boolean guardarUsuario(String nombre, String contrasena, boolean admin) {
+    public boolean guardarUsuario(String nombre, String contrasena) {
         DAO_Usuario daou = new DAO_Usuario();
-        return daou.guardarUsuario(nombre, contrasena, admin);
+        return daou.guardarUsuario(nombre, contrasena);
     }
  
     public boolean eliminarUsuario(int id) {
@@ -103,7 +93,7 @@ public class BL_Usuario {
         ArrayList<BL_Usuario> listaBlu = new ArrayList<>();
  
         for (TO_Usuario listaTou1 : listaTou) {
-            listaBlu.add(new BL_Usuario(listaTou1.getIdUsuario(), listaTou1.getNombreUsuario(), listaTou1.isAdministrador()));
+            listaBlu.add(new BL_Usuario(listaTou1.getIdUsuario(), listaTou1.getNombreUsuario()));
         }
         return listaBlu;
     }

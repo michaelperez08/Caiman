@@ -226,7 +226,7 @@ public class LogIn extends javax.swing.JDialog {
                 } else {
                     if (password.getText().trim().equals(password2.getText().trim())) {
                         BL_Usuario blu = new BL_Usuario();
-                        blu.guardarUsuario(username.getText().trim(), password.getText().trim(), true);
+                        blu.guardarUsuario(username.getText().trim(), password.getText().trim());
                         JOptionPane.showMessageDialog(null, "Usuario guardado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                         continuar = true;
                     } else {

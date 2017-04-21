@@ -14,22 +14,19 @@ public class TO_Usuario {
     private int idUsuario;
     private String NombreUsuario;
     private String Contrasena;
-    private boolean Administrador;
  
     public TO_Usuario() {
     }
  
-    public TO_Usuario(int idUsuario, String NombreUsuario, String Contrasena, boolean Administrador) {
+    public TO_Usuario(int idUsuario, String NombreUsuario, String Contrasena) {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
         this.Contrasena = Contrasena;
-        this.Administrador = Administrador;
     }
  
-    public TO_Usuario(int idUsuario, String NombreUsuario, boolean Administrador) {
+    public TO_Usuario(int idUsuario, String NombreUsuario) {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
-        this.Administrador = Administrador;
     }
  
      
@@ -56,13 +53,5 @@ public class TO_Usuario {
      
     public void setContrasena(String Contrasena) {
         this.Contrasena = Contrasena;
-    }
-     
-    public boolean isAdministrador() {
-        return Administrador;
-    }
-     
-    public void setAdministrador(boolean Administrador) {
-        this.Administrador = Administrador;
     }
 }

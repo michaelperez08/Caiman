@@ -43,7 +43,7 @@ public class DAO_Usuario {
  
             rs = cmd.executeQuery();
             while (rs.next()) {
-                usuario = new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario"), rs.getBoolean("Administrador"));
+                usuario = new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario"));
                 conexion.close();
                 return usuario;
             }
@@ -61,7 +61,7 @@ public class DAO_Usuario {
         return usuario;
     }
  
-    public boolean guardarUsuario(String nombreUsuario, String contrasena, boolean admin) {
+    public boolean guardarUsuario(String nombreUsuario, String contrasena) {
         try {
  
             try {
@@ -72,10 +72,9 @@ public class DAO_Usuario {
                 Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
             }
  
-            cmd = conexion.prepareStatement("insert into Usuario(NombreUsuario, Contrasena, Administrador) values (?,?,?);");
+            cmd = conexion.prepareStatement("insert into Usuario(NombreUsuario, Contrasena, Administrador) values (?,?);");
             cmd.setString(1, nombreUsuario);
             cmd.setString(2, contrasena);
-            cmd.setBoolean(3, admin);
             cmd.execute();
  
             return true;
@@ -137,7 +136,7 @@ public class DAO_Usuario {
             rs = cmd.executeQuery();
  
             while (rs.next()) {
-                listaTou.add(new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario"), rs.getBoolean("Administrador")));
+                listaTou.add(new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
