@@ -42,6 +42,5 @@ public class BL_Telefono {
     public boolean ingresarTelefono(String telefono){
           DAO.DAO_Telefono daotele = new DAO_Telefono();
         return  daotele.ingresarTelefono(telefono); 
-        
     } 
 }
