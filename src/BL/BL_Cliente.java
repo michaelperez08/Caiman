@@ -12,13 +12,19 @@ import DAO.DAO_Cliente;
  * @author michael
  */
 public class BL_Cliente {
-      
+    int id; 
     String Nombre;
     String Direccion;
     String Cedula;
     
     
     public BL_Cliente(String Nombre,String Direccion, String cedula){
+        this.Nombre = Nombre;
+        this.Direccion = Direccion;
+        this.Cedula = cedula;
+    }
+    public BL_Cliente(int id ,String Nombre,String Direccion, String cedula){
+        this.id = id;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = cedula;
