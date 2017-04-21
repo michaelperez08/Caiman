@@ -18,16 +18,16 @@ public class BL_Cliente {
     String Cedula;
     
     
-    public BL_Cliente(String Nombre,String Direccion, String cedula){
+    public BL_Cliente(String Nombre,String Direccion, String Cedula){
         this.Nombre = Nombre;
         this.Direccion = Direccion;
-        this.Cedula = cedula;
+        this.Cedula = Cedula;
     }
-    public BL_Cliente(int id ,String Nombre,String Direccion, String cedula){
+    public BL_Cliente(int id ,String Nombre,String Direccion, String Cedula){
         this.id = id;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
-        this.Cedula = cedula;
+        this.Cedula = Cedula;
     }
          public BL_Cliente(){
             
