@@ -16,16 +16,16 @@ public class TO_Cliente {
     String Cedula;
     
     
-    public TO_Cliente(String Nombre,String Direccion, String cedula){
+    public TO_Cliente(String Nombre,String Direccion, String Cedula){
         this.Nombre = Nombre;
         this.Direccion = Direccion;
-        this.Cedula = cedula;
+        this.Cedula = Cedula;
     }
-    public TO_Cliente(int id ,String Nombre,String Direccion, String cedula){
+    public TO_Cliente(int id ,String Nombre,String Direccion, String Cedula){
         this.id = id;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
-        this.Cedula = cedula;
+        this.Cedula = Cedula;
     }
          public TO_Cliente(){
             
