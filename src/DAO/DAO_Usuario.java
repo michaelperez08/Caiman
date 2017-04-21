@@ -72,7 +72,7 @@ public class DAO_Usuario {
                 Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
             }
  
-            cmd = conexion.prepareStatement("insert into Usuario(NombreUsuario, Contrasena, Administrador) values (?,?);");
+            cmd = conexion.prepareStatement("insert into Usuario(NombreUsuario, Contrasena) values (?,?);");
             cmd.setString(1, nombreUsuario);
             cmd.setString(2, contrasena);
             cmd.execute();
