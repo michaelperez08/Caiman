@@ -54,7 +54,8 @@ CREATE TABLE `Cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) NOT NULL,
   `Direccion` varchar(100) NOT NULL,
-  `Cedula` varchar(25) DEFAULT NULL,
+  `Cedula` varchar(25) NOT NULL,
+  `Telefonos` varchar(50) NOT NULL,
   PRIMARY KEY (`idCliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -65,7 +66,7 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
-INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','207350735'),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','207450335'),(3,'Kenneth Gonzales Oreamuno','Coyol, Alajuela','207450335'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','207450335');
+INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','207350735',''),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','207450335',''),(3,'Kenneth Gonzales Oreamuno','Coyol, Alajuela','207450335',''),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','207450335','');
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-22 10:43:27
+-- Dump completed on 2017-04-22 10:52:18
