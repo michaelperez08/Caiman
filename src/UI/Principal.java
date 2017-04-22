@@ -6,6 +6,7 @@
 package UI;
 
 import BL.BL_Cliente;
+import com.sun.security.ntlm.Client;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -22,10 +23,11 @@ public class Principal extends javax.swing.JFrame {
     private DefaultTableModel dtmClientes;
     private ArrayList<BL_Cliente> listaClientes;
     private TableRowSorter trsfiltro;
+    private BL_Cliente cliente; 
     
     public Principal() {
         initComponents();
-        
+        formatoTablaPacientes();
     }
 
     /**
@@ -223,14 +225,11 @@ public class Principal extends javax.swing.JFrame {
         
     }
     
-     public ArrayList<BL_Cliente> cargarClientes(){
-        
-        return null;
-    }
      
     public void formatoTablaPacientes() {
- 
-        String[] nombreColumnas = {"Nombre", "Primer Apellido", "Segundo Apellido", "Cedula"};
+        cliente = new BL_Cliente();
+        listaClientes = cliente.cargarClientes();
+        String[] nombreColumnas = {"Nombre", "Dirección", "Cedula"};
         dtmClientes = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {

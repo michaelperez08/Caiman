@@ -66,7 +66,7 @@ public class DAO_Cliente {
                 Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            cmd = conexion.prepareStatement("select idCliente Nombre, Direccion, Cedula, Telefonos from Cliente  order by Nombre; ");
+            cmd = conexion.prepareStatement("select idCliente, Nombre, Direccion, Cedula, Telefonos from Cliente  order by Nombre; ");
             rs = cmd.executeQuery();
             
             while (rs.next()) {
