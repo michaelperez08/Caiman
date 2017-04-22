@@ -17,7 +17,7 @@ public class BL_Cliente {
     String Nombre;
     String Direccion;
     String Cedula;
-    ArrayList<String> listaTelefonos;
+    public ArrayList<String> listaTelefonos;
     
     
     public BL_Cliente(String Nombre,String Direccion, String Cedula, ArrayList<String> listaTelefonos){
