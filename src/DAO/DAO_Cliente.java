@@ -25,7 +25,7 @@ public class DAO_Cliente {
     private ResultSet rs;
     private TO_Cliente cliente;
     
-    public boolean ingresarCliente(String nombre,String direccion,String cedula){
+    public boolean ingresarCliente(String nombre,String direccion,String cedula, String telefonos){
         
       try {
           if(conexion == null || conexion.isClosed()){
@@ -34,10 +34,11 @@ public class DAO_Cliente {
           
          
                 
-      cmd = conexion.prepareStatement("insert into Cliente(Nombre,Direccion,Cedula) values (?,?,?,?);");
-      cmd.setString(2,nombre);
-      cmd.setString(3,direccion);
-      cmd.setString(4,cedula);
+      cmd = conexion.prepareStatement("insert into Cliente(Nombre,Direccion,Cedula,Telefonos) values (?,?,?,?);");
+      cmd.setString(1,nombre);
+      cmd.setString(2,direccion);
+      cmd.setString(3,cedula);
+      cmd.setString(4,telefonos);
       cmd.execute();
       return true;
       
