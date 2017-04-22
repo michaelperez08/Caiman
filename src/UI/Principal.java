@@ -6,10 +6,10 @@
 package UI;
 
 import BL.BL_Cliente;
-import com.sun.security.ntlm.Client;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -18,7 +18,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author michael
  */
-public class Principal extends javax.swing.JFrame {
+public final class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
@@ -32,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         formatoTablaPacientes();
+        jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -278,19 +279,16 @@ public class Principal extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Principal().setVisible(true);
             }
@@ -318,8 +316,8 @@ public class Principal extends javax.swing.JFrame {
         };
         if (!listaClientes.isEmpty()) {
             Bayron:
-            for (BL_Cliente cliente : listaClientes) {
-                dtmClientes.addRow(new Object[]{cliente.getNombre(), cliente.getDireccion(), cliente.getCedula()});
+            for (BL_Cliente cliente_temp : listaClientes) {
+                dtmClientes.addRow(new Object[]{cliente_temp.getNombre(), cliente_temp.getDireccion(), cliente_temp.getCedula()});
             }
         }
         jt_clientes.setModel(dtmClientes);
