@@ -13,14 +13,15 @@ import javax.swing.JOptionPane;
  *
  * @author victoru
  */
-public class UI_IngresarUsuario extends javax.swing.JDialog {
+public class UI_Cliente extends javax.swing.JDialog {
 
     /**
-     * Creates new form UI_IngresarUsuario
+     * Creates new form UI_Cliente
      */
     public DefaultListModel dlm_telfonos;
+    public BL_Cliente clienteAMostrar;
 
-    public UI_IngresarUsuario(java.awt.Frame parent, boolean modal) {
+    public UI_Cliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -188,9 +189,9 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String telefonos = tf_telefono.getText();
         try {
-            Integer.parseInt(telefonos);
+            Integer.parseInt(telefonos.trim());
             if (!telefonos.isEmpty()) {
-                dlm_telfonos.addElement(telefonos);
+                dlm_telfonos.addElement(telefonos.trim());
                 jl_telefonos.setModel(dlm_telfonos);
                 tf_telefono.setText("");
             } else {
@@ -224,10 +225,19 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
             try {
                 Integer.parseInt(cedula);
                 BL_Cliente cliente = new BL_Cliente();
-                clienteIngresado = cliente.insertarCliente(tf_nombre.getText().trim(), tf_direccion.getText().trim(), tf_cedula.getText().trim(), "  ");
+                clienteIngresado = cliente.insertarCliente(tf_nombre.getText().trim(), tf_direccion.getText().trim(), tf_cedula.getText().trim(), concatenarTelefonos());
                 if (clienteIngresado) {
-                    JOptionPane.showMessageDialog(null, "Paciente Añadido", "Paciente Ingresado", JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "Cliente Añadido", "Cliente Ingresado", JOptionPane.INFORMATION_MESSAGE);
+                    Object[] opciones = {"Si","No"};
+                    int n = JOptionPane.showOptionDialog(null, "Desea ingresar otro cliente?", "Cliente Nuevo", 
+                            JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,opciones, opciones[0]);
+                    if (n==1) {
+                        this.dispose();
+                    }else{
+                        limpiarCampos();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al insertar cliente, si el error persiste, contacte al adminstrador del sistema", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (NumberFormatException n) {
                  JOptionPane.showMessageDialog(null, "Debe digitar numeros");
@@ -246,12 +256,29 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
 
     public DefaultListModel separarTelefonos(String telefonos) {
         DefaultListModel dlm_temp = new DefaultListModel();
-        for (String telefono : telefonos.split("|")) {
+        String[] partTele = telefonos.split("-");
+        for (String telefono : partTele) {
             dlm_temp.addElement(telefono);
         }
         return dlm_temp;
     }
     
+    public void cargarCliente(BL_Cliente cliente){
+        clienteAMostrar = cliente;
+        tf_nombre.setText(clienteAMostrar.getNombre());
+        tf_direccion.setText(clienteAMostrar.getDireccion());
+        tf_cedula.setText(clienteAMostrar.getCedula());
+        dlm_telfonos = separarTelefonos(clienteAMostrar.getTelefonos());
+        jl_telefonos.setModel(dlm_telfonos);
+    }
+    
+    public void limpiarCampos(){
+        tf_cedula.setText("");
+        tf_direccion.setText("");
+        tf_nombre.setText("");
+        tf_telefono.setText("");
+        dlm_telfonos.clear();
+    }
     /**
      * @param args the command line arguments
      */
@@ -269,20 +296,21 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI_IngresarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI_IngresarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI_IngresarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_IngresarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UI_IngresarUsuario dialog = new UI_IngresarUsuario(new javax.swing.JFrame(), true);
+                UI_Cliente dialog = new UI_Cliente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -112,6 +112,11 @@ public final class Principal extends javax.swing.JFrame {
         bt_agregar.setBackground(new java.awt.Color(51, 51, 51));
         bt_agregar.setForeground(new java.awt.Color(204, 204, 204));
         bt_agregar.setText("Agregar");
+        bt_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_agregarActionPerformed(evt);
+            }
+        });
 
         bt_modificar.setBackground(new java.awt.Color(51, 51, 51));
         bt_modificar.setForeground(new java.awt.Color(204, 204, 204));
@@ -265,6 +270,13 @@ public final class Principal extends javax.swing.JFrame {
         modificarCliente();
     }//GEN-LAST:event_bt_modificarActionPerformed
 
+    private void bt_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarActionPerformed
+        // TODO add your handling code here:
+        UI_Cliente ic = new UI_Cliente(this, rootPaneCheckingEnabled);
+        ic.setVisible(true);
+        formatoTablaPacientes();
+    }//GEN-LAST:event_bt_agregarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -303,13 +315,13 @@ public final class Principal extends javax.swing.JFrame {
         if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
             hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
         }
-        trsfiltro.setRowFilter(RowFilter.regexFilter(hilera, 0));
+        trsfiltro.setRowFilter(RowFilter.regexFilter(hilera, 1));
     }
      
     public void formatoTablaPacientes() {
         cliente = new BL_Cliente();
         listaClientes = cliente.cargarClientes();
-        String[] nombreColumnas = {"Nombre", "Dirección", "Cedula"};
+        String[] nombreColumnas =  {"numeroFila","Nombre", "Dirección", "Cedula"};
         dtmClientes = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -319,7 +331,7 @@ public final class Principal extends javax.swing.JFrame {
         if (!listaClientes.isEmpty()) {
             Bayron:
             for (BL_Cliente cliente_temp : listaClientes) {
-                dtmClientes.addRow(new Object[]{cliente_temp.getNombre(), cliente_temp.getDireccion(), cliente_temp.getCedula()});
+                dtmClientes.addRow(new Object[]{dtmClientes.getRowCount(),cliente_temp.getNombre(), cliente_temp.getDireccion(), cliente_temp.getCedula()});
             }
         }
         jt_clientes.setModel(dtmClientes);
@@ -327,8 +339,14 @@ public final class Principal extends javax.swing.JFrame {
     }
     
     public void verCliente(){
+        BL_Cliente clienteVer;
         if(validarSeleccion()) {
-            
+            UI_Cliente uic = new UI_Cliente(this, rootPaneCheckingEnabled);
+            int fila = jt_clientes.getSelectedRow();
+            int numeroFila = Integer.parseInt(""+jt_clientes.getValueAt(fila, 0));
+            clienteVer = listaClientes.get(numeroFila);
+            uic.cargarCliente(clienteVer);
+            uic.setVisible(true);
         }
     }
     
