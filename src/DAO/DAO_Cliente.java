@@ -53,4 +53,35 @@ public class DAO_Cliente {
       
       return false;
     }
+    
+    public ArrayList<TO_Cliente> cargarClientes() {
+        ArrayList<TO_Cliente> clientes = new ArrayList<>();
+        
+        try {
+            try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            cmd = conexion.prepareStatement("select idCliente Nombre, Direccion, Cedula, Telefonos from Cliente  order by Nombre; ");
+            rs = cmd.executeQuery();
+            
+            while (rs.next()) {
+                clientes.add(new TO_Cliente(rs.getInt("idCliente"), rs.getString("Nombre"), rs.getString("Direccion"), rs.getString("Cedula"), rs.getString("Telefonos")));
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                cmd.close();
+                conexion.close();
+            } catch(Exception ex) {
+                 Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return clientes;
+    }
 }

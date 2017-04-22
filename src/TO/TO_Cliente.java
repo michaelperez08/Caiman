@@ -10,22 +10,25 @@ package TO;
  * @author michael
  */
 public class TO_Cliente {
-    int id; 
-    String Nombre;
-    String Direccion;
-    String Cedula;
+    public int idCliente; 
+    public String Nombre;
+    public String Direccion;
+    public String Cedula;
+    public String Telefonos;
     
     
-    public TO_Cliente(String Nombre,String Direccion, String Cedula){
+    public TO_Cliente(String Nombre,String Direccion, String Cedula, String Telefonos){
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
+        this.Telefonos = Telefonos;
     }
-    public TO_Cliente(int id ,String Nombre,String Direccion, String Cedula){
-        this.id = id;
+    public TO_Cliente(int Cliente ,String Nombre,String Direccion, String Cedula,String Telefonos){
+        this.idCliente = Cliente;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
+        this.Telefonos = Telefonos;
     }
          public TO_Cliente(){
             
@@ -54,12 +57,12 @@ public class TO_Cliente {
         this.Cedula = Cedula;
     }
     
-      public int getId() {
-        return id;
+      public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCliente(int Cliente) {
+        this.idCliente = Cliente;
     }
 
 }

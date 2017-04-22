@@ -6,6 +6,7 @@
 package BL;
 
 import DAO.DAO_Cliente;
+import TO.TO_Cliente;
 import java.util.ArrayList;
 
 /**
@@ -13,37 +14,37 @@ import java.util.ArrayList;
  * @author michael
  */
 public class BL_Cliente {
-    int id; 
-    String Nombre;
-    String Direccion;
-    String Cedula;
-    public ArrayList<String> listaTelefonos;
+    public int idCliente; 
+    public String Nombre;
+    public String Direccion;
+    public String Cedula;
+    public String Telefonos;
     
     
-    public BL_Cliente(String Nombre,String Direccion, String Cedula, ArrayList<String> listaTelefonos){
+    public BL_Cliente(String Nombre,String Direccion, String Cedula, String listaTelefonos){
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
-        this.listaTelefonos = listaTelefonos;
+        this.Telefonos = listaTelefonos;
     }
-    public BL_Cliente(int id ,String Nombre,String Direccion, String Cedula, ArrayList<String> listaTelefonos){
-        this.id = id;
+    public BL_Cliente(int idCliente ,String Nombre,String Direccion, String Cedula, String listaTelefonos){
+        this.idCliente = idCliente;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
-        this.listaTelefonos = listaTelefonos;
+        this.Telefonos = listaTelefonos;
     }
     
     public BL_Cliente(){
 
     }
 
-    public ArrayList<String> getListaTelefonos() {
-        return listaTelefonos;
+    public String getListaTelefonos() {
+        return Telefonos;
     }
 
-    public void setListaTelefonos(ArrayList<String> listaTelefonos) {
-        this.listaTelefonos = listaTelefonos;
+    public void setListaTelefonos(String listaTelefonos) {
+        this.Telefonos = listaTelefonos;
     }
     
     public String getNombre() {
@@ -70,12 +71,12 @@ public class BL_Cliente {
         this.Cedula = Cedula;
     }
     
-      public int getId() {
-        return id;
+      public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public boolean insertarCliente(String Nombre, String Direccion, String Cedula){
@@ -83,6 +84,15 @@ public class BL_Cliente {
         return  daoCli.ingresarCliente(Nombre, Direccion, Cedula); 
     }
  
-    
+    public ArrayList<BL_Cliente> cargarClientes() {
+        ArrayList<TO_Cliente> listaToClientes;
+        ArrayList<BL_Cliente> listaBlClientes = new ArrayList<>();
+        DAO_Cliente daoCliente = new DAO_Cliente();
+        listaToClientes = daoCliente.cargarClientes();
+        for(TO_Cliente tem : listaToClientes) {
+            listaBlClientes.add(new BL_Cliente(tem.idCliente, tem.Nombre, tem.Direccion, tem.Cedula, tem.Telefonos));
+        }
+        return listaBlClientes;
+    }
     
 }
