@@ -58,9 +58,9 @@ public class LogIn extends javax.swing.JDialog {
     }
  
     public void bloquerLogIn() {
-        /*tf_usuario.setEnabled(false);
-        jpf_contraseña.setEnabled(false);
-        bt_entrar.setEnabled(false);*/
+        tf_usuario.setEnabled(false);
+        tf_contrasena.setEnabled(false);
+        bt_logIn.setEnabled(false);
     }
  
     public void desbloquerLogIn() {/*
