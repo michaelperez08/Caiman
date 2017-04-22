@@ -5,6 +5,7 @@
  */
 package UI;
 
+import BL.BL_Cliente;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -18,6 +19,7 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
      * Creates new form UI_IngresarUsuario
      */
     public DefaultListModel dlm_telfonos;
+
     public UI_IngresarUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -84,6 +86,11 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
         bt_ingresarCliente.setBackground(new java.awt.Color(51, 51, 51));
         bt_ingresarCliente.setForeground(new java.awt.Color(204, 204, 204));
         bt_ingresarCliente.setText("Ingresar Cliente");
+        bt_ingresarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_ingresarClienteActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(51, 51, 51));
         jButton1.setForeground(new java.awt.Color(204, 204, 204));
@@ -180,16 +187,16 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String telefonos = tf_telefono.getText();
-        try{
+        try {
             Integer.parseInt(telefonos);
-            if(!telefonos.isEmpty()){
+            if (!telefonos.isEmpty()) {
                 dlm_telfonos.addElement(telefonos);
                 jl_telefonos.setModel(dlm_telfonos);
                 tf_telefono.setText("");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "No hay telefono que agregar", "Telefonos", JOptionPane.INFORMATION_MESSAGE);
             }
-        }catch(NumberFormatException n){
+        } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Debe digitar numeros");
             tf_telefono.setText("");
         }
@@ -198,13 +205,36 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
         // TODO add your handling code here:
         int tel_seleccionado = jl_telefonos.getSelectedIndex();
-        if(tel_seleccionado >= 0){
+        if (tel_seleccionado >= 0) {
             dlm_telfonos.remove(tel_seleccionado);
             jl_telefonos.setModel(dlm_telfonos);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado un telefono", "Telefono", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jmi_eliminarActionPerformed
+
+    private void bt_ingresarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ingresarClienteActionPerformed
+        boolean clienteIngresado = false;
+        String cedula = tf_cedula.getText().trim();
+
+        if (tf_nombre.getText().trim().isEmpty() || tf_cedula.getText().trim().isEmpty()
+                || tf_direccion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            try {
+                Integer.parseInt(cedula);
+                BL_Cliente cliente = new BL_Cliente();
+                clienteIngresado = cliente.insertarCliente(tf_nombre.getText().trim(), tf_direccion.getText().trim(), tf_cedula.getText().trim(), "  ");
+                if (clienteIngresado) {
+                    JOptionPane.showMessageDialog(null, "Paciente Añadido", "Paciente Ingresado", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }
+            } catch (NumberFormatException n) {
+                 JOptionPane.showMessageDialog(null, "Debe digitar numeros");
+                tf_cedula.setText("");
+            }
+        }
+    }//GEN-LAST:event_bt_ingresarClienteActionPerformed
 
     /**
      * @param args the command line arguments
