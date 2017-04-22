@@ -31,6 +31,8 @@ public final class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         formatoTablaPacientes();
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
