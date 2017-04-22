@@ -7,6 +7,8 @@ package UI;
 
 import BL.BL_Cliente;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -17,8 +19,13 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    private DefaultTableModel dtmClientes;
+    private ArrayList<BL_Cliente> listaClientes;
+    private TableRowSorter trsfiltro;
+    
     public Principal() {
         initComponents();
+        
     }
 
     /**
@@ -219,6 +226,25 @@ public class Principal extends javax.swing.JFrame {
      public ArrayList<BL_Cliente> cargarClientes(){
         
         return null;
+    }
+     
+    public void formatoTablaPacientes() {
+ 
+        String[] nombreColumnas = {"Nombre", "Primer Apellido", "Segundo Apellido", "Cedula"};
+        dtmClientes = new DefaultTableModel(null, nombreColumnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        if (!listaClientes.isEmpty()) {
+            Bayron:
+            for (BL_Cliente cliente : listaClientes) {
+                dtmClientes.addRow(new Object[]{cliente.getNombre(), cliente.getDireccion(), cliente.getCedula()});
+            }
+        }
+        jt_clientes.setModel(dtmClientes);
+        trsfiltro = new TableRowSorter(jt_clientes.getModel());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

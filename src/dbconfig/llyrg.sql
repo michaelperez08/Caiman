@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `LlantasyReencauchesGriegos` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `LlantasyReencauchesGriegos`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
--- Host: localhost    Database: LlantasyReencacuhesGriegos
+-- Host: localhost    Database: LlantasyReencauchesGriegos
 -- ------------------------------------------------------
 -- Server version	5.7.17
 
@@ -54,7 +56,7 @@ CREATE TABLE `Cliente` (
   `Direccion` varchar(100) NOT NULL,
   `Cedula` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +65,7 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
+INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','207350735'),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','207450335'),(3,'Kenneth Gonzales Oreamuno','Coyol, Alajuela','207450335'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','207450335');
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,32 +153,6 @@ LOCK TABLES `Llanta` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Telefono`
---
-
-DROP TABLE IF EXISTS `Telefono`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Telefono` (
-  `idTelefono` int(11) NOT NULL AUTO_INCREMENT,
-  `idCliente` int(11) NOT NULL,
-  `Telefono` varchar(15) NOT NULL,
-  PRIMARY KEY (`idTelefono`),
-  KEY `fk_Telefono_1_idx` (`idCliente`),
-  CONSTRAINT `fk_Telefono_1` FOREIGN KEY (`idCliente`) REFERENCES `Cliente` (`idCliente`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Telefono`
---
-
-LOCK TABLES `Telefono` WRITE;
-/*!40000 ALTER TABLE `Telefono` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Telefono` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Usuario`
 --
 
@@ -185,9 +162,9 @@ DROP TABLE IF EXISTS `Usuario`;
 CREATE TABLE `Usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `NombreUsuario` varchar(15) NOT NULL,
-  `Contraseña` varchar(20) DEFAULT NULL,
+  `Contrasena` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,16 +173,9 @@ CREATE TABLE `Usuario` (
 
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
+INSERT INTO `Usuario` VALUES (1,'admin','admin');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'LlantasyReencacuhesGriegos'
---
-
---
--- Dumping routines for database 'LlantasyReencacuhesGriegos'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -216,4 +186,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-19 18:20:29
+-- Dump completed on 2017-04-22 10:43:27

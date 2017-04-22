@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * @author michael
  */
 public class DAO_Cliente {
-      private Connection conexion;
+    private Connection conexion;
     private DAO_Conexion daoConexion = new DAO_Conexion();
     private PreparedStatement cmd;
     private ResultSet rs;
