@@ -9,6 +9,7 @@ import BL.BL_Cliente;
 import com.sun.security.ntlm.Client;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -25,7 +26,8 @@ public class Principal extends javax.swing.JFrame {
     private DefaultTableModel dtmClientes;
     private ArrayList<BL_Cliente> listaClientes;
     private TableRowSorter trsfiltro;
-    private BL_Cliente cliente; 
+    private BL_Cliente cliente;
+    private int filaSeleccionada;
     
     public Principal() {
         initComponents();
@@ -41,6 +43,10 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pum_tbClientes = new javax.swing.JPopupMenu();
+        jmi_verCliente = new javax.swing.JMenuItem();
+        jmi_modificarCliente = new javax.swing.JMenuItem();
+        jmi_eliminar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -54,6 +60,25 @@ public class Principal extends javax.swing.JFrame {
         jt_clientes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+
+        jmi_verCliente.setText("Ver");
+        jmi_verCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_verClienteActionPerformed(evt);
+            }
+        });
+        pum_tbClientes.add(jmi_verCliente);
+
+        jmi_modificarCliente.setText("Modificar");
+        jmi_modificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_modificarClienteActionPerformed(evt);
+            }
+        });
+        pum_tbClientes.add(jmi_modificarCliente);
+
+        jmi_eliminar.setText("Eliminar");
+        pum_tbClientes.add(jmi_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +100,11 @@ public class Principal extends javax.swing.JFrame {
         bt_ver.setBackground(new java.awt.Color(51, 51, 51));
         bt_ver.setForeground(new java.awt.Color(204, 204, 204));
         bt_ver.setText("Ver");
+        bt_ver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_verActionPerformed(evt);
+            }
+        });
 
         bt_agregar.setBackground(new java.awt.Color(51, 51, 51));
         bt_agregar.setForeground(new java.awt.Color(204, 204, 204));
@@ -83,6 +113,11 @@ public class Principal extends javax.swing.JFrame {
         bt_modificar.setBackground(new java.awt.Color(51, 51, 51));
         bt_modificar.setForeground(new java.awt.Color(204, 204, 204));
         bt_modificar.setText("Modificar");
+        bt_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_modificarActionPerformed(evt);
+            }
+        });
 
         bt_eliminar.setBackground(new java.awt.Color(51, 51, 51));
         bt_eliminar.setForeground(new java.awt.Color(204, 204, 204));
@@ -101,6 +136,7 @@ public class Principal extends javax.swing.JFrame {
                 "ID", "Nombre", "Cedula", "Telefono"
             }
         ));
+        jt_clientes.setComponentPopupMenu(pum_tbClientes);
         jt_clientes.setGridColor(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(jt_clientes);
 
@@ -206,6 +242,26 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tf_buscarClienteKeyReleased
 
+    private void bt_verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verActionPerformed
+        // TODO add your handling code here:
+        verCliente();
+    }//GEN-LAST:event_bt_verActionPerformed
+
+    private void jmi_verClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verClienteActionPerformed
+        // TODO add your handling code here:
+        verCliente();
+    }//GEN-LAST:event_jmi_verClienteActionPerformed
+
+    private void jmi_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarClienteActionPerformed
+        // TODO add your handling code here:
+        modificarCliente();
+    }//GEN-LAST:event_jmi_modificarClienteActionPerformed
+
+    private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
+        // TODO add your handling code here:
+        modificarCliente();
+    }//GEN-LAST:event_bt_modificarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,6 +325,28 @@ public class Principal extends javax.swing.JFrame {
         jt_clientes.setModel(dtmClientes);
         trsfiltro = new TableRowSorter(jt_clientes.getModel());
     }
+    
+    public void verCliente(){
+        if(validarSeleccion()) {
+            
+        }
+    }
+    
+    public void modificarCliente(){
+        if (validarSeleccion()) {
+            
+        }
+    }
+    
+    public boolean validarSeleccion(){
+        filaSeleccionada = jt_clientes.getSelectedRow();
+        if(filaSeleccionada >= 0){
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun Cliente", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_agregar;
@@ -282,7 +360,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jl_Buscar;
+    private javax.swing.JMenuItem jmi_eliminar;
+    private javax.swing.JMenuItem jmi_modificarCliente;
+    private javax.swing.JMenuItem jmi_verCliente;
     private javax.swing.JTable jt_clientes;
+    private javax.swing.JPopupMenu pum_tbClientes;
     private javax.swing.JTextField tf_buscarCliente;
     // End of variables declaration//GEN-END:variables
 }
