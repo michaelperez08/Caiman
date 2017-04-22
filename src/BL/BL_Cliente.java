@@ -39,12 +39,12 @@ public class BL_Cliente {
 
     }
 
-    public String getListaTelefonos() {
+    public String getTelefonos() {
         return Telefonos;
     }
 
-    public void setListaTelefonos(String listaTelefonos) {
-        this.Telefonos = listaTelefonos;
+    public void setTelefonos(String Telefonos) {
+        this.Telefonos = Telefonos;
     }
     
     public String getNombre() {
@@ -79,9 +79,9 @@ public class BL_Cliente {
         this.idCliente = idCliente;
     }
 
-    public boolean insertarCliente(String Nombre, String Direccion, String Cedula){
+    public boolean insertarCliente(String Nombre, String Direccion, String Cedula,String Telefonos){
          DAO.DAO_Cliente daoCli = new DAO_Cliente();
-        return  daoCli.ingresarCliente(Nombre, Direccion, Cedula); 
+        return  daoCli.ingresarCliente(Nombre, Direccion, Cedula,Telefonos); 
     }
  
     public ArrayList<BL_Cliente> cargarClientes() {
