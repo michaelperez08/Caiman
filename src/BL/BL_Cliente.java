@@ -6,6 +6,7 @@
 package BL;
 
 import DAO.DAO_Cliente;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,22 +17,35 @@ public class BL_Cliente {
     String Nombre;
     String Direccion;
     String Cedula;
+    ArrayList<String> listaTelefonos;
     
     
-    public BL_Cliente(String Nombre,String Direccion, String Cedula){
+    public BL_Cliente(String Nombre,String Direccion, String Cedula, ArrayList<String> listaTelefonos){
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
+        this.listaTelefonos = listaTelefonos;
     }
-    public BL_Cliente(int id ,String Nombre,String Direccion, String Cedula){
+    public BL_Cliente(int id ,String Nombre,String Direccion, String Cedula, ArrayList<String> listaTelefonos){
         this.id = id;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
+        this.listaTelefonos = listaTelefonos;
     }
-         public BL_Cliente(){
-            
-        }
+    
+    public BL_Cliente(){
+
+    }
+
+    public ArrayList<String> getListaTelefonos() {
+        return listaTelefonos;
+    }
+
+    public void setListaTelefonos(ArrayList<String> listaTelefonos) {
+        this.listaTelefonos = listaTelefonos;
+    }
+    
     public String getNombre() {
         return Nombre;
     }
@@ -64,7 +78,7 @@ public class BL_Cliente {
         this.id = id;
     }
 
-    public boolean insertarCliente(String Nombre, String Direccion,String Cedula ){
+    public boolean insertarCliente(String Nombre, String Direccion, String Cedula){
          DAO.DAO_Cliente daoCli = new DAO_Cliente();
         return  daoCli.ingresarCliente(Nombre, Direccion, Cedula); 
     }
