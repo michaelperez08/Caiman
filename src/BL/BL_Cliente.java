@@ -21,18 +21,18 @@ public class BL_Cliente {
     public String Telefonos;
     
     
-    public BL_Cliente(String Nombre,String Direccion, String Cedula, String listaTelefonos){
+    public BL_Cliente(String Nombre,String Direccion, String Cedula, String Telefonos){
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
-        this.Telefonos = listaTelefonos;
+        this.Telefonos = Telefonos;
     }
-    public BL_Cliente(int idCliente ,String Nombre,String Direccion, String Cedula, String listaTelefonos){
+    public BL_Cliente(int idCliente ,String Nombre,String Direccion, String Cedula, String Telefonos){
         this.idCliente = idCliente;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cedula = Cedula;
-        this.Telefonos = listaTelefonos;
+        this.Telefonos = Telefonos;
     }
     
     public BL_Cliente(){
