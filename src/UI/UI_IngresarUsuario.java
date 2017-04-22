@@ -236,6 +236,22 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_bt_ingresarClienteActionPerformed
 
+    public String concatenarTelefonos() {
+        String telefonos = "";
+        for (int i = 0; i < dlm_telfonos.getSize(); i++) {
+            telefonos += dlm_telfonos.getElementAt(i) + "|";
+        }
+        return telefonos;
+    }
+
+    public DefaultListModel separarTelefonos(String telefonos) {
+        DefaultListModel dlm_temp = new DefaultListModel();
+        for (String telefono : telefonos.split("|")) {
+            dlm_temp.addElement(telefono);
+        }
+        return dlm_temp;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -277,6 +293,8 @@ public class UI_IngresarUsuario extends javax.swing.JDialog {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bl_direccion;
