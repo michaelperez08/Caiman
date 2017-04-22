@@ -29,6 +29,8 @@ public class LogIn extends javax.swing.JDialog {
     public LogIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
     
     public boolean iniciarLogIn() {
@@ -56,9 +58,9 @@ public class LogIn extends javax.swing.JDialog {
     }
  
     public void bloquerLogIn() {
-        /*tf_usuario.setEnabled(false);
-        jpf_contraseña.setEnabled(false);
-        bt_entrar.setEnabled(false);*/
+        tf_usuario.setEnabled(false);
+        tf_contrasena.setEnabled(false);
+        bt_logIn.setEnabled(false);
     }
  
     public void desbloquerLogIn() {/*
@@ -103,6 +105,11 @@ public class LogIn extends javax.swing.JDialog {
 
         bt_logIn.setForeground(new java.awt.Color(204, 204, 204));
         bt_logIn.setText("Aceptar");
+        bt_logIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_logInActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -171,6 +178,24 @@ public class LogIn extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
+        // TODO add your handling code here:
+        if (tf_usuario.getText().trim().isEmpty() || tf_contrasena.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña vacios", "ERROR",JOptionPane.ERROR_MESSAGE);
+        } else {
+            BL_Usuario blUsuario;
+            blUsuario = new BL_Usuario(tf_usuario.getText(), tf_contrasena.getText());
+            if (blUsuario.LogIn() != null) {
+                Principal p = new Principal();
+                p.setVisible(true);
+                this.setVisible(false);
+            } else {
+                 JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña incorrectos", "ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }//GEN-LAST:event_bt_logInActionPerformed
 
     /**
      * @param args the command line arguments

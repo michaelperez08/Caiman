@@ -33,15 +33,18 @@ public class Main {
         } catch (Exception e) {
     // If Nimbus is not available, you can set the GUI to another look and feel.
         }
+         
         ConfBD confdb = new ConfBD();
         /*LogIn login = new LogIn(null, true);
         if(login.iniciarLogIn()) {
         login.setVisible(true);
         } else {
             System.exit(0);
-        }*/
+        }
+        */
         Principal p = new Principal();
         p.setVisible(true);
+     
     }
     
 }
