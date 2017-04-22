@@ -7,7 +7,9 @@ package UI;
 
 import BL.BL_Cliente;
 import com.sun.security.ntlm.Client;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -64,6 +66,11 @@ public class Principal extends javax.swing.JFrame {
         tf_buscarCliente.setBackground(new java.awt.Color(51, 51, 51));
         tf_buscarCliente.setForeground(new java.awt.Color(255, 255, 255));
         tf_buscarCliente.setSelectionColor(new java.awt.Color(153, 153, 153));
+        tf_buscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_buscarClienteKeyReleased(evt);
+            }
+        });
 
         bt_ver.setBackground(new java.awt.Color(51, 51, 51));
         bt_ver.setForeground(new java.awt.Color(204, 204, 204));
@@ -189,6 +196,16 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tf_buscarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarClienteKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            //new AyudaF1().abrirAyuda();
+        } else {
+            filtrar();
+            jt_clientes.setRowSorter(trsfiltro);
+        }
+    }//GEN-LAST:event_tf_buscarClienteKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -225,6 +242,13 @@ public class Principal extends javax.swing.JFrame {
         
     }
     
+     public void filtrar() {
+        String hilera = tf_buscarCliente.getText();
+        if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
+            hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
+        }
+        trsfiltro.setRowFilter(RowFilter.regexFilter(hilera, 0));
+    }
      
     public void formatoTablaPacientes() {
         cliente = new BL_Cliente();
