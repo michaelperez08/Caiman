@@ -256,7 +256,7 @@ public class UI_Cliente extends javax.swing.JDialog {
 
     public DefaultListModel separarTelefonos(String telefonos) {
         DefaultListModel dlm_temp = new DefaultListModel();
-        String[] partTele = telefonos.split("-");
+        String[] partTele = telefonos.split(" ");
         for (String telefono : partTele) {
             dlm_temp.addElement(telefono);
         }

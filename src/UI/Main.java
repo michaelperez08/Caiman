@@ -20,7 +20,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-          try {
+        try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
@@ -28,23 +28,23 @@ public class Main {
                 }
             }
                //UIManager.setLookAndFeel (WebLookAndFeel.class.getCanonicalName());
-              //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-              //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
         } catch (Exception e) {
-    // If Nimbus is not available, you can set the GUI to another look and feel.
+            // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-         
+
         ConfBD confdb = new ConfBD();
         /*LogIn login = new LogIn(null, true);
-        if(login.iniciarLogIn()) {
-        login.setVisible(true);
-        } else {
-            System.exit(0);
-        }
-        */
+         if(login.iniciarLogIn()) {
+         login.setVisible(true);
+         } else {
+         System.exit(0);
+         }
+         */
         Principal p = new Principal();
         p.setVisible(true);
-     
+
     }
-    
+
 }

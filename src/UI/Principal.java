@@ -8,6 +8,7 @@ package UI;
 import BL.BL_Cliente;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
@@ -31,6 +32,7 @@ public final class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../IMG/tire-icon.png")).getImage());
         setLocationRelativeTo(null);
         setResizable(false);
         formatoTablaPacientes();
@@ -85,14 +87,20 @@ public final class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
+
+        jTabbedPane1.setBackground(new java.awt.Color(51, 51, 51));
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+
         jl_Buscar.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jl_Buscar.setForeground(new java.awt.Color(204, 204, 204));
         jl_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar.setText("Buscar");
 
-        tf_buscarCliente.setBackground(new java.awt.Color(51, 51, 51));
-        tf_buscarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        tf_buscarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        tf_buscarCliente.setForeground(new java.awt.Color(51, 51, 51));
         tf_buscarCliente.setSelectionColor(new java.awt.Color(153, 153, 153));
         tf_buscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
