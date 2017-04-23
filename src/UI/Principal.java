@@ -154,6 +154,11 @@ public final class Principal extends javax.swing.JFrame {
         ));
         jt_clientes.setComponentPopupMenu(pum_tbClientes);
         jt_clientes.setGridColor(new java.awt.Color(51, 51, 51));
+        jt_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jt_clientesMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_clientes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -284,6 +289,13 @@ public final class Principal extends javax.swing.JFrame {
         ic.setVisible(true);
         formatoTablaPacientes();
     }//GEN-LAST:event_bt_agregarActionPerformed
+
+    private void jt_clientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_clientesMouseReleased
+        // TODO add your handling code here:
+        if (evt.getClickCount()==2){
+            verCliente();
+        }
+    }//GEN-LAST:event_jt_clientesMouseReleased
 
     /**
      * @param args the command line arguments
