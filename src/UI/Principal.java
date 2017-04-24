@@ -9,9 +9,11 @@ import BL.BL_Cliente;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -29,13 +31,13 @@ public final class Principal extends javax.swing.JFrame {
     private TableRowSorter trsfiltro;
     private BL_Cliente cliente;
     private int filaSeleccionada;
-    
+
     public Principal() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../IMG/tire-icon.png")).getImage());
         setLocationRelativeTo(null);
         setResizable(false);
-        formatoTablaPacientes();
+        cargarClientes();
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
@@ -86,6 +88,7 @@ public final class Principal extends javax.swing.JFrame {
         pum_tbClientes.add(jmi_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LLantas y Reencauches Griegos");
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -287,12 +290,12 @@ public final class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         UI_Cliente ic = new UI_Cliente(this, rootPaneCheckingEnabled);
         ic.setVisible(true);
-        formatoTablaPacientes();
+        cargarClientes();
     }//GEN-LAST:event_bt_agregarActionPerformed
 
     private void jt_clientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_clientesMouseReleased
         // TODO add your handling code here:
-        if (evt.getClickCount()==2){
+        if (evt.getClickCount() == 2) {
             verCliente();
         }
     }//GEN-LAST:event_jt_clientesMouseReleased
@@ -317,7 +320,7 @@ public final class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -327,21 +330,21 @@ public final class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
-        
+
     }
-    
-     public void filtrar() {
+
+    public void filtrar() {
         String hilera = tf_buscarCliente.getText();
         if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
             hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
         }
         trsfiltro.setRowFilter(RowFilter.regexFilter(hilera, 1));
     }
-     
-    public void formatoTablaPacientes() {
+
+    public void cargarClientes() {
         cliente = new BL_Cliente();
         listaClientes = cliente.cargarClientes();
-        String[] nombreColumnas =  {"numeroFila","Nombre", "Dirección", "Cedula"};
+        String[] nombreColumnas = {"numeroFila", "Nombre", "Dirección", "Cedula"};
         dtmClientes = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -351,36 +354,40 @@ public final class Principal extends javax.swing.JFrame {
         if (!listaClientes.isEmpty()) {
             Bayron:
             for (BL_Cliente cliente_temp : listaClientes) {
-                dtmClientes.addRow(new Object[]{dtmClientes.getRowCount(),cliente_temp.getNombre(), cliente_temp.getDireccion(), cliente_temp.getCedula()});
+                dtmClientes.addRow(new Object[]{dtmClientes.getRowCount(), cliente_temp.getNombre(), cliente_temp.getDireccion(), cliente_temp.getCedula()});
             }
         }
         jt_clientes.setModel(dtmClientes);
+        jt_clientes.getColumnModel().getColumn(0).setMinWidth(0);
+        jt_clientes.getColumnModel().getColumn(0).setMaxWidth(0);
+        jt_clientes.getColumnModel().getColumn(3).setMinWidth(100);
+        jt_clientes.getColumnModel().getColumn(3).setMaxWidth(100);
+        //((DefaultTableCellRenderer)jt_clientes.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         trsfiltro = new TableRowSorter(jt_clientes.getModel());
     }
-    
-    public void verCliente(){
+
+    public void verCliente() {
         BL_Cliente clienteVer;
-        if(validarSeleccion()) {
+        if (validarSeleccion()) {
             UI_Cliente uic = new UI_Cliente(this, rootPaneCheckingEnabled);
             int fila = jt_clientes.getSelectedRow();
-            int numeroFila = Integer.parseInt(""+jt_clientes.getValueAt(fila, 0));
+            int numeroFila = Integer.parseInt("" + jt_clientes.getValueAt(fila, 0));
             clienteVer = listaClientes.get(numeroFila);
             uic.cargarCliente(clienteVer);
             uic.setVisible(true);
+            cargarClientes();
         }
     }
-    
-    public void modificarCliente(){
-        if (validarSeleccion()) {
-            
-        }
+
+    public void modificarCliente() {
+        verCliente();
     }
-    
-    public boolean validarSeleccion(){
+
+    public boolean validarSeleccion() {
         filaSeleccionada = jt_clientes.getSelectedRow();
-        if(filaSeleccionada >= 0){
+        if (filaSeleccionada >= 0) {
             return true;
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningun Cliente", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }

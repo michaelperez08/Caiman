@@ -83,6 +83,11 @@ public class BL_Cliente {
          DAO.DAO_Cliente daoCli = new DAO_Cliente();
         return  daoCli.ingresarCliente(Nombre, Direccion, Cedula,Telefonos); 
     }
+    
+    public boolean modificarCliente(int idCliente, String Nombre, String Direccion, String Cedula,String Telefonos){
+         DAO.DAO_Cliente daoCli = new DAO_Cliente();
+        return  daoCli.modificarCliente(idCliente, Nombre, Direccion, Cedula,Telefonos); 
+    }
  
     public ArrayList<BL_Cliente> cargarClientes() {
         ArrayList<TO_Cliente> listaToClientes;

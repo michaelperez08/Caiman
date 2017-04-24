@@ -54,6 +54,37 @@ public class DAO_Cliente {
       
       return false;
     }
+    public boolean modificarCliente(int idCliente, String nombre,String direccion,String cedula, String telefonos){
+        
+      try {
+          if(conexion == null || conexion.isClosed()){
+           conexion = daoConexion.nuevaConexion();
+          }
+          
+         
+                
+      cmd = conexion.prepareStatement("update Cliente set Nombre=?,Direccion=?,Cedula=?,Telefonos=? where idCliente=?;");
+      cmd.setString(1,nombre);
+      cmd.setString(2,direccion);
+      cmd.setString(3,cedula);
+      cmd.setString(4,telefonos);
+      cmd.setInt(5,idCliente);
+      cmd.execute();
+      return true;
+      
+      } catch (SQLException ex) {
+          Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+      }finally{
+          try {    
+              conexion.close();
+          } catch (SQLException ex) {
+              Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }
+      
+      return false;
+    }
+    
     
     public ArrayList<TO_Cliente> cargarClientes() {
         ArrayList<TO_Cliente> clientes = new ArrayList<>();

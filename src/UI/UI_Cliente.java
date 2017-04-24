@@ -201,7 +201,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         if (esNumero(telefono)) {
             if (bt_agregarTelefono.getText().equals("Modificar Teléfono")) {
                 int telefonoSeleccionado = jl_telefonos.getSelectedIndex();
-                dlm_telfonos.setElementAt(telefono,telefonoSeleccionado);
+                dlm_telfonos.setElementAt(telefono, telefonoSeleccionado);
                 jl_telefonos.setModel(dlm_telfonos);
                 tf_telefono.setText("");
                 bt_agregarTelefono.setText("Agregar Teléfono");
@@ -228,35 +228,53 @@ public class UI_Cliente extends javax.swing.JDialog {
         if (tel_seleccionado >= 0) {
             dlm_telfonos.remove(tel_seleccionado);
             jl_telefonos.setModel(dlm_telfonos);
+            tf_telefono.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado un teléfono", "Telefono", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jmi_eliminarActionPerformed
 
     private void bt_ingresarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ingresarClienteActionPerformed
-        boolean clienteIngresado = false;
+        String nombre = tf_nombre.getText().trim();
         String cedula = tf_cedula.getText().trim();
+        String direccion = tf_direccion.getText().trim();
+        String telefonos = concatenarTelefonos();
+        boolean consultaExitosa;
 
-        if (tf_nombre.getText().trim().isEmpty() || tf_cedula.getText().trim().isEmpty()
-                || tf_direccion.getText().trim().isEmpty()) {
+        if (nombre.isEmpty() || cedula.isEmpty() || direccion.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (esNumero(cedula)) {
                 Integer.parseInt(cedula);
                 BL_Cliente cliente = new BL_Cliente();
-                clienteIngresado = cliente.insertarCliente(tf_nombre.getText().trim(), tf_direccion.getText().trim(), tf_cedula.getText().trim(), concatenarTelefonos());
-                if (clienteIngresado) {
-                    JOptionPane.showMessageDialog(null, "Cliente Añadido", "Cliente Ingresado", JOptionPane.INFORMATION_MESSAGE);
-                    Object[] opciones = {"Si", "No"};
-                    int n = JOptionPane.showOptionDialog(null, "Desea ingresar otro cliente?", "Cliente Nuevo",
-                            JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-                    if (n == 1) {
+                if (bt_ingresarCliente.getText().equals("Ingresar Cliente")) {// ingresar cliente nuevo
+                    consultaExitosa = cliente.insertarCliente(nombre, direccion, cedula, concatenarTelefonos());
+                    if (consultaExitosa) {
+                        JOptionPane.showMessageDialog(null, "Cliente Añadido", "Cliente Ingresado", JOptionPane.INFORMATION_MESSAGE);
+                        Object[] opciones = {"Si", "No"};
+                        int n = JOptionPane.showOptionDialog(null, "Desea ingresar otro cliente?", "Cliente Nuevo",
+                                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+                        if (n == 1) {
+                            this.dispose();
+                        } else {
+                            limpiarCampos();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al insertar cliente, si el error persiste, contacte al adminstrador del sistema", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {//modificar cliente
+                    clienteAMostrar.setNombre(nombre);
+                    clienteAMostrar.setDireccion(direccion);
+                    clienteAMostrar.setCedula(cedula);
+                    clienteAMostrar.setTelefonos(telefonos);
+                    consultaExitosa = cliente.modificarCliente(clienteAMostrar.getIdCliente(), clienteAMostrar.getNombre(),
+                            clienteAMostrar.getDireccion(), clienteAMostrar.getCedula(), clienteAMostrar.getTelefonos());
+                    if (consultaExitosa) {
+                        JOptionPane.showMessageDialog(null, "Cliente Actualizado con exito", "Cliente Actualizado", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
                     } else {
-                        limpiarCampos();
+                        JOptionPane.showMessageDialog(null, "Error al insertar cliente, si el error persiste, contacte al adminstrador del sistema", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al insertar cliente, si el error persiste, contacte al adminstrador del sistema", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
                 tf_cedula.setText("");
@@ -273,7 +291,7 @@ public class UI_Cliente extends javax.swing.JDialog {
 
     private void tf_telefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyReleased
         // TODO add your handling code here:
-        if(tf_telefono.getText().trim().equals("")){
+        if (tf_telefono.getText().trim().equals("")) {
             bt_agregarTelefono.setText("Agregar Teléfono");
         }
     }//GEN-LAST:event_tf_telefonoKeyReleased
@@ -281,7 +299,7 @@ public class UI_Cliente extends javax.swing.JDialog {
     public String concatenarTelefonos() {
         String telefonos = "";
         for (int i = 0; i < dlm_telfonos.getSize(); i++) {
-            telefonos += dlm_telfonos.getElementAt(i) + "|";
+            telefonos += dlm_telfonos.getElementAt(i) + " ";
         }
         return telefonos;
     }
@@ -302,6 +320,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         tf_cedula.setText(clienteAMostrar.getCedula());
         dlm_telfonos = separarTelefonos(clienteAMostrar.getTelefonos());
         jl_telefonos.setModel(dlm_telfonos);
+        bt_ingresarCliente.setText("Modificar Cliente");
     }
 
     public void limpiarCampos() {
@@ -338,20 +357,18 @@ public class UI_Cliente extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
+        //</editor-fold>
+        //</editor-fold>
+
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 UI_Cliente dialog = new UI_Cliente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

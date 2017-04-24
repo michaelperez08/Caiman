@@ -42,8 +42,10 @@ public class Main {
          System.exit(0);
          }
          */
-        Principal p = new Principal();
-        p.setVisible(true);
+        LogIn li = new LogIn(null, true);
+        li.setVisible(true);
+        //Principal p = new Principal();
+        //p.setVisible(true);
 
     }
 
