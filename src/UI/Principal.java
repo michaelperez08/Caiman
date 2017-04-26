@@ -414,7 +414,6 @@ public final class Principal extends javax.swing.JFrame {
     }
     
     private void eliminarCliente() {
-
         BL_Cliente blCliente;
         if (validarSeleccion()) {
             UI_Cliente uic = new UI_Cliente(this, rootPaneCheckingEnabled);
