@@ -116,4 +116,31 @@ public class DAO_Cliente {
         }
         return clientes;
     }
+    
+    public boolean eliminarCliente(int idCliente) {
+        try {
+            try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            cmd = conexion.prepareStatement("delete from Cliente where idCliente = ?;");
+            cmd.setInt(1, idCliente);
+            cmd.execute();
+            return true;
+
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
 }

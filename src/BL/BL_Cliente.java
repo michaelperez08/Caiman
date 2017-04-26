@@ -100,4 +100,9 @@ public class BL_Cliente {
         return listaBlClientes;
     }
     
+    public boolean eliminarCliente() {
+        DAO_Cliente daoCliente = new DAO_Cliente();
+        return daoCliente.eliminarCliente(idCliente);
+    }
+    
 }

@@ -85,6 +85,11 @@ public final class Principal extends javax.swing.JFrame {
         pum_tbClientes.add(jmi_modificarCliente);
 
         jmi_eliminar.setText("Eliminar");
+        jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarActionPerformed(evt);
+            }
+        });
         pum_tbClientes.add(jmi_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,6 +146,11 @@ public final class Principal extends javax.swing.JFrame {
         bt_eliminar.setBackground(new java.awt.Color(51, 51, 51));
         bt_eliminar.setForeground(new java.awt.Color(204, 204, 204));
         bt_eliminar.setText("Eliminar");
+        bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_eliminarActionPerformed(evt);
+            }
+        });
 
         jt_clientes.setBackground(new java.awt.Color(51, 51, 51));
         jt_clientes.setForeground(new java.awt.Color(153, 153, 153));
@@ -300,6 +310,16 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jt_clientesMouseReleased
 
+    private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
+        // TODO add your handling code here:
+        eliminarCliente();
+    }//GEN-LAST:event_bt_eliminarActionPerformed
+
+    private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
+        // TODO add your handling code here:
+        eliminarCliente();
+    }//GEN-LAST:event_jmi_eliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -391,6 +411,27 @@ public final class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningun Cliente", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+    }
+    
+    private void eliminarCliente() {
+
+        BL_Cliente blCliente;
+        if (validarSeleccion()) {
+            UI_Cliente uic = new UI_Cliente(this, rootPaneCheckingEnabled);
+            int fila = jt_clientes.getSelectedRow();
+            int numeroFila = Integer.parseInt("" + jt_clientes.getValueAt(fila, 0));
+            blCliente = listaClientes.get(numeroFila);
+           int   confirmacion =   JOptionPane.showConfirmDialog(null, "¿Desea eliminar a " + blCliente.getNombre() + "?", "Warning", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                if (blCliente.eliminarCliente()) {
+                    JOptionPane.showMessageDialog(null, "Cliente Elimiado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarClientes();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el cliente", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
