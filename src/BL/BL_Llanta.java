@@ -6,6 +6,8 @@
 package BL;
 
 import DAO.DAO_Llanta;
+import TO.TO_Llanta;
+import java.util.ArrayList;
 
 /**
  *
@@ -101,5 +103,22 @@ public class BL_Llanta {
     public boolean IngresarLlanta(String numeroLlanta, String marca,String diseno,int numeroCapas,int cantidad,String tipoLlanta){
         DAO_Llanta daoLlanta = new DAO_Llanta();
         return daoLlanta.ingresarLLanta(numeroLlanta, marca, diseno, numeroCapas, cantidad, tipoLlanta);
+    }
+    
+    public boolean eliminarLlanta() {
+        DAO_Llanta daoLlanta = new DAO_Llanta();
+        return daoLlanta.eliminarLlanta(idLlanta);
+    }
+    
+    public ArrayList<BL_Llanta> cargarLlantas() {
+        ArrayList<TO_Llanta> listaToLlantas;
+        ArrayList<BL_Llanta> listaBlLlantas = new ArrayList<>();
+        DAO_Llanta daoLlanta = new DAO_Llanta();
+        listaToLlantas = daoLlanta.cargarLlantas();
+
+        for (TO_Llanta tem : listaToLlantas) {
+            listaBlLlantas.add(new BL_Llanta(tem.idLlanta, tem.NumeroLlanta, tem.Marca, tem.Diseno, tem.NumeroCapas, tem.Cantidad, tem.TipoLlanta));
+        }
+        return listaBlLlantas;
     }
 }

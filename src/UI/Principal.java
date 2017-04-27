@@ -6,6 +6,7 @@
 package UI;
 
 import BL.BL_Cliente;
+import BL.BL_Llanta;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -31,6 +32,9 @@ public final class Principal extends javax.swing.JFrame {
     private TableRowSorter trsfiltro;
     private BL_Cliente cliente;
     private int filaSeleccionada;
+    private BL_Llanta llanta;
+    private ArrayList<BL_Llanta> listaLlantas;
+    private DefaultTableModel dtmLlantas;
 
     public Principal() {
         initComponents();
@@ -38,7 +42,9 @@ public final class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         cargarClientes();
+        cargarLlantas();
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -66,6 +72,14 @@ public final class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_clientes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jt_llantas = new javax.swing.JTable();
+        tf_buscarLlantas = new javax.swing.JTextField();
+        jl_Buscar1 = new javax.swing.JLabel();
+        bt_verLlanta = new javax.swing.JButton();
+        bt_agregarLlanta = new javax.swing.JButton();
+        bt_modificarLlanta = new javax.swing.JButton();
+        bt_eliminarLlanta = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
         jmi_verCliente.setText("Ver");
@@ -188,7 +202,7 @@ public final class Principal extends javax.swing.JFrame {
                     .addComponent(bt_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
                     .addComponent(tf_buscarCliente))
                 .addContainerGap())
         );
@@ -215,15 +229,85 @@ public final class Principal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Clientes", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+
+        jt_llantas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jt_llantas);
+
+        tf_buscarLlantas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_buscarLlantasActionPerformed(evt);
+            }
+        });
+
+        jl_Buscar1.setBackground(new java.awt.Color(153, 153, 153));
+        jl_Buscar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jl_Buscar1.setForeground(new java.awt.Color(204, 204, 204));
+        jl_Buscar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_Buscar1.setText("Buscar");
+
+        bt_verLlanta.setText("Ver");
+
+        bt_agregarLlanta.setText("Agregar");
+
+        bt_modificarLlanta.setText("Modificar");
+
+        bt_eliminarLlanta.setText("Eliminar");
+        bt_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_eliminarLlantaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jl_Buscar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_verLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_eliminarLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(bt_modificarLlanta)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(bt_agregarLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jl_Buscar1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(bt_verLlanta)
+                        .addGap(27, 27, 27)
+                        .addComponent(bt_agregarLlanta)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_modificarLlanta)
+                        .addGap(26, 26, 26)
+                        .addComponent(bt_eliminarLlanta))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inventario", jPanel3);
@@ -232,7 +316,7 @@ public final class Principal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,6 +404,15 @@ public final class Principal extends javax.swing.JFrame {
         eliminarCliente();
     }//GEN-LAST:event_jmi_eliminarActionPerformed
 
+    private void tf_buscarLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_buscarLlantasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_buscarLlantasActionPerformed
+
+    private void bt_eliminarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarLlantaActionPerformed
+        // TODO add your handling code here:
+        eliminarLlanta();
+    }//GEN-LAST:event_bt_eliminarLlantaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,7 +465,7 @@ public final class Principal extends javax.swing.JFrame {
             }
         };
         if (!listaClientes.isEmpty()) {
-            Bayron:
+            
             for (BL_Cliente cliente_temp : listaClientes) {
                 dtmClientes.addRow(new Object[]{dtmClientes.getRowCount(), cliente_temp.getNombre(), cliente_temp.getDireccion(), cliente_temp.getCedula()});
             }
@@ -384,6 +477,32 @@ public final class Principal extends javax.swing.JFrame {
         jt_clientes.getColumnModel().getColumn(3).setMaxWidth(100);
         //((DefaultTableCellRenderer)jt_clientes.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         trsfiltro = new TableRowSorter(jt_clientes.getModel());
+    }
+    
+    public void cargarLlantas() {
+        llanta = new BL_Llanta();
+        listaLlantas = llanta.cargarLlantas();
+        String[] nombreColumnas = {"numeroFila","NumeroLlanta", "Marca", "Diseño","Capas" , "Cantidad", "TipoLlanta"};
+        dtmLlantas = new DefaultTableModel(null, nombreColumnas){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        if(!listaLlantas.isEmpty()){
+            for(BL_Llanta llanta_temp: listaLlantas){
+                dtmLlantas.addRow(new Object[]{dtmLlantas.getRowCount(),llanta_temp.getNumeroLlanta(), llanta_temp.getMarca(),llanta_temp.getDiseno(),
+                                                                 llanta_temp.getNumeroCapas(),llanta_temp.getCantidad(), llanta_temp.getTipoLlanta()});
+            }
+        }
+        jt_llantas.setModel(dtmLlantas);
+        jt_llantas.getColumnModel().getColumn(0).setMinWidth(0);
+        jt_llantas.getColumnModel().getColumn(0).setMaxWidth(0);
+        jt_llantas.getColumnModel().getColumn(1).setMinWidth(0);
+        jt_llantas.getColumnModel().getColumn(1).setMaxWidth(0);
+        jt_llantas.getColumnModel().getColumn(6).setMinWidth(0);
+        jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
+      
     }
 
     public void verCliente() {
@@ -413,6 +532,16 @@ public final class Principal extends javax.swing.JFrame {
         }
     }
     
+    public boolean validarSeleccionLlantas(){
+        filaSeleccionada = jt_llantas.getSelectedRow();
+        if(filaSeleccionada >=0){
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna Llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+    }
+    
     private void eliminarCliente() {
         BL_Cliente blCliente;
         if (validarSeleccion()) {
@@ -432,24 +561,50 @@ public final class Principal extends javax.swing.JFrame {
         }
 
     }
+    
+    private void eliminarLlanta() {
+        BL_Llanta blLanta;
+        if(validarSeleccionLlantas()){
+           int fila = jt_llantas.getSelectedRow();
+           int numeroFila = Integer.parseInt("" + jt_llantas.getValueAt(fila, 0));
+           blLanta = listaLlantas.get(numeroFila);
+           int   confirmacion =   JOptionPane.showConfirmDialog(null, "¿Desea eliminar a esta llanta?", "Warning", JOptionPane.YES_NO_OPTION);
+           if(confirmacion == JOptionPane.YES_OPTION){
+               if(blLanta.eliminarLlanta()){
+                      JOptionPane.showMessageDialog(null, "Llanta Elimiada con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                      cargarLlantas();
+               } else {
+                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+               }
+           }
+        } 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_agregar;
+    private javax.swing.JButton bt_agregarLlanta;
     private javax.swing.JButton bt_eliminar;
+    private javax.swing.JButton bt_eliminarLlanta;
     private javax.swing.JButton bt_modificar;
+    private javax.swing.JButton bt_modificarLlanta;
     private javax.swing.JButton bt_ver;
+    private javax.swing.JButton bt_verLlanta;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jl_Buscar;
+    private javax.swing.JLabel jl_Buscar1;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_modificarCliente;
     private javax.swing.JMenuItem jmi_verCliente;
     private javax.swing.JTable jt_clientes;
+    private javax.swing.JTable jt_llantas;
     private javax.swing.JPopupMenu pum_tbClientes;
     private javax.swing.JTextField tf_buscarCliente;
+    private javax.swing.JTextField tf_buscarLlantas;
     // End of variables declaration//GEN-END:variables
 }

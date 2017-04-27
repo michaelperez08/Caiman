@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,6 +57,66 @@ public class DAO_Llanta {
       return false;
     }
 
+    
+    public boolean eliminarLlanta(int idLlanta) {
+        try {
+            try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            cmd = conexion.prepareStatement("delete from Llanta where idLlanta = ?;");
+            cmd.setInt(1, idLlanta);
+            cmd.execute();
+            return true;
+
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+    
+    public ArrayList<TO_Llanta> cargarLlantas(){
+        ArrayList<TO_Llanta> llantas = new ArrayList<>();
+        try {
+            
+            try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            cmd = conexion.prepareStatement("select * from Llanta;");
+            rs = cmd.executeQuery();
+            
+            while (rs.next()) {                
+                llantas.add(new TO_Llanta(rs.getInt("idLlanta"), rs.getString("NumeroLlanta"), rs.getString("Marca"),
+                        rs.getString("Diseno"), rs.getInt("NumeroCapas"), rs.getInt("Cantidad"), rs.getString("TipoLlanta")));
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                cmd.close();
+                conexion.close();
+            } catch(Exception ex) {
+                 Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return llantas;
+    }
     
     
 }
