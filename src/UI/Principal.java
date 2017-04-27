@@ -30,12 +30,13 @@ public final class Principal extends javax.swing.JFrame {
      */
     private DefaultTableModel dtmClientes;
     private ArrayList<BL_Cliente> listaClientes;
-    private TableRowSorter trsfiltro;
+    private TableRowSorter trsfiltroCliente;
     private BL_Cliente cliente;
     private int filaSeleccionada;
     private BL_Llanta llanta;
     private ArrayList<BL_Llanta> listaLlantas;
     private DefaultTableModel dtmLlantas;
+    private TableRowSorter trsfiltroLlantas;
 
     public Principal() {
         initComponents();
@@ -279,6 +280,11 @@ public final class Principal extends javax.swing.JFrame {
                 tf_buscarLlantasActionPerformed(evt);
             }
         });
+        tf_buscarLlantas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_buscarLlantasKeyReleased(evt);
+            }
+        });
 
         jl_Buscar1.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -400,8 +406,8 @@ public final class Principal extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             //new AyudaF1().abrirAyuda();
         } else {
-            filtrar();
-            jt_clientes.setRowSorter(trsfiltro);
+            filtrarClientes();
+            jt_clientes.setRowSorter(trsfiltroCliente);
         }
     }//GEN-LAST:event_tf_buscarClienteKeyReleased
 
@@ -489,6 +495,16 @@ public final class Principal extends javax.swing.JFrame {
         eliminarLlanta();
     }//GEN-LAST:event_jmi_eliminarLlantaActionPerformed
 
+    private void tf_buscarLlantasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarLlantasKeyReleased
+        // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            //new AyudaF1().abrirAyuda();
+        } else {
+            filtrarLlantas();
+            jt_llantas.setRowSorter(trsfiltroLlantas);
+        }
+    }//GEN-LAST:event_tf_buscarLlantasKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -522,12 +538,20 @@ public final class Principal extends javax.swing.JFrame {
 
     }
 
-    public void filtrar() {
+    public void filtrarClientes() {
         String hilera = tf_buscarCliente.getText();
         if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
             hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
         }
-        trsfiltro.setRowFilter(RowFilter.regexFilter(hilera, 1));
+        trsfiltroCliente.setRowFilter(RowFilter.regexFilter(hilera, 1));
+    }
+    
+    public void filtrarLlantas() {
+        String hilera = tf_buscarLlantas.getText();
+         if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
+            hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
+        }
+        trsfiltroLlantas.setRowFilter(RowFilter.regexFilter(hilera, 2));
     }
 
     public void cargarClientes() {
@@ -552,13 +576,13 @@ public final class Principal extends javax.swing.JFrame {
         jt_clientes.getColumnModel().getColumn(3).setMinWidth(100);
         jt_clientes.getColumnModel().getColumn(3).setMaxWidth(100);
         //((DefaultTableCellRenderer)jt_clientes.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
-        trsfiltro = new TableRowSorter(jt_clientes.getModel());
+        trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
     }
     
     public void cargarLlantas() {
         llanta = new BL_Llanta();
         listaLlantas = llanta.cargarLlantas();
-        String[] nombreColumnas = {"numeroFila","NumeroLlanta", "Marca", "Diseño","Capas" , "Cantidad", "TipoLlanta"};
+        String[] nombreColumnas = {"numeroFila","Numero Llanta", "Marca", "Diseño","Capas" , "Cantidad", "TipoLlanta"};
         dtmLlantas = new DefaultTableModel(null, nombreColumnas){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -574,11 +598,9 @@ public final class Principal extends javax.swing.JFrame {
         jt_llantas.setModel(dtmLlantas);
         jt_llantas.getColumnModel().getColumn(0).setMinWidth(0);
         jt_llantas.getColumnModel().getColumn(0).setMaxWidth(0);
-        jt_llantas.getColumnModel().getColumn(1).setMinWidth(0);
-        jt_llantas.getColumnModel().getColumn(1).setMaxWidth(0);
         jt_llantas.getColumnModel().getColumn(6).setMinWidth(0);
         jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
-      
+      trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
     }
 
     public void verCliente() {
