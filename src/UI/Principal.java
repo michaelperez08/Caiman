@@ -86,6 +86,7 @@ public final class Principal extends javax.swing.JFrame {
         bt_agregarLlanta = new javax.swing.JButton();
         bt_modificarLlanta = new javax.swing.JButton();
         bt_eliminarLlanta = new javax.swing.JButton();
+        jcb_filtroBusqueda = new javax.swing.JComboBox();
         jPanel4 = new javax.swing.JPanel();
 
         jmi_verCliente.setText("Ver");
@@ -320,6 +321,13 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
 
+        jcb_filtroBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Marca", "Número", "Diseño" }));
+        jcb_filtroBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_filtroBusquedaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -335,18 +343,22 @@ public final class Principal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(bt_agregarLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcb_filtroBusqueda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_Buscar1))
+                    .addComponent(jl_Buscar1)
+                    .addComponent(jcb_filtroBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -358,7 +370,7 @@ public final class Principal extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(bt_eliminarLlanta))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inventario", jPanel3);
@@ -497,13 +509,19 @@ public final class Principal extends javax.swing.JFrame {
 
     private void tf_buscarLlantasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarLlantasKeyReleased
         // TODO add your handling code here:
-         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
             //new AyudaF1().abrirAyuda();
         } else {
             filtrarLlantas();
             jt_llantas.setRowSorter(trsfiltroLlantas);
         }
     }//GEN-LAST:event_tf_buscarLlantasKeyReleased
+
+    private void jcb_filtroBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_filtroBusquedaActionPerformed
+        // TODO add your handling code here:
+        filtrarLlantas();
+        jt_llantas.setRowSorter(trsfiltroLlantas);
+    }//GEN-LAST:event_jcb_filtroBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -545,13 +563,28 @@ public final class Principal extends javax.swing.JFrame {
         }
         trsfiltroCliente.setRowFilter(RowFilter.regexFilter(hilera, 1));
     }
-    
+
     public void filtrarLlantas() {
         String hilera = tf_buscarLlantas.getText();
-         if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
+        String filtro = jcb_filtroBusqueda.getSelectedItem() + "";
+            int fila = 0;
+            switch (filtro) {
+                case "Marca": 
+                    fila = 2;
+                    break;
+                case "Número": 
+                    fila = 1;
+                    break;
+                    
+                case "Diseño": 
+                    fila = 3;
+                    break;
+                
+            }
+        if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
             hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
         }
-        trsfiltroLlantas.setRowFilter(RowFilter.regexFilter(hilera, 2));
+        trsfiltroLlantas.setRowFilter(RowFilter.regexFilter(hilera, fila));
     }
 
     public void cargarClientes() {
@@ -565,7 +598,7 @@ public final class Principal extends javax.swing.JFrame {
             }
         };
         if (!listaClientes.isEmpty()) {
-            
+
             for (BL_Cliente cliente_temp : listaClientes) {
                 dtmClientes.addRow(new Object[]{dtmClientes.getRowCount(), cliente_temp.getNombre(), cliente_temp.getDireccion(), cliente_temp.getCedula()});
             }
@@ -578,21 +611,21 @@ public final class Principal extends javax.swing.JFrame {
         //((DefaultTableCellRenderer)jt_clientes.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
     }
-    
+
     public void cargarLlantas() {
         llanta = new BL_Llanta();
         listaLlantas = llanta.cargarLlantas();
-        String[] nombreColumnas = {"numeroFila","Numero Llanta", "Marca", "Diseño","Capas" , "Cantidad", "TipoLlanta"};
-        dtmLlantas = new DefaultTableModel(null, nombreColumnas){
+        String[] nombreColumnas = {"numeroFila", "Numero Llanta", "Marca", "Diseño", "Capas", "Cantidad", "TipoLlanta"};
+        dtmLlantas = new DefaultTableModel(null, nombreColumnas) {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        if(!listaLlantas.isEmpty()){
-            for(BL_Llanta llanta_temp: listaLlantas){
-                dtmLlantas.addRow(new Object[]{dtmLlantas.getRowCount(),llanta_temp.getNumeroLlanta(), llanta_temp.getMarca(),llanta_temp.getDiseno(),
-                                                                 llanta_temp.getNumeroCapas(),llanta_temp.getCantidad(), llanta_temp.getTipoLlanta()});
+        if (!listaLlantas.isEmpty()) {
+            for (BL_Llanta llanta_temp : listaLlantas) {
+                dtmLlantas.addRow(new Object[]{dtmLlantas.getRowCount(), llanta_temp.getNumeroLlanta(), llanta_temp.getMarca(), llanta_temp.getDiseno(),
+                    llanta_temp.getNumeroCapas(), llanta_temp.getCantidad(), llanta_temp.getTipoLlanta()});
             }
         }
         jt_llantas.setModel(dtmLlantas);
@@ -600,7 +633,7 @@ public final class Principal extends javax.swing.JFrame {
         jt_llantas.getColumnModel().getColumn(0).setMaxWidth(0);
         jt_llantas.getColumnModel().getColumn(6).setMinWidth(0);
         jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
-      trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
+        trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
     }
 
     public void verCliente() {
@@ -616,10 +649,9 @@ public final class Principal extends javax.swing.JFrame {
         }
     }
 
-    
-    public void verLlanta(){
+    public void verLlanta() {
         BL_Llanta llantaVer;
-        if(validarSeleccionLlantas()){
+        if (validarSeleccionLlantas()) {
             UI_Llanta uill = new UI_Llanta(this, rootPaneCheckingEnabled);
             int fila = jt_llantas.getSelectedRow();
             int numeroFila = Integer.parseInt("" + jt_llantas.getValueAt(fila, 0));
@@ -629,13 +661,15 @@ public final class Principal extends javax.swing.JFrame {
             cargarLlantas();
         }
     }
+
     public void modificarCliente() {
         verCliente();
     }
 
-    public void modificarLlanta(){
+    public void modificarLlanta() {
         verLlanta();
     }
+
     public boolean validarSeleccion() {
         filaSeleccionada = jt_clientes.getSelectedRow();
         if (filaSeleccionada >= 0) {
@@ -645,17 +679,17 @@ public final class Principal extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    public boolean validarSeleccionLlantas(){
+
+    public boolean validarSeleccionLlantas() {
         filaSeleccionada = jt_llantas.getSelectedRow();
-        if(filaSeleccionada >=0){
+        if (filaSeleccionada >= 0) {
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna Llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
     }
-    
+
     private void eliminarCliente() {
         BL_Cliente blCliente;
         if (validarSeleccion()) {
@@ -663,7 +697,7 @@ public final class Principal extends javax.swing.JFrame {
             int fila = jt_clientes.getSelectedRow();
             int numeroFila = Integer.parseInt("" + jt_clientes.getValueAt(fila, 0));
             blCliente = listaClientes.get(numeroFila);
-           int   confirmacion =   JOptionPane.showConfirmDialog(null, "¿Desea eliminar a " + blCliente.getNombre() + "?", "Warning", JOptionPane.YES_NO_OPTION);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar a " + blCliente.getNombre() + "?", "Warning", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
                 if (blCliente.eliminarCliente()) {
                     JOptionPane.showMessageDialog(null, "Cliente Elimiado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
@@ -675,23 +709,23 @@ public final class Principal extends javax.swing.JFrame {
         }
 
     }
-    
+
     private void eliminarLlanta() {
         BL_Llanta blLanta;
-        if(validarSeleccionLlantas()){
-           int fila = jt_llantas.getSelectedRow();
-           int numeroFila = Integer.parseInt("" + jt_llantas.getValueAt(fila, 0));
-           blLanta = listaLlantas.get(numeroFila);
-           int   confirmacion =   JOptionPane.showConfirmDialog(null, "¿Desea eliminar a esta llanta?", "Warning", JOptionPane.YES_NO_OPTION);
-           if(confirmacion == JOptionPane.YES_OPTION){
-               if(blLanta.eliminarLlanta()){
-                      JOptionPane.showMessageDialog(null, "Llanta Elimiada con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                      cargarLlantas();
-               } else {
+        if (validarSeleccionLlantas()) {
+            int fila = jt_llantas.getSelectedRow();
+            int numeroFila = Integer.parseInt("" + jt_llantas.getValueAt(fila, 0));
+            blLanta = listaLlantas.get(numeroFila);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar a esta llanta?", "Warning", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                if (blLanta.eliminarLlanta()) {
+                    JOptionPane.showMessageDialog(null, "Llanta Elimiada con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarLlantas();
+                } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-               }
-           }
-        } 
+                }
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -710,6 +744,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox jcb_filtroBusqueda;
     private javax.swing.JLabel jl_Buscar;
     private javax.swing.JLabel jl_Buscar1;
     private javax.swing.JMenuItem jmi_eliminar;
