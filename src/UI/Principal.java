@@ -61,6 +61,10 @@ public final class Principal extends javax.swing.JFrame {
         jmi_verCliente = new javax.swing.JMenuItem();
         jmi_modificarCliente = new javax.swing.JMenuItem();
         jmi_eliminar = new javax.swing.JMenuItem();
+        pum_tbLlantas = new javax.swing.JPopupMenu();
+        jmi_verLlanta = new javax.swing.JMenuItem();
+        jmi_modificarLlanta = new javax.swing.JMenuItem();
+        jmi_eliminarLlanta = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -106,6 +110,30 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
         pum_tbClientes.add(jmi_eliminar);
+
+        jmi_verLlanta.setText("Ver");
+        jmi_verLlanta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_verLlantaActionPerformed(evt);
+            }
+        });
+        pum_tbLlantas.add(jmi_verLlanta);
+
+        jmi_modificarLlanta.setText("Modificar");
+        jmi_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_modificarLlantaActionPerformed(evt);
+            }
+        });
+        pum_tbLlantas.add(jmi_modificarLlanta);
+
+        jmi_eliminarLlanta.setText("Eliminar");
+        jmi_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarLlantaActionPerformed(evt);
+            }
+        });
+        pum_tbLlantas.add(jmi_eliminarLlanta);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LLantas y Reencauches Griegos");
@@ -243,6 +271,7 @@ public final class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jt_llantas.setComponentPopupMenu(pum_tbLlantas);
         jScrollPane2.setViewportView(jt_llantas);
 
         tf_buscarLlantas.addActionListener(new java.awt.event.ActionListener() {
@@ -444,6 +473,21 @@ public final class Principal extends javax.swing.JFrame {
         uil.setVisible(true);
         cargarLlantas();
     }//GEN-LAST:event_bt_agregarLlantaActionPerformed
+
+    private void jmi_verLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verLlantaActionPerformed
+        // TODO add your handling code here:
+        verLlanta();
+    }//GEN-LAST:event_jmi_verLlantaActionPerformed
+
+    private void jmi_modificarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarLlantaActionPerformed
+        // TODO add your handling code here:
+        modificarLlanta();
+    }//GEN-LAST:event_jmi_modificarLlantaActionPerformed
+
+    private void jmi_eliminarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarLlantaActionPerformed
+        // TODO add your handling code here:
+        eliminarLlanta();
+    }//GEN-LAST:event_jmi_eliminarLlantaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -647,11 +691,15 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jl_Buscar;
     private javax.swing.JLabel jl_Buscar1;
     private javax.swing.JMenuItem jmi_eliminar;
+    private javax.swing.JMenuItem jmi_eliminarLlanta;
     private javax.swing.JMenuItem jmi_modificarCliente;
+    private javax.swing.JMenuItem jmi_modificarLlanta;
     private javax.swing.JMenuItem jmi_verCliente;
+    private javax.swing.JMenuItem jmi_verLlanta;
     private javax.swing.JTable jt_clientes;
     private javax.swing.JTable jt_llantas;
     private javax.swing.JPopupMenu pum_tbClientes;
+    private javax.swing.JPopupMenu pum_tbLlantas;
     private javax.swing.JTextField tf_buscarCliente;
     private javax.swing.JTextField tf_buscarLlantas;
     // End of variables declaration//GEN-END:variables
