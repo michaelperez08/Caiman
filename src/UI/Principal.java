@@ -430,6 +430,7 @@ public final class Principal extends javax.swing.JFrame {
 
     private void bt_verLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verLlantaActionPerformed
         // TODO add your handling code here:
+        verLlanta();
     }//GEN-LAST:event_bt_verLlantaActionPerformed
 
     /**
