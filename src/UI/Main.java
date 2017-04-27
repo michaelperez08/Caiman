@@ -9,6 +9,7 @@ package UI;
  *
  * @author michael
  */
+import BL.BL_Llanta;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import dbconfig.ConfBD;

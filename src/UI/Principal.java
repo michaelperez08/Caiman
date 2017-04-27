@@ -7,6 +7,7 @@ package UI;
 
 import BL.BL_Cliente;
 import BL.BL_Llanta;
+import com.sun.jmx.snmp.SnmpDataTypeEnums;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -257,10 +258,20 @@ public final class Principal extends javax.swing.JFrame {
         jl_Buscar1.setText("Buscar");
 
         bt_verLlanta.setText("Ver");
+        bt_verLlanta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_verLlantaActionPerformed(evt);
+            }
+        });
 
         bt_agregarLlanta.setText("Agregar");
 
         bt_modificarLlanta.setText("Modificar");
+        bt_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_modificarLlantaActionPerformed(evt);
+            }
+        });
 
         bt_eliminarLlanta.setText("Eliminar");
         bt_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -413,6 +424,14 @@ public final class Principal extends javax.swing.JFrame {
         eliminarLlanta();
     }//GEN-LAST:event_bt_eliminarLlantaActionPerformed
 
+    private void bt_modificarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarLlantaActionPerformed
+        modificarLlanta();
+    }//GEN-LAST:event_bt_modificarLlantaActionPerformed
+
+    private void bt_verLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verLlantaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_verLlantaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -518,10 +537,26 @@ public final class Principal extends javax.swing.JFrame {
         }
     }
 
+    
+    public void verLlanta(){
+        BL_Llanta llantaVer;
+        if(validarSeleccionLlantas()){
+            UI_Llanta uill = new UI_Llanta(this, rootPaneCheckingEnabled);
+            int fila = jt_llantas.getSelectedRow();
+            int numeroFila = Integer.parseInt("" + jt_llantas.getValueAt(fila, 0));
+            llantaVer = listaLlantas.get(numeroFila);
+            uill.cargarLlanta(llantaVer);
+            uill.setVisible(true);
+            cargarLlantas();
+        }
+    }
     public void modificarCliente() {
         verCliente();
     }
 
+    public void modificarLlanta(){
+        verLlanta();
+    }
     public boolean validarSeleccion() {
         filaSeleccionada = jt_clientes.getSelectedRow();
         if (filaSeleccionada >= 0) {
