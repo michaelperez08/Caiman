@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  * @author victor
  */
 public class UI_Llanta extends javax.swing.JDialog {
-
+    public BL_Llanta llantaAMostrar;
     /**
      * Creates new form UI_Llanta
      */
@@ -108,6 +108,7 @@ public class UI_Llanta extends javax.swing.JDialog {
 
         cb_tipoLlanta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cb_tipoLlanta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Industrial", "Agricola" }));
+        cb_tipoLlanta.setToolTipText("");
 
         javax.swing.GroupLayout pn_IngresarLlantaLayout = new javax.swing.GroupLayout(pn_IngresarLlanta);
         pn_IngresarLlanta.setLayout(pn_IngresarLlantaLayout);
@@ -151,7 +152,6 @@ public class UI_Llanta extends javax.swing.JDialog {
                         .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_diseno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_diseno, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
@@ -169,7 +169,7 @@ public class UI_Llanta extends javax.swing.JDialog {
                     .addComponent(cb_tipoLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,8 +218,14 @@ public class UI_Llanta extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(null, "Error al insertar Llanta, si el error persiste, contacte al adminstrador del sistema", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {//modificar Llanta
-                    
-                    consultaExitosa = true;
+                    llantaAMostrar.setNumeroLlantas(numeroLlanta);
+                    llantaAMostrar.setMarca(marca);
+                    llantaAMostrar.setDiseno(diseno);
+                    llantaAMostrar.setNumeroCapas(numeroCapas2);
+                    llantaAMostrar.setCantidad(cantidad2);
+                    llantaAMostrar.setTipoLlanta(tipoLlanta);
+                    consultaExitosa = llantaAMostrar.modificarLlanta(llantaAMostrar.getidLlanta(), llantaAMostrar.getNumeroLlanta(),
+                            llantaAMostrar.getMarca(), llantaAMostrar.getDiseno(), llantaAMostrar.getNumeroCapas(),llantaAMostrar.getCantidad(), llantaAMostrar.getTipoLlanta());
                     if (consultaExitosa) {
                         JOptionPane.showMessageDialog(null, "Llanta Actualizada con exito", "Llanta Actualizada", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
@@ -244,6 +250,25 @@ public class UI_Llanta extends javax.swing.JDialog {
         }
     }
     
+     public void cargarLlanta(BL_Llanta llanta) {
+        llantaAMostrar = llanta;
+        tf_numeroLlanta.setText(llantaAMostrar.getNumeroLlanta());
+        tf_marca.setText(llantaAMostrar.getMarca());
+        tf_diseno.setText(llantaAMostrar.getDiseno());
+        tf_numeroCapas.setText(String.valueOf( llantaAMostrar.getNumeroCapas()));
+        tf_cantidad.setText(String.valueOf(llantaAMostrar.getCantidad()));
+        if(llantaAMostrar.getTipoLlanta().equals("Normal")){
+        cb_tipoLlanta.setSelectedIndex(0);
+                }else{
+            if(llantaAMostrar.getTipoLlanta().equals("Industrial")){
+            cb_tipoLlanta.setSelectedIndex(1);    
+            }else{
+             cb_tipoLlanta.setSelectedIndex(2);   
+        }
+        
+    }
+        bt_ingresarLlanta.setText("Modificar Llanta");
+  }
     public void limpiarCampos() {
         tf_numeroLlanta.setText("");
         tf_marca.setText("");
