@@ -105,10 +105,17 @@ public class BL_Llanta {
         return daoLlanta.ingresarLLanta(numeroLlanta, marca, diseno, numeroCapas, cantidad, tipoLlanta);
     }
     
+    public boolean modificarLlanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+        DAO_Llanta daoLlanta = new DAO_Llanta();
+        return daoLlanta.modificarLlanta(idLlanta, NumeroLlanta, Marca, Diseno, NumeroCapas, Cantidad, TipoLlanta);
+        
+    }
     public boolean eliminarLlanta() {
         DAO_Llanta daoLlanta = new DAO_Llanta();
         return daoLlanta.eliminarLlanta(idLlanta);
     }
+    
+    
     
     public ArrayList<BL_Llanta> cargarLlantas() {
         ArrayList<TO_Llanta> listaToLlantas;

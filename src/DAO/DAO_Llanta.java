@@ -118,5 +118,35 @@ public class DAO_Llanta {
         return llantas;
     }
     
+    public boolean modificarLlanta(int idLlanta,String numeroLlanta,String marca,String diseno, int numeroCapas, int cantidad, String tipoLlanta ){
+        try {
+            if(conexion == null || conexion.isClosed()){
+                conexion = daoConexion.nuevaConexion();
+            }
+           cmd = conexion.prepareStatement("update Llanta set NumeroLlanta=?, Marca=? ,Diseno=?, NumeroCapas=?,Cantidad=?,TipoLlanta = ? where idLLanta=?;");
+           cmd.setString(1, numeroLlanta);
+           cmd.setString(2,marca);
+           cmd.setString(3, diseno);
+           cmd.setInt(4, numeroCapas);
+           cmd.setInt(5, cantidad);
+           cmd.setString(6, tipoLlanta);
+           cmd.setInt(7, idLlanta);
+           cmd.execute();
+           
+           return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        return false;
+                
+        
+    }
     
 }
