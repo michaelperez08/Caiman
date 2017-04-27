@@ -265,6 +265,11 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         bt_agregarLlanta.setText("Agregar");
+        bt_agregarLlanta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_agregarLlantaActionPerformed(evt);
+            }
+        });
 
         bt_modificarLlanta.setText("Modificar");
         bt_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -432,6 +437,13 @@ public final class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         verLlanta();
     }//GEN-LAST:event_bt_verLlantaActionPerformed
+
+    private void bt_agregarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarLlantaActionPerformed
+        // TODO add your handling code here:
+        UI_Llanta uil = new UI_Llanta(this, rootPaneCheckingEnabled);
+        uil.setVisible(true);
+        cargarLlantas();
+    }//GEN-LAST:event_bt_agregarLlantaActionPerformed
 
     /**
      * @param args the command line arguments
