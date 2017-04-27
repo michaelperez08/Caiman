@@ -66,22 +66,28 @@ public class UI_Cliente extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
+        jl_nombre.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jl_nombre.setForeground(new java.awt.Color(204, 204, 204));
         jl_nombre.setText("Nombre:");
 
         tf_nombre.setBackground(new java.awt.Color(204, 204, 204));
+        tf_nombre.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_nombre.setForeground(new java.awt.Color(51, 51, 51));
 
+        bl_direccion.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         bl_direccion.setForeground(new java.awt.Color(204, 204, 204));
         bl_direccion.setText("Dirección:");
 
         tf_direccion.setBackground(new java.awt.Color(204, 204, 204));
+        tf_direccion.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_direccion.setForeground(new java.awt.Color(51, 51, 51));
 
+        lb_telefono.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         lb_telefono.setForeground(new java.awt.Color(204, 204, 204));
         lb_telefono.setText("Teléfono:");
 
         tf_telefono.setBackground(new java.awt.Color(204, 204, 204));
+        tf_telefono.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_telefono.setForeground(new java.awt.Color(51, 51, 51));
         tf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -90,6 +96,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         });
 
         bt_ingresarCliente.setBackground(new java.awt.Color(51, 51, 51));
+        bt_ingresarCliente.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         bt_ingresarCliente.setForeground(new java.awt.Color(204, 204, 204));
         bt_ingresarCliente.setText("Ingresar Cliente");
         bt_ingresarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +106,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         });
 
         bt_agregarTelefono.setBackground(new java.awt.Color(51, 51, 51));
+        bt_agregarTelefono.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         bt_agregarTelefono.setForeground(new java.awt.Color(204, 204, 204));
         bt_agregarTelefono.setText("Agregar Teléfono");
         bt_agregarTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -107,13 +115,16 @@ public class UI_Cliente extends javax.swing.JDialog {
             }
         });
 
+        jl_nombre1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jl_nombre1.setForeground(new java.awt.Color(204, 204, 204));
         jl_nombre1.setText("Cedula:");
 
         tf_cedula.setBackground(new java.awt.Color(204, 204, 204));
+        tf_cedula.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_cedula.setForeground(new java.awt.Color(51, 51, 51));
 
         jl_telefonos.setBackground(new java.awt.Color(204, 204, 204));
+        jl_telefonos.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jl_telefonos.setForeground(new java.awt.Color(51, 51, 51));
         jl_telefonos.setComponentPopupMenu(pum_telefonos);
         jl_telefonos.addMouseListener(new java.awt.event.MouseAdapter() {

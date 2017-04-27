@@ -45,34 +45,34 @@ public class UI_Llanta extends javax.swing.JDialog {
         tf_diseno = new javax.swing.JTextField();
         tf_numeroLlanta = new javax.swing.JTextField();
         bt_ingresarLlanta = new javax.swing.JButton();
-        cb_tipoLlanta = new javax.swing.JComboBox<>();
+        cb_tipoLlanta = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingresar Llanta");
 
         pn_IngresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
 
-        lb_numeroLlanta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_numeroLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_numeroLlanta.setForeground(new java.awt.Color(255, 255, 255));
         lb_numeroLlanta.setText("Número de Llanta:");
 
-        lb_marca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_marca.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_marca.setForeground(new java.awt.Color(255, 255, 255));
         lb_marca.setText("Marca:");
 
-        lb_diseno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_diseno.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_diseno.setForeground(new java.awt.Color(255, 255, 255));
         lb_diseno.setText("Diseño:");
 
-        lb_numeroCapas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_numeroCapas.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_numeroCapas.setForeground(new java.awt.Color(255, 255, 255));
         lb_numeroCapas.setText("Número de Capas:");
 
-        lb_cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_cantidad.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_cantidad.setForeground(new java.awt.Color(255, 255, 255));
         lb_cantidad.setText("Cantidad de Llantas:");
 
-        lb_tipoLlanta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_tipoLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_tipoLlanta.setForeground(new java.awt.Color(255, 255, 255));
         lb_tipoLlanta.setText("Tipo de Llanta:");
 
@@ -97,7 +97,7 @@ public class UI_Llanta extends javax.swing.JDialog {
         tf_numeroLlanta.setForeground(new java.awt.Color(51, 51, 51));
 
         bt_ingresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
-        bt_ingresarLlanta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bt_ingresarLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         bt_ingresarLlanta.setForeground(new java.awt.Color(204, 204, 204));
         bt_ingresarLlanta.setText("Ingresar Llanta");
         bt_ingresarLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -106,8 +106,8 @@ public class UI_Llanta extends javax.swing.JDialog {
             }
         });
 
-        cb_tipoLlanta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cb_tipoLlanta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Industrial", "Agricola" }));
+        cb_tipoLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        cb_tipoLlanta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Industrial", "Agricola" }));
         cb_tipoLlanta.setToolTipText("");
 
         javax.swing.GroupLayout pn_IngresarLlantaLayout = new javax.swing.GroupLayout(pn_IngresarLlanta);
@@ -115,62 +115,61 @@ public class UI_Llanta extends javax.swing.JDialog {
         pn_IngresarLlantaLayout.setHorizontalGroup(
             pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
-                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_IngresarLlantaLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_numeroCapas, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_tipoLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_diseno, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_cantidad)
-                            .addComponent(tf_diseno)
-                            .addComponent(tf_numeroCapas)
-                            .addComponent(tf_marca)
-                            .addComponent(tf_numeroLlanta)
-                            .addComponent(cb_tipoLlanta, 0, 239, Short.MAX_VALUE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lb_tipoLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lb_cantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                        .addComponent(lb_numeroCapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lb_diseno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lb_marca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_numeroLlanta)
+                    .addComponent(tf_marca)
+                    .addComponent(tf_diseno)
+                    .addComponent(tf_numeroCapas)
+                    .addComponent(tf_cantidad)
+                    .addComponent(cb_tipoLlanta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_IngresarLlantaLayout.setVerticalGroup(
             pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_numeroLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_marca, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(lb_marca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_diseno, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(lb_diseno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_numeroCapas, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(lb_numeroCapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_cantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(lb_cantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_tipoLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
-                        .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
-                    .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
-                        .addComponent(tf_numeroLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(6, 6, 6)
-                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_diseno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_diseno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_numeroCapas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_numeroCapas, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_tipoLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_tipoLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                        .addComponent(lb_tipoLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(4, 4, 4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
