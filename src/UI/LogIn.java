@@ -99,6 +99,11 @@ public class LogIn extends javax.swing.JDialog {
         tf_contrasena.setBackground(new java.awt.Color(204, 204, 204));
         tf_contrasena.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_contrasena.setForeground(new java.awt.Color(51, 51, 51));
+        tf_contrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_contrasenaKeyReleased(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
@@ -124,6 +129,11 @@ public class LogIn extends javax.swing.JDialog {
         tf_usuario.setBackground(new java.awt.Color(204, 204, 204));
         tf_usuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_usuario.setForeground(new java.awt.Color(51, 51, 51));
+        tf_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_usuarioKeyReleased(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/llanta.png"))); // NOI18N
 
@@ -191,21 +201,25 @@ public class LogIn extends javax.swing.JDialog {
 
     private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
         // TODO add your handling code here:
-        if (tf_usuario.getText().trim().isEmpty() || tf_contrasena.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña vacios", "ERROR",JOptionPane.ERROR_MESSAGE);
-        } else {
-            BL_Usuario blUsuario;
-            blUsuario = new BL_Usuario(tf_usuario.getText(), tf_contrasena.getText());
-            if (blUsuario.LogIn() != null) {
-                Principal p = new Principal();
-                p.setVisible(true);
-                this.setVisible(false);
-            } else {
-                 JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña incorrectos", "ERROR",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        
+        logIn();
     }//GEN-LAST:event_bt_logInActionPerformed
+
+    
+    private void tf_contrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_contrasenaKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    logIn();
+                }
+    }//GEN-LAST:event_tf_contrasenaKeyReleased
+
+    private void tf_usuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_usuarioKeyReleased
+        // TODO add your handling code here:
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    tf_contrasena.requestFocusInWindow();
+                }
+    }//GEN-LAST:event_tf_usuarioKeyReleased
 
     /**
      * @param args the command line arguments
@@ -291,6 +305,22 @@ public class LogIn extends javax.swing.JDialog {
         } while (!continuar);
  
         return true;
+    }
+    
+    private void logIn(){
+        if (tf_usuario.getText().trim().isEmpty() || tf_contrasena.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña vacios", "ERROR",JOptionPane.ERROR_MESSAGE);
+        } else {
+            BL_Usuario blUsuario;
+            blUsuario = new BL_Usuario(tf_usuario.getText(), tf_contrasena.getText());
+            if (blUsuario.LogIn() != null) {
+                Principal p = new Principal();
+                p.setVisible(true);
+                this.setVisible(false);
+            } else {
+                 JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña incorrectos", "ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
