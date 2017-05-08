@@ -14,12 +14,14 @@ import javax.swing.JOptionPane;
  */
 public class UI_Llanta extends javax.swing.JDialog {
     public BL_Llanta llantaAMostrar;
+    public boolean actualizarLista;
     /**
      * Creates new form UI_Llanta
      */
     public UI_Llanta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        actualizarLista=false;
         this.setLocationRelativeTo(null);
     }
 
@@ -54,29 +56,28 @@ public class UI_Llanta extends javax.swing.JDialog {
 
         lb_numeroLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_numeroLlanta.setForeground(new java.awt.Color(255, 255, 255));
-        lb_numeroLlanta.setText("Número de Llanta:");
+        lb_numeroLlanta.setText("Número de Llanta");
 
         lb_marca.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_marca.setForeground(new java.awt.Color(255, 255, 255));
-        lb_marca.setText("Marca:");
+        lb_marca.setText("Marca");
 
         lb_diseno.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_diseno.setForeground(new java.awt.Color(255, 255, 255));
-        lb_diseno.setText("Diseño:");
+        lb_diseno.setText("Diseño");
 
         lb_numeroCapas.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_numeroCapas.setForeground(new java.awt.Color(255, 255, 255));
-        lb_numeroCapas.setText("Número de Capas:");
+        lb_numeroCapas.setText("Capas");
 
         lb_cantidad.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_cantidad.setForeground(new java.awt.Color(255, 255, 255));
-        lb_cantidad.setText("Cantidad de Llantas:");
+        lb_cantidad.setText("Cantidad de Llantas");
 
         lb_tipoLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_tipoLlanta.setForeground(new java.awt.Color(255, 255, 255));
         lb_tipoLlanta.setText("Tipo de Llanta:");
 
-        tf_marca.setBackground(new java.awt.Color(204, 204, 204));
         tf_marca.setForeground(new java.awt.Color(51, 51, 51));
         tf_marca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,22 +85,19 @@ public class UI_Llanta extends javax.swing.JDialog {
             }
         });
 
-        tf_cantidad.setBackground(new java.awt.Color(204, 204, 204));
         tf_cantidad.setForeground(new java.awt.Color(51, 51, 51));
 
-        tf_numeroCapas.setBackground(new java.awt.Color(204, 204, 204));
         tf_numeroCapas.setForeground(new java.awt.Color(51, 51, 51));
 
-        tf_diseno.setBackground(new java.awt.Color(204, 204, 204));
         tf_diseno.setForeground(new java.awt.Color(51, 51, 51));
 
-        tf_numeroLlanta.setBackground(new java.awt.Color(204, 204, 204));
         tf_numeroLlanta.setForeground(new java.awt.Color(51, 51, 51));
 
         bt_ingresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
-        bt_ingresarLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        bt_ingresarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         bt_ingresarLlanta.setForeground(new java.awt.Color(204, 204, 204));
         bt_ingresarLlanta.setText("Ingresar Llanta");
+        bt_ingresarLlanta.setPreferredSize(new java.awt.Dimension(148, 32));
         bt_ingresarLlanta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_ingresarLlantaActionPerformed(evt);
@@ -118,33 +116,31 @@ public class UI_Llanta extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lb_tipoLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                    .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lb_cantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                        .addComponent(lb_numeroCapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lb_diseno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lb_marca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lb_cantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(lb_numeroCapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_diseno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_marca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_numeroLlanta)
+                    .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
+                        .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(tf_marca)
                     .addComponent(tf_diseno)
                     .addComponent(tf_numeroCapas)
                     .addComponent(tf_cantidad)
-                    .addComponent(cb_tipoLlanta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cb_tipoLlanta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_numeroLlanta, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
-            .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
-                .addGap(270, 270, 270)
-                .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_IngresarLlantaLayout.setVerticalGroup(
             pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_numeroLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lb_numeroLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_numeroLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(12, 12, 12)
                 .addGroup(pn_IngresarLlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_marca, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
@@ -167,9 +163,9 @@ public class UI_Llanta extends javax.swing.JDialog {
                     .addGroup(pn_IngresarLlantaLayout.createSequentialGroup()
                         .addComponent(lb_tipoLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(4, 4, 4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(bt_ingresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,7 +176,7 @@ public class UI_Llanta extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_IngresarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pn_IngresarLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -205,6 +201,7 @@ public class UI_Llanta extends javax.swing.JDialog {
                 if (bt_ingresarLlanta.getText().equals("Ingresar Llanta")) {// ingresar Llanta nuevo
                     consultaExitosa = llanta.IngresarLlanta(numeroLlanta, marca, diseno, numeroCapas2, cantidad2, tipoLlanta);
                     if (consultaExitosa) {
+                        actualizarLista = true;
                         JOptionPane.showMessageDialog(null, "Llanta Añadida", "Llanta Ingresada", JOptionPane.INFORMATION_MESSAGE);
                         Object[] opciones = {"Si", "No"};
                         int n = JOptionPane.showOptionDialog(null, "Desea ingresar otra llanta?", "Llanta Nueva",
@@ -227,6 +224,7 @@ public class UI_Llanta extends javax.swing.JDialog {
                     consultaExitosa = llantaAMostrar.modificarLlanta(llantaAMostrar.getidLlanta(), llantaAMostrar.getNumeroLlanta(),
                             llantaAMostrar.getMarca(), llantaAMostrar.getDiseno(), llantaAMostrar.getNumeroCapas(),llantaAMostrar.getCantidad(), llantaAMostrar.getTipoLlanta());
                     if (consultaExitosa) {
+                        actualizarLista=true;
                         JOptionPane.showMessageDialog(null, "Llanta Actualizada con exito", "Llanta Actualizada", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
                     } else {

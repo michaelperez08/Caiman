@@ -12,21 +12,24 @@ package TO;
 public class TO_Cliente {
     public int idCliente; 
     public String Nombre;
-    public String Direccion;
+    public String direccion_simple;
+    public String direccion_exacta;
     public String Cedula;
     public String Telefonos;
     
     
-    public TO_Cliente(String Nombre,String Direccion, String Cedula, String Telefonos){
+    public TO_Cliente(String Nombre, String direccion_simple, String direccion_exacta, String Cedula, String Telefonos){
         this.Nombre = Nombre;
-        this.Direccion = Direccion;
+        this.direccion_simple = direccion_simple;
+        this.direccion_exacta = direccion_exacta;
         this.Cedula = Cedula;
         this.Telefonos = Telefonos;
     }
-    public TO_Cliente(int Cliente ,String Nombre,String Direccion, String Cedula,String Telefonos){
-        this.idCliente = Cliente;
+    public TO_Cliente(int idCliente, String Nombre, String direccion_simple, String direccion_exacta, String Cedula, String Telefonos){
+        this.idCliente = idCliente;
         this.Nombre = Nombre;
-        this.Direccion = Direccion;
+        this.direccion_simple = direccion_simple;
+        this.direccion_exacta = direccion_exacta;
         this.Cedula = Cedula;
         this.Telefonos = Telefonos;
     }
@@ -40,13 +43,29 @@ public class TO_Cliente {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-    
-    public String getDireccion() {
-        return Direccion;
+
+    public String getDireccion_simple() {
+        return direccion_simple;
     }
 
-    public void setDireccion(String Direccion) {
-        this.Direccion = Direccion;
+    public void setDireccion_simple(String direccion_simple) {
+        this.direccion_simple = direccion_simple;
+    }
+
+    public String getDireccion_exacta() {
+        return direccion_exacta;
+    }
+
+    public void setDireccion_exacta(String direccion_exacta) {
+        this.direccion_exacta = direccion_exacta;
+    }
+
+    public String getTelefonos() {
+        return Telefonos;
+    }
+
+    public void setTelefonos(String Telefonos) {
+        this.Telefonos = Telefonos;
     }
     
     public String getCedula() {

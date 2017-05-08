@@ -25,7 +25,7 @@ public class DAO_Cliente {
     private ResultSet rs;
     private TO_Cliente cliente;
     
-    public boolean ingresarCliente(String nombre,String direccion,String cedula, String telefonos){
+    public boolean ingresarCliente(String nombre,String direccion_simple, String direccion_exacta,String cedula, String telefonos){
         
       try {
           if(conexion == null || conexion.isClosed()){
@@ -34,11 +34,12 @@ public class DAO_Cliente {
           
          
                 
-      cmd = conexion.prepareStatement("insert into Cliente(Nombre,Direccion,Cedula,Telefonos) values (?,?,?,?);");
+      cmd = conexion.prepareStatement("insert into Cliente(Nombre,Direccion_Simple, Direccion_Exacta,Cedula,Telefonos) values (?,?,?,?,?);");
       cmd.setString(1,nombre);
-      cmd.setString(2,direccion);
-      cmd.setString(3,cedula);
-      cmd.setString(4,telefonos);
+      cmd.setString(2,direccion_simple);
+      cmd.setString(3,direccion_exacta);
+      cmd.setString(4,cedula);
+      cmd.setString(5,telefonos);
       cmd.execute();
       return true;
       
@@ -54,7 +55,7 @@ public class DAO_Cliente {
       
       return false;
     }
-    public boolean modificarCliente(int idCliente, String nombre,String direccion,String cedula, String telefonos){
+    public boolean modificarCliente(int idCliente, String nombre,String direccion_simple, String direccion_exacta, String cedula, String telefonos){
         
       try {
           if(conexion == null || conexion.isClosed()){
@@ -63,12 +64,13 @@ public class DAO_Cliente {
           
          
                 
-      cmd = conexion.prepareStatement("update Cliente set Nombre=?,Direccion=?,Cedula=?,Telefonos=? where idCliente=?;");
+      cmd = conexion.prepareStatement("update Cliente set Nombre=?,Direccion_Simple=?, Direccion_Exacta=?,Cedula=?,Telefonos=? where idCliente=?;");
       cmd.setString(1,nombre);
-      cmd.setString(2,direccion);
-      cmd.setString(3,cedula);
-      cmd.setString(4,telefonos);
-      cmd.setInt(5,idCliente);
+      cmd.setString(2,direccion_simple);
+      cmd.setString(3,direccion_exacta);
+      cmd.setString(4,cedula);
+      cmd.setString(5,telefonos);
+      cmd.setInt(6,idCliente);
       cmd.execute();
       return true;
       
@@ -98,11 +100,11 @@ public class DAO_Cliente {
                 Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            cmd = conexion.prepareStatement("select idCliente, Nombre, Direccion, Cedula, Telefonos from Cliente  order by Nombre; ");
+            cmd = conexion.prepareStatement("select idCliente, Nombre, Direccion_Simple, Direccion_Exacta, Cedula, Telefonos from Cliente  order by Nombre; ");
             rs = cmd.executeQuery();
             
             while (rs.next()) {
-                clientes.add(new TO_Cliente(rs.getInt("idCliente"), rs.getString("Nombre"), rs.getString("Direccion"), rs.getString("Cedula"), rs.getString("Telefonos")));
+                clientes.add(new TO_Cliente(rs.getInt("idCliente"), rs.getString("Nombre"), rs.getString("Direccion_Simple"), rs.getString("Direccion_Exacta"), rs.getString("Cedula"), rs.getString("Telefonos")));
             }
         } catch (Exception ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);

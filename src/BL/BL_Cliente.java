@@ -16,21 +16,24 @@ import java.util.ArrayList;
 public class BL_Cliente {
     public int idCliente; 
     public String Nombre;
-    public String Direccion;
+    public String direccion_simple;
+    public String direccion_exacta;
     public String Cedula;
     public String Telefonos;
     
     
-    public BL_Cliente(String Nombre,String Direccion, String Cedula, String Telefonos){
+    public BL_Cliente(String Nombre,String direccion_simple, String direccion_exacta, String Cedula, String Telefonos){
         this.Nombre = Nombre;
-        this.Direccion = Direccion;
+        this.direccion_simple = direccion_simple;
+        this.direccion_exacta = direccion_exacta;
         this.Cedula = Cedula;
         this.Telefonos = Telefonos;
     }
-    public BL_Cliente(int idCliente ,String Nombre,String Direccion, String Cedula, String Telefonos){
+    public BL_Cliente(int idCliente ,String Nombre,String direccion_simple, String direccion_exacta, String Cedula, String Telefonos){
         this.idCliente = idCliente;
         this.Nombre = Nombre;
-        this.Direccion = Direccion;
+        this.direccion_simple = direccion_simple;
+        this.direccion_exacta = direccion_exacta;
         this.Cedula = Cedula;
         this.Telefonos = Telefonos;
     }
@@ -54,14 +57,23 @@ public class BL_Cliente {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-    
-    public String getDireccion() {
-        return Direccion;
+
+    public String getDireccion_simple() {
+        return direccion_simple;
     }
 
-    public void setDireccion(String Direccion) {
-        this.Direccion = Direccion;
+    public void setDireccion_simple(String direccion_simple) {
+        this.direccion_simple = direccion_simple;
     }
+
+    public String getDireccion_exacta() {
+        return direccion_exacta;
+    }
+
+    public void setDireccion_exacta(String direccion_exacta) {
+        this.direccion_exacta = direccion_exacta;
+    }
+    
     
     public String getCedula() {
         return Cedula;
@@ -79,14 +91,14 @@ public class BL_Cliente {
         this.idCliente = idCliente;
     }
 
-    public boolean insertarCliente(String Nombre, String Direccion, String Cedula,String Telefonos){
+    public boolean insertarCliente(String Nombre, String direccio_simple, String direccio_exacta, String Cedula,String Telefonos){
          DAO.DAO_Cliente daoCli = new DAO_Cliente();
-        return  daoCli.ingresarCliente(Nombre, Direccion, Cedula,Telefonos); 
+        return  daoCli.ingresarCliente(Nombre, direccio_simple, direccio_exacta, Cedula,Telefonos); 
     }
     
-    public boolean modificarCliente(int idCliente, String Nombre, String Direccion, String Cedula,String Telefonos){
+    public boolean modificarCliente(int idCliente, String Nombre, String direccion_simple, String dirreccion_exacta, String Cedula,String Telefonos){
          DAO.DAO_Cliente daoCli = new DAO_Cliente();
-        return  daoCli.modificarCliente(idCliente, Nombre, Direccion, Cedula,Telefonos); 
+        return  daoCli.modificarCliente(idCliente, Nombre, direccion_simple, dirreccion_exacta, Cedula,Telefonos); 
     }
  
     public ArrayList<BL_Cliente> cargarClientes() {
@@ -95,7 +107,7 @@ public class BL_Cliente {
         DAO_Cliente daoCliente = new DAO_Cliente();
         listaToClientes = daoCliente.cargarClientes();
         for(TO_Cliente tem : listaToClientes) {
-            listaBlClientes.add(new BL_Cliente(tem.idCliente, tem.Nombre, tem.Direccion, tem.Cedula, tem.Telefonos));
+            listaBlClientes.add(new BL_Cliente(tem.idCliente, tem.Nombre, tem.direccion_simple, tem.direccion_exacta, tem.Cedula, tem.Telefonos));
         }
         return listaBlClientes;
     }
