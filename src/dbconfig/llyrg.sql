@@ -53,11 +53,12 @@ DROP TABLE IF EXISTS `Cliente`;
 CREATE TABLE `Cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) NOT NULL,
-  `Direccion` varchar(100) NOT NULL,
+  `Direccion_Simple` varchar(100) NOT NULL,
+  `Direccion_Exacta` varchar(150) NOT NULL,
   `Cedula` varchar(25) NOT NULL,
   `Telefonos` varchar(50) NOT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +67,7 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
-INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','207350735',''),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','207450335',''),(3,'Kenneth Gonzales Oreamuno','Coyol, Alajuela','207450335',''),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','207450335','');
+INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207350735','24543624 87363723 '),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','','207450335','88996655'),(3,'Kenneth Gonzales Oreamuno','Coyol, Alajuela','','207450335','22334455'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','','207450335','55661100'),(5,'Oscar Perez Lopez','Tacares, grecia, Alajuela','','208750456','24447567 87896534 '),(7,'Juan Rodriguez','Sarchi, Alajuela, Costa Rica','haaayyy yaaa yyaaa, cantaa y no llores, por que llorando se alegra.','209840336','22222222 111111111 333333333 '),(8,'Cooporacion Industrial de Trasportes Patica','sdfsd','','2044450445','345234 '),(9,'Antonio Alavarez','Pital de San Carlos','Por la salchichoneria de los caballeros del sodiaco, cerca de la entrada al inframundo permidada por haya','2245678','3456543 3434455 ');
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +142,7 @@ CREATE TABLE `Llanta` (
   `Cantidad` int(11) NOT NULL,
   `TipoLlanta` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`idLlanta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +151,7 @@ CREATE TABLE `Llanta` (
 
 LOCK TABLES `Llanta` WRITE;
 /*!40000 ALTER TABLE `Llanta` DISABLE KEYS */;
+INSERT INTO `Llanta` VALUES (1,'205/70/14','Aeulos','hn08','3',10,'Normal'),(2,'175/60/13','Firestone','NO34','3',23,'Normal'),(3,'11-24.5','Ovation','VI 312','16',10,'Normal');
 /*!40000 ALTER TABLE `Llanta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-22 10:52:18
+-- Dump completed on 2017-05-08 15:02:42
