@@ -36,6 +36,7 @@ public final class DAO_Conexion {
         try {
             return DriverManager.getConnection("jdbc:mysql://"+servidor+":3306/"+nombreDB, usuarioDB, passwordDB);
         } catch (SQLException ex) {
+            HE.Exepciones.RegistrarError(ex);
         }
         return null;
     }
@@ -45,6 +46,7 @@ public final class DAO_Conexion {
             return true;
         } catch (SQLException e) {
             System.err.println("Cannot connect the database!"+ e);
+            HE.Exepciones.RegistrarError(e);
             return false;
         }
          

@@ -49,6 +49,7 @@ public class DAO_Cliente {
                 conexion.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
             }
         }
 
@@ -79,6 +80,7 @@ public class DAO_Cliente {
                 conexion.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
             }
         }
 
@@ -121,6 +123,7 @@ public class DAO_Cliente {
                 }
             } catch (Exception ex) {
                 Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
             }
 
             cmd = conexion.prepareStatement("delete from Cliente where idCliente = ?;");
@@ -130,11 +133,13 @@ public class DAO_Cliente {
 
         } catch (Exception ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
         } finally {
             try {
                 conexion.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
             }
         }
         return false;
