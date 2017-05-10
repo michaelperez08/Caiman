@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dbconfig;
+package config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,6 @@ import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -29,8 +28,8 @@ public final class ConfBD {
 
     public void leerConfigXML() {
 
-        String pathCarpProperties = getDirectoriosPorSO()[0];
-        String pathArchProperties = getDirectoriosPorSO()[1];
+        String pathCarpProperties = ManejoDirecctorios.getDirectoriosPorSO();
+        String pathArchProperties = ManejoDirecctorios.getNombreArchivoConfDB();
         Properties prop = new Properties();
         OutputStream output = null;
         try {
@@ -63,8 +62,8 @@ public final class ConfBD {
 
     public boolean modificarConfigProp(String usuario, String contrasena, String nombreBD,String servidor) {
         Properties prop = new Properties();
-        String pathCarpProperties = getDirectoriosPorSO()[0];
-        String pathArchProperties = getDirectoriosPorSO()[1];
+        String pathCarpProperties = ManejoDirecctorios.getDirectoriosPorSO();
+        String pathArchProperties = ManejoDirecctorios.getNombreArchivoConfDB();
         OutputStream output = null;
         try {
             output = new FileOutputStream(pathCarpProperties + pathArchProperties);
@@ -83,7 +82,7 @@ public final class ConfBD {
         return false;
     }
 
-    public String[] getDirectoriosPorSO() {
+    /*public String[] getDirectoriosPorSO() {
         String os = System.getProperty("os.name").toLowerCase();
         String[] direccWind = {System.getProperty("user.home") + "\\.llyrg-dbconfig", "\\dbconfig.properties"};
         String[] direccLinux = {System.getProperty("user.home") + "/.llyrg-dbconfig", "/dbconfig.properties"};
@@ -92,6 +91,6 @@ public final class ConfBD {
         } else {
             return direccWind;
         }
-    }
+    }*/
 
 }

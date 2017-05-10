@@ -12,7 +12,7 @@ package UI;
 import BL.BL_Llanta;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import dbconfig.ConfBD;
+import config.ConfBD;
 
 public class Main {
 
