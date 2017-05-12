@@ -126,6 +126,7 @@ public class BL_Llanta {
         for (TO_Llanta tem : listaToLlantas) {
             listaBlLlantas.add(new BL_Llanta(tem.idLlanta, tem.NumeroLlanta, tem.Marca, tem.Diseno, tem.NumeroCapas, tem.Cantidad, tem.TipoLlanta));
         }
+        
         return listaBlLlantas;
     }
 }
