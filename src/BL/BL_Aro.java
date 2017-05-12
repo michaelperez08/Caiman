@@ -6,6 +6,8 @@
 package BL;
 
 import DAO.DAO_Aro;
+import TO.TO_Aro;
+import java.util.ArrayList;
 
 /**
  *
@@ -81,6 +83,17 @@ public class BL_Aro {
     public boolean IngresarAro(String numeroAro, String marca,int cantidad,String codigo){
         DAO_Aro daoAro = new DAO_Aro();
         return daoAro.ingresarAro(numeroAro, marca, cantidad, codigo);
+    }
+    
+    public ArrayList<BL_Aro> cargarAros() {
+        ArrayList<BL_Aro> listaBlAros = new ArrayList<>();
+        ArrayList<TO_Aro> listaToAros = new ArrayList<>();
+        DAO_Aro daoAro = new DAO_Aro();
+        listaToAros = daoAro.cargarAros();
+        for(TO_Aro tem : listaToAros) {
+            listaBlAros.add(new BL_Aro(tem.getidAro(), tem.getNumeroAro(), tem.getMarca(), tem.getCantidad(), tem.getCodigo()));
+        }
+        return listaBlAros;
     }
     
 }

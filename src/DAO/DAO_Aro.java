@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,6 +56,39 @@ public class DAO_Aro {
       }
       
       return false;
+    }
+    
+    public ArrayList<TO_Aro> cargarAros() {
+        ArrayList<TO_Aro> aros = new ArrayList<>();
+        
+        try {
+            try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+          cmd = conexion.prepareStatement("SELECT * FROM Aro;");
+          rs = cmd.executeQuery();
+          
+            while (rs.next()) {                
+                aros.add(new TO_Aro(rs.getInt("idAro"), rs.getString("NumeroAro"), rs.getString("Marca"), rs.getInt("Cantidad"), rs.getString("Codigo")));
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                cmd.close();
+                conexion.close();
+            } catch(Exception ex) {
+                 Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+                 HE.Exepciones.RegistrarError(ex);
+            }
+        }
+        return aros;
     }
 
 }
