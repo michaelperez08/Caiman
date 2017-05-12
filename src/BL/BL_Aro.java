@@ -12,11 +12,11 @@ import DAO.DAO_Aro;
  * @author michael
  */
 public class BL_Aro {
-     public int idAro;
-    public String NumeroAro;
-    public String Marca;
-    public int Cantidad;
-    public String Codigo;
+    private int idAro;
+    private String NumeroAro;
+    private String Marca;
+    private int Cantidad;
+    private String Codigo;
     
     
    public BL_Aro(int idAro,String NumeroAro, String Marca,int Cantidad,String Codigo){

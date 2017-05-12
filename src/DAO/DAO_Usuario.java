@@ -9,6 +9,7 @@ package DAO;
  *
  * @author michael
  */
+import HE.Exepciones;
 import TO.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -169,9 +170,10 @@ public class DAO_Usuario {
                 if (conexion != null) {
                     conexion.close();
                 }
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
                 HE.Exepciones.RegistrarError(ex);
+                //throw new HE.Exepciones(ex);
             }
         }
         return retorno;

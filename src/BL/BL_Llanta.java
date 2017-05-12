@@ -14,13 +14,13 @@ import java.util.ArrayList;
  * @author Extreme PC
  */
 public class BL_Llanta {
-    public int idLlanta;
-    public String NumeroLlanta;
-    public String Marca;
-    public String Diseno;
-    public int NumeroCapas;
-    public int Cantidad;
-    public String TipoLlanta;
+    private int idLlanta;
+    private String NumeroLlanta;
+    private String Marca;
+    private String Diseno;
+    private int NumeroCapas;
+    private int Cantidad;
+    private String TipoLlanta;
     
    public BL_Llanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
        this.idLlanta = idLlanta;
