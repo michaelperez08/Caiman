@@ -16,6 +16,12 @@ public class Exepciones extends Exception{
 
     public Exepciones() {
     }
+
+    public Exepciones(Throwable cause) {
+        super(cause);
+    }
+    
+    
     
     public static void RegistrarError(Throwable cause){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

@@ -14,12 +14,12 @@ import java.util.ArrayList;
  * @author michael
  */
 public class BL_Cliente {
-    public int idCliente; 
-    public String Nombre;
-    public String direccion_simple;
-    public String direccion_exacta;
-    public String Cedula;
-    public String Telefonos;
+    private int idCliente; 
+    private String Nombre;
+    private String direccion_simple;
+    private String direccion_exacta;
+    private String Cedula;
+    private String Telefonos;
     
     
     public BL_Cliente(String Nombre,String direccion_simple, String direccion_exacta, String Cedula, String Telefonos){
