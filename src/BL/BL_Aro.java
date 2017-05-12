@@ -74,7 +74,7 @@ public class BL_Aro {
         return Codigo;
     }
 
-    public void setTipoLlanta(String Codigo) {
+    public void setCodigo(String Codigo) {
         this.Codigo = Codigo;
     }
    
