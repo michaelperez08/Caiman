@@ -96,4 +96,9 @@ public class BL_Aro {
         return listaBlAros;
     }
     
+    public boolean EliminarAro() {
+        DAO_Aro daoAro = new DAO_Aro();
+        return daoAro.eliminarAro(idAro);
+    }
+    
 }
