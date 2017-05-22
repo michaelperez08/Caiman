@@ -51,6 +51,7 @@ public final class Principal extends javax.swing.JFrame {
         cargarAros();
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -125,7 +126,6 @@ public final class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LLantas y Reencauches Griegos");
-        setPreferredSize(new java.awt.Dimension(1080, 720));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -369,10 +369,11 @@ public final class Principal extends javax.swing.JFrame {
             jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_llantasLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_filtroBusquedaLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jl_Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcb_filtroBusquedaLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jp_llantasLayout.createSequentialGroup()
@@ -619,7 +620,7 @@ public final class Principal extends javax.swing.JFrame {
                 eliminarLlanta();
                 break;
             case 2:
-                //eliminar aro
+                eliminarAro();
                 break;
             case 3:
                 
@@ -714,7 +715,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_modificarAroActionPerformed
 
     private void bt_eliminarAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarAroActionPerformed
-        // TODO add your handling code here:
+        eliminarAro();
     }//GEN-LAST:event_bt_eliminarAroActionPerformed
 
     private void jcb_filtroBusquedaAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_filtroBusquedaAroActionPerformed
@@ -995,6 +996,24 @@ public final class Principal extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                 }
+            }
+        }
+    }
+    
+    private void eliminarAro() {
+        BL_Aro blAro;
+        if (validarSeleccion('a')){
+            int fila = jt_aros.getSelectedRow();
+            int numeroFila = Integer.parseInt("" + jt_aros.getValueAt(fila, 0));
+            blAro = listaAros.get(numeroFila);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la aro " + blAro.getMarca()+ " " + blAro.getNumeroAro() +" "+ blAro.getCodigo()+ "?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if(confirmacion == JOptionPane.YES_OPTION){
+                if(blAro.eliminarAro()){
+                   JOptionPane.showMessageDialog(null, "Aro Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarAros();
+                } else {
+                   JOptionPane.showMessageDialog(null, "Fallo al eliminar el aro", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                 }
             }
         }
     }

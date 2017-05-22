@@ -101,7 +101,7 @@ public class BL_Aro {
         return listaBlAros;
     }
     
-    public boolean EliminarAro() {
+    public boolean eliminarAro() {
         DAO_Aro daoAro = new DAO_Aro();
         return daoAro.eliminarAro(idAro);
     }
