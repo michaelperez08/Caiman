@@ -44,13 +44,13 @@ public class DAO_Aro {
       return true;
       
       } catch (SQLException ex) {
-          Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
           HE.Exepciones.RegistrarError(ex);
       }finally{
           try {    
               conexion.close();
           } catch (SQLException ex) {
-              Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
               HE.Exepciones.RegistrarError(ex);
           }
       }
@@ -89,6 +89,37 @@ public class DAO_Aro {
             }
         }
         return aros;
+    }
+    
+    public boolean modificarAro(int idAro, String numeroAro, String marca, int cantidad, String codigo ){
+        try {
+            if(conexion == null || conexion.isClosed()){
+                conexion = daoConexion.nuevaConexion();
+            }
+           cmd = conexion.prepareStatement("update Aro set NumeroAro=?, Marca=? , Cantidad=?, Codigo = ? where idAro=?;");
+           cmd.setString(1, numeroAro);
+           cmd.setString(2,marca);
+           cmd.setInt(3, cantidad);
+           cmd.setString(4, codigo);
+           cmd.setInt(5, idAro);
+           cmd.execute();
+           
+           return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+            
+        }
+        return false;
+                
+        
     }
 
 }

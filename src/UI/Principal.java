@@ -62,16 +62,12 @@ public final class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pum_tbClientes = new javax.swing.JPopupMenu();
-        jmi_verCliente = new javax.swing.JMenuItem();
-        jmi_modificarCliente = new javax.swing.JMenuItem();
+        pum_tb = new javax.swing.JPopupMenu();
+        jmi_ver = new javax.swing.JMenuItem();
+        jmi_modificar = new javax.swing.JMenuItem();
         jmi_eliminar = new javax.swing.JMenuItem();
-        pum_tbLlantas = new javax.swing.JPopupMenu();
-        jmi_verLlanta = new javax.swing.JMenuItem();
-        jmi_modificarLlanta = new javax.swing.JMenuItem();
-        jmi_eliminarLlanta = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        panel_tabs = new javax.swing.JTabbedPane();
         jp_clientes = new javax.swing.JPanel();
         jl_Buscar = new javax.swing.JLabel();
         tf_buscarCliente = new javax.swing.JTextField();
@@ -103,21 +99,21 @@ public final class Principal extends javax.swing.JFrame {
         jcb_filtroBusquedaAro = new javax.swing.JComboBox();
         jp_facturacion = new javax.swing.JPanel();
 
-        jmi_verCliente.setText("Ver");
-        jmi_verCliente.addActionListener(new java.awt.event.ActionListener() {
+        jmi_ver.setText("Ver");
+        jmi_ver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmi_verClienteActionPerformed(evt);
+                jmi_verActionPerformed(evt);
             }
         });
-        pum_tbClientes.add(jmi_verCliente);
+        pum_tb.add(jmi_ver);
 
-        jmi_modificarCliente.setText("Modificar");
-        jmi_modificarCliente.addActionListener(new java.awt.event.ActionListener() {
+        jmi_modificar.setText("Modificar");
+        jmi_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmi_modificarClienteActionPerformed(evt);
+                jmi_modificarActionPerformed(evt);
             }
         });
-        pum_tbClientes.add(jmi_modificarCliente);
+        pum_tb.add(jmi_modificar);
 
         jmi_eliminar.setText("Eliminar");
         jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,31 +121,7 @@ public final class Principal extends javax.swing.JFrame {
                 jmi_eliminarActionPerformed(evt);
             }
         });
-        pum_tbClientes.add(jmi_eliminar);
-
-        jmi_verLlanta.setText("Ver");
-        jmi_verLlanta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmi_verLlantaActionPerformed(evt);
-            }
-        });
-        pum_tbLlantas.add(jmi_verLlanta);
-
-        jmi_modificarLlanta.setText("Modificar");
-        jmi_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmi_modificarLlantaActionPerformed(evt);
-            }
-        });
-        pum_tbLlantas.add(jmi_modificarLlanta);
-
-        jmi_eliminarLlanta.setText("Eliminar");
-        jmi_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmi_eliminarLlantaActionPerformed(evt);
-            }
-        });
-        pum_tbLlantas.add(jmi_eliminarLlanta);
+        pum_tb.add(jmi_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LLantas y Reencauches Griegos");
@@ -157,7 +129,7 @@ public final class Principal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
-        jTabbedPane1.setBackground(new java.awt.Color(51, 51, 51));
+        panel_tabs.setBackground(new java.awt.Color(51, 51, 51));
 
         jp_clientes.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -231,7 +203,7 @@ public final class Principal extends javax.swing.JFrame {
                 "ID", "Nombre", "Cedula", "Telefono"
             }
         ));
-        jt_clientes.setComponentPopupMenu(pum_tbClientes);
+        jt_clientes.setComponentPopupMenu(pum_tb);
         jt_clientes.setGridColor(new java.awt.Color(51, 51, 51));
         jt_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -280,7 +252,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Clientes", jp_clientes);
+        panel_tabs.addTab("Clientes", jp_clientes);
 
         jp_llantas.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -298,7 +270,7 @@ public final class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jt_llantas.setComponentPopupMenu(pum_tbLlantas);
+        jt_llantas.setComponentPopupMenu(pum_tb);
         jt_llantas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jt_llantasMouseReleased(evt);
@@ -307,11 +279,6 @@ public final class Principal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jt_llantas);
 
         tf_buscarLlantas.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        tf_buscarLlantas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_buscarLlantasActionPerformed(evt);
-            }
-        });
         tf_buscarLlantas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_buscarLlantasKeyReleased(evt);
@@ -404,8 +371,8 @@ public final class Principal extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_filtroBusquedaLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcb_filtroBusquedaLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jl_Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jp_llantasLayout.createSequentialGroup()
@@ -421,7 +388,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("LLantas", jp_llantas);
+        panel_tabs.addTab("LLantas", jp_llantas);
 
         jp_aros.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -439,7 +406,7 @@ public final class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jt_aros.setComponentPopupMenu(pum_tbLlantas);
+        jt_aros.setComponentPopupMenu(pum_tb);
         jt_aros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jt_arosMouseReleased(evt);
@@ -511,7 +478,7 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jcb_filtroBusquedaAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jcb_filtroBusquedaAro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca", "Codigo" }));
+        jcb_filtroBusquedaAro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca", "Código" }));
         jcb_filtroBusquedaAro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcb_filtroBusquedaAroActionPerformed(evt);
@@ -562,7 +529,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Aros", jp_aros);
+        panel_tabs.addTab("Aros", jp_aros);
 
         javax.swing.GroupLayout jp_facturacionLayout = new javax.swing.GroupLayout(jp_facturacion);
         jp_facturacion.setLayout(jp_facturacionLayout);
@@ -575,17 +542,17 @@ public final class Principal extends javax.swing.JFrame {
             .addGap(0, 689, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Facturación", jp_facturacion);
+        panel_tabs.addTab("Facturación", jp_facturacion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(panel_tabs)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(panel_tabs)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -613,27 +580,22 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_buscarClienteKeyReleased
 
     private void bt_verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verActionPerformed
-        // TODO add your handling code here:
         verCliente();
     }//GEN-LAST:event_bt_verActionPerformed
 
-    private void jmi_verClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verClienteActionPerformed
-        // TODO add your handling code here:
-        verCliente();
-    }//GEN-LAST:event_jmi_verClienteActionPerformed
+    private void jmi_verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verActionPerformed
+        menuitem_ver();
+    }//GEN-LAST:event_jmi_verActionPerformed
 
-    private void jmi_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarClienteActionPerformed
-        // TODO add your handling code here:
-        modificarCliente();
-    }//GEN-LAST:event_jmi_modificarClienteActionPerformed
+    private void jmi_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarActionPerformed
+        menuitem_ver();
+    }//GEN-LAST:event_jmi_modificarActionPerformed
 
     private void bt_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarActionPerformed
-        // TODO add your handling code here:
-        modificarCliente();
+        verCliente();
     }//GEN-LAST:event_bt_modificarActionPerformed
 
     private void bt_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarActionPerformed
-        // TODO add your handling code here:
         UI_Cliente blc = new UI_Cliente(this, rootPaneCheckingEnabled);
         blc.setVisible(true);
         if (blc.actualizarLista) {
@@ -648,12 +610,22 @@ public final class Principal extends javax.swing.JFrame {
 
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
         // TODO add your handling code here:
-        eliminarCliente();
+        int tabseleccionado = panel_tabs.getSelectedIndex();
+        switch(tabseleccionado){
+            case 0:
+                eliminarCliente();
+                break;
+            case 1:
+                eliminarLlanta();
+                break;
+            case 2:
+                //eliminar aro
+                break;
+            case 3:
+                
+                break;
+        }
     }//GEN-LAST:event_jmi_eliminarActionPerformed
-
-    private void tf_buscarLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_buscarLlantasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_buscarLlantasActionPerformed
 
     private void bt_eliminarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarLlantaActionPerformed
         // TODO add your handling code here:
@@ -661,7 +633,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_eliminarLlantaActionPerformed
 
     private void bt_modificarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarLlantaActionPerformed
-        modificarLlanta();
+        verLlanta();
     }//GEN-LAST:event_bt_modificarLlantaActionPerformed
 
     private void bt_verLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verLlantaActionPerformed
@@ -678,23 +650,7 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_agregarLlantaActionPerformed
 
-    private void jmi_verLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verLlantaActionPerformed
-        // TODO add your handling code here:
-        verLlanta();
-    }//GEN-LAST:event_jmi_verLlantaActionPerformed
-
-    private void jmi_modificarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarLlantaActionPerformed
-        // TODO add your handling code here:
-        modificarLlanta();
-    }//GEN-LAST:event_jmi_modificarLlantaActionPerformed
-
-    private void jmi_eliminarLlantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarLlantaActionPerformed
-        // TODO add your handling code here:
-        eliminarLlanta();
-    }//GEN-LAST:event_jmi_eliminarLlantaActionPerformed
-
     private void tf_buscarLlantasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarLlantasKeyReleased
-        // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             //new AyudaF1().abrirAyuda();
         } else {
@@ -723,7 +679,9 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jt_llantasMouseReleased
 
     private void jt_arosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_arosMouseReleased
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            verAro();
+        }
     }//GEN-LAST:event_jt_arosMouseReleased
 
     private void tf_buscarAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_buscarAroActionPerformed
@@ -740,7 +698,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_buscarAroKeyReleased
 
     private void bt_verAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verAroActionPerformed
-        // TODO add your handling code here:
+        verAro();
     }//GEN-LAST:event_bt_verAroActionPerformed
 
     private void bt_agregarAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarAroActionPerformed
@@ -752,7 +710,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_agregarAroActionPerformed
 
     private void bt_modificarAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarAroActionPerformed
-        // TODO add your handling code here:
+        verAro();
     }//GEN-LAST:event_bt_modificarAroActionPerformed
 
     private void bt_eliminarAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarAroActionPerformed
@@ -795,6 +753,24 @@ public final class Principal extends javax.swing.JFrame {
         });
 
     }
+    
+    public void menuitem_ver(){
+        int tabseleccionado = panel_tabs.getSelectedIndex();
+        switch(tabseleccionado){
+            case 0:
+                verCliente();
+                break;
+            case 1:
+                verLlanta();
+                break;
+            case 2:
+                verAro();
+                break;
+            case 3:
+                
+                break;
+        }
+    }
 
     public void filtrarClientes() {
         String hilera = tf_buscarCliente.getText();
@@ -807,10 +783,22 @@ public final class Principal extends javax.swing.JFrame {
     public void filtrarAros() {
         String hilera = tf_buscarAro.getText();
         String filtro = jcb_filtroBusquedaAro.getSelectedItem() + "";
+        int fila = 0;
+        switch (filtro) {
+            case "Marca":
+                fila = 2;
+                break;
+            case "Número":
+                fila = 1;
+                break;
+            case "Código":
+                fila = 3;
+                break;
+        }
         if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
             hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
         }
-        trsfiltroCliente.setRowFilter(RowFilter.regexFilter(hilera, 1));
+        trsfiltroAros.setRowFilter(RowFilter.regexFilter(hilera, fila));
     }
 
     public void filtrarLlantas() {
@@ -909,7 +897,9 @@ public final class Principal extends javax.swing.JFrame {
             clienteVer = listaClientes.get(numeroFila);
             uic.cargarCliente(clienteVer);
             uic.setVisible(true);
-            cargarClientes();
+            if (uic.actualizarLista) {
+                cargarClientes();
+            }
         }
     }
 
@@ -922,16 +912,25 @@ public final class Principal extends javax.swing.JFrame {
             llantaVer = listaLlantas.get(numeroFila);
             uill.cargarLlanta(llantaVer);
             uill.setVisible(true);
-            cargarLlantas();
+            if (uill.actualizarLista) {
+                cargarLlantas();
+            }
         }
     }
-
-    public void modificarCliente() {
-        verCliente();
-    }
-
-    public void modificarLlanta() {
-        verLlanta();
+    
+    public void verAro() {
+        BL_Aro aroVer;
+        if (validarSeleccion('a')) {
+            UI_Aro uia = new UI_Aro(this, rootPaneCheckingEnabled);
+            int fila = jt_aros.getSelectedRow();
+            int numeroFila = Integer.parseInt("" + jt_aros.getValueAt(fila, 0));
+            aroVer = listaAros.get(numeroFila);
+            uia.cargarAro(aroVer);
+            uia.setVisible(true);
+            if (uia.actualizarLista) {
+                cargarAros();
+            }
+        }
     }
 
     public boolean validarSeleccion(char t) {
@@ -1017,18 +1016,14 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox jcb_filtroBusquedaAro;
     private javax.swing.JComboBox jcb_filtroBusquedaLlanta;
     private javax.swing.JLabel jl_Buscar;
     private javax.swing.JLabel jl_Buscar1;
     private javax.swing.JLabel jl_Buscar2;
     private javax.swing.JMenuItem jmi_eliminar;
-    private javax.swing.JMenuItem jmi_eliminarLlanta;
-    private javax.swing.JMenuItem jmi_modificarCliente;
-    private javax.swing.JMenuItem jmi_modificarLlanta;
-    private javax.swing.JMenuItem jmi_verCliente;
-    private javax.swing.JMenuItem jmi_verLlanta;
+    private javax.swing.JMenuItem jmi_modificar;
+    private javax.swing.JMenuItem jmi_ver;
     private javax.swing.JPanel jp_aros;
     private javax.swing.JPanel jp_clientes;
     private javax.swing.JPanel jp_facturacion;
@@ -1036,8 +1031,8 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jt_aros;
     private javax.swing.JTable jt_clientes;
     private javax.swing.JTable jt_llantas;
-    private javax.swing.JPopupMenu pum_tbClientes;
-    private javax.swing.JPopupMenu pum_tbLlantas;
+    private javax.swing.JTabbedPane panel_tabs;
+    private javax.swing.JPopupMenu pum_tb;
     private javax.swing.JTextField tf_buscarAro;
     private javax.swing.JTextField tf_buscarCliente;
     private javax.swing.JTextField tf_buscarLlantas;

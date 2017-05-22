@@ -2,26 +2,26 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JPopupMenu" name="pum_tbClientes">
+    <Container class="javax.swing.JPopupMenu" name="pum_tb">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="jmi_verCliente">
+        <MenuItem class="javax.swing.JMenuItem" name="jmi_ver">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_verClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_verActionPerformed"/>
           </Events>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="jmi_modificarCliente">
+        <MenuItem class="javax.swing.JMenuItem" name="jmi_modificar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_modificarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_modificarActionPerformed"/>
           </Events>
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jmi_eliminar">
@@ -30,38 +30,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_eliminarActionPerformed"/>
-          </Events>
-        </MenuItem>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPopupMenu" name="pum_tbLlantas">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-      <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="jmi_verLlanta">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ver"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_verLlantaActionPerformed"/>
-          </Events>
-        </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="jmi_modificarLlanta">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modificar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_modificarLlantaActionPerformed"/>
-          </Events>
-        </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="jmi_eliminarLlanta">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_eliminarLlantaActionPerformed"/>
           </Events>
         </MenuItem>
       </SubComponents>
@@ -113,17 +81,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="panel_tabs" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="panel_tabs" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+        <Container class="javax.swing.JTabbedPane" name="panel_tabs">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -324,7 +292,7 @@
                           </Table>
                         </Property>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="pum_tbClientes"/>
+                          <ComponentRef name="pum_tb"/>
                         </Property>
                         <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="33" type="rgb"/>
@@ -383,8 +351,8 @@
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="tf_buscarLlantas" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="jl_Buscar1" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="jcb_filtroBusquedaLlanta" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jl_Buscar1" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -429,7 +397,7 @@
                           </Table>
                         </Property>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="pum_tbLlantas"/>
+                          <ComponentRef name="pum_tb"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -445,7 +413,6 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_buscarLlantasActionPerformed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_buscarLlantasKeyReleased"/>
                   </Events>
                 </Component>
@@ -656,7 +623,7 @@
                           </Table>
                         </Property>
                         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="pum_tbLlantas"/>
+                          <ComponentRef name="pum_tb"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -783,7 +750,7 @@
                       <StringArray count="3">
                         <StringItem index="0" value="N&#xfa;mero"/>
                         <StringItem index="1" value="Marca"/>
-                        <StringItem index="2" value="Codigo"/>
+                        <StringItem index="2" value="C&#xf3;digo"/>
                       </StringArray>
                     </Property>
                   </Properties>

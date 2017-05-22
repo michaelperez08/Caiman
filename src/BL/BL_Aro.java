@@ -85,6 +85,11 @@ public class BL_Aro {
         return daoAro.ingresarAro(numeroAro, marca, cantidad, codigo);
     }
     
+    public boolean modificarAro(int idAro, String numeroAro, String Marca, int Cantidad, String Codigo){
+        DAO_Aro daoaro = new DAO_Aro();
+        return daoaro.modificarAro(idAro, numeroAro, Marca, Cantidad, Codigo);
+    }
+    
     public ArrayList<BL_Aro> cargarAros() {
         ArrayList<BL_Aro> listaBlAros = new ArrayList<>();
         ArrayList<TO_Aro> listaToAros = new ArrayList<>();

@@ -17,6 +17,8 @@ public class UI_Aro extends javax.swing.JDialog {
     public boolean actualizarLista;
     /**
      * Creates new form UI_Aro
+     * @param parent
+     * @param modal
      */
     public UI_Aro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -183,8 +185,8 @@ public class UI_Aro extends javax.swing.JDialog {
                     aroAMostrar.setMarca(marca);
                     aroAMostrar.setCantidad(cantidad2);
                     aroAMostrar.setCodigo(codigo);
-                    consultaExitosa = /**aroAMostrar.modificarAro(aroAMostrar.getidAro(), aroAMostrar.getNumeroAro(),
-                            aroAMostrar.getMarca(), aroAMostrar.getCantidad(), aroAMostrar.getCodigo());**/ true;
+                    consultaExitosa = aroAMostrar.modificarAro(aroAMostrar.getidAro(), aroAMostrar.getNumeroAro(),
+                            aroAMostrar.getMarca(), aroAMostrar.getCantidad(), aroAMostrar.getCodigo());
                     if (consultaExitosa) {
                         actualizarLista=true;
                         JOptionPane.showMessageDialog(null, "Aro Actualizado con exito", "Aro Actualizado", JOptionPane.INFORMATION_MESSAGE);
