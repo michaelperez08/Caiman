@@ -118,8 +118,35 @@ public class DAO_Aro {
             
         }
         return false;
-                
+    }
         
+    public boolean eliminarAro(int idAro) {
+        try {
+            try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            cmd = conexion.prepareStatement("delete from Aro where idAro = ? ;");
+            cmd.setInt(1, idAro);
+            cmd.execute();
+            return true;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+        }
+        return false;
     }
 
 }
