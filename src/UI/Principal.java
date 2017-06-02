@@ -8,7 +8,10 @@ package UI;
 import BL.BL_Aro;
 import BL.BL_Cliente;
 import BL.BL_Llanta;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -40,6 +43,7 @@ public final class Principal extends javax.swing.JFrame {
     private TableRowSorter trsfiltroCliente;
     private TableRowSorter trsfiltroLlantas;
     private TableRowSorter trsfiltroAros;
+    int resaltado;
 
     public Principal() {
         initComponents();
@@ -52,6 +56,7 @@ public final class Principal extends javax.swing.JFrame {
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        resaltado=0;
     }
 
     /**
@@ -99,6 +104,35 @@ public final class Principal extends javax.swing.JFrame {
         bt_eliminarAro = new javax.swing.JButton();
         jcb_filtroBusquedaAro = new javax.swing.JComboBox();
         jp_facturacion = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tf_telefono = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tf_cedula = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tf_direccion = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        rb_cliente_nuevo = new javax.swing.JRadioButton();
+        cb_nombre_cliente = new javax.swing.JComboBox();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jt_linea_factura = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        sp_cantidad = new javax.swing.JSpinner();
+        bt_agregar_linea = new javax.swing.JButton();
+        tf_precio = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        rb_producto_nuevo = new javax.swing.JRadioButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cb_producto = new javax.swing.JComboBox<>();
+        bt_imprimir = new javax.swing.JButton();
+        rb_contado = new javax.swing.JRadioButton();
+        rb_credito = new javax.swing.JRadioButton();
 
         jmi_ver.setText("Ver");
         jmi_ver.addActionListener(new java.awt.event.ActionListener() {
@@ -129,28 +163,38 @@ public final class Principal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
-        panel_tabs.setBackground(new java.awt.Color(51, 51, 51));
+        panel_tabs.setMaximumSize(new java.awt.Dimension(1080, 720));
+        panel_tabs.setMinimumSize(new java.awt.Dimension(1080, 720));
+        panel_tabs.setPreferredSize(new java.awt.Dimension(1080, 720));
 
         jp_clientes.setBackground(new java.awt.Color(51, 51, 51));
+        jp_clientes.setForeground(new java.awt.Color(102, 102, 102));
+        jp_clientes.setMaximumSize(new java.awt.Dimension(1080, 720));
+        jp_clientes.setMinimumSize(new java.awt.Dimension(1080, 720));
+        jp_clientes.setName(""); // NOI18N
+        jp_clientes.setPreferredSize(new java.awt.Dimension(1080, 720));
+        jp_clientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jl_Buscar.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jl_Buscar.setForeground(new java.awt.Color(204, 204, 204));
         jl_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar.setText("Buscar");
+        jl_Buscar.setPreferredSize(new java.awt.Dimension(102, 33));
+        jp_clientes.add(jl_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 33));
 
         tf_buscarCliente.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_buscarCliente.setForeground(new java.awt.Color(51, 51, 51));
+        tf_buscarCliente.setPreferredSize(new java.awt.Dimension(946, 34));
         tf_buscarCliente.setSelectionColor(new java.awt.Color(153, 153, 153));
         tf_buscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_buscarClienteKeyReleased(evt);
             }
         });
+        jp_clientes.add(tf_buscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, 946, 34));
 
-        bt_ver.setBackground(new java.awt.Color(51, 51, 51));
         bt_ver.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_ver.setForeground(new java.awt.Color(204, 204, 204));
         bt_ver.setText("Ver");
         bt_ver.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_ver.addActionListener(new java.awt.event.ActionListener() {
@@ -158,10 +202,9 @@ public final class Principal extends javax.swing.JFrame {
                 bt_verActionPerformed(evt);
             }
         });
+        jp_clientes.add(bt_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, 102, 33));
 
-        bt_agregar.setBackground(new java.awt.Color(51, 51, 51));
         bt_agregar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregar.setForeground(new java.awt.Color(204, 204, 204));
         bt_agregar.setText("Agregar");
         bt_agregar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,20 +212,18 @@ public final class Principal extends javax.swing.JFrame {
                 bt_agregarActionPerformed(evt);
             }
         });
+        jp_clientes.add(bt_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
 
-        bt_modificar.setBackground(new java.awt.Color(51, 51, 51));
         bt_modificar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificar.setForeground(new java.awt.Color(204, 204, 204));
         bt_modificar.setText("Modificar");
         bt_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarActionPerformed(evt);
             }
         });
+        jp_clientes.add(bt_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 172, -1, -1));
 
-        bt_eliminar.setBackground(new java.awt.Color(51, 51, 51));
         bt_eliminar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminar.setForeground(new java.awt.Color(204, 204, 204));
         bt_eliminar.setText("Eliminar");
         bt_eliminar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +231,7 @@ public final class Principal extends javax.swing.JFrame {
                 bt_eliminarActionPerformed(evt);
             }
         });
+        jp_clientes.add(bt_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 222, -1, -1));
 
         jt_clientes.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jt_clientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -212,49 +254,15 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jt_clientes);
 
-        javax.swing.GroupLayout jp_clientesLayout = new javax.swing.GroupLayout(jp_clientes);
-        jp_clientes.setLayout(jp_clientesLayout);
-        jp_clientesLayout.setHorizontalGroup(
-            jp_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_clientesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jp_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bt_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jl_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_ver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jp_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_buscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-        );
-        jp_clientesLayout.setVerticalGroup(
-            jp_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_clientesLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jp_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_buscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jp_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_clientesLayout.createSequentialGroup()
-                        .addComponent(bt_ver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jp_clientes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
 
         panel_tabs.addTab("Clientes", jp_clientes);
 
         jp_llantas.setBackground(new java.awt.Color(51, 51, 51));
+        jp_llantas.setMaximumSize(new java.awt.Dimension(1080, 720));
+        jp_llantas.setMinimumSize(new java.awt.Dimension(1080, 720));
+        jp_llantas.setPreferredSize(new java.awt.Dimension(1080, 720));
+        jp_llantas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane2.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
 
@@ -278,22 +286,26 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jt_llantas);
 
+        jp_llantas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
+
         tf_buscarLlantas.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        tf_buscarLlantas.setPreferredSize(new java.awt.Dimension(813, 34));
         tf_buscarLlantas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_buscarLlantasKeyReleased(evt);
             }
         });
+        jp_llantas.add(tf_buscarLlantas, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, 813, 34));
 
         jl_Buscar1.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jl_Buscar1.setForeground(new java.awt.Color(204, 204, 204));
         jl_Buscar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar1.setText("Buscar");
+        jl_Buscar1.setPreferredSize(new java.awt.Dimension(102, 33));
+        jp_llantas.add(jl_Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 33));
 
-        bt_verLlanta.setBackground(new java.awt.Color(51, 51, 51));
         bt_verLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verLlanta.setForeground(new java.awt.Color(204, 204, 204));
         bt_verLlanta.setText("Ver");
         bt_verLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -301,10 +313,9 @@ public final class Principal extends javax.swing.JFrame {
                 bt_verLlantaActionPerformed(evt);
             }
         });
+        jp_llantas.add(bt_verLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, -1, -1));
 
-        bt_agregarLlanta.setBackground(new java.awt.Color(51, 51, 51));
         bt_agregarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarLlanta.setForeground(new java.awt.Color(204, 204, 204));
         bt_agregarLlanta.setText("Agregar");
         bt_agregarLlanta.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarLlanta.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -314,20 +325,18 @@ public final class Principal extends javax.swing.JFrame {
                 bt_agregarLlantaActionPerformed(evt);
             }
         });
+        jp_llantas.add(bt_agregarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
 
-        bt_modificarLlanta.setBackground(new java.awt.Color(51, 51, 51));
         bt_modificarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificarLlanta.setForeground(new java.awt.Color(204, 204, 204));
         bt_modificarLlanta.setText("Modificar");
         bt_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarLlantaActionPerformed(evt);
             }
         });
+        jp_llantas.add(bt_modificarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 172, -1, -1));
 
-        bt_eliminarLlanta.setBackground(new java.awt.Color(51, 51, 51));
         bt_eliminarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminarLlanta.setForeground(new java.awt.Color(204, 204, 204));
         bt_eliminarLlanta.setText("Eliminar");
         bt_eliminarLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -335,6 +344,7 @@ public final class Principal extends javax.swing.JFrame {
                 bt_eliminarLlantaActionPerformed(evt);
             }
         });
+        jp_llantas.add(bt_eliminarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 222, -1, -1));
 
         jcb_filtroBusquedaLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jcb_filtroBusquedaLlanta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca" }));
@@ -343,55 +353,15 @@ public final class Principal extends javax.swing.JFrame {
                 jcb_filtroBusquedaLlantaActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jp_llantasLayout = new javax.swing.GroupLayout(jp_llantas);
-        jp_llantas.setLayout(jp_llantasLayout);
-        jp_llantasLayout.setHorizontalGroup(
-            jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_llantasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(bt_verLlanta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_agregarLlanta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_modificarLlanta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_eliminarLlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jl_Buscar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_llantasLayout.createSequentialGroup()
-                        .addComponent(tf_buscarLlantas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jcb_filtroBusquedaLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jp_llantasLayout.setVerticalGroup(
-            jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_llantasLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jl_Buscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tf_buscarLlantas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcb_filtroBusquedaLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jp_llantasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_llantasLayout.createSequentialGroup()
-                        .addComponent(bt_verLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_agregarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_modificarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_eliminarLlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jp_llantas.add(jcb_filtroBusquedaLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
 
         panel_tabs.addTab("LLantas", jp_llantas);
 
         jp_aros.setBackground(new java.awt.Color(51, 51, 51));
+        jp_aros.setMaximumSize(new java.awt.Dimension(1080, 720));
+        jp_aros.setMinimumSize(new java.awt.Dimension(1080, 720));
+        jp_aros.setPreferredSize(new java.awt.Dimension(1080, 720));
+        jp_aros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane3.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
 
@@ -415,27 +385,25 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jt_aros);
 
+        jp_aros.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
+
         tf_buscarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        tf_buscarAro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_buscarAroActionPerformed(evt);
-            }
-        });
+        tf_buscarAro.setPreferredSize(new java.awt.Dimension(813, 34));
         tf_buscarAro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_buscarAroKeyReleased(evt);
             }
         });
+        jp_aros.add(tf_buscarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, -1, -1));
 
         jl_Buscar2.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jl_Buscar2.setForeground(new java.awt.Color(204, 204, 204));
         jl_Buscar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar2.setText("Buscar");
+        jp_aros.add(jl_Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 34));
 
-        bt_verAro.setBackground(new java.awt.Color(51, 51, 51));
         bt_verAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verAro.setForeground(new java.awt.Color(204, 204, 204));
         bt_verAro.setText("Ver");
         bt_verAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verAro.addActionListener(new java.awt.event.ActionListener() {
@@ -443,10 +411,9 @@ public final class Principal extends javax.swing.JFrame {
                 bt_verAroActionPerformed(evt);
             }
         });
+        jp_aros.add(bt_verAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, -1, -1));
 
-        bt_agregarAro.setBackground(new java.awt.Color(51, 51, 51));
         bt_agregarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarAro.setForeground(new java.awt.Color(204, 204, 204));
         bt_agregarAro.setText("Agregar");
         bt_agregarAro.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarAro.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -456,20 +423,18 @@ public final class Principal extends javax.swing.JFrame {
                 bt_agregarAroActionPerformed(evt);
             }
         });
+        jp_aros.add(bt_agregarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
 
-        bt_modificarAro.setBackground(new java.awt.Color(51, 51, 51));
         bt_modificarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificarAro.setForeground(new java.awt.Color(204, 204, 204));
         bt_modificarAro.setText("Modificar");
         bt_modificarAro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarAroActionPerformed(evt);
             }
         });
+        jp_aros.add(bt_modificarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 172, -1, -1));
 
-        bt_eliminarAro.setBackground(new java.awt.Color(51, 51, 51));
         bt_eliminarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminarAro.setForeground(new java.awt.Color(204, 204, 204));
         bt_eliminarAro.setText("Eliminar");
         bt_eliminarAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarAro.addActionListener(new java.awt.event.ActionListener() {
@@ -477,6 +442,7 @@ public final class Principal extends javax.swing.JFrame {
                 bt_eliminarAroActionPerformed(evt);
             }
         });
+        jp_aros.add(bt_eliminarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 222, -1, -1));
 
         jcb_filtroBusquedaAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jcb_filtroBusquedaAro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca", "Código" }));
@@ -485,63 +451,173 @@ public final class Principal extends javax.swing.JFrame {
                 jcb_filtroBusquedaAroActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jp_arosLayout = new javax.swing.GroupLayout(jp_aros);
-        jp_aros.setLayout(jp_arosLayout);
-        jp_arosLayout.setHorizontalGroup(
-            jp_arosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_arosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jp_arosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(bt_verAro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_agregarAro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_modificarAro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_eliminarAro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jl_Buscar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jp_arosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_arosLayout.createSequentialGroup()
-                        .addComponent(tf_buscarAro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jcb_filtroBusquedaAro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jp_arosLayout.setVerticalGroup(
-            jp_arosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_arosLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jp_arosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_buscarAro, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_Buscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_filtroBusquedaAro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jp_arosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jp_arosLayout.createSequentialGroup()
-                        .addComponent(bt_verAro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_agregarAro, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_modificarAro, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_eliminarAro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jp_aros.add(jcb_filtroBusquedaAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
 
         panel_tabs.addTab("Aros", jp_aros);
 
-        javax.swing.GroupLayout jp_facturacionLayout = new javax.swing.GroupLayout(jp_facturacion);
-        jp_facturacion.setLayout(jp_facturacionLayout);
-        jp_facturacionLayout.setHorizontalGroup(
-            jp_facturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1078, Short.MAX_VALUE)
-        );
-        jp_facturacionLayout.setVerticalGroup(
-            jp_facturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 689, Short.MAX_VALUE)
-        );
+        jp_facturacion.setBackground(new java.awt.Color(51, 51, 51));
+        jp_facturacion.setMaximumSize(new java.awt.Dimension(1080, 720));
+        jp_facturacion.setMinimumSize(new java.awt.Dimension(1080, 720));
+        jp_facturacion.setPreferredSize(new java.awt.Dimension(1080, 720));
+        jp_facturacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("Cedula");
+        jLabel1.setPreferredSize(new java.awt.Dimension(75, 32));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 45, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("Nombre");
+        jLabel2.setPreferredSize(new java.awt.Dimension(75, 32));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, -1, -1));
+
+        tf_telefono.setPreferredSize(new java.awt.Dimension(220, 32));
+        jPanel2.add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 45, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText("Telefono");
+        jLabel3.setPreferredSize(new java.awt.Dimension(75, 32));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 45, -1, -1));
+
+        tf_cedula.setPreferredSize(new java.awt.Dimension(220, 32));
+        jPanel2.add(tf_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 45, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setText("Direccion");
+        jLabel4.setPreferredSize(new java.awt.Dimension(75, 32));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        tf_direccion.setPreferredSize(new java.awt.Dimension(220, 32));
+        jPanel2.add(tf_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel6.setText("Cliente");
+        jLabel6.setPreferredSize(new java.awt.Dimension(142, 32));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 9, -1, -1));
+
+        rb_cliente_nuevo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        rb_cliente_nuevo.setForeground(new java.awt.Color(204, 204, 204));
+        rb_cliente_nuevo.setText("Cliente Nuevo");
+        rb_cliente_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
+        jPanel2.add(rb_cliente_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+
+        cb_nombre_cliente.setPreferredSize(new java.awt.Dimension(220, 32));
+        cb_nombre_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_nombre_clienteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cb_nombre_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
+
+        jp_facturacion.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 1078, 130));
+
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setText("Producto");
+        jLabel5.setPreferredSize(new java.awt.Dimension(75, 32));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setText("Agregar Linea");
+        jLabel7.setPreferredSize(new java.awt.Dimension(142, 32));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, -1, -1));
+
+        jt_linea_factura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cantidad", "Detalle", "Precio Unitario", "Precio Linea"
+            }
+        ));
+        jScrollPane4.setViewportView(jt_linea_factura);
+
+        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1076, 350));
+
+        jLabel8.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel8.setText("Cantidad");
+        jLabel8.setPreferredSize(new java.awt.Dimension(75, 32));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 45, -1, -1));
+
+        sp_cantidad.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        sp_cantidad.setPreferredSize(new java.awt.Dimension(40, 32));
+        jPanel3.add(sp_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 45, 80, -1));
+
+        bt_agregar_linea.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregar_linea.setText("Agregar Linea");
+        bt_agregar_linea.setPreferredSize(new java.awt.Dimension(160, 32));
+        jPanel3.add(bt_agregar_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 45, -1, -1));
+
+        tf_precio.setPreferredSize(new java.awt.Dimension(220, 32));
+        jPanel3.add(tf_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 45, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setText("Precio");
+        jLabel9.setPreferredSize(new java.awt.Dimension(75, 32));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 45, -1, -1));
+
+        rb_producto_nuevo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        rb_producto_nuevo.setForeground(new java.awt.Color(204, 204, 204));
+        rb_producto_nuevo.setText("Producto Nuevo");
+        rb_producto_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
+        jPanel3.add(rb_producto_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
+        jLabel10.setText("Total:");
+        jLabel10.setPreferredSize(new java.awt.Dimension(220, 20));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
+        jLabel11.setText("Sub Total:");
+        jLabel11.setPreferredSize(new java.awt.Dimension(220, 20));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
+        jLabel12.setText("Imp. Ventas:");
+        jLabel12.setPreferredSize(new java.awt.Dimension(220, 20));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
+
+        cb_producto.setPreferredSize(new java.awt.Dimension(220, 32));
+        jPanel3.add(cb_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 45, 220, -1));
+
+        jp_facturacion.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 166, -1, 500));
+
+        bt_imprimir.setText("Imprimir");
+        bt_imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_imprimirActionPerformed(evt);
+            }
+        });
+        jp_facturacion.add(bt_imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 680, -1, -1));
+
+        rb_contado.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        rb_contado.setForeground(new java.awt.Color(204, 204, 204));
+        rb_contado.setText("Contado");
+        jp_facturacion.add(rb_contado, new org.netbeans.lib.awtextra.AbsoluteConstraints(974, 6, -1, -1));
+
+        rb_credito.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        rb_credito.setForeground(new java.awt.Color(204, 204, 204));
+        rb_credito.setText("Credito");
+        jp_facturacion.add(rb_credito, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 6, -1, -1));
 
         panel_tabs.addTab("Facturación", jp_facturacion);
 
@@ -549,11 +625,11 @@ public final class Principal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_tabs)
+            .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_tabs)
+            .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -685,12 +761,8 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jt_arosMouseReleased
 
-    private void tf_buscarAroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_buscarAroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_buscarAroActionPerformed
-
     private void tf_buscarAroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarAroKeyReleased
-         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
             //new AyudaF1().abrirAyuda();
         } else {
             filtrarAros();
@@ -722,38 +794,21 @@ public final class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcb_filtroBusquedaAroActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void bt_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_imprimirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_imprimirActionPerformed
+
+    private void cb_nombre_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_nombre_clienteActionPerformed
+        try{
+            BL_Cliente cliente_seleccionado = (BL_Cliente) cb_nombre_cliente.getSelectedItem();
+            if (cliente_seleccionado!=null) {
+                cargarClienteSeleccionadoFactura(cliente_seleccionado);
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }catch(ClassCastException e){
+            System.err.println("caaaacaaaaa");    
         }
-        //</editor-fold>
+    }//GEN-LAST:event_cb_nombre_clienteActionPerformed
 
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
-
-    }
     
     public void menuitem_ver(){
         int tabseleccionado = panel_tabs.getSelectedIndex();
@@ -775,10 +830,7 @@ public final class Principal extends javax.swing.JFrame {
 
     public void filtrarClientes() {
         String hilera = tf_buscarCliente.getText();
-        if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
-            hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
-        }
-        trsfiltroCliente.setRowFilter(RowFilter.regexFilter(hilera, 1));
+        trsfiltroCliente.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, 1));
     }
     
     public void filtrarAros() {
@@ -796,10 +848,7 @@ public final class Principal extends javax.swing.JFrame {
                 fila = 3;
                 break;
         }
-        if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
-            hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
-        }
-        trsfiltroAros.setRowFilter(RowFilter.regexFilter(hilera, fila));
+        trsfiltroAros.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
     }
 
     public void filtrarLlantas() {
@@ -814,14 +863,25 @@ public final class Principal extends javax.swing.JFrame {
                 fila = 1;
                 break;
         }
-        if (!hilera.isEmpty() && hilera.charAt(0) >= 97) {
-            hilera = (char) ((hilera.charAt(0) - 32)) + hilera.substring(1);
-        }
-        trsfiltroLlantas.setRowFilter(RowFilter.regexFilter(hilera, fila));
+        trsfiltroLlantas.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
     }
 
     public void cargarClientes() {
         cliente = new BL_Cliente();
+        cb_nombre_cliente.setEditable(true);
+        cb_nombre_cliente.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int tecla = e.getKeyCode(); 
+                if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122) || tecla==KeyEvent.VK_BACK_SPACE){
+                    resaltado = 0;
+                    filtrar_cb_clientes(cb_nombre_cliente.getEditor().getItem()+"");
+                }
+            } 
+            
+        });
+        
+        
         listaClientes = cliente.cargarClientes();
         String[] nombreColumnas = {"numeroFila", "Nombre", "Dirección", "Teléfono(s)"};
         dtmClientes = new DefaultTableModel(null, nombreColumnas) {
@@ -830,6 +890,7 @@ public final class Principal extends javax.swing.JFrame {
                 return false;
             }
         };
+        cb_nombre_cliente.addItem("");
         if (!listaClientes.isEmpty()) {
 
             for (BL_Cliente cliente_temp : listaClientes) {
@@ -865,12 +926,13 @@ public final class Principal extends javax.swing.JFrame {
         jt_llantas.getColumnModel().getColumn(6).setMinWidth(0);
         jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
         trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
+        
     }
     
     public void cargarAros() {
         aro = new BL_Aro();
         listaAros = aro.cargarAros();
-        String[] nombreColumnas = {"numeroFila", "Numero Aro", "Marca", "Codigo","Cantidad"};
+        String[] nombreColumnas = {"numeroFila", "Numero Aro", "Marca", "Codigo","Cantidad (Juegos)"};
         dtmAros = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -933,6 +995,13 @@ public final class Principal extends javax.swing.JFrame {
             }
         }
     }
+    
+    public void cargarClienteSeleccionadoFactura(BL_Cliente cliente){
+        cb_nombre_cliente.getEditor().setItem(cliente.getNombre());
+        tf_cedula.setText(cliente.getCedula());
+        tf_telefono.setText(cliente.getTelefonos());
+        tf_direccion.setText(cliente.getDireccion_simple());
+    }
 
     public boolean validarSeleccion(char t) {
         JTable temp = null;
@@ -979,8 +1048,8 @@ public final class Principal extends javax.swing.JFrame {
                 }
             }
         }
-
     }
+    
 
     private void eliminarLlanta() {
         BL_Llanta blLanta;
@@ -1017,24 +1086,57 @@ public final class Principal extends javax.swing.JFrame {
             }
         }
     }
+    
+    //cargar clientes en el campo nombre cliente de factura
+    public void filtrar_cb_clientes(String texto_digitado){
+        cb_nombre_cliente.removeAllItems();
+        for (BL_Cliente cliente : listaClientes) {
+            if(cliente.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
+                cb_nombre_cliente.addItem(cliente);
+            }
+        }
+        if(!cb_nombre_cliente.isPopupVisible()){
+            cb_nombre_cliente.showPopup();
+        }
+        cb_nombre_cliente.getEditor().setItem(texto_digitado);
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_agregar;
     private javax.swing.JButton bt_agregarAro;
     private javax.swing.JButton bt_agregarLlanta;
+    private javax.swing.JButton bt_agregar_linea;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_eliminarAro;
     private javax.swing.JButton bt_eliminarLlanta;
+    private javax.swing.JButton bt_imprimir;
     private javax.swing.JButton bt_modificar;
     private javax.swing.JButton bt_modificarAro;
     private javax.swing.JButton bt_modificarLlanta;
     private javax.swing.JButton bt_ver;
     private javax.swing.JButton bt_verAro;
     private javax.swing.JButton bt_verLlanta;
+    private javax.swing.JComboBox cb_nombre_cliente;
+    private javax.swing.JComboBox<String> cb_producto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JComboBox jcb_filtroBusquedaAro;
     private javax.swing.JComboBox jcb_filtroBusquedaLlanta;
     private javax.swing.JLabel jl_Buscar;
@@ -1049,11 +1151,21 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jp_llantas;
     private javax.swing.JTable jt_aros;
     private javax.swing.JTable jt_clientes;
+    private javax.swing.JTable jt_linea_factura;
     private javax.swing.JTable jt_llantas;
     private javax.swing.JTabbedPane panel_tabs;
     private javax.swing.JPopupMenu pum_tb;
+    private javax.swing.JRadioButton rb_cliente_nuevo;
+    private javax.swing.JRadioButton rb_contado;
+    private javax.swing.JRadioButton rb_credito;
+    private javax.swing.JRadioButton rb_producto_nuevo;
+    private javax.swing.JSpinner sp_cantidad;
     private javax.swing.JTextField tf_buscarAro;
     private javax.swing.JTextField tf_buscarCliente;
     private javax.swing.JTextField tf_buscarLlantas;
+    private javax.swing.JTextField tf_cedula;
+    private javax.swing.JTextField tf_direccion;
+    private javax.swing.JTextField tf_precio;
+    private javax.swing.JTextField tf_telefono;
     // End of variables declaration//GEN-END:variables
 }

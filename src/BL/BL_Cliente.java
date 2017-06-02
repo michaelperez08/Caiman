@@ -116,5 +116,12 @@ public class BL_Cliente {
         DAO_Cliente daoCliente = new DAO_Cliente();
         return daoCliente.eliminarCliente(idCliente);
     }
+
+    @Override
+    public String toString() {
+        return Nombre;
+    }
+    
+    
     
 }

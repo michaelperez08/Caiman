@@ -66,12 +66,12 @@ public class UI_Aro extends javax.swing.JDialog {
 
         lb_cantidad.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_cantidad.setForeground(new java.awt.Color(255, 255, 255));
-        lb_cantidad.setText("Cantidad de Aros");
+        lb_cantidad.setText("Cantidad (Juegos)");
 
         tf_marca.setForeground(new java.awt.Color(51, 51, 51));
-        tf_marca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_marcaActionPerformed(evt);
+        tf_marca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_marcaKeyReleased(evt);
             }
         });
 
@@ -161,7 +161,7 @@ public class UI_Aro extends javax.swing.JDialog {
         if (numeroAro.isEmpty() || marca.isEmpty() || cantidad.isEmpty() || codigo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            if (esNumero(cantidad)) {
+            if (esNumero(cantidad,"Cantidad")) {
                 int cantidad2 = Integer.parseInt(cantidad);
                 BL_Aro aro = new BL_Aro();
                 if (bt_ingresarAro.getText().equals("Ingresar Aro")) {// ingresar aro nuevo
@@ -201,12 +201,18 @@ public class UI_Aro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_bt_ingresarAroActionPerformed
 
-    public boolean esNumero(String numero) {
+    private void tf_marcaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_marcaKeyReleased
+        if(tf_marca.getText().length() >= 10){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tf_marcaKeyReleased
+
+    public boolean esNumero(String numero, String campo) {
         try {
             Integer.parseInt(numero);
             return true;
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Debe digitar numeros", "Aro", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe digitar numeros en el campo "+campo, "Aro", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
     }
@@ -227,10 +233,6 @@ public class UI_Aro extends javax.swing.JDialog {
         tf_cantidad.setText("");
     }
     
-    private void tf_marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_marcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_marcaActionPerformed
-
     /**
      * @param args the command line arguments
      */
