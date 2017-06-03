@@ -6,6 +6,7 @@
 package DAO;
 
 import TO.TO_Aro;
+import config.ConfBD;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -21,7 +22,9 @@ import static org.junit.Assert.*;
 public class DAO_AroTest {
     
     public DAO_AroTest() {
+        ConfBD confdb = new ConfBD();
     }
+    
     
     @BeforeClass
     public static void setUpClass() {
