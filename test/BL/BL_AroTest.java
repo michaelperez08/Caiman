@@ -5,6 +5,7 @@
  */
 package BL;
 
+import config.ConfBD;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
 public class BL_AroTest {
     
     public BL_AroTest() {
+        ConfBD confdb = new ConfBD();
     }
     
     @BeforeClass
@@ -37,42 +39,6 @@ public class BL_AroTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of getidAro method, of class BL_Aro.
-     */
-    
-    
-
-    /**
-     * Test of setidAro method, of class BL_Aro.
-     */
-    
-
-    /**
-     * Test of getNumeroAro method, of class BL_Aro.
-     */
-    
-
-    /**
-     * Test of setNumeroAro method, of class BL_Aro.
-     */
-    
-
-    /**
-     * Test of getMarca method, of class BL_Aro.
-     */
-    
-
-    /**
-     * Test of setMarca method, of class BL_Aro.
-     */
-    
-
-    /**
-     * Test of getCantidad method, of class BL_Aro.
-     */
-    
 
     /**
      * Test of IngresarAro method, of class BL_Aro.
