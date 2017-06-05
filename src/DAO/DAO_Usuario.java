@@ -30,7 +30,6 @@ public class DAO_Usuario {
     public TO_Usuario checkLogIn(String NombreUsuario, String Contraseña) {
         TO_Usuario usuario = null;
         try {
-
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
             }
