@@ -10,8 +10,6 @@ import BL.BL_Cliente;
 import BL.BL_Llanta;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -129,7 +127,7 @@ public final class Principal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        cb_producto = new javax.swing.JComboBox<>();
+        cb_producto = new javax.swing.JComboBox();
         bt_imprimir = new javax.swing.JButton();
         rb_contado = new javax.swing.JRadioButton();
         rb_credito = new javax.swing.JRadioButton();
@@ -469,7 +467,7 @@ public final class Principal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Cedula");
         jLabel1.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 45, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
@@ -478,16 +476,16 @@ public final class Principal extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, -1, -1));
 
         tf_telefono.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel2.add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 45, -1, -1));
+        jPanel2.add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 290, -1));
 
         jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Telefono");
         jLabel3.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 45, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
 
         tf_cedula.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel2.add(tf_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 45, -1, -1));
+        jPanel2.add(tf_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 290, -1));
 
         jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
@@ -496,7 +494,7 @@ public final class Principal extends javax.swing.JFrame {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         tf_direccion.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel2.add(tf_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+        jPanel2.add(tf_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 340, -1));
 
         jLabel6.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
@@ -516,7 +514,7 @@ public final class Principal extends javax.swing.JFrame {
                 cb_nombre_clienteActionPerformed(evt);
             }
         });
-        jPanel2.add(cb_nombre_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
+        jPanel2.add(cb_nombre_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 340, -1));
 
         jp_facturacion.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 1078, 130));
 
@@ -567,7 +565,7 @@ public final class Principal extends javax.swing.JFrame {
         jPanel3.add(bt_agregar_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 45, -1, -1));
 
         tf_precio.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel3.add(tf_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 45, -1, -1));
+        jPanel3.add(tf_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 45, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(204, 204, 204));
@@ -805,7 +803,7 @@ public final class Principal extends javax.swing.JFrame {
                 cargarClienteSeleccionadoFactura(cliente_seleccionado);
             }
         }catch(ClassCastException e){
-            System.err.println("caaaacaaaaa");    
+            System.err.println(e);    
         }
     }//GEN-LAST:event_cb_nombre_clienteActionPerformed
 
@@ -876,6 +874,10 @@ public final class Principal extends javax.swing.JFrame {
                 if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122) || tecla==KeyEvent.VK_BACK_SPACE){
                     resaltado = 0;
                     filtrar_cb_clientes(cb_nombre_cliente.getEditor().getItem()+"");
+                }else if(tecla==KeyEvent.VK_ENTER){
+                    cargarClienteSeleccionadoFactura((BL_Cliente)cb_nombre_cliente.getItemAt(0));
+                }else if(tecla==KeyEvent.VK_UP || tecla==KeyEvent.VK_DOWN){
+                    
                 }
             } 
             
@@ -902,6 +904,22 @@ public final class Principal extends javax.swing.JFrame {
         jt_clientes.getColumnModel().getColumn(0).setMaxWidth(0);
         //((DefaultTableCellRenderer)jt_clientes.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
+    }
+    
+    public void agregarListenerCBProductos(){
+        cb_producto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int tecla = e.getKeyCode(); 
+                if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122) || tecla==KeyEvent.VK_BACK_SPACE){
+                    resaltado = 0;
+                    filtrar_cb_clientes(cb_producto.getEditor().getItem()+"");
+                }else if(tecla==KeyEvent.VK_ENTER){
+                    cargarClienteSeleccionadoFactura((BL_Cliente)cb_producto.getItemAt(0));
+                }
+            } 
+            
+        });
     }
 
     public void cargarLlantas() {
@@ -1002,6 +1020,12 @@ public final class Principal extends javax.swing.JFrame {
         tf_telefono.setText(cliente.getTelefonos());
         tf_direccion.setText(cliente.getDireccion_simple());
     }
+    
+    public void cargarClienteSeleccionadoFactura(Object producto){
+        
+        System.out.println(producto);
+        
+    }
 
     public boolean validarSeleccion(char t) {
         JTable temp = null;
@@ -1090,9 +1114,33 @@ public final class Principal extends javax.swing.JFrame {
     //cargar clientes en el campo nombre cliente de factura
     public void filtrar_cb_clientes(String texto_digitado){
         cb_nombre_cliente.removeAllItems();
-        for (BL_Cliente cliente : listaClientes) {
-            if(cliente.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
-                cb_nombre_cliente.addItem(cliente);
+        for (BL_Cliente cliente_temp : listaClientes) {
+            if(cliente_temp.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
+                cb_nombre_cliente.addItem(cliente_temp);
+            }
+        }
+        if(!cb_nombre_cliente.isPopupVisible()){
+            cb_nombre_cliente.showPopup();
+        }
+        cb_nombre_cliente.getEditor().setItem(texto_digitado);
+    }
+    
+    public void filtrar_cb_llanta(String texto_digitado){
+        for (BL_Cliente temp_cliente : listaClientes) {
+            if(temp_cliente.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
+                cb_nombre_cliente.addItem(temp_cliente);
+            }
+        }
+        if(!cb_nombre_cliente.isPopupVisible()){
+            cb_nombre_cliente.showPopup();
+        }
+        cb_nombre_cliente.getEditor().setItem(texto_digitado);
+    } 
+    
+    public void filtrar_cb_aro(String texto_digitado){
+        for (BL_Cliente temp_cliente : listaClientes) {
+            if(temp_cliente.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
+                cb_nombre_cliente.addItem(temp_cliente);
             }
         }
         if(!cb_nombre_cliente.isPopupVisible()){
@@ -1117,7 +1165,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_verAro;
     private javax.swing.JButton bt_verLlanta;
     private javax.swing.JComboBox cb_nombre_cliente;
-    private javax.swing.JComboBox<String> cb_producto;
+    private javax.swing.JComboBox cb_producto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
