@@ -57,22 +57,17 @@ public class DAO_LineaFactura {
         return false;
     }
     
-    public boolean eliminarLineaFactura(int id){
+    public boolean eliminarLineaFactura(int id) {
         try {
-            
-            try {
-                if (conexion == null || conexion.isClosed()) {
-                    conexion = daoConexion.nuevaConexion();
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
+
+            if (conexion == null || conexion.isClosed()) {
+                conexion = daoConexion.nuevaConexion();
+                cmd = conexion.prepareStatement("delete from LineaFactura where idLineaFactura=?");
+                cmd.setInt(1, id);
+                cmd.execute();
+                return true;
             }
-            
-            cmd = conexion.prepareStatement("delete from LineaFactura where idLineaFactura=?");
-            cmd.setInt(1, id);
-            cmd.execute();
-            return true;
-            
+
         } catch (Exception ex) {
             Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
             HE.Exepciones.RegistrarError(ex);
@@ -87,24 +82,20 @@ public class DAO_LineaFactura {
         return false;
     }
     
-    public ArrayList<TO_LineaFactura> cargarLineasFactura(){
+    public ArrayList<TO_LineaFactura> cargarLineasFactura() {
         ArrayList<TO_LineaFactura> lineas = new ArrayList<>();
         try {
-            try {
-                if (conexion == null || conexion.isClosed()) {
-                    conexion = daoConexion.nuevaConexion();
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
+            if (conexion == null || conexion.isClosed()) {
+                conexion = daoConexion.nuevaConexion();
             }
-            
+
             cmd = conexion.prepareStatement("select * from LineaFactura");
             rs = cmd.executeQuery();
-            while (rs.next()) {                
-                lineas.add(new TO_LineaFactura(rs.getInt("idFactura"), rs.getInt("Cantidad"), 
+            while (rs.next()) {
+                lineas.add(new TO_LineaFactura(rs.getInt("idFactura"), rs.getInt("Cantidad"),
                         rs.getString("Detalle"), rs.getDouble("PrecioUnitario"), rs.getDouble("PrecioTotalLinea")));
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
             HE.Exepciones.RegistrarError(ex);
@@ -112,9 +103,9 @@ public class DAO_LineaFactura {
             try {
                 cmd.close();
                 conexion.close();
-            } catch(Exception ex) {
-                 Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
-                 HE.Exepciones.RegistrarError(ex);
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
             }
         }
         return lineas;
