@@ -52,7 +52,6 @@ public class DAO_Cliente {
                 HE.Exepciones.RegistrarError(ex);
             }
         }
-
         return false;
     }
 

@@ -13,25 +13,24 @@ import java.util.ArrayList;
  *
  * @author michael
  */
-public class BL_Aro {
+public class BL_Aro extends BL_Producto{
     private int idAro;
     private String NumeroAro;
     private String Marca;
-    private int Cantidad;
     private String Codigo;
     
     
    public BL_Aro(int idAro,String NumeroAro, String Marca,int Cantidad,String Codigo){
+       super(Cantidad);
        this.idAro = idAro;
        this.NumeroAro = NumeroAro;
        this.Marca = Marca;
-       this.Cantidad = Cantidad;
        this.Codigo = Codigo;
    }
   public BL_Aro(String NumeroAro, String Marca,int Cantidad,String Codigo){
+       super(Cantidad);
        this.NumeroAro = NumeroAro;
        this.Marca = Marca;
-       this.Cantidad = Cantidad;
        this.Codigo = Codigo;
    }
    
@@ -61,15 +60,6 @@ public class BL_Aro {
 
     public void setMarca(String Marca) {
         this.Marca = Marca;
-    }
-    
-    
-    public int getCantidad() {
-        return Cantidad;
-    }
-
-    public void setCantidad(int Cantidad) {
-        this.Cantidad = Cantidad ;
     }
     
      public String getCodigo() {
@@ -105,5 +95,12 @@ public class BL_Aro {
         DAO_Aro daoAro = new DAO_Aro();
         return daoAro.eliminarAro(idAro);
     }
+
+    @Override
+    public String toString() {
+        return "Aro " + NumeroAro +" "+ Marca +" "+ Codigo;
+    }
+    
+    
     
 }

@@ -13,35 +13,34 @@ import java.util.ArrayList;
  *
  * @author Extreme PC
  */
-public class BL_Llanta {
+public class BL_Llanta extends BL_Producto{
     private int idLlanta;
     private String NumeroLlanta;
     private String Marca;
     private String Diseno;
     private int NumeroCapas;
-    private int Cantidad;
     private String TipoLlanta;
     
    public BL_Llanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+       super(Cantidad);
        this.idLlanta = idLlanta;
        this.NumeroLlanta = NumeroLlanta;
        this.Marca = Marca;
        this.Diseno = Diseno;
        this.NumeroCapas = NumeroCapas;
-       this.Cantidad = Cantidad;
        this.TipoLlanta = TipoLlanta;
    }
    public BL_Llanta(String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+       super(Cantidad);
        this.NumeroLlanta = NumeroLlanta;
        this.Marca = Marca;
        this.Diseno = Diseno;
        this.NumeroCapas = NumeroCapas;
-       this.Cantidad = Cantidad;
        this.TipoLlanta = TipoLlanta;
    }
    
    public BL_Llanta(){
-       
+       super();
    }
    
    public int getidLlanta() {
@@ -84,14 +83,6 @@ public class BL_Llanta {
         this.NumeroCapas= NumeroCapas;
     }
     
-    public int getCantidad() {
-        return Cantidad;
-    }
-
-    public void setCantidad(int Cantidad) {
-        this.Cantidad = Cantidad ;
-    }
-    
      public String getTipoLlanta() {
         return TipoLlanta;
     }
@@ -128,4 +119,11 @@ public class BL_Llanta {
         }
         return listaBlLlantas;
     }
+
+    @Override
+    public String toString() {
+        return "Llanta "+ TipoLlanta +" "+ NumeroLlanta +" "+ Marca +" "+ Diseno;
+    }
+    
+    
 }

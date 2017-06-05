@@ -102,35 +102,13 @@ public final class Principal extends javax.swing.JFrame {
         bt_eliminarAro = new javax.swing.JButton();
         jcb_filtroBusquedaAro = new javax.swing.JComboBox();
         jp_facturacion = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        tf_telefono = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        tf_cedula = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        tf_direccion = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        rb_cliente_nuevo = new javax.swing.JRadioButton();
-        cb_nombre_cliente = new javax.swing.JComboBox();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jt_linea_factura = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        sp_cantidad = new javax.swing.JSpinner();
-        bt_agregar_linea = new javax.swing.JButton();
-        tf_precio = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        rb_producto_nuevo = new javax.swing.JRadioButton();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        cb_producto = new javax.swing.JComboBox();
-        bt_imprimir = new javax.swing.JButton();
-        rb_contado = new javax.swing.JRadioButton();
-        rb_credito = new javax.swing.JRadioButton();
+        bt_verFactura = new javax.swing.JButton();
+        bt_agregarFactura = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jt_aros1 = new javax.swing.JTable();
+        tf_buscarAro1 = new javax.swing.JTextField();
+        jl_Buscar3 = new javax.swing.JLabel();
+        jcb_filtroBusquedaAro1 = new javax.swing.JComboBox();
 
         jmi_ver.setText("Ver");
         jmi_ver.addActionListener(new java.awt.event.ActionListener() {
@@ -459,82 +437,32 @@ public final class Principal extends javax.swing.JFrame {
         jp_facturacion.setPreferredSize(new java.awt.Dimension(1080, 720));
         jp_facturacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Cedula");
-        jLabel1.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setText("Nombre");
-        jLabel2.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, -1, -1));
-
-        tf_telefono.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel2.add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 290, -1));
-
-        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel3.setText("Telefono");
-        jLabel3.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
-
-        tf_cedula.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel2.add(tf_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 290, -1));
-
-        jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel4.setText("Direccion");
-        jLabel4.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
-
-        tf_direccion.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel2.add(tf_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 340, -1));
-
-        jLabel6.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel6.setText("Cliente");
-        jLabel6.setPreferredSize(new java.awt.Dimension(142, 32));
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 9, -1, -1));
-
-        rb_cliente_nuevo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_cliente_nuevo.setForeground(new java.awt.Color(204, 204, 204));
-        rb_cliente_nuevo.setText("Cliente Nuevo");
-        rb_cliente_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
-        jPanel2.add(rb_cliente_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
-
-        cb_nombre_cliente.setPreferredSize(new java.awt.Dimension(220, 32));
-        cb_nombre_cliente.addActionListener(new java.awt.event.ActionListener() {
+        bt_verFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_verFactura.setText("Ver");
+        bt_verFactura.setPreferredSize(new java.awt.Dimension(102, 33));
+        bt_verFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_nombre_clienteActionPerformed(evt);
+                bt_verFacturaActionPerformed(evt);
             }
         });
-        jPanel2.add(cb_nombre_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 340, -1));
+        jp_facturacion.add(bt_verFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, -1, -1));
 
-        jp_facturacion.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 1078, 130));
+        bt_agregarFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregarFactura.setText("Agregar");
+        bt_agregarFactura.setMaximumSize(new java.awt.Dimension(52, 34));
+        bt_agregarFactura.setMinimumSize(new java.awt.Dimension(52, 34));
+        bt_agregarFactura.setPreferredSize(new java.awt.Dimension(102, 33));
+        bt_agregarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_agregarFacturaActionPerformed(evt);
+            }
+        });
+        jp_facturacion.add(bt_agregarFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jScrollPane5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel5.setText("Producto");
-        jLabel5.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel7.setText("Agregar Linea");
-        jLabel7.setPreferredSize(new java.awt.Dimension(142, 32));
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, -1, -1));
-
-        jt_linea_factura.setModel(new javax.swing.table.DefaultTableModel(
+        jt_aros1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jt_aros1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -542,80 +470,43 @@ public final class Principal extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Cantidad", "Detalle", "Precio Unitario", "Precio Linea"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jt_linea_factura);
-
-        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1076, 350));
-
-        jLabel8.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel8.setText("Cantidad");
-        jLabel8.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 45, -1, -1));
-
-        sp_cantidad.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        sp_cantidad.setPreferredSize(new java.awt.Dimension(40, 32));
-        jPanel3.add(sp_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 45, 80, -1));
-
-        bt_agregar_linea.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregar_linea.setText("Agregar Linea");
-        bt_agregar_linea.setPreferredSize(new java.awt.Dimension(160, 32));
-        jPanel3.add(bt_agregar_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 45, -1, -1));
-
-        tf_precio.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel3.add(tf_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 45, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel9.setText("Precio");
-        jLabel9.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 45, -1, -1));
-
-        rb_producto_nuevo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_producto_nuevo.setForeground(new java.awt.Color(204, 204, 204));
-        rb_producto_nuevo.setText("Producto Nuevo");
-        rb_producto_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
-        jPanel3.add(rb_producto_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        jLabel10.setText("Total:");
-        jLabel10.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        jLabel11.setText("Sub Total:");
-        jLabel11.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
-
-        jLabel12.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        jLabel12.setText("Imp. Ventas:");
-        jLabel12.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
-
-        cb_producto.setPreferredSize(new java.awt.Dimension(220, 32));
-        jPanel3.add(cb_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 45, 220, -1));
-
-        jp_facturacion.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 166, -1, 500));
-
-        bt_imprimir.setText("Imprimir");
-        bt_imprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_imprimirActionPerformed(evt);
+        jt_aros1.setComponentPopupMenu(pum_tb);
+        jt_aros1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jt_aros1MouseReleased(evt);
             }
         });
-        jp_facturacion.add(bt_imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 680, -1, -1));
+        jScrollPane5.setViewportView(jt_aros1);
 
-        rb_contado.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_contado.setForeground(new java.awt.Color(204, 204, 204));
-        rb_contado.setText("Contado");
-        jp_facturacion.add(rb_contado, new org.netbeans.lib.awtextra.AbsoluteConstraints(974, 6, -1, -1));
+        jp_facturacion.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
 
-        rb_credito.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_credito.setForeground(new java.awt.Color(204, 204, 204));
-        rb_credito.setText("Credito");
-        jp_facturacion.add(rb_credito, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 6, -1, -1));
+        tf_buscarAro1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        tf_buscarAro1.setPreferredSize(new java.awt.Dimension(813, 34));
+        tf_buscarAro1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_buscarAro1KeyReleased(evt);
+            }
+        });
+        jp_facturacion.add(tf_buscarAro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, -1, -1));
+
+        jl_Buscar3.setBackground(new java.awt.Color(153, 153, 153));
+        jl_Buscar3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jl_Buscar3.setForeground(new java.awt.Color(204, 204, 204));
+        jl_Buscar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_Buscar3.setText("Buscar");
+        jp_facturacion.add(jl_Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 34));
+
+        jcb_filtroBusquedaAro1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jcb_filtroBusquedaAro1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca", "Código" }));
+        jcb_filtroBusquedaAro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_filtroBusquedaAro1ActionPerformed(evt);
+            }
+        });
+        jp_facturacion.add(jcb_filtroBusquedaAro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
 
         panel_tabs.addTab("Facturación", jp_facturacion);
 
@@ -792,20 +683,26 @@ public final class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcb_filtroBusquedaAroActionPerformed
 
-    private void bt_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_imprimirActionPerformed
+    private void bt_verFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verFacturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bt_imprimirActionPerformed
+    }//GEN-LAST:event_bt_verFacturaActionPerformed
 
-    private void cb_nombre_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_nombre_clienteActionPerformed
-        try{
-            BL_Cliente cliente_seleccionado = (BL_Cliente) cb_nombre_cliente.getSelectedItem();
-            if (cliente_seleccionado!=null) {
-                cargarClienteSeleccionadoFactura(cliente_seleccionado);
-            }
-        }catch(ClassCastException e){
-            System.err.println(e);    
-        }
-    }//GEN-LAST:event_cb_nombre_clienteActionPerformed
+    private void bt_agregarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarFacturaActionPerformed
+        UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled, listaClientes, listaLlantas, listaAros);
+        uif.setVisible(true);
+    }//GEN-LAST:event_bt_agregarFacturaActionPerformed
+
+    private void jt_aros1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_aros1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jt_aros1MouseReleased
+
+    private void tf_buscarAro1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarAro1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_buscarAro1KeyReleased
+
+    private void jcb_filtroBusquedaAro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_filtroBusquedaAro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_filtroBusquedaAro1ActionPerformed
 
     
     public void menuitem_ver(){
@@ -866,23 +763,6 @@ public final class Principal extends javax.swing.JFrame {
 
     public void cargarClientes() {
         cliente = new BL_Cliente();
-        cb_nombre_cliente.setEditable(true);
-        cb_nombre_cliente.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                int tecla = e.getKeyCode(); 
-                if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122) || tecla==KeyEvent.VK_BACK_SPACE){
-                    resaltado = 0;
-                    filtrar_cb_clientes(cb_nombre_cliente.getEditor().getItem()+"");
-                }else if(tecla==KeyEvent.VK_ENTER){
-                    cargarClienteSeleccionadoFactura((BL_Cliente)cb_nombre_cliente.getItemAt(0));
-                }else if(tecla==KeyEvent.VK_UP || tecla==KeyEvent.VK_DOWN){
-                    
-                }
-            } 
-            
-        });
-        
         
         listaClientes = cliente.cargarClientes();
         String[] nombreColumnas = {"numeroFila", "Nombre", "Dirección", "Teléfono(s)"};
@@ -892,7 +772,6 @@ public final class Principal extends javax.swing.JFrame {
                 return false;
             }
         };
-        cb_nombre_cliente.addItem("");
         if (!listaClientes.isEmpty()) {
 
             for (BL_Cliente cliente_temp : listaClientes) {
@@ -906,21 +785,7 @@ public final class Principal extends javax.swing.JFrame {
         trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
     }
     
-    public void agregarListenerCBProductos(){
-        cb_producto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                int tecla = e.getKeyCode(); 
-                if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122) || tecla==KeyEvent.VK_BACK_SPACE){
-                    resaltado = 0;
-                    filtrar_cb_clientes(cb_producto.getEditor().getItem()+"");
-                }else if(tecla==KeyEvent.VK_ENTER){
-                    cargarClienteSeleccionadoFactura((BL_Cliente)cb_producto.getItemAt(0));
-                }
-            } 
-            
-        });
-    }
+    
 
     public void cargarLlantas() {
         llanta = new BL_Llanta();
@@ -1014,13 +879,6 @@ public final class Principal extends javax.swing.JFrame {
         }
     }
     
-    public void cargarClienteSeleccionadoFactura(BL_Cliente cliente){
-        cb_nombre_cliente.getEditor().setItem(cliente.getNombre());
-        tf_cedula.setText(cliente.getCedula());
-        tf_telefono.setText(cliente.getTelefonos());
-        tf_direccion.setText(cliente.getDireccion_simple());
-    }
-    
     public void cargarClienteSeleccionadoFactura(Object producto){
         
         System.out.println(producto);
@@ -1112,84 +970,37 @@ public final class Principal extends javax.swing.JFrame {
     }
     
     //cargar clientes en el campo nombre cliente de factura
-    public void filtrar_cb_clientes(String texto_digitado){
-        cb_nombre_cliente.removeAllItems();
-        for (BL_Cliente cliente_temp : listaClientes) {
-            if(cliente_temp.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
-                cb_nombre_cliente.addItem(cliente_temp);
-            }
-        }
-        if(!cb_nombre_cliente.isPopupVisible()){
-            cb_nombre_cliente.showPopup();
-        }
-        cb_nombre_cliente.getEditor().setItem(texto_digitado);
-    }
     
-    public void filtrar_cb_llanta(String texto_digitado){
-        for (BL_Cliente temp_cliente : listaClientes) {
-            if(temp_cliente.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
-                cb_nombre_cliente.addItem(temp_cliente);
-            }
-        }
-        if(!cb_nombre_cliente.isPopupVisible()){
-            cb_nombre_cliente.showPopup();
-        }
-        cb_nombre_cliente.getEditor().setItem(texto_digitado);
-    } 
     
-    public void filtrar_cb_aro(String texto_digitado){
-        for (BL_Cliente temp_cliente : listaClientes) {
-            if(temp_cliente.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
-                cb_nombre_cliente.addItem(temp_cliente);
-            }
-        }
-        if(!cb_nombre_cliente.isPopupVisible()){
-            cb_nombre_cliente.showPopup();
-        }
-        cb_nombre_cliente.getEditor().setItem(texto_digitado);
-    } 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_agregar;
     private javax.swing.JButton bt_agregarAro;
+    private javax.swing.JButton bt_agregarFactura;
     private javax.swing.JButton bt_agregarLlanta;
-    private javax.swing.JButton bt_agregar_linea;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_eliminarAro;
     private javax.swing.JButton bt_eliminarLlanta;
-    private javax.swing.JButton bt_imprimir;
     private javax.swing.JButton bt_modificar;
     private javax.swing.JButton bt_modificarAro;
     private javax.swing.JButton bt_modificarLlanta;
     private javax.swing.JButton bt_ver;
     private javax.swing.JButton bt_verAro;
+    private javax.swing.JButton bt_verFactura;
     private javax.swing.JButton bt_verLlanta;
-    private javax.swing.JComboBox cb_nombre_cliente;
-    private javax.swing.JComboBox cb_producto;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JComboBox jcb_filtroBusquedaAro;
+    private javax.swing.JComboBox jcb_filtroBusquedaAro1;
     private javax.swing.JComboBox jcb_filtroBusquedaLlanta;
     private javax.swing.JLabel jl_Buscar;
     private javax.swing.JLabel jl_Buscar1;
     private javax.swing.JLabel jl_Buscar2;
+    private javax.swing.JLabel jl_Buscar3;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JMenuItem jmi_ver;
@@ -1198,22 +1009,14 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jp_facturacion;
     private javax.swing.JPanel jp_llantas;
     private javax.swing.JTable jt_aros;
+    private javax.swing.JTable jt_aros1;
     private javax.swing.JTable jt_clientes;
-    private javax.swing.JTable jt_linea_factura;
     private javax.swing.JTable jt_llantas;
     private javax.swing.JTabbedPane panel_tabs;
     private javax.swing.JPopupMenu pum_tb;
-    private javax.swing.JRadioButton rb_cliente_nuevo;
-    private javax.swing.JRadioButton rb_contado;
-    private javax.swing.JRadioButton rb_credito;
-    private javax.swing.JRadioButton rb_producto_nuevo;
-    private javax.swing.JSpinner sp_cantidad;
     private javax.swing.JTextField tf_buscarAro;
+    private javax.swing.JTextField tf_buscarAro1;
     private javax.swing.JTextField tf_buscarCliente;
     private javax.swing.JTextField tf_buscarLlantas;
-    private javax.swing.JTextField tf_cedula;
-    private javax.swing.JTextField tf_direccion;
-    private javax.swing.JTextField tf_precio;
-    private javax.swing.JTextField tf_telefono;
     // End of variables declaration//GEN-END:variables
 }
