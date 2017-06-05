@@ -71,8 +71,11 @@ public class DAO_Cliente {
             cmd.setString(5, telefonos);
             cmd.setInt(6, idCliente);
             cmd.execute();
-            return true;
-
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
