@@ -73,7 +73,11 @@ public class DAO_Usuario {
             cmd.setString(2, contrasena);
             cmd.execute();
 
-            return true;
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,7 +104,11 @@ public class DAO_Usuario {
             cmd.setInt(1, id);
             cmd.execute();
 
-            return true;
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
