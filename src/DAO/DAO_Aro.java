@@ -62,13 +62,11 @@ public class DAO_Aro {
         ArrayList<TO_Aro> aros = new ArrayList<>();
         
         try {
-            try {
+            
                 if (conexion == null || conexion.isClosed()) {
                     conexion = daoConexion.nuevaConexion();
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             
           cmd = conexion.prepareStatement("SELECT * FROM Aro;");
           rs = cmd.executeQuery();
