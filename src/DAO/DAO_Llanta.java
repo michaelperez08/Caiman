@@ -42,7 +42,11 @@ public class DAO_Llanta {
       cmd.setInt(5,cantidad);
       cmd.setString(6,tipoLlanta);
       cmd.execute();
-      return true;
+      if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
       
       } catch (SQLException ex) {
           Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,18 +66,20 @@ public class DAO_Llanta {
     
     public boolean eliminarLlanta(int idLlanta) {
         try {
-            try {
+            
                 if (conexion == null || conexion.isClosed()) {
                     conexion = daoConexion.nuevaConexion();
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
             cmd = conexion.prepareStatement("delete from Llanta where idLlanta = ?;");
             cmd.setInt(1, idLlanta);
             cmd.execute();
-            return true;
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch (Exception ex) {
             Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,7 +145,11 @@ public class DAO_Llanta {
            cmd.setInt(7, idLlanta);
            cmd.execute();
            
-           return true;
+           if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
             HE.Exepciones.RegistrarError(ex);
