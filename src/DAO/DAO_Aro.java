@@ -41,7 +41,11 @@ public class DAO_Aro {
       cmd.setString(3,codigo);
       cmd.setInt(4,cantidad);
       cmd.execute();
-      return true;
+      if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
       
       } catch (SQLException ex) {
           Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,8 +105,12 @@ public class DAO_Aro {
            cmd.setString(4, codigo);
            cmd.setInt(5, idAro);
            cmd.execute();
+           if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
            
-           return true;
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
             HE.Exepciones.RegistrarError(ex);
@@ -120,18 +128,18 @@ public class DAO_Aro {
         
     public boolean eliminarAro(int idAro) {
         try {
-            try {
                 if (conexion == null || conexion.isClosed()) {
                     conexion = daoConexion.nuevaConexion();
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
-            }
             
             cmd = conexion.prepareStatement("delete from Aro where idAro = ? ;");
             cmd.setInt(1, idAro);
             cmd.execute();
-            return true;
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
             
         } catch (Exception ex) {
             Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);

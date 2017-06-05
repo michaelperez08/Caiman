@@ -41,7 +41,11 @@ public class DAO_LineaFactura {
           cmd.setDouble(4, precioUnitario);
           cmd.setDouble(5, precioTotalLinea);
           cmd.execute();
-          return true;
+          if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
           
           } catch (SQLException ex) {
           Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,11 +66,16 @@ public class DAO_LineaFactura {
 
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
+            }
                 cmd = conexion.prepareStatement("delete from LineaFactura where idLineaFactura=?");
                 cmd.setInt(1, id);
                 cmd.execute();
+                if(cmd.getUpdateCount()>0){
                 return true;
+            }else{
+                return false;
             }
+            
 
         } catch (Exception ex) {
             Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,7 +138,11 @@ public class DAO_LineaFactura {
             cmd.setDouble(5, precioTotalLinea);
             cmd.setInt(6, idLineaFactura);
             cmd.execute();
-            return true;
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
             
             } catch (SQLException ex) {
             Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);

@@ -40,7 +40,11 @@ public class DAO_Cliente {
             cmd.setString(4, cedula);
             cmd.setString(5, telefonos);
             cmd.execute();
-            return true;
+            if (cmd.getUpdateCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,9 +74,9 @@ public class DAO_Cliente {
             cmd.setString(5, telefonos);
             cmd.setInt(6, idCliente);
             cmd.execute();
-            if(cmd.getUpdateCount()>0){
+            if (cmd.getUpdateCount() > 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } catch (SQLException ex) {
@@ -89,7 +93,7 @@ public class DAO_Cliente {
         return false;
     }
 
-    public ArrayList<TO_Cliente> cargarClientes(){
+    public ArrayList<TO_Cliente> cargarClientes() {
         ArrayList<TO_Cliente> clientes = new ArrayList<>();
 
         try {
@@ -119,19 +123,18 @@ public class DAO_Cliente {
 
     public boolean eliminarCliente(int idCliente) {
         try {
-            try {
-                if (conexion == null || conexion.isClosed()) {
-                    conexion = daoConexion.nuevaConexion();
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
-                HE.Exepciones.RegistrarError(ex);
+            if (conexion == null || conexion.isClosed()) {
+                conexion = daoConexion.nuevaConexion();
             }
 
             cmd = conexion.prepareStatement("delete from Cliente where idCliente = ?;");
             cmd.setInt(1, idCliente);
             cmd.execute();
-            return true;
+            if (cmd.getUpdateCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
 
         } catch (Exception ex) {
             Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);

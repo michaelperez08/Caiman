@@ -30,11 +30,9 @@ public class DAO_Usuario {
     public TO_Usuario checkLogIn(String NombreUsuario, String Contraseña) {
         TO_Usuario usuario = null;
         try {
-
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
             }
-
             cmd = conexion.prepareStatement("select * from Usuario where NombreUsuario = ? and Contrasena = ? limit 1");
             cmd.setString(1, NombreUsuario);
             cmd.setString(2, Contraseña);
@@ -73,7 +71,11 @@ public class DAO_Usuario {
             cmd.setString(2, contrasena);
             cmd.execute();
 
-            return true;
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,7 +102,11 @@ public class DAO_Usuario {
             cmd.setInt(1, id);
             cmd.execute();
 
-            return true;
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
