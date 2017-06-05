@@ -49,13 +49,13 @@ public class DAO_Llanta {
             }
       
       } catch (SQLException ex) {
-          Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
           HE.Exepciones.RegistrarError(ex);
       }finally{
           try {    
               conexion.close();
           } catch (SQLException ex) {
-              Logger.getLogger(DAO_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
               HE.Exepciones.RegistrarError(ex);
           }
       }
