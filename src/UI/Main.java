@@ -28,11 +28,9 @@ public class Main {
                     break;
                 }
             }
-               //UIManager.setLookAndFeel (WebLookAndFeel.class.getCanonicalName());
-            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+               
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+            
         }
 
         ConfBD confdb = new ConfBD();

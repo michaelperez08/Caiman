@@ -53,7 +53,7 @@ public class BL_UsuarioTest {
     @Test
     public void testLogIn() {
         System.out.println("LogIn");
-        BL_Usuario instance = new BL_Usuario("admin", "admin");
+        BL_Usuario instance = new BL_Usuario("admin", "admin","Administrador");
         BL_Usuario expResult = new BL_Usuario(1, "admin");
         BL_Usuario result = instance.LogIn();
         assertEquals(expResult.getIdUsuario(), result.getIdUsuario());
@@ -72,9 +72,10 @@ public class BL_UsuarioTest {
         System.out.println("guardarUsuario");
         String nombre = "prueba2";
         String contrasena = "prueba";
+        String tipo = "Administrador";
         BL_Usuario instance = new BL_Usuario();
         boolean expResult = true;
-        boolean result = instance.guardarUsuario(nombre, contrasena);
+        boolean result = instance.guardarUsuario(nombre, contrasena, tipo);
         assertEquals(expResult, result);
         if(expResult != result){
             fail("The test case is a prototype.");
@@ -108,7 +109,7 @@ public class BL_UsuarioTest {
         System.out.println("getListaUsuarios");
         BL_Usuario instance = new BL_Usuario();
         ArrayList<BL_Usuario> expResult = new ArrayList<>();
-        ArrayList<BL_Usuario> result = instance.getListaUsuarios();
+        ArrayList<BL_Usuario> result = instance.cargarUsuarios();
         assertNotEquals(expResult.isEmpty(), result.isEmpty());
         //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

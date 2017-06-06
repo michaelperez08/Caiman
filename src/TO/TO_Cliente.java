@@ -10,6 +10,7 @@ package TO;
  * @author michael
  */
 public class TO_Cliente {
+    
     public int idCliente; 
     public String Nombre;
     public String direccion_simple;
@@ -33,9 +34,11 @@ public class TO_Cliente {
         this.Cedula = Cedula;
         this.Telefonos = Telefonos;
     }
-         public TO_Cliente(){
+    
+    public TO_Cliente(){
             
-        }
+    }
+    
     public String getNombre() {
         return Nombre;
     }

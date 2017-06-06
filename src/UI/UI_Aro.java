@@ -6,6 +6,7 @@
 package UI;
 
 import BL.BL_Aro;
+import config.Validacion;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,16 +71,31 @@ public class UI_Aro extends javax.swing.JDialog {
 
         tf_marca.setForeground(new java.awt.Color(51, 51, 51));
         tf_marca.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_marcaKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_marcaKeyTyped(evt);
             }
         });
 
         tf_cantidad.setForeground(new java.awt.Color(51, 51, 51));
+        tf_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_cantidadKeyTyped(evt);
+            }
+        });
 
         tf_codigo.setForeground(new java.awt.Color(51, 51, 51));
+        tf_codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_codigoKeyTyped(evt);
+            }
+        });
 
         tf_numeroAro.setForeground(new java.awt.Color(51, 51, 51));
+        tf_numeroAro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_numeroAroKeyTyped(evt);
+            }
+        });
 
         bt_ingresarAro.setBackground(new java.awt.Color(51, 51, 51));
         bt_ingresarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
@@ -201,11 +217,23 @@ public class UI_Aro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_bt_ingresarAroActionPerformed
 
-    private void tf_marcaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_marcaKeyReleased
-        if(tf_marca.getText().length() >= 10){
-            evt.consume();
+    private void tf_numeroAroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numeroAroKeyTyped
+        Validacion.validarLongitud(tf_numeroAro.getText(), evt, 25);
+    }//GEN-LAST:event_tf_numeroAroKeyTyped
+
+    private void tf_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cantidadKeyTyped
+        if(Validacion.soloNumeros(evt)){
+            Validacion.validarLongitud(tf_cantidad.getText(), evt, 9);
         }
-    }//GEN-LAST:event_tf_marcaKeyReleased
+    }//GEN-LAST:event_tf_cantidadKeyTyped
+
+    private void tf_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_codigoKeyTyped
+        Validacion.validarLongitud(tf_codigo.getText(), evt, 10);
+    }//GEN-LAST:event_tf_codigoKeyTyped
+
+    private void tf_marcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_marcaKeyTyped
+        Validacion.validarLongitud(tf_marca.getText(), evt, 25);
+    }//GEN-LAST:event_tf_marcaKeyTyped
 
     public boolean esNumero(String numero, String campo) {
         try {
@@ -233,47 +261,6 @@ public class UI_Aro extends javax.swing.JDialog {
         tf_cantidad.setText("");
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                UI_Aro dialog = new UI_Aro(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_ingresarAro;

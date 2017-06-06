@@ -26,7 +26,6 @@ public class UI_Factura extends javax.swing.JDialog {
     
     private ArrayList<BL_Cliente> listaClientes;
     private ArrayList<BL_Producto> listaProductos;
-    private int itemResaltado;
     private BL_Cliente cliente_seleccionado;
             
     public UI_Factura(java.awt.Frame parent, boolean modal) {
@@ -44,7 +43,6 @@ public class UI_Factura extends javax.swing.JDialog {
         listaProductos.addAll(listaLlantas);
         formatoCBClientes();
         formatoCBProductos();
-        itemResaltado=0;
     }
     
 

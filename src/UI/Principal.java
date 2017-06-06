@@ -8,6 +8,7 @@ package UI;
 import BL.BL_Aro;
 import BL.BL_Cliente;
 import BL.BL_Llanta;
+import BL.BL_Usuario;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -31,16 +32,20 @@ public final class Principal extends javax.swing.JFrame {
     private BL_Cliente cliente;
     private BL_Llanta llanta;
     private BL_Aro aro;
+    private BL_Usuario usuario;
     private int filaSeleccionada;
     private ArrayList<BL_Cliente> listaClientes;
     private ArrayList<BL_Llanta> listaLlantas;
     private ArrayList<BL_Aro> listaAros;
+    private ArrayList<BL_Usuario> listaUsuarios;
     private DefaultTableModel dtmClientes;
     private DefaultTableModel dtmLlantas;
     private DefaultTableModel dtmAros;
+    private DefaultTableModel dtmUsuarios;
     private TableRowSorter trsfiltroCliente;
     private TableRowSorter trsfiltroLlantas;
     private TableRowSorter trsfiltroAros;
+    private TableRowSorter trsfiltroUsuarios;
     int resaltado;
 
     public Principal() {
@@ -51,6 +56,7 @@ public final class Principal extends javax.swing.JFrame {
         cargarClientes();
         cargarLlantas();
         cargarAros();
+        cargarUsuarios();
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -81,6 +87,7 @@ public final class Principal extends javax.swing.JFrame {
         bt_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_clientes = new javax.swing.JTable();
+        tb_productos = new javax.swing.JTabbedPane();
         jp_llantas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_llantas = new javax.swing.JTable();
@@ -109,6 +116,18 @@ public final class Principal extends javax.swing.JFrame {
         tf_buscarAro1 = new javax.swing.JTextField();
         jl_Buscar3 = new javax.swing.JLabel();
         jcb_filtroBusquedaAro1 = new javax.swing.JComboBox();
+        jPanel2 = new javax.swing.JPanel();
+        tf_buscarCliente1 = new javax.swing.JTextField();
+        jl_Buscar4 = new javax.swing.JLabel();
+        bt_modificarUsuario = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jt_usuarios = new javax.swing.JTable();
+        bt_eliminarUsuario = new javax.swing.JButton();
+        bt_verUsuario = new javax.swing.JButton();
+        bt_agregarUsuairo = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mi_cerrar_sesion = new javax.swing.JMenuItem();
 
         jmi_ver.setText("Ver");
         jmi_ver.addActionListener(new java.awt.event.ActionListener() {
@@ -331,7 +350,7 @@ public final class Principal extends javax.swing.JFrame {
         });
         jp_llantas.add(jcb_filtroBusquedaLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
 
-        panel_tabs.addTab("LLantas", jp_llantas);
+        tb_productos.addTab("LLantas", jp_llantas);
 
         jp_aros.setBackground(new java.awt.Color(51, 51, 51));
         jp_aros.setMaximumSize(new java.awt.Dimension(1080, 720));
@@ -429,7 +448,9 @@ public final class Principal extends javax.swing.JFrame {
         });
         jp_aros.add(jcb_filtroBusquedaAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
 
-        panel_tabs.addTab("Aros", jp_aros);
+        tb_productos.addTab("Aros", jp_aros);
+
+        panel_tabs.addTab("Productos", tb_productos);
 
         jp_facturacion.setBackground(new java.awt.Color(51, 51, 51));
         jp_facturacion.setMaximumSize(new java.awt.Dimension(1080, 720));
@@ -510,6 +531,131 @@ public final class Principal extends javax.swing.JFrame {
 
         panel_tabs.addTab("Facturación", jp_facturacion);
 
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+
+        tf_buscarCliente1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        tf_buscarCliente1.setForeground(new java.awt.Color(51, 51, 51));
+        tf_buscarCliente1.setPreferredSize(new java.awt.Dimension(946, 34));
+        tf_buscarCliente1.setSelectionColor(new java.awt.Color(153, 153, 153));
+        tf_buscarCliente1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_buscarCliente1KeyReleased(evt);
+            }
+        });
+
+        jl_Buscar4.setBackground(new java.awt.Color(153, 153, 153));
+        jl_Buscar4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jl_Buscar4.setForeground(new java.awt.Color(204, 204, 204));
+        jl_Buscar4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_Buscar4.setText("Buscar");
+        jl_Buscar4.setPreferredSize(new java.awt.Dimension(102, 33));
+
+        bt_modificarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_modificarUsuario.setText("Modificar");
+        bt_modificarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_modificarUsuarioActionPerformed(evt);
+            }
+        });
+
+        jt_usuarios.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jt_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Cedula", "Telefono"
+            }
+        ));
+        jt_usuarios.setComponentPopupMenu(pum_tb);
+        jt_usuarios.setGridColor(new java.awt.Color(51, 51, 51));
+        jt_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jt_usuariosMouseReleased(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jt_usuarios);
+
+        bt_eliminarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_eliminarUsuario.setText("Eliminar");
+        bt_eliminarUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
+        bt_eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_eliminarUsuarioActionPerformed(evt);
+            }
+        });
+
+        bt_verUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_verUsuario.setText("Ver");
+        bt_verUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
+        bt_verUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_verUsuarioActionPerformed(evt);
+            }
+        });
+
+        bt_agregarUsuairo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregarUsuairo.setText("Agregar");
+        bt_agregarUsuairo.setPreferredSize(new java.awt.Dimension(102, 33));
+        bt_agregarUsuairo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_agregarUsuairoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1078, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jl_Buscar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(tf_buscarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(bt_verUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bt_agregarUsuairo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bt_modificarUsuario)
+                                .addComponent(bt_eliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 699, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jl_Buscar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(1, 1, 1)
+                            .addComponent(tf_buscarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(bt_verUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(17, 17, 17)
+                            .addComponent(bt_agregarUsuairo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(17, 17, 17)
+                            .addComponent(bt_modificarUsuario)
+                            .addGap(17, 17, 17)
+                            .addComponent(bt_eliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        panel_tabs.addTab("Usuarios", jPanel2);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -518,8 +664,22 @@ public final class Principal extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+            .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("Usuario");
+
+        mi_cerrar_sesion.setText("Cerra Sesion");
+        mi_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_cerrar_sesionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mi_cerrar_sesion);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -704,6 +864,37 @@ public final class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcb_filtroBusquedaAro1ActionPerformed
 
+    private void tf_buscarCliente1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarCliente1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_buscarCliente1KeyReleased
+
+    private void bt_modificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_modificarUsuarioActionPerformed
+
+    private void jt_usuariosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_usuariosMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jt_usuariosMouseReleased
+
+    private void bt_eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_eliminarUsuarioActionPerformed
+
+    private void bt_verUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_verUsuarioActionPerformed
+
+    private void bt_agregarUsuairoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarUsuairoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_agregarUsuairoActionPerformed
+
+    private void mi_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_cerrar_sesionActionPerformed
+        LogIn li = new LogIn(this, rootPaneCheckingEnabled);
+        LogIn.bl_usuairo = null;
+        this.dispose();
+        li.setVisible(true);
+    }//GEN-LAST:event_mi_cerrar_sesionActionPerformed
+
     
     public void menuitem_ver(){
         int tabseleccionado = panel_tabs.getSelectedIndex();
@@ -833,6 +1024,27 @@ public final class Principal extends javax.swing.JFrame {
         jt_aros.getColumnModel().getColumn(0).setMaxWidth(0);
         trsfiltroAros = new TableRowSorter(jt_aros.getModel());
     }
+    
+    public void cargarUsuarios() {
+        usuario = new BL_Usuario();
+        listaUsuarios = usuario.cargarUsuarios();
+        String[] nombreColumnas = {"id", "Nombre"};
+        dtmUsuarios = new DefaultTableModel(null, nombreColumnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        if (!listaUsuarios.isEmpty()) {
+            for (BL_Usuario usuario_temp : listaUsuarios) {
+                dtmUsuarios.addRow(new Object[]{dtmAros.getRowCount(), usuario_temp.getNombreUsuario()});
+            }
+        }
+        jt_usuarios.setModel(dtmUsuarios);
+        jt_usuarios.getColumnModel().getColumn(0).setMinWidth(0);
+        jt_usuarios.getColumnModel().getColumn(0).setMaxWidth(0);
+        trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
+    }
 
     public void verCliente() {
         BL_Cliente clienteVer;
@@ -875,6 +1087,21 @@ public final class Principal extends javax.swing.JFrame {
             uia.setVisible(true);
             if (uia.actualizarLista) {
                 cargarAros();
+            }
+        }
+    }
+    
+    public void verUsuario() {
+        BL_Usuario usuarioVer;
+        if (validarSeleccion('u')) {
+            UI_Usuario uiu = new UI_Usuario(this, rootPaneCheckingEnabled);
+            int fila = jt_aros.getSelectedRow();
+            int numeroFila = Integer.parseInt("" + jt_usuarios.getValueAt(fila, 0));
+            usuarioVer = listaUsuarios.get(numeroFila);
+            uiu.cargarUsuarioEditar(usuarioVer);
+            uiu.setVisible(true);
+            if (uiu.actualizarLista) {
+                cargarUsuarios();
             }
         }
     }
@@ -979,20 +1206,28 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_agregarAro;
     private javax.swing.JButton bt_agregarFactura;
     private javax.swing.JButton bt_agregarLlanta;
+    private javax.swing.JButton bt_agregarUsuairo;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_eliminarAro;
     private javax.swing.JButton bt_eliminarLlanta;
+    private javax.swing.JButton bt_eliminarUsuario;
     private javax.swing.JButton bt_modificar;
     private javax.swing.JButton bt_modificarAro;
     private javax.swing.JButton bt_modificarLlanta;
+    private javax.swing.JButton bt_modificarUsuario;
     private javax.swing.JButton bt_ver;
     private javax.swing.JButton bt_verAro;
     private javax.swing.JButton bt_verFactura;
     private javax.swing.JButton bt_verLlanta;
+    private javax.swing.JButton bt_verUsuario;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JComboBox jcb_filtroBusquedaAro;
     private javax.swing.JComboBox jcb_filtroBusquedaAro1;
@@ -1001,6 +1236,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jl_Buscar1;
     private javax.swing.JLabel jl_Buscar2;
     private javax.swing.JLabel jl_Buscar3;
+    private javax.swing.JLabel jl_Buscar4;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JMenuItem jmi_ver;
@@ -1012,11 +1248,15 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jt_aros1;
     private javax.swing.JTable jt_clientes;
     private javax.swing.JTable jt_llantas;
+    private javax.swing.JTable jt_usuarios;
+    private javax.swing.JMenuItem mi_cerrar_sesion;
     private javax.swing.JTabbedPane panel_tabs;
     private javax.swing.JPopupMenu pum_tb;
+    private javax.swing.JTabbedPane tb_productos;
     private javax.swing.JTextField tf_buscarAro;
     private javax.swing.JTextField tf_buscarAro1;
     private javax.swing.JTextField tf_buscarCliente;
+    private javax.swing.JTextField tf_buscarCliente1;
     private javax.swing.JTextField tf_buscarLlantas;
     // End of variables declaration//GEN-END:variables
 }

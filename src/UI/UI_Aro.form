@@ -146,7 +146,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_marcaKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_marcaKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tf_cantidad">
@@ -155,6 +155,9 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_cantidadKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tf_codigo">
           <Properties>
@@ -162,6 +165,9 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_codigoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tf_numeroAro">
           <Properties>
@@ -169,6 +175,9 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_numeroAroKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bt_ingresarAro">
           <Properties>

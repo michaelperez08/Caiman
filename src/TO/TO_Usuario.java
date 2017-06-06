@@ -14,19 +14,27 @@ public class TO_Usuario {
     private int idUsuario;
     private String NombreUsuario;
     private String Contrasena;
+    private String tipoUsuario;
  
-    public TO_Usuario() {
-    }
- 
-    public TO_Usuario(int idUsuario, String NombreUsuario, String Contrasena) {
+    public TO_Usuario(int idUsuario, String NombreUsuario, String Contrasena, String tipoUsuario) {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
         this.Contrasena = Contrasena;
+        this.tipoUsuario=tipoUsuario;
+    }
+ 
+    public TO_Usuario(String NombreUsuario, String Contrasena, String tipoUsuario) {
+        this.NombreUsuario = NombreUsuario;
+        this.Contrasena = Contrasena;
+        this.tipoUsuario=tipoUsuario;
     }
  
     public TO_Usuario(int idUsuario, String NombreUsuario) {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
+    }
+ 
+    public TO_Usuario() {
     }
  
      

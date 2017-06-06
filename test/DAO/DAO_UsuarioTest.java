@@ -68,9 +68,10 @@ public class DAO_UsuarioTest {
         System.out.println("guardarUsuario");
         String nombreUsuario = "pruebaTest";
         String contrasena = "pruebaTest";
+        String tipo = "Administrador";
         DAO_Usuario instance = new DAO_Usuario();
         boolean expResult = true;
-        boolean result = instance.guardarUsuario(nombreUsuario, contrasena);
+        boolean result = instance.guardarUsuario(nombreUsuario, contrasena, tipo);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         if(expResult != result){
@@ -105,7 +106,7 @@ public class DAO_UsuarioTest {
         System.out.println("getListaUsuarios");
         DAO_Usuario instance = new DAO_Usuario();
         ArrayList<TO_Usuario> expResult = new ArrayList<>();
-        ArrayList<TO_Usuario> result = instance.getListaUsuarios();
+        ArrayList<TO_Usuario> result = instance.cargarUsuarios();
         //assertEquals(expResult, result);
         assertNotEquals(expResult.isEmpty(), result.isEmpty());
         // TODO review the generated test code and remove the default call to fail.

@@ -6,6 +6,7 @@
 package UI;
 
 import BL.BL_Llanta;
+import config.Validacion;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,7 +48,7 @@ public class UI_Llanta extends javax.swing.JDialog {
         tf_diseno = new javax.swing.JTextField();
         tf_numeroLlanta = new javax.swing.JTextField();
         bt_ingresarLlanta = new javax.swing.JButton();
-        cb_tipoLlanta = new javax.swing.JComboBox<String>();
+        cb_tipoLlanta = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingresar Llanta");
@@ -84,14 +85,39 @@ public class UI_Llanta extends javax.swing.JDialog {
                 tf_marcaActionPerformed(evt);
             }
         });
+        tf_marca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_marcaKeyTyped(evt);
+            }
+        });
 
         tf_cantidad.setForeground(new java.awt.Color(51, 51, 51));
+        tf_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_cantidadKeyTyped(evt);
+            }
+        });
 
         tf_numeroCapas.setForeground(new java.awt.Color(51, 51, 51));
+        tf_numeroCapas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_numeroCapasKeyTyped(evt);
+            }
+        });
 
         tf_diseno.setForeground(new java.awt.Color(51, 51, 51));
+        tf_diseno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_disenoKeyTyped(evt);
+            }
+        });
 
         tf_numeroLlanta.setForeground(new java.awt.Color(51, 51, 51));
+        tf_numeroLlanta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_numeroLlantaKeyTyped(evt);
+            }
+        });
 
         bt_ingresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
         bt_ingresarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
@@ -105,7 +131,7 @@ public class UI_Llanta extends javax.swing.JDialog {
         });
 
         cb_tipoLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        cb_tipoLlanta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Industrial", "Agricola" }));
+        cb_tipoLlanta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Industrial", "Agricola" }));
         cb_tipoLlanta.setToolTipText("");
 
         javax.swing.GroupLayout pn_IngresarLlantaLayout = new javax.swing.GroupLayout(pn_IngresarLlanta);
@@ -279,47 +305,30 @@ public class UI_Llanta extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_marcaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_Llanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void tf_numeroLlantaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numeroLlantaKeyTyped
+        Validacion.validarLongitud(tf_numeroLlanta.getText(), evt, 25);
+    }//GEN-LAST:event_tf_numeroLlantaKeyTyped
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                UI_Llanta dialog = new UI_Llanta(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    private void tf_marcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_marcaKeyTyped
+        Validacion.validarLongitud(tf_marca.getText(), evt, 25);
+    }//GEN-LAST:event_tf_marcaKeyTyped
+
+    private void tf_disenoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_disenoKeyTyped
+        Validacion.validarLongitud(tf_diseno.getText(), evt, 25);
+    }//GEN-LAST:event_tf_disenoKeyTyped
+
+    private void tf_numeroCapasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numeroCapasKeyTyped
+        if(Validacion.soloNumeros(evt)){
+            Validacion.validarLongitud(tf_numeroCapas.getText(), evt, 9);
+        }
+    }//GEN-LAST:event_tf_numeroCapasKeyTyped
+
+    private void tf_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cantidadKeyTyped
+        if(Validacion.soloNumeros(evt)){
+            Validacion.validarLongitud(tf_cantidad.getText(), evt, 9);
+        }
+    }//GEN-LAST:event_tf_cantidadKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_ingresarLlanta;

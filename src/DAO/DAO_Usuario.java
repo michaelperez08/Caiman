@@ -59,16 +59,48 @@ public class DAO_Usuario {
         return usuario;
     }
 
-    public boolean guardarUsuario(String nombreUsuario, String contrasena) {
+    public boolean guardarUsuario(String nombreUsuario, String contrasena, String tipoUsuario) {
         try {
 
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
             }
 
-            cmd = conexion.prepareStatement("insert into Usuario(NombreUsuario, Contrasena) values (?,?);");
+            cmd = conexion.prepareStatement("insert into Usuario(NombreUsuario, Contrasena, Tipo) values (?,?,?);");
             cmd.setString(1, nombreUsuario);
             cmd.setString(2, contrasena);
+            cmd.setString(3, tipoUsuario);
+            cmd.execute();
+
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+        }
+        return false;
+    }
+    
+    public boolean modificarUsuario(int id, String nombreUsuario, String contrasena, String tipoUsuario) {
+        try {
+
+            if (conexion == null || conexion.isClosed()) {
+                conexion = daoConexion.nuevaConexion();
+            }
+
+            cmd = conexion.prepareStatement("Update Usuario set NombreUsuario=?, Contrasena=? ,Tipo=? where idLLanta=?;");
+            cmd.setInt(1, id);
             cmd.execute();
 
             if(cmd.getUpdateCount()>0){
@@ -122,7 +154,7 @@ public class DAO_Usuario {
         return false;
     }
 
-    public ArrayList<TO_Usuario> getListaUsuarios() {
+    public ArrayList<TO_Usuario> cargarUsuarios() {
         ArrayList<TO_Usuario> listaTou = new ArrayList<>();
         try {
 
@@ -134,7 +166,7 @@ public class DAO_Usuario {
             rs = cmd.executeQuery();
 
             while (rs.next()) {
-                listaTou.add(new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario")));
+                listaTou.add(new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario"), rs.getString("Contrasena"), rs.getString("Tipo")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Usuario.class.getName()).log(Level.SEVERE, null, ex);

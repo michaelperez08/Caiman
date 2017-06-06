@@ -19,16 +19,19 @@ public class BL_Usuario {
     private int idUsuario;
     private String NombreUsuario;
     private String Contrasena;
+    private String tipoUsuario;
  
-    public BL_Usuario(int idUsuario, String NombreUsuario, String Contrasena) {
+    public BL_Usuario(int idUsuario, String NombreUsuario, String Contrasena, String tipoUsuario) {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
         this.Contrasena = Contrasena;
+        this.tipoUsuario=tipoUsuario;
     }
  
-    public BL_Usuario(String NombreUsuario, String Contrasena) {
+    public BL_Usuario(String NombreUsuario, String Contrasena, String tipoUsuario) {
         this.NombreUsuario = NombreUsuario;
         this.Contrasena = Contrasena;
+        this.tipoUsuario=tipoUsuario;
     }
  
     public BL_Usuario(int idUsuario, String NombreUsuario) {
@@ -63,6 +66,14 @@ public class BL_Usuario {
     public void setContrasena(String Contrasena) {
         this.Contrasena = Contrasena;
     }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
  
     public BL_Usuario LogIn() {
         DAO_Usuario daou = new DAO_Usuario();
@@ -72,24 +83,28 @@ public class BL_Usuario {
         } else {
             return null;
         }
- 
     }
 
 //</editor-fold>
  
-    public boolean guardarUsuario(String nombre, String contrasena) {
+    public boolean guardarUsuario(String nombre, String contrasena, String tipo) {
         DAO_Usuario daou = new DAO_Usuario();
-        return daou.guardarUsuario(nombre, contrasena);
+        return daou.guardarUsuario(nombre, contrasena, tipo);
     }
  
     public boolean eliminarUsuario(int id) {
         DAO_Usuario daou = new DAO_Usuario();
         return daou.eliminarUsuario(id);
     }
- 
-    public ArrayList<BL_Usuario> getListaUsuarios() {
+    
+    public boolean modificarUsuario(int id, String nombre, String contrasena, String tipo) {
         DAO_Usuario daou = new DAO_Usuario();
-        ArrayList<TO_Usuario> listaTou = daou.getListaUsuarios();
+        return daou.modificarUsuario(id, nombre, contrasena, tipo);
+    }
+ 
+    public ArrayList<BL_Usuario> cargarUsuarios() {
+        DAO_Usuario daou = new DAO_Usuario();
+        ArrayList<TO_Usuario> listaTou = daou.cargarUsuarios();
         ArrayList<BL_Usuario> listaBlu = new ArrayList<>();
  
         for (TO_Usuario listaTou1 : listaTou) {
