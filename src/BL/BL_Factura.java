@@ -41,6 +41,7 @@ ArrayList<BL_LineaFactura> ListaLineaFactura = new ArrayList();
     }
 
     public BL_Factura() {
+        
     }
 
     public int getIdFactura() {
