@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author michael
@@ -23,16 +22,16 @@ public class UI_Factura extends javax.swing.JDialog {
     /**
      * Creates new form UI_Factura
      */
-    
     private ArrayList<BL_Cliente> listaClientes;
     private ArrayList<BL_Producto> listaProductos;
     private BL_Cliente cliente_seleccionado;
-            
+
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
     }
+
     public UI_Factura(java.awt.Frame parent, boolean modal, ArrayList<BL_Cliente> listaClientes, ArrayList<BL_Llanta> listaLlantas, ArrayList<BL_Aro> listaAros) {
         super(parent, modal);
         initComponents();
@@ -43,8 +42,8 @@ public class UI_Factura extends javax.swing.JDialog {
         listaProductos.addAll(listaLlantas);
         formatoCBClientes();
         formatoCBProductos();
+        clienteNuevo(false);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,6 +142,11 @@ public class UI_Factura extends javax.swing.JDialog {
         rb_cliente_nuevo.setForeground(new java.awt.Color(204, 204, 204));
         rb_cliente_nuevo.setText("Cliente Nuevo");
         rb_cliente_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
+        rb_cliente_nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_cliente_nuevoActionPerformed(evt);
+            }
+        });
         jPanel2.add(rb_cliente_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 170, -1));
 
         cb_nombre_cliente.setPreferredSize(new java.awt.Dimension(220, 32));
@@ -264,12 +268,12 @@ public class UI_Factura extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cb_nombre_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_nombre_clienteActionPerformed
-        try{
+        try {
             cliente_seleccionado = (BL_Cliente) cb_nombre_cliente.getSelectedItem();
-            if (cliente_seleccionado!=null) {
+            if (cliente_seleccionado != null) {
                 cargarClienteSeleccionadoFactura(cliente_seleccionado);
             }
-        }catch(ClassCastException e){
+        } catch (ClassCastException e) {
             System.err.println(e);
         }
     }//GEN-LAST:event_cb_nombre_clienteActionPerformed
@@ -277,78 +281,96 @@ public class UI_Factura extends javax.swing.JDialog {
     private void bt_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_imprimirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_imprimirActionPerformed
-     
-    public void formatoCBClientes(){
-     cb_nombre_cliente.setEditable(true);
+
+    private void rb_cliente_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_cliente_nuevoActionPerformed
+        if (rb_cliente_nuevo.isSelected()) {
+            clienteNuevo(true);
+            limpiarCampos();
+        } else {
+            clienteNuevo(false);
+        }
+    }//GEN-LAST:event_rb_cliente_nuevoActionPerformed
+
+    public void formatoCBClientes() {
+        cb_nombre_cliente.setEditable(true);
         cb_nombre_cliente.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                int tecla = e.getKeyCode(); 
-                if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122) || tecla==KeyEvent.VK_BACK_SPACE){
-                    filtrar_cb_clientes(cb_nombre_cliente.getEditor().getItem()+"");
-                }else if(tecla==KeyEvent.VK_ENTER && cliente_seleccionado!=null){
-                    cargarClienteSeleccionadoFactura(cliente_seleccionado);
+                int tecla = e.getKeyCode();
+                if (!rb_cliente_nuevo.isSelected()) {
+                    if ((tecla >= 65 && tecla <= 90) || (tecla >= 97 && tecla <= 122) || tecla == KeyEvent.VK_BACK_SPACE) {
+                        filtrar_cb_clientes(cb_nombre_cliente.getEditor().getItem() + "");
+                    } else if (tecla == KeyEvent.VK_ENTER && cliente_seleccionado != null) {
+                        cargarClienteSeleccionadoFactura(cliente_seleccionado);
+                    }
                 }
             }
-            
+
         });
     }
-    
-    
-    
-    public void formatoCBProductos(){
+
+    public void clienteNuevo(boolean b) {
+        tf_cedula.setEditable(b);
+        tf_direccion.setEditable(b);
+        tf_telefono.setEditable(b);
+    }
+
+    public void formatoCBProductos() {
         cb_producto.setEditable(true);
         cb_producto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                int tecla = e.getKeyCode(); 
-                if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122) || tecla==KeyEvent.VK_BACK_SPACE){
-                    filtrar_cb_producto(cb_producto.getEditor().getItem()+"");
-                }else if(tecla==KeyEvent.VK_ENTER && cb_producto.getSelectedItem() instanceof String){
+                int tecla = e.getKeyCode();
+                if ((tecla >= 65 && tecla <= 90) || (tecla >= 97 && tecla <= 122) || tecla == KeyEvent.VK_BACK_SPACE) {
+                    filtrar_cb_producto(cb_producto.getEditor().getItem() + "");
+                } else if (tecla == KeyEvent.VK_ENTER && cb_producto.getSelectedItem() instanceof String) {
                     cb_producto.getEditor().setItem(cb_producto.getItemAt(0));
                 }
-            } 
-            
+            }
+
         });
     }
-    
-    public void filtrar_cb_clientes(String texto_digitado){
+
+    public void filtrar_cb_clientes(String texto_digitado) {
         cb_nombre_cliente.removeAllItems();
         for (BL_Cliente cliente_temp : listaClientes) {
-            if(cliente_temp.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())){
+            if (cliente_temp.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())) {
                 cb_nombre_cliente.addItem(cliente_temp);
             }
         }
-        if(!cb_nombre_cliente.isPopupVisible()){
+        if (!cb_nombre_cliente.isPopupVisible()) {
             cb_nombre_cliente.showPopup();
         }
         cb_nombre_cliente.getEditor().setItem(texto_digitado);
     }
-    
-    public void cargarClienteSeleccionadoFactura(BL_Cliente cliente){
+
+    public void cargarClienteSeleccionadoFactura(BL_Cliente cliente) {
         cb_nombre_cliente.getEditor().setItem(cliente.getNombre());
         tf_cedula.setText(cliente.getCedula());
         tf_telefono.setText(cliente.getTelefonos());
         tf_direccion.setText(cliente.getDireccion_simple());
     }
-    
-    public void filtrar_cb_producto(String texto_digitado){
+
+    public void filtrar_cb_producto(String texto_digitado) {
         cb_producto.removeAllItems();
         for (BL_Producto temp_producto : listaProductos) {
-            if(temp_producto.toString().toLowerCase().contains(texto_digitado.toLowerCase())){
+            if (temp_producto.toString().toLowerCase().contains(texto_digitado.toLowerCase())) {
                 cb_producto.addItem(temp_producto);
             }
         }
-        if(!cb_producto.isPopupVisible()){
+        if (!cb_producto.isPopupVisible()) {
             cb_producto.showPopup();
         }
         cb_producto.getEditor().setItem(texto_digitado);
     }
-    
-    public void esCasteableProducto(String texto){
-        
+
+    public void limpiarCampos() {
+        cb_nombre_cliente.removeAllItems();
+        tf_cedula.setText("");
+        tf_direccion.setText("");
+        tf_telefono.setText("");
     }
-        
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_agregar_linea;

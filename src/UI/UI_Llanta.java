@@ -306,26 +306,26 @@ public class UI_Llanta extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_marcaActionPerformed
 
     private void tf_numeroLlantaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numeroLlantaKeyTyped
-        Validacion.validarLongitud(tf_numeroLlanta.getText(), evt, 25);
+        Validacion.validarLongitud(tf_numeroLlanta, evt, 25);
     }//GEN-LAST:event_tf_numeroLlantaKeyTyped
 
     private void tf_marcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_marcaKeyTyped
-        Validacion.validarLongitud(tf_marca.getText(), evt, 25);
+        Validacion.validarLongitud(tf_marca, evt, 25);
     }//GEN-LAST:event_tf_marcaKeyTyped
 
     private void tf_disenoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_disenoKeyTyped
-        Validacion.validarLongitud(tf_diseno.getText(), evt, 25);
+        Validacion.validarLongitud(tf_diseno, evt, 25);
     }//GEN-LAST:event_tf_disenoKeyTyped
 
     private void tf_numeroCapasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numeroCapasKeyTyped
         if(Validacion.soloNumeros(evt)){
-            Validacion.validarLongitud(tf_numeroCapas.getText(), evt, 9);
+            Validacion.validarLongitud(tf_numeroCapas, evt, 9);
         }
     }//GEN-LAST:event_tf_numeroCapasKeyTyped
 
     private void tf_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cantidadKeyTyped
         if(Validacion.soloNumeros(evt)){
-            Validacion.validarLongitud(tf_cantidad.getText(), evt, 9);
+            Validacion.validarLongitud(tf_cantidad, evt, 9);
         }
     }//GEN-LAST:event_tf_cantidadKeyTyped
 

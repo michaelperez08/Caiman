@@ -57,9 +57,9 @@ CREATE TABLE `Cliente` (
   `Direccion_Simple` varchar(100) NOT NULL,
   `Direccion_Exacta` varchar(150) NOT NULL,
   `Cedula` varchar(25) NOT NULL,
-  `Telefonos` varchar(45) NOT NULL,
+  `Telefonos` varchar(50) NOT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
-INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207350735','24543624 87363723 '),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','','207450335','88996655'),(3,'Kenneth Gonzales Oreamuno','Coyol, Alajuela','','207450335','22334455'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','','207450335','55661100'),(5,'Oscar Perez Lopez','Tacares, grecia, Alajuela','','208750456','24447567 87896534 '),(7,'Juan Rodriguez','Sarchi, Alajuela, Costa Rica','haaayyy yaaa yyaaa, cantaa y no llores, por que llorando se alegra.','209840336','22222222 111111111 333333333 '),(8,'Cooporacion Industrial de Trasportes Patica','sdfsd','','2044450445','345234 '),(9,'Antonio Alavarez','Pital de San Carlos','Por la salchichoneria de los caballeros del sodiaco, cerca de la entrada al inframundo permidada por haya','2245678','3456543 3434455 ');
+INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207350735','24543624 87363723 '),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','','207450335','88996655'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','','207450335','55661100'),(5,'Oscar Perez Lopez','Tacares, grecia, Alajuela','','208750456','24447567 87896534 '),(7,'Juan Rodriguez','Sarchi, Alajuela, Costa Rica','haaayyy yaaa yyaaa, cantaa y no llores, por que llorando se alegra.','209840336','22222222 111111111 333333333 '),(8,'Cooporacion Industrial de Trasportes Patica','sdfsd','','2044450445','345234 '),(9,'Antonio Alavarez','Pital de San Carlos','Por la salchichoneria de los caballeros del sodiaco, cerca de la entrada al inframundo permidada por haya','2245678','3456543 3434455 '),(10,'Oscar Cubero Araya','Tacares, Grecia, Alajuela','350 metros de la Universidad de Costa Rica','254536544','(+506) 2454-3624 (+506) 5064-8736 ');
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +182,7 @@ CREATE TABLE `Usuario` (
 
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` VALUES (1,'admin','admin','Estandar'),(2,'michael','mike9538','Administrador');
+INSERT INTO `Usuario` VALUES (1,'admin','admin','Estandar');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -195,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-07 10:42:48
+-- Dump completed on 2017-06-07 11:33:45

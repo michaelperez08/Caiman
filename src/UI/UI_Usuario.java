@@ -113,7 +113,7 @@ public class UI_Usuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_nombreKeyTyped
-        Validacion.validarLongitud(tf_nombre.getText(), evt, 15);
+        Validacion.validarLongitud(tf_nombre, evt, 15);
     }//GEN-LAST:event_tf_nombreKeyTyped
 
     private void bt_ingresarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ingresarUsuarioActionPerformed
@@ -174,7 +174,7 @@ public class UI_Usuario extends javax.swing.JDialog {
         tf_nombre.setText(usuarioCargar.getNombreUsuario());
         pf_contrasena.setText(usuarioCargar.getContrasena());
         pf_confirmar.setText(usuarioCargar.getContrasena());
-        if(usuarioCargar.getTipoUsuario().equalsIgnoreCase("admin")){
+        if(usuarioCargar.getTipoUsuario().toLowerCase().contains("admin")){
            cb_tipoUsuario.setSelectedIndex(1);
         }
         bt_ingresarUsuario.setText("Modificar Usuario");
