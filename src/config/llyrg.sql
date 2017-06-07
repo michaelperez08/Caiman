@@ -57,7 +57,7 @@ CREATE TABLE `Cliente` (
   `Direccion_Simple` varchar(100) NOT NULL,
   `Direccion_Exacta` varchar(150) NOT NULL,
   `Cedula` varchar(25) NOT NULL,
-  `Telefonos` varchar(50) NOT NULL,
+  `Telefonos` varchar(45) NOT NULL,
   PRIMARY KEY (`idCliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -195,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-07 10:16:55
+-- Dump completed on 2017-06-07 10:42:48

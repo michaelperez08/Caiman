@@ -272,6 +272,7 @@ public class UI_Cliente extends javax.swing.JDialog {
                     dlm_telfonos.addElement(telefono);
                     jl_telefonos.setModel(dlm_telfonos);
                     tf_telefono.setText("");
+                    maximoTelefonos();
                 } else {
                     JOptionPane.showMessageDialog(null, "No hay telefono que agregar", "Telefonos", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -289,6 +290,7 @@ public class UI_Cliente extends javax.swing.JDialog {
             dlm_telfonos.remove(tel_seleccionado);
             jl_telefonos.setModel(dlm_telfonos);
             tf_telefono.setText("");
+            activ_desa_NuevoTelefono(true);
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado un teléfono", "Telefono", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -380,7 +382,7 @@ public class UI_Cliente extends javax.swing.JDialog {
 
     private void tf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyTyped
         if (Validacion.soloNumeros(evt)) {
-            Validacion.validarLongitud(tf_telefono.getText(), evt, 10);
+            Validacion.validarLongitud(tf_telefono.getText(), evt, 14);
         }
     }//GEN-LAST:event_tf_telefonoKeyTyped
 
@@ -401,7 +403,17 @@ public class UI_Cliente extends javax.swing.JDialog {
         }
         return dlm_temp;
     }
-
+    
+    public void maximoTelefonos(){
+         if(jl_telefonos.getModel().getSize()==3){
+             activ_desa_NuevoTelefono(false);
+         }
+    }
+    
+    public void activ_desa_NuevoTelefono(boolean b){
+        tf_telefono.setEnabled(b);
+        bt_agregarTelefono.setEnabled(b);
+    }
     public void cargarCliente(BL_Cliente cliente) {
         clienteAMostrar = cliente;
         tf_nombre.setText(clienteAMostrar.getNombre());
