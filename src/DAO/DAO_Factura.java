@@ -28,19 +28,22 @@ public class DAO_Factura {
     public ResultSet rs;
     
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion, 
-            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura){
+            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura,double subTotal, double impVenta, int contado){
         
          try {
           if(conexion == null || conexion.isClosed()){
            conexion = daoConexion.nuevaConexion();
           }
           
-          cmd = conexion.prepareStatement("insert into Factura (NombreCliente,TelefonoCliente,DireccionCliente,PrecioTotal,Fecha) \n" +
-                "values (?,?,?,?,current_date());");
+          cmd = conexion.prepareStatement("INSERT INTO Factura (NombreCliente, TelefonoCliente, DireccionCliente, "
+                  + "Fecha, SubTotal, ImpVenta, PrecioTotal, Contado) VALUES (?, ?, ?, curdate(), ?, ?, ?, ?);");
           cmd.setString(1, nombreCliente);
           cmd.setString(2, telefono);
           cmd.setString(3, direccion);
-          cmd.setDouble(4, precioTotal);
+          cmd.setDouble(4, subTotal);
+          cmd.setDouble(5, impVenta);
+          cmd.setDouble(6, precioTotal);
+          cmd.setInt(7, contado);
           cmd.execute();
           
           int idFactura = ultimoIdFactura();

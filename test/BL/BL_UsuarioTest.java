@@ -92,8 +92,9 @@ public class BL_UsuarioTest {
         System.out.println("eliminarUsuario");
         int id = 11;
         BL_Usuario instance = new BL_Usuario();
+        instance.setIdUsuario(id);
         boolean expResult = true;
-        boolean result = instance.eliminarUsuario(id);
+        boolean result = instance.eliminarUsuario();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         if(expResult != result){
