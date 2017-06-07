@@ -127,6 +127,12 @@ public class UI_Usuario extends javax.swing.JDialog {
         if (nombreUsuario.isEmpty() || contrasena.isEmpty() || confirmar.isEmpty() || tipoUsuario.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            if(!contrasena.equals(confirmar)){
+                JOptionPane.showMessageDialog(null, "Los campos Contraseña y Confirmar contraseña deben ser iguales", "Contraseña no coincide", JOptionPane.INFORMATION_MESSAGE);
+                pf_contrasena.setText("");
+                pf_confirmar.setText("");
+                pf_contrasena.requestFocusInWindow();
+            } else {
                 BL_Usuario blu = new BL_Usuario();
                 if (bt_ingresarUsuario.getText().equals("Ingresar Usuario")) {// ingresar aro nuevo
                     consultaExitosa = blu.guardarUsuario(nombreUsuario, contrasena, tipoUsuario);
@@ -158,7 +164,7 @@ public class UI_Usuario extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(null, "Error al ingresar el Usuario, si el error persiste, contacte al adminstrador del sistema", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-           
+            }
         }
     }//GEN-LAST:event_bt_ingresarUsuarioActionPerformed
 
@@ -174,7 +180,7 @@ public class UI_Usuario extends javax.swing.JDialog {
         tf_nombre.setText(usuarioCargar.getNombreUsuario());
         pf_contrasena.setText(usuarioCargar.getContrasena());
         pf_confirmar.setText(usuarioCargar.getContrasena());
-        if(usuarioCargar.getTipoUsuario().equalsIgnoreCase("admin")){
+        if(usuarioCargar.getTipoUsuario().toLowerCase().contains("admin")){
            cb_tipoUsuario.setSelectedIndex(1);
         }
         bt_ingresarUsuario.setText("Modificar Usuario");
