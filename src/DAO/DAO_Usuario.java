@@ -99,8 +99,11 @@ public class DAO_Usuario {
                 conexion = daoConexion.nuevaConexion();
             }
 
-            cmd = conexion.prepareStatement("Update Usuario set NombreUsuario=?, Contrasena=? ,Tipo=? where idLLanta=?;");
-            cmd.setInt(1, id);
+            cmd = conexion.prepareStatement("Update Usuario set NombreUsuario=?, Contrasena=? ,Tipo=? where idUsuario=?;");
+            cmd.setString(1, nombreUsuario);
+            cmd.setString(2, contrasena);
+            cmd.setString(3, tipoUsuario);
+            cmd.setInt(4, id);
             cmd.execute();
 
             if(cmd.getUpdateCount()>0){

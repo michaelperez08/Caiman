@@ -128,13 +128,13 @@ public class UI_Usuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
                 BL_Usuario blu = new BL_Usuario();
-                if (bt_ingresarUsuario.getText().equals("Ingresar Aro")) {// ingresar aro nuevo
+                if (bt_ingresarUsuario.getText().equals("Ingresar Usuario")) {// ingresar aro nuevo
                     consultaExitosa = blu.guardarUsuario(nombreUsuario, contrasena, tipoUsuario);
                     if (consultaExitosa) {
                         actualizarLista = true;
-                        JOptionPane.showMessageDialog(null, "Aro Añadido", "Aro Ingresado", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Usuario Añadido", "Usuario Ingresado", JOptionPane.INFORMATION_MESSAGE);
                         Object[] opciones = {"Si", "No"};
-                        int n = JOptionPane.showOptionDialog(null, "Desea ingresar otro aro?", "Aro Nuevo",
+                        int n = JOptionPane.showOptionDialog(null, "Desea ingresar otro Usuario?", "Usuario Nuevo",
                             JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
                         if (n == 1) {
                             this.dispose();
@@ -144,7 +144,7 @@ public class UI_Usuario extends javax.swing.JDialog {
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al insertar Aro, si el error persiste, contacte al adminstrador del sistema", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                } else {//modificar Aro
+                } else {//modificar usuario
                     usuarioCargar.setNombreUsuario(nombreUsuario);
                     usuarioCargar.setContrasena(contrasena);
                     usuarioCargar.setTipoUsuario(tipoUsuario);
@@ -177,6 +177,7 @@ public class UI_Usuario extends javax.swing.JDialog {
         if(usuarioCargar.getTipoUsuario().equalsIgnoreCase("admin")){
            cb_tipoUsuario.setSelectedIndex(1);
         }
+        bt_ingresarUsuario.setText("Modificar Usuario");
     }
     
 

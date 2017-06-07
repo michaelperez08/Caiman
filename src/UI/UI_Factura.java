@@ -144,7 +144,7 @@ public class UI_Factura extends javax.swing.JDialog {
         rb_cliente_nuevo.setForeground(new java.awt.Color(204, 204, 204));
         rb_cliente_nuevo.setText("Cliente Nuevo");
         rb_cliente_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
-        jPanel2.add(rb_cliente_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+        jPanel2.add(rb_cliente_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 170, -1));
 
         cb_nombre_cliente.setPreferredSize(new java.awt.Dimension(220, 32));
         cb_nombre_cliente.addActionListener(new java.awt.event.ActionListener() {

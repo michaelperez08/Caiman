@@ -4,7 +4,7 @@ USE `LlantasyReencauchesGriegos`;
 --
 -- Host: localhost    Database: LlantasyReencauchesGriegos
 -- ------------------------------------------------------
--- Server version	5.7.17
+-- Server version	5.7.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +31,7 @@ CREATE TABLE `Aro` (
   `Codigo` varchar(10) DEFAULT NULL,
   `Cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`idAro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `Aro` (
 
 LOCK TABLES `Aro` WRITE;
 /*!40000 ALTER TABLE `Aro` DISABLE KEYS */;
+INSERT INTO `Aro` VALUES (1,'Horizon','15x8','25hY',4),(2,'Horizon','14','LK8',5),(3,'BBS','20','KJB4',6),(4,'BBS','15x8','LK5',4),(5,'Horizon','15','KJ5',6);
 /*!40000 ALTER TABLE `Aro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,10 +81,14 @@ DROP TABLE IF EXISTS `Factura`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Factura` (
   `idFactura` int(11) NOT NULL AUTO_INCREMENT,
-  `NombreCliente` varchar(45) DEFAULT NULL,
+  `NombreCliente` varchar(45) NOT NULL,
   `TelefonoCliente` varchar(35) DEFAULT NULL,
   `DireccionCliente` varchar(100) DEFAULT NULL,
-  `PrecioTotal` double DEFAULT NULL,
+  `Fecha` date NOT NULL,
+  `SubTotal` double NOT NULL,
+  `ImpVenta` double NOT NULL,
+  `PrecioTotal` double NOT NULL,
+  `Contado` tinyint(4) NOT NULL,
   PRIMARY KEY (`idFactura`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -106,11 +111,11 @@ DROP TABLE IF EXISTS `LineaFactura`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `LineaFactura` (
   `idLineaFactura` int(11) NOT NULL AUTO_INCREMENT,
-  `idFactura` int(11) DEFAULT NULL,
-  `Cantidad` int(11) DEFAULT NULL,
-  `Detalle` varchar(45) DEFAULT NULL,
-  `PrecioUnitario` double DEFAULT NULL,
-  `PrecioTotalLinea` double DEFAULT NULL,
+  `idFactura` int(11) NOT NULL,
+  `Cantidad` int(11) NOT NULL,
+  `Detalle` varchar(45) NOT NULL,
+  `PrecioUnitario` double NOT NULL,
+  `PrecioTotalLinea` double NOT NULL,
   PRIMARY KEY (`idLineaFactura`),
   KEY `fk_LineaFactura_1_idx` (`idFactura`),
   CONSTRAINT `fk_LineaFactura_1` FOREIGN KEY (`idFactura`) REFERENCES `Factura` (`idFactura`) ON DELETE CASCADE ON UPDATE NO ACTION
@@ -151,7 +156,7 @@ CREATE TABLE `Llanta` (
 
 LOCK TABLES `Llanta` WRITE;
 /*!40000 ALTER TABLE `Llanta` DISABLE KEYS */;
-INSERT INTO `Llanta` VALUES (1,'205/70/14','Aeulos','hn08','3',10,'Normal'),(2,'175/60/13','Firestone','NO34','3',23,'Normal'),(3,'11-24.5','Ovation','VI 312','16',10,'Normal');
+INSERT INTO `Llanta` VALUES (1,'205/70/14','Aeulos','hn08','3',10,'Normal'),(3,'11-24.5','Ovation','VI 312','16',10,'Normal');
 /*!40000 ALTER TABLE `Llanta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,9 +170,10 @@ DROP TABLE IF EXISTS `Usuario`;
 CREATE TABLE `Usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `NombreUsuario` varchar(15) NOT NULL,
-  `Contrasena` varchar(20) DEFAULT NULL,
+  `Contrasena` varchar(20) NOT NULL,
+  `Tipo` varchar(15) NOT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +182,7 @@ CREATE TABLE `Usuario` (
 
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` VALUES (1,'admin','admin');
+INSERT INTO `Usuario` VALUES (1,'admin','admin','Estandar'),(2,'michael','mike9538','Administrador');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -189,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-08 15:02:42
+-- Dump completed on 2017-06-07 10:16:55

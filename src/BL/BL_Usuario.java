@@ -92,9 +92,9 @@ public class BL_Usuario {
         return daou.guardarUsuario(nombre, contrasena, tipo);
     }
  
-    public boolean eliminarUsuario(int id) {
+    public boolean eliminarUsuario() {
         DAO_Usuario daou = new DAO_Usuario();
-        return daou.eliminarUsuario(id);
+        return daou.eliminarUsuario(this.idUsuario);
     }
     
     public boolean modificarUsuario(int id, String nombre, String contrasena, String tipo) {
@@ -107,8 +107,8 @@ public class BL_Usuario {
         ArrayList<TO_Usuario> listaTou = daou.cargarUsuarios();
         ArrayList<BL_Usuario> listaBlu = new ArrayList<>();
  
-        for (TO_Usuario listaTou1 : listaTou) {
-            listaBlu.add(new BL_Usuario(listaTou1.getIdUsuario(), listaTou1.getNombreUsuario()));
+        for (TO_Usuario temp_tou : listaTou) {
+            listaBlu.add(new BL_Usuario(temp_tou.getIdUsuario(), temp_tou.getNombreUsuario(), temp_tou.getContrasena(), temp_tou.getTipoUsuario()));
         }
         return listaBlu;
     }

@@ -249,7 +249,7 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jt_clientes);
 
-        jp_clientes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
+        jp_clientes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 620));
 
         panel_tabs.addTab("Clientes", jp_clientes);
 
@@ -281,7 +281,7 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jt_llantas);
 
-        jp_llantas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
+        jp_llantas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 600));
 
         tf_buscarLlantas.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_buscarLlantas.setPreferredSize(new java.awt.Dimension(813, 34));
@@ -380,7 +380,7 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jt_aros);
 
-        jp_aros.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
+        jp_aros.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 600));
 
         tf_buscarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_buscarAro.setPreferredSize(new java.awt.Dimension(813, 34));
@@ -502,7 +502,7 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jt_aros1);
 
-        jp_facturacion.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 640));
+        jp_facturacion.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 620));
 
         tf_buscarAro1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         tf_buscarAro1.setPreferredSize(new java.awt.Dimension(813, 34));
@@ -660,7 +660,10 @@ public final class Principal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -737,6 +740,9 @@ public final class Principal extends javax.swing.JFrame {
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
         // TODO add your handling code here:
         int tabseleccionado = panel_tabs.getSelectedIndex();
+        if(tabseleccionado==1){
+            tabseleccionado = tb_productos.getSelectedIndex()+1;
+        }
         switch(tabseleccionado){
             case 0:
                 eliminarCliente();
@@ -748,7 +754,7 @@ public final class Principal extends javax.swing.JFrame {
                 eliminarAro();
                 break;
             case 3:
-                
+                eliminarUsuario();
                 break;
         }
     }//GEN-LAST:event_jmi_eliminarActionPerformed
@@ -869,23 +875,29 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_buscarCliente1KeyReleased
 
     private void bt_modificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarUsuarioActionPerformed
-        // TODO add your handling code here:
+        verUsuario();
     }//GEN-LAST:event_bt_modificarUsuarioActionPerformed
 
     private void jt_usuariosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_usuariosMouseReleased
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            verUsuario();
+        }
     }//GEN-LAST:event_jt_usuariosMouseReleased
 
     private void bt_eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarUsuarioActionPerformed
-        // TODO add your handling code here:
+        eliminarUsuario();
     }//GEN-LAST:event_bt_eliminarUsuarioActionPerformed
 
     private void bt_verUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verUsuarioActionPerformed
-        // TODO add your handling code here:
+        verUsuario();
     }//GEN-LAST:event_bt_verUsuarioActionPerformed
 
     private void bt_agregarUsuairoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarUsuairoActionPerformed
-        // TODO add your handling code here:
+        UI_Usuario iuu = new UI_Usuario(this, rootPaneCheckingEnabled);
+        iuu.setVisible(true);
+        if (iuu.actualizarLista) {
+            cargarUsuarios();
+        }
     }//GEN-LAST:event_bt_agregarUsuairoActionPerformed
 
     private void mi_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_cerrar_sesionActionPerformed
@@ -897,7 +909,10 @@ public final class Principal extends javax.swing.JFrame {
 
     
     public void menuitem_ver(){
-        int tabseleccionado = panel_tabs.getSelectedIndex();
+       int tabseleccionado = panel_tabs.getSelectedIndex();
+        if(tabseleccionado==1){
+            tabseleccionado = tb_productos.getSelectedIndex()+1;
+        }
         switch(tabseleccionado){
             case 0:
                 verCliente();
@@ -909,7 +924,7 @@ public final class Principal extends javax.swing.JFrame {
                 verAro();
                 break;
             case 3:
-                
+                verUsuario();
                 break;
         }
     }
@@ -1028,7 +1043,7 @@ public final class Principal extends javax.swing.JFrame {
     public void cargarUsuarios() {
         usuario = new BL_Usuario();
         listaUsuarios = usuario.cargarUsuarios();
-        String[] nombreColumnas = {"id", "Nombre"};
+        String[] nombreColumnas = {"id", "Nombre", "Tipo"};
         dtmUsuarios = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -1037,7 +1052,7 @@ public final class Principal extends javax.swing.JFrame {
         };
         if (!listaUsuarios.isEmpty()) {
             for (BL_Usuario usuario_temp : listaUsuarios) {
-                dtmUsuarios.addRow(new Object[]{dtmAros.getRowCount(), usuario_temp.getNombreUsuario()});
+                dtmUsuarios.addRow(new Object[]{dtmUsuarios.getRowCount(), usuario_temp.getNombreUsuario(), usuario_temp.getTipoUsuario()});
             }
         }
         jt_usuarios.setModel(dtmUsuarios);
@@ -1095,7 +1110,7 @@ public final class Principal extends javax.swing.JFrame {
         BL_Usuario usuarioVer;
         if (validarSeleccion('u')) {
             UI_Usuario uiu = new UI_Usuario(this, rootPaneCheckingEnabled);
-            int fila = jt_aros.getSelectedRow();
+            int fila = jt_usuarios.getSelectedRow();
             int numeroFila = Integer.parseInt("" + jt_usuarios.getValueAt(fila, 0));
             usuarioVer = listaUsuarios.get(numeroFila);
             uiu.cargarUsuarioEditar(usuarioVer);
@@ -1129,6 +1144,10 @@ public final class Principal extends javax.swing.JFrame {
             case 'a':
                 temp = jt_aros;
                 mensaje = "ningun aro";
+                break;
+            case 'u':
+                temp = jt_usuarios;
+                mensaje = "ningun usuario";
                 break;
         }
         filaSeleccionada = temp.getSelectedRow();
@@ -1191,6 +1210,24 @@ public final class Principal extends javax.swing.JFrame {
                     cargarAros();
                 } else {
                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el aro", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                 }
+            }
+        }
+    }
+    
+    private void eliminarUsuario() {
+        BL_Usuario blusuairo;
+        if (validarSeleccion('u')){
+            int fila = jt_usuarios.getSelectedRow();
+            int numeroFila = Integer.parseInt("" + jt_usuarios.getValueAt(fila, 0));
+            blusuairo = listaUsuarios.get(numeroFila);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el usuario " + blusuairo.getNombreUsuario()+ "?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if(confirmacion == JOptionPane.YES_OPTION){
+                if(blusuairo.eliminarUsuario()){
+                   JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarAros();
+                } else {
+                   JOptionPane.showMessageDialog(null, "Fallo al eliminar el Usuairo", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                  }
             }
         }

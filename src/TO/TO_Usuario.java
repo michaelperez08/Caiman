@@ -62,4 +62,14 @@ public class TO_Usuario {
     public void setContrasena(String Contrasena) {
         this.Contrasena = Contrasena;
     }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+    
+    
 }
