@@ -60,6 +60,7 @@ public final class Principal extends javax.swing.JFrame {
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jt_usuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         resaltado=0;
     }
 
