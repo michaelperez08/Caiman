@@ -48,7 +48,7 @@ public class DAO_Factura {
           DAO_LineaFactura daoLineaFactura = new DAO_LineaFactura();
              for (TO_LineaFactura tO_LineaFactura : listaLineaFactura) {
                 if(!daoLineaFactura.ingresarLineaFactura(idFactura, tO_LineaFactura.getCantidad(), 
-                         tO_LineaFactura.getDetalle(), tO_LineaFactura.getPrecioUnitario(), tO_LineaFactura.getPrecioTotalLinea())){
+                         tO_LineaFactura.getDetalle(), tO_LineaFactura.getPrecioUnitario(), tO_LineaFactura.getPrecioTotalLinea())|idFactura==0){
                     eliminarFactura(idFactura);
                     return false;
                 }
@@ -85,7 +85,7 @@ public class DAO_Factura {
          } catch (SQLException ex) {
           Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
           HE.Exepciones.RegistrarError(ex);
-          return -1;
+          return 0;
       }finally{
           try {    
               conexion.close();
