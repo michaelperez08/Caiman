@@ -44,6 +44,7 @@ public class DAO_Factura {
           cmd.execute();
           
           int idFactura = ultimoIdFactura();
+          
           DAO_LineaFactura daoLineaFactura = new DAO_LineaFactura();
              for (TO_LineaFactura tO_LineaFactura : listaLineaFactura) {
                 if(!daoLineaFactura.ingresarLineaFactura(idFactura, tO_LineaFactura.getCantidad(), 
@@ -78,12 +79,13 @@ public class DAO_Factura {
           cmd = conexion.prepareStatement("select max(idFactura) from Factura;");
           rs = cmd.executeQuery();
           while(rs.next()){
-              idFactura = rs.getInt("idFactura");
+              idFactura = rs.getInt("max(idFactura)");
           }
           
          } catch (SQLException ex) {
           Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
           HE.Exepciones.RegistrarError(ex);
+          return -1;
       }finally{
           try {    
               conexion.close();
