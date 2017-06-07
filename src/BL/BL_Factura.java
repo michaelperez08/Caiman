@@ -5,6 +5,8 @@
  */
 package BL;
 
+import DAO.DAO_Factura;
+import TO.TO_LineaFactura;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -92,7 +94,16 @@ ArrayList<BL_LineaFactura> ListaLineaFactura = new ArrayList();
         this.Fecha = fecha;
     }
 
-  
+  public boolean ingresarFactura(String nombreCliente, String telefono, String direccion, 
+            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas){
+      DAO_Factura daoFactura = new DAO_Factura();
+      ArrayList<TO_LineaFactura> toListaLineas = new ArrayList<>();
+      for (BL_LineaFactura blListaLinea : blListaLineas) {
+          toListaLineas.add(new TO_LineaFactura(blListaLinea.getCantidad(), blListaLinea.getDetalle(), 
+                  blListaLinea.getPrecioUnitario(), blListaLinea.getPrecioTotalLinea()));
+      }
+      return daoFactura.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, toListaLineas);
+  }
 
 
 

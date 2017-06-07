@@ -41,6 +41,15 @@ public class BL_LineaFactura {
         this.precioTotalLinea = precioTotalLinea;
     }
 
+    public BL_LineaFactura(int cantidad, String detalle, double precioUnitario, double precioTotalLinea) {
+        this.cantidad = cantidad;
+        this.detalle = detalle;
+        this.precioUnitario = precioUnitario;
+        this.precioTotalLinea = precioTotalLinea;
+    }
+
+    
+    
     public BL_LineaFactura() {
     }
     
