@@ -53,13 +53,17 @@ public class BL_FacturaTest {
         String telefono = "90909090";
         String direccion = "konoha";
         double precioTotal = 77777.0;
+        double subtotal = 9999;
+        double impuesto = 6666;
+        int contado  = 0;
         ArrayList<BL_LineaFactura> blListaLineas = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
            blListaLineas.add(new BL_LineaFactura(i, "detalle#"+i, i*100, i*1000));
         }
         BL_Factura instance = new BL_Factura();
         boolean expResult = true;
-        boolean result = instance.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, blListaLineas);
+        boolean result = instance.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, blListaLineas, 
+                subtotal, impuesto, contado);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         if(expResult != result){

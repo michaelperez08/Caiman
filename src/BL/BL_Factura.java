@@ -95,14 +95,14 @@ ArrayList<BL_LineaFactura> ListaLineaFactura = new ArrayList();
     }
 
   public boolean ingresarFactura(String nombreCliente, String telefono, String direccion, 
-            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas){
+            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, int contado){
       DAO_Factura daoFactura = new DAO_Factura();
       ArrayList<TO_LineaFactura> toListaLineas = new ArrayList<>();
       for (BL_LineaFactura blListaLinea : blListaLineas) {
           toListaLineas.add(new TO_LineaFactura(blListaLinea.getCantidad(), blListaLinea.getDetalle(), 
                   blListaLinea.getPrecioUnitario(), blListaLinea.getPrecioTotalLinea()));
       }
-      return daoFactura.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, toListaLineas);
+      return daoFactura.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, toListaLineas, subTotal, impVenta, contado);
   }
 
 
