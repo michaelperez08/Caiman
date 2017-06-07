@@ -60,6 +60,8 @@ public final class Principal extends javax.swing.JFrame {
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jt_usuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jt_aros1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         resaltado=0;
     }
 
@@ -1222,7 +1224,7 @@ public final class Principal extends javax.swing.JFrame {
             if(confirmacion == JOptionPane.YES_OPTION){
                 if(blusuairo.eliminarUsuario()){
                    JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                    cargarAros();
+                    cargarUsuarios();
                 } else {
                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el Usuairo", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                  }
