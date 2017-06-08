@@ -347,6 +347,9 @@
               <Dimension value="[259, 31]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_telefonoKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

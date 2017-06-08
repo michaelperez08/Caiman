@@ -167,6 +167,11 @@ public class UI_Cliente extends javax.swing.JDialog {
             ex.printStackTrace();
         }
         tf_telefono.setPreferredSize(new java.awt.Dimension(259, 31));
+        tf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_telefonoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -267,12 +272,12 @@ public class UI_Cliente extends javax.swing.JDialog {
                     dlm_telfonos.addElement(telefono);
                     jl_telefonos.setModel(dlm_telfonos);
                     tf_telefono.setText("506");
-                    maximoTelefonos();
                 } else {
                     JOptionPane.showMessageDialog(null, "No hay telefono que agregar", "Telefonos", JOptionPane.INFORMATION_MESSAGE);
                 }
 
             }
+            maximoTelefonos();
     }//GEN-LAST:event_bt_agregarTelefonoActionPerformed
 
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
@@ -344,6 +349,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         if (clienteAMostrar != null) {
             bt_agregarTelefono.setText("Modificar Teléfono");
             tf_telefono.setText(jl_telefonos.getSelectedValue() + "");
+            activ_desa_NuevoTelefono(true);
         }
     }//GEN-LAST:event_jl_telefonosMouseReleased
 
@@ -365,18 +371,29 @@ public class UI_Cliente extends javax.swing.JDialog {
         Validacion.validarLongitud(ta_direccionexacta, evt, 150);
     }//GEN-LAST:event_ta_direccionexactaKeyTyped
 
+    private void tf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyTyped
+        System.out.println(tf_telefono.getText().substring(7,11));
+        if(!telefonoVacio(tf_telefono.getText().substring(7,11))){
+            bt_agregarTelefono.setText("Agregar Teléfono");
+        }
+        if(!telefonoVacio(tf_telefono.getText().substring(2, 5))){
+            tf_telefono.setText("506");
+            maximoTelefonos();
+        }
+    }//GEN-LAST:event_tf_telefonoKeyTyped
+
     
     public String concatenarTelefonos() {
         String telefonos = "";
         for (int i = 0; i < dlm_telfonos.getSize(); i++) {
-            telefonos += dlm_telfonos.getElementAt(i) + " ";
+            telefonos += dlm_telfonos.getElementAt(i) + " / ";
         }
         return telefonos;
     }
 
     public DefaultListModel separarTelefonos(String telefonos) {
         DefaultListModel dlm_temp = new DefaultListModel();
-        String[] partTele = telefonos.split(" ");
+        String[] partTele = telefonos.split(" / ");
         for (String telefono : partTele) {
             dlm_temp.addElement(telefono);
         }
@@ -390,7 +407,7 @@ public class UI_Cliente extends javax.swing.JDialog {
     }
     
     public void activ_desa_NuevoTelefono(boolean b){
-        tf_telefono.setEnabled(b);
+        tf_telefono.setEditable(b);
         bt_agregarTelefono.setEnabled(b);
     }
     public void cargarCliente(BL_Cliente cliente) {
@@ -427,46 +444,14 @@ public class UI_Cliente extends javax.swing.JDialog {
             return false;
         }
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    
+    public boolean telefonoVacio(String numero) {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Double.parseDouble(numero);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                UI_Cliente dialog = new UI_Cliente(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
 
