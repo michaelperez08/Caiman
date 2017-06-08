@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * @author Extreme PC
  */
 public class BL_Llanta extends BL_Producto{
-    private int idLlanta;
     private String NumeroLlanta;
     private String Marca;
     private String Diseno;
@@ -22,8 +21,7 @@ public class BL_Llanta extends BL_Producto{
     private String TipoLlanta;
     
    public BL_Llanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
-       super(Cantidad);
-       this.idLlanta = idLlanta;
+       super(Cantidad, idLlanta);
        this.NumeroLlanta = NumeroLlanta;
        this.Marca = Marca;
        this.Diseno = Diseno;
@@ -42,14 +40,6 @@ public class BL_Llanta extends BL_Producto{
    public BL_Llanta(){
        super();
    }
-   
-   public int getidLlanta() {
-        return idLlanta;
-    }
-
-    public void setidLlanta(int idLlanta) {
-        this.idLlanta = idLlanta;
-    }
     
     public String getNumeroLlanta() {
         return NumeroLlanta;
@@ -103,7 +93,7 @@ public class BL_Llanta extends BL_Producto{
     }
     public boolean eliminarLlanta() {
         DAO_Llanta daoLlanta = new DAO_Llanta();
-        return daoLlanta.eliminarLlanta(idLlanta);
+        return daoLlanta.eliminarLlanta(idProducto);
     }
     
     

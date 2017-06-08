@@ -201,7 +201,7 @@ public class UI_Aro extends javax.swing.JDialog {
                     aroAMostrar.setMarca(marca);
                     aroAMostrar.setCantidad(cantidad2);
                     aroAMostrar.setCodigo(codigo);
-                    consultaExitosa = aroAMostrar.modificarAro(aroAMostrar.getidAro(), aroAMostrar.getNumeroAro(),
+                    consultaExitosa = aroAMostrar.modificarAro(aroAMostrar.getIdProducto(), aroAMostrar.getNumeroAro(),
                             aroAMostrar.getMarca(), aroAMostrar.getCantidad(), aroAMostrar.getCodigo());
                     if (consultaExitosa) {
                         actualizarLista=true;
@@ -218,21 +218,21 @@ public class UI_Aro extends javax.swing.JDialog {
     }//GEN-LAST:event_bt_ingresarAroActionPerformed
 
     private void tf_numeroAroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numeroAroKeyTyped
-        Validacion.validarLongitud(tf_numeroAro.getText(), evt, 25);
+        Validacion.validarLongitud(tf_numeroAro, evt, 25);
     }//GEN-LAST:event_tf_numeroAroKeyTyped
 
     private void tf_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cantidadKeyTyped
         if(Validacion.soloNumeros(evt)){
-            Validacion.validarLongitud(tf_cantidad.getText(), evt, 9);
+            Validacion.validarLongitud(tf_cantidad, evt, 9);
         }
     }//GEN-LAST:event_tf_cantidadKeyTyped
 
     private void tf_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_codigoKeyTyped
-        Validacion.validarLongitud(tf_codigo.getText(), evt, 10);
+        Validacion.validarLongitud(tf_codigo, evt, 10);
     }//GEN-LAST:event_tf_codigoKeyTyped
 
     private void tf_marcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_marcaKeyTyped
-        Validacion.validarLongitud(tf_marca.getText(), evt, 25);
+        Validacion.validarLongitud(tf_marca, evt, 25);
     }//GEN-LAST:event_tf_marcaKeyTyped
 
     public boolean esNumero(String numero, String campo) {

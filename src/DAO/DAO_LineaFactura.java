@@ -101,7 +101,7 @@ public class DAO_LineaFactura {
             cmd = conexion.prepareStatement("select * from LineaFactura");
             rs = cmd.executeQuery();
             while (rs.next()) {
-                lineas.add(new TO_LineaFactura(rs.getInt("idFactura"), rs.getInt("Cantidad"),
+                lineas.add(new TO_LineaFactura(rs.getInt("idFactura"), rs.getInt("idProducto"), rs.getInt("Cantidad"),
                         rs.getString("Detalle"), rs.getDouble("PrecioUnitario"), rs.getDouble("PrecioTotalLinea")));
             }
 

@@ -29,7 +29,8 @@ public class UI_Cliente extends javax.swing.JDialog {
         actualizarLista = false;
         this.setLocationRelativeTo(null);
         dlm_telfonos = new DefaultListModel();
-        jta_direccionexacta.setLineWrap(true);
+        ta_direccionexacta.setLineWrap(true);
+        tf_telefono.setText("506");
     }
 
     /**
@@ -49,7 +50,6 @@ public class UI_Cliente extends javax.swing.JDialog {
         bl_direccion = new javax.swing.JLabel();
         tf_direccion = new javax.swing.JTextField();
         lb_telefono = new javax.swing.JLabel();
-        tf_telefono = new javax.swing.JTextField();
         bt_ingresarCliente = new javax.swing.JButton();
         bt_agregarTelefono = new javax.swing.JButton();
         jl_nombre1 = new javax.swing.JLabel();
@@ -58,7 +58,8 @@ public class UI_Cliente extends javax.swing.JDialog {
         jl_telefonos = new javax.swing.JList();
         lb_telefono1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jta_direccionexacta = new javax.swing.JTextArea();
+        ta_direccionexacta = new javax.swing.JTextArea();
+        tf_telefono = new javax.swing.JFormattedTextField();
 
         jmi_eliminar.setText("Eliminar");
         jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,18 +103,6 @@ public class UI_Cliente extends javax.swing.JDialog {
         lb_telefono.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         lb_telefono.setForeground(new java.awt.Color(204, 204, 204));
         lb_telefono.setText("Teléfono");
-
-        tf_telefono.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        tf_telefono.setForeground(new java.awt.Color(51, 51, 51));
-        tf_telefono.setPreferredSize(new java.awt.Dimension(259, 31));
-        tf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_telefonoKeyTyped(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_telefonoKeyReleased(evt);
-            }
-        });
 
         bt_ingresarCliente.setBackground(new java.awt.Color(51, 51, 51));
         bt_ingresarCliente.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
@@ -162,15 +151,27 @@ public class UI_Cliente extends javax.swing.JDialog {
         lb_telefono1.setForeground(new java.awt.Color(204, 204, 204));
         lb_telefono1.setText("Direccion Exacta");
 
-        jta_direccionexacta.setColumns(20);
-        jta_direccionexacta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jta_direccionexacta.setRows(5);
-        jta_direccionexacta.addKeyListener(new java.awt.event.KeyAdapter() {
+        ta_direccionexacta.setColumns(20);
+        ta_direccionexacta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        ta_direccionexacta.setRows(5);
+        ta_direccionexacta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jta_direccionexactaKeyTyped(evt);
+                ta_direccionexactaKeyTyped(evt);
             }
         });
-        jScrollPane2.setViewportView(jta_direccionexacta);
+        jScrollPane2.setViewportView(ta_direccionexacta);
+
+        try {
+            tf_telefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(+###) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tf_telefono.setPreferredSize(new java.awt.Dimension(259, 31));
+        tf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_telefonoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,10 +196,11 @@ public class UI_Cliente extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lb_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bt_agregarTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(bt_agregarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(tf_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(bt_ingresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -233,8 +235,8 @@ public class UI_Cliente extends javax.swing.JDialog {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(tf_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
                 .addComponent(bt_agregarTelefono)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +261,6 @@ public class UI_Cliente extends javax.swing.JDialog {
 
     private void bt_agregarTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarTelefonoActionPerformed
         String telefono = tf_telefono.getText().trim();
-        if (esNumero(telefono)) {
             if (bt_agregarTelefono.getText().equals("Modificar Teléfono")) {
                 int telefonoSeleccionado = jl_telefonos.getSelectedIndex();
                 dlm_telfonos.setElementAt(telefono, telefonoSeleccionado);
@@ -267,19 +268,16 @@ public class UI_Cliente extends javax.swing.JDialog {
                 tf_telefono.setText("");
                 bt_agregarTelefono.setText("Agregar Teléfono");
             } else {
-                Double.parseDouble(telefono.trim());
                 if (!telefono.isEmpty()) {
                     dlm_telfonos.addElement(telefono);
                     jl_telefonos.setModel(dlm_telfonos);
-                    tf_telefono.setText("");
+                    tf_telefono.setText("506");
                 } else {
                     JOptionPane.showMessageDialog(null, "No hay telefono que agregar", "Telefonos", JOptionPane.INFORMATION_MESSAGE);
                 }
 
             }
-        } else {
-            tf_telefono.setText("");
-        }
+            maximoTelefonos();
     }//GEN-LAST:event_bt_agregarTelefonoActionPerformed
 
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
@@ -289,6 +287,7 @@ public class UI_Cliente extends javax.swing.JDialog {
             dlm_telfonos.remove(tel_seleccionado);
             jl_telefonos.setModel(dlm_telfonos);
             tf_telefono.setText("");
+            activ_desa_NuevoTelefono(true);
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado un teléfono", "Telefono", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -298,7 +297,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         String nombre = tf_nombre.getText().trim();
         String cedula = tf_cedula.getText().trim();
         String direccion_simple = tf_direccion.getText().trim();
-        String direccion_exacta = jta_direccionexacta.getText().trim();
+        String direccion_exacta = ta_direccionexacta.getText().trim();
         String telefonos = concatenarTelefonos();
         boolean consultaExitosa;
 
@@ -350,37 +349,36 @@ public class UI_Cliente extends javax.swing.JDialog {
         if (clienteAMostrar != null) {
             bt_agregarTelefono.setText("Modificar Teléfono");
             tf_telefono.setText(jl_telefonos.getSelectedValue() + "");
+            activ_desa_NuevoTelefono(true);
         }
     }//GEN-LAST:event_jl_telefonosMouseReleased
 
-    private void tf_telefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyReleased
-        // TODO add your handling code here:
-        if (tf_telefono.getText().trim().equals("")) {
-            bt_agregarTelefono.setText("Agregar Teléfono");
-        }
-    }//GEN-LAST:event_tf_telefonoKeyReleased
-
     private void tf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_nombreKeyTyped
-        Validacion.validarLongitud(tf_nombre.getText(), evt, 45);
+        Validacion.validarLongitud(tf_nombre, evt, 45);
     }//GEN-LAST:event_tf_nombreKeyTyped
 
     private void tf_cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cedulaKeyTyped
         if(Validacion.soloNumeros(evt)){
-            Validacion.validarLongitud(tf_cedula.getText(), evt, 25);
+            Validacion.validarLongitud(tf_cedula, evt, 25);
         }
     }//GEN-LAST:event_tf_cedulaKeyTyped
 
     private void tf_direccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_direccionKeyTyped
-        Validacion.validarLongitud(tf_direccion.getText(), evt, 100);
+        Validacion.validarLongitud(tf_direccion, evt, 100);
     }//GEN-LAST:event_tf_direccionKeyTyped
 
-    private void jta_direccionexactaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jta_direccionexactaKeyTyped
-        Validacion.validarLongitud(jta_direccionexacta.getText(), evt, 150);
-    }//GEN-LAST:event_jta_direccionexactaKeyTyped
+    private void ta_direccionexactaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ta_direccionexactaKeyTyped
+        Validacion.validarLongitud(ta_direccionexacta, evt, 150);
+    }//GEN-LAST:event_ta_direccionexactaKeyTyped
 
     private void tf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyTyped
-        if (Validacion.soloNumeros(evt)) {
-            Validacion.validarLongitud(tf_telefono.getText(), evt, 10);
+        System.out.println(tf_telefono.getText().substring(7,11));
+        if(!telefonoVacio(tf_telefono.getText().substring(7,11))){
+            bt_agregarTelefono.setText("Agregar Teléfono");
+        }
+        if(!telefonoVacio(tf_telefono.getText().substring(2, 5))){
+            tf_telefono.setText("506");
+            maximoTelefonos();
         }
     }//GEN-LAST:event_tf_telefonoKeyTyped
 
@@ -388,25 +386,35 @@ public class UI_Cliente extends javax.swing.JDialog {
     public String concatenarTelefonos() {
         String telefonos = "";
         for (int i = 0; i < dlm_telfonos.getSize(); i++) {
-            telefonos += dlm_telfonos.getElementAt(i) + " ";
+            telefonos += dlm_telfonos.getElementAt(i) + " / ";
         }
         return telefonos;
     }
 
     public DefaultListModel separarTelefonos(String telefonos) {
         DefaultListModel dlm_temp = new DefaultListModel();
-        String[] partTele = telefonos.split(" ");
+        String[] partTele = telefonos.split(" / ");
         for (String telefono : partTele) {
             dlm_temp.addElement(telefono);
         }
         return dlm_temp;
     }
-
+    
+    public void maximoTelefonos(){
+         if(jl_telefonos.getModel().getSize()==3){
+             activ_desa_NuevoTelefono(false);
+         }
+    }
+    
+    public void activ_desa_NuevoTelefono(boolean b){
+        tf_telefono.setEditable(b);
+        bt_agregarTelefono.setEnabled(b);
+    }
     public void cargarCliente(BL_Cliente cliente) {
         clienteAMostrar = cliente;
         tf_nombre.setText(clienteAMostrar.getNombre());
         tf_direccion.setText(clienteAMostrar.getDireccion_simple());
-        jta_direccionexacta.setText(clienteAMostrar.getDireccion_exacta());
+        ta_direccionexacta.setText(clienteAMostrar.getDireccion_exacta());
         tf_cedula.setText(clienteAMostrar.getCedula());
         dlm_telfonos = separarTelefonos(clienteAMostrar.getTelefonos());
         jl_telefonos.setModel(dlm_telfonos);
@@ -420,7 +428,10 @@ public class UI_Cliente extends javax.swing.JDialog {
         tf_cedula.setText("");
         tf_direccion.setText("");
         tf_nombre.setText("");
-        tf_telefono.setText("");
+        ta_direccionexacta.setText("");
+        tf_telefono.setText("506");
+        tf_telefono.setEnabled(true);
+        bt_agregarTelefono.setEnabled(true);
         dlm_telfonos.clear();
     }
 
@@ -433,46 +444,14 @@ public class UI_Cliente extends javax.swing.JDialog {
             return false;
         }
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    
+    public boolean telefonoVacio(String numero) {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Double.parseDouble(numero);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                UI_Cliente dialog = new UI_Cliente(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
 
@@ -487,13 +466,13 @@ public class UI_Cliente extends javax.swing.JDialog {
     private javax.swing.JLabel jl_nombre1;
     private javax.swing.JList jl_telefonos;
     private javax.swing.JMenuItem jmi_eliminar;
-    private javax.swing.JTextArea jta_direccionexacta;
     private javax.swing.JLabel lb_telefono;
     private javax.swing.JLabel lb_telefono1;
     private javax.swing.JPopupMenu pum_telefonos;
+    private javax.swing.JTextArea ta_direccionexacta;
     private javax.swing.JTextField tf_cedula;
     private javax.swing.JTextField tf_direccion;
     private javax.swing.JTextField tf_nombre;
-    private javax.swing.JTextField tf_telefono;
+    private javax.swing.JFormattedTextField tf_telefono;
     // End of variables declaration//GEN-END:variables
 }

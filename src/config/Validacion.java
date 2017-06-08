@@ -5,13 +5,20 @@
  */
 package config;
 
+import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
+
 /**
  *
  * @author michael
  */
 public class Validacion {
     
-    public static void validarLongitud(String texto, java.awt.event.KeyEvent evt, int maximo){
+    public static void validarLongitud(JTextComponent campo, java.awt.event.KeyEvent evt, int maximo){
+        String texto = campo.getText();
+        if(texto.length() > maximo){
+            campo.setText(texto.substring(0,maximo-1));
+        }
         if (texto.length()>=maximo) {
             evt.consume();
         }
