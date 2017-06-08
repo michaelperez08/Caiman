@@ -170,7 +170,7 @@ public class DAO_LineaFactura {
            cmd.setInt(1, id);
             rs = cmd.executeQuery();
             while (rs.next()) {
-                lineas.add(new TO_LineaFactura(rs.getInt("idFactura"), rs.getInt("Cantidad"),
+                lineas.add(new TO_LineaFactura(rs.getInt("idFactura"),0, rs.getInt("Cantidad"),
                         rs.getString("Detalle"), rs.getDouble("PrecioUnitario"), rs.getDouble("PrecioTotalLinea")));
             }
 

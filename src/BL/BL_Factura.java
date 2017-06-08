@@ -158,7 +158,7 @@ public class BL_Factura {
                     facturaTemp.PrecioTotal, facturaTemp.Fecha, facturaTemp.Subtotal, facturaTemp.ImpVenta, facturaTemp.Contado, listaBl_LineaFactura));
             listaBlFactura.get(listaBlFactura.size()-1).ListaLineaFactura = new ArrayList<BL_LineaFactura>();
             for (TO_LineaFactura toTempLineaFactura : facturaTemp.ListaLineaFactura) {    
-                listaBlFactura.get(listaBlFactura.size()-1).ListaLineaFactura.add(new BL_LineaFactura(toTempLineaFactura.getIdFactura(), 
+                listaBlFactura.get(listaBlFactura.size()-1).ListaLineaFactura.add(new BL_LineaFactura(toTempLineaFactura.getIdFactura(),0, 
                         toTempLineaFactura.getCantidad(), toTempLineaFactura.getDetalle(), toTempLineaFactura.getPrecioUnitario(), toTempLineaFactura.getPrecioTotalLinea()));
             }
         }
