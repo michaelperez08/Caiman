@@ -12,7 +12,13 @@ package BL;
 public abstract class BL_Producto {
     
     protected int cantidad;
+    protected int idProducto;
 
+    public BL_Producto(int cantidad, int idProducto) {
+        this.cantidad = cantidad;
+        this.idProducto = cantidad;
+    }
+    
     public BL_Producto(int cantidad) {
         this.cantidad = cantidad;
     }
@@ -27,5 +33,15 @@ public abstract class BL_Producto {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+    
+    
     
 }

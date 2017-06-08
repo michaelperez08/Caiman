@@ -201,7 +201,7 @@ public class UI_Aro extends javax.swing.JDialog {
                     aroAMostrar.setMarca(marca);
                     aroAMostrar.setCantidad(cantidad2);
                     aroAMostrar.setCodigo(codigo);
-                    consultaExitosa = aroAMostrar.modificarAro(aroAMostrar.getidAro(), aroAMostrar.getNumeroAro(),
+                    consultaExitosa = aroAMostrar.modificarAro(aroAMostrar.getIdProducto(), aroAMostrar.getNumeroAro(),
                             aroAMostrar.getMarca(), aroAMostrar.getCantidad(), aroAMostrar.getCodigo());
                     if (consultaExitosa) {
                         actualizarLista=true;

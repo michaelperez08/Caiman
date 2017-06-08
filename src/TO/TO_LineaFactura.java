@@ -13,23 +13,26 @@ public class TO_LineaFactura {
     
     private int id;
     private int idFactura;
+    private int idProducto;
     private int cantidad;
     private String detalle;
     private double precioUnitario;
     private double precioTotalLinea;
 
     //<editor-fold defaultstate="collapsed" desc="Constructores">
-    public TO_LineaFactura(int id, int idFactura, int cantidad, String detalle, double precioUnitario, double precioTotalLinea) {
+    public TO_LineaFactura(int id, int idFactura, int idProducto, int cantidad, String detalle, double precioUnitario, double precioTotalLinea) {
         this.id = id;
         this.idFactura = idFactura;
+        this.idProducto=idProducto;
         this.cantidad = cantidad;
         this.detalle = detalle;
         this.precioUnitario = precioUnitario;
         this.precioTotalLinea = precioTotalLinea;
     }
 
-    public TO_LineaFactura(int idFactura, int cantidad, String detalle, double precioUnitario, double precioTotalLinea) {
+    public TO_LineaFactura(int idFactura, int idProducto, int cantidad, String detalle, double precioUnitario, double precioTotalLinea) {
         this.idFactura = idFactura;
+        this.idProducto=idProducto;
         this.cantidad = cantidad;
         this.detalle = detalle;
         this.precioUnitario = precioUnitario;
@@ -98,6 +101,16 @@ public class TO_LineaFactura {
     public void setPrecioTotalLinea(double precioTotalLinea) {
         this.precioTotalLinea = precioTotalLinea;
     }
+    
+    
     //</editor-fold>
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
     
 }

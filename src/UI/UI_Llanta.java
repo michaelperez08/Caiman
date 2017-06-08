@@ -247,7 +247,7 @@ public class UI_Llanta extends javax.swing.JDialog {
                     llantaAMostrar.setNumeroCapas(numeroCapas2);
                     llantaAMostrar.setCantidad(cantidad2);
                     llantaAMostrar.setTipoLlanta(tipoLlanta);
-                    consultaExitosa = llantaAMostrar.modificarLlanta(llantaAMostrar.getidLlanta(), llantaAMostrar.getNumeroLlanta(),
+                    consultaExitosa = llantaAMostrar.modificarLlanta(llantaAMostrar.getIdProducto(), llantaAMostrar.getNumeroLlanta(),
                             llantaAMostrar.getMarca(), llantaAMostrar.getDiseno(), llantaAMostrar.getNumeroCapas(),llantaAMostrar.getCantidad(), llantaAMostrar.getTipoLlanta());
                     if (consultaExitosa) {
                         actualizarLista=true;
