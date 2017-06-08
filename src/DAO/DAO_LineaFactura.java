@@ -159,4 +159,35 @@ public class DAO_LineaFactura {
         return false;
     }
     
+        public ArrayList<TO_LineaFactura> cargarLineasFacturaId(int id) {
+        ArrayList<TO_LineaFactura> lineas = new ArrayList<>();
+        try {
+            if (conexion == null || conexion.isClosed()) {
+                conexion = daoConexion.nuevaConexion();
+            }
+
+            cmd = conexion.prepareStatement("select * from LineaFactura where idFactura=?");
+           cmd.setInt(1, id);
+            rs = cmd.executeQuery();
+            while (rs.next()) {
+                lineas.add(new TO_LineaFactura(rs.getInt("idFactura"), rs.getInt("Cantidad"),
+                        rs.getString("Detalle"), rs.getDouble("PrecioUnitario"), rs.getDouble("PrecioTotalLinea")));
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                cmd.close();
+                conexion.close();
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+        }
+        return lineas;
+    }
+
+    
 }

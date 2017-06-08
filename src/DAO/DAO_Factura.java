@@ -6,6 +6,7 @@
 package DAO;
 
 
+import TO.TO_Factura;
 import TO.TO_LineaFactura;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -128,5 +129,37 @@ public class DAO_Factura {
       }
     return false;
     }
+    
+    
+public ArrayList<TO_Factura> cargarFactura(){
+       ArrayList<TO_Factura> lista  = new ArrayList<>();
+      DAO_LineaFactura daoLinea  = new DAO_LineaFactura();
+       try {
+            if (conexion == null || conexion.isClosed()) {
+                conexion = daoConexion.nuevaConexion();
+            }
+            cmd = conexion.prepareStatement("SELECT * FROM Factura ORDER BY Factura.fecha DESC limit 50");
+            rs = cmd.executeQuery();
+            while(rs.next()){
+                lista.add(new TO_Factura(rs.getInt("idFactura"),rs.getString("NombreCliente"),rs.getString("TelefonoCliente"),rs.getString("DireccionCliente"),rs.getDouble("PrecioTotal"), rs.getDate("Fecha"),rs.getDouble("SubTotal"),rs.getDouble("ImpVenta"),rs.getBoolean("Contado"),daoLinea.cargarLineasFacturaId(rs.getInt("idFactura"))));
+            }
+            
+        
+
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                cmd.close();
+                conexion.close();
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_LineaFactura.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+        }
+       return lista;
+    }
+
 
 }

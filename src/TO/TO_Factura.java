@@ -14,31 +14,42 @@ import java.util.Date;
  * @author Extreme PC
  */
 public class TO_Factura {
-private int idFactura;
-private String NombreCliente;
-private String TelefonoCliente;
-private String DireccionCliente;
-private Double PrecioTotal;
-private Date Fecha;
-ArrayList<TO_LineaFactura> ListaLineaFactura = new ArrayList();
+public int idFactura;
+public String NombreCliente;
+public String TelefonoCliente;
+public String DireccionCliente;
+public Double PrecioTotal;
+public Date Fecha;
+public Double Subtotal;
+public Boolean Contado;
+public Double ImpVenta;
+public ArrayList<TO_LineaFactura> ListaLineaFactura = new ArrayList();
 
-    public TO_Factura(int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha, ArrayList<TO_LineaFactura> listaLineaFactura) {
+   public TO_Factura(int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha,Double subtotal,Double impventa,Boolean contado, ArrayList<TO_LineaFactura> listaLineaFactura ) {
         this.idFactura = idFactura;
         this.NombreCliente = NombreCliente;
         this.TelefonoCliente = TelefonoCliente;
         this.DireccionCliente = DireccionCliente;
         this.PrecioTotal = PrecioTotal;
         this.Fecha = fecha;
+        this.Subtotal = subtotal;
+        this.ImpVenta = impventa;
+        this.Contado = contado;
         this.ListaLineaFactura = listaLineaFactura;
+        
     }
-    public TO_Factura( String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha, ArrayList<TO_LineaFactura> listaLineaFactura ) {
+    public TO_Factura( String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha,Double subtotal,Double impventa,Boolean contado, ArrayList<TO_LineaFactura> listaLineaFactura ) {
         
         this.NombreCliente = NombreCliente;
         this.TelefonoCliente = TelefonoCliente;
         this.DireccionCliente = DireccionCliente;
         this.PrecioTotal = PrecioTotal;
         this.Fecha = fecha;
+        this.Subtotal = subtotal;
+        this.ImpVenta = impventa;
+        this.Contado = contado;
         this.ListaLineaFactura = listaLineaFactura;
+        
     }
 
     public TO_Factura() {
@@ -92,4 +103,32 @@ ArrayList<TO_LineaFactura> ListaLineaFactura = new ArrayList();
         this.Fecha = fecha;
     }
     
+    public Double getSubtotal() {
+        return Subtotal;
+    }
+
+    public void setSubtotal(Double Subtotal) {
+        this.Subtotal = Subtotal;
+    }
+
+    public Boolean getContado() {
+        return Contado;
+    }
+
+    public void setContado(Boolean Contado) {
+        this.Contado = Contado;
+    }
+
+    public Double getImpVenta() {
+        return ImpVenta;
+    }
+
+    public void setImpVenta(Double ImpVenta) {
+        this.ImpVenta = ImpVenta;
+    }
+    
+     public ArrayList<TO_LineaFactura> Retornar()
+        {
+            return this.ListaLineaFactura;
+        }
 }
