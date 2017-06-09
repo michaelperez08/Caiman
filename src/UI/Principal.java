@@ -7,6 +7,7 @@ package UI;
 
 import BL.BL_Aro;
 import BL.BL_Cliente;
+import BL.BL_Factura;
 import BL.BL_Llanta;
 import BL.BL_Usuario;
 import java.awt.event.KeyAdapter;
@@ -33,19 +34,23 @@ public final class Principal extends javax.swing.JFrame {
     private BL_Llanta llanta;
     private BL_Aro aro;
     private BL_Usuario usuario;
+    private BL_Factura factura;
     private int filaSeleccionada;
     private ArrayList<BL_Cliente> listaClientes;
     private ArrayList<BL_Llanta> listaLlantas;
     private ArrayList<BL_Aro> listaAros;
     private ArrayList<BL_Usuario> listaUsuarios;
+    private ArrayList<BL_Factura> listaFactura;
     private DefaultTableModel dtmClientes;
     private DefaultTableModel dtmLlantas;
     private DefaultTableModel dtmAros;
     private DefaultTableModel dtmUsuarios;
+    private DefaultTableModel dtmFacturas;
     private TableRowSorter trsfiltroCliente;
     private TableRowSorter trsfiltroLlantas;
     private TableRowSorter trsfiltroAros;
     private TableRowSorter trsfiltroUsuarios;
+    private TableRowSorter trsfiltroFactura;
     int resaltado;
 
     public Principal() {
@@ -57,6 +62,7 @@ public final class Principal extends javax.swing.JFrame {
         cargarLlantas();
         cargarAros();
         cargarUsuarios();
+        cargarFacturas();
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -115,9 +121,9 @@ public final class Principal extends javax.swing.JFrame {
         bt_agregarFactura = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jt_aros1 = new javax.swing.JTable();
-        tf_buscarAro1 = new javax.swing.JTextField();
+        tf_buscarFactura = new javax.swing.JTextField();
         jl_Buscar3 = new javax.swing.JLabel();
-        jcb_filtroBusquedaAro1 = new javax.swing.JComboBox();
+        jcb_filtroBusquedaFactura = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         tf_buscarCliente1 = new javax.swing.JTextField();
         jl_Buscar4 = new javax.swing.JLabel();
@@ -506,14 +512,19 @@ public final class Principal extends javax.swing.JFrame {
 
         jp_facturacion.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 620));
 
-        tf_buscarAro1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        tf_buscarAro1.setPreferredSize(new java.awt.Dimension(813, 34));
-        tf_buscarAro1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_buscarAro1KeyReleased(evt);
+        tf_buscarFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        tf_buscarFactura.setPreferredSize(new java.awt.Dimension(813, 34));
+        tf_buscarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_buscarFacturaActionPerformed(evt);
             }
         });
-        jp_facturacion.add(tf_buscarAro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, -1, -1));
+        tf_buscarFactura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_buscarFacturaKeyReleased(evt);
+            }
+        });
+        jp_facturacion.add(tf_buscarFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, -1, -1));
 
         jl_Buscar3.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
@@ -522,14 +533,14 @@ public final class Principal extends javax.swing.JFrame {
         jl_Buscar3.setText("Buscar");
         jp_facturacion.add(jl_Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 34));
 
-        jcb_filtroBusquedaAro1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jcb_filtroBusquedaAro1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca", "Código" }));
-        jcb_filtroBusquedaAro1.addActionListener(new java.awt.event.ActionListener() {
+        jcb_filtroBusquedaFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jcb_filtroBusquedaFactura.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Telefono", "Fecha" }));
+        jcb_filtroBusquedaFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcb_filtroBusquedaAro1ActionPerformed(evt);
+                jcb_filtroBusquedaFacturaActionPerformed(evt);
             }
         });
-        jp_facturacion.add(jcb_filtroBusquedaAro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
+        jp_facturacion.add(jcb_filtroBusquedaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
 
         panel_tabs.addTab("Facturación", jp_facturacion);
 
@@ -861,13 +872,18 @@ public final class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jt_aros1MouseReleased
 
-    private void tf_buscarAro1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarAro1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_buscarAro1KeyReleased
+    private void tf_buscarFacturaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarFacturaKeyReleased
+           if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            //new AyudaF1().abrirAyuda();
+        } else {
+            filtrarFactura();
+            jt_aros1.setRowSorter(trsfiltroFactura);
+        }
+    }//GEN-LAST:event_tf_buscarFacturaKeyReleased
 
-    private void jcb_filtroBusquedaAro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_filtroBusquedaAro1ActionPerformed
+    private void jcb_filtroBusquedaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_filtroBusquedaFacturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcb_filtroBusquedaAro1ActionPerformed
+    }//GEN-LAST:event_jcb_filtroBusquedaFacturaActionPerformed
 
     private void tf_buscarCliente1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarCliente1KeyReleased
         // TODO add your handling code here:
@@ -906,6 +922,10 @@ public final class Principal extends javax.swing.JFrame {
         li.setVisible(true);
     }//GEN-LAST:event_mi_cerrar_sesionActionPerformed
 
+    private void tf_buscarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_buscarFacturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_buscarFacturaActionPerformed
+
     
     public void menuitem_ver(){
        int tabseleccionado = panel_tabs.getSelectedIndex();
@@ -932,6 +952,8 @@ public final class Principal extends javax.swing.JFrame {
         String hilera = tf_buscarCliente.getText();
         trsfiltroCliente.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, 1));
     }
+    
+    
     
     public void filtrarAros() {
         String hilera = tf_buscarAro.getText();
@@ -964,6 +986,21 @@ public final class Principal extends javax.swing.JFrame {
                 break;
         }
         trsfiltroLlantas.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
+    }
+    
+     public void filtrarFactura() {
+        String hilera = tf_buscarFactura.getText();
+        String filtro = jcb_filtroBusquedaFactura.getSelectedItem() + "";
+        int fila = 0;
+        switch (filtro) {
+            case "Telefono":
+                fila = 2;
+                break;
+            case "Fecha":
+                fila = 3;
+                break;
+        }
+        trsfiltroFactura.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
     }
 
     public void cargarClientes() {
@@ -1060,6 +1097,29 @@ public final class Principal extends javax.swing.JFrame {
         trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
     }
 
+    public void cargarFacturas(){
+        factura = new BL_Factura();
+        listaFactura = factura.cargarFactura();
+        String[] nombreColumnas = {"Id de Factura","Nombre del cliente" ,"Telefono","Fecha","Precio Total"};
+        dtmFacturas = new DefaultTableModel(null, nombreColumnas){
+         @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        if (!listaFactura.isEmpty()) {
+            for (BL_Factura factura_temp : listaFactura) {
+                dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(),factura_temp.getNombreCliente(),factura_temp.getTelefonoCliente()
+                        ,factura_temp.getFecha(), factura_temp.getPrecioTotal()});
+            }
+        }
+        jt_aros1.setModel(dtmFacturas);
+        jt_aros1.getColumnModel().getColumn(0).setMinWidth(0);
+        jt_aros1.getColumnModel().getColumn(0).setMaxWidth(0);
+        trsfiltroFactura = new TableRowSorter(jt_aros1.getModel());
+                
+                
+    }
     public void verCliente() {
         BL_Cliente clienteVer;
         if (validarSeleccion('c')) {
@@ -1266,7 +1326,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JComboBox jcb_filtroBusquedaAro;
-    private javax.swing.JComboBox jcb_filtroBusquedaAro1;
+    private javax.swing.JComboBox jcb_filtroBusquedaFactura;
     private javax.swing.JComboBox jcb_filtroBusquedaLlanta;
     private javax.swing.JLabel jl_Buscar;
     private javax.swing.JLabel jl_Buscar1;
@@ -1290,9 +1350,9 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu pum_tb;
     private javax.swing.JTabbedPane tb_productos;
     private javax.swing.JTextField tf_buscarAro;
-    private javax.swing.JTextField tf_buscarAro1;
     private javax.swing.JTextField tf_buscarCliente;
     private javax.swing.JTextField tf_buscarCliente1;
+    private javax.swing.JTextField tf_buscarFactura;
     private javax.swing.JTextField tf_buscarLlantas;
     // End of variables declaration//GEN-END:variables
 }
