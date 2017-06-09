@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +30,7 @@ public class DAO_Factura {
     public ResultSet rs;
     
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion, 
-            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura,double subTotal, double impVenta, int contado){
+            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura,double subTotal, double impVenta, int contado, Date fechaExpiracion){
         
          try {
           if(conexion == null || conexion.isClosed()){
@@ -37,14 +38,15 @@ public class DAO_Factura {
           }
           
           cmd = conexion.prepareStatement("INSERT INTO Factura (NombreCliente, TelefonoCliente, DireccionCliente, "
-                  + "Fecha, SubTotal, ImpVenta, PrecioTotal, Contado) VALUES (?, ?, ?, curdate(), ?, ?, ?, ?);");
+                  + "FechaExpiracion, SubTotal, ImpVenta, PrecioTotal, Contado) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
           cmd.setString(1, nombreCliente);
           cmd.setString(2, telefono);
           cmd.setString(3, direccion);
-          cmd.setDouble(4, subTotal);
-          cmd.setDouble(5, impVenta);
-          cmd.setDouble(6, precioTotal);
-          cmd.setInt(7, contado);
+          cmd.setDate(4, new java.sql.Date(fechaExpiracion.getTime()));
+          cmd.setDouble(5, subTotal);
+          cmd.setDouble(6, impVenta);
+          cmd.setDouble(7, precioTotal);
+          cmd.setInt(8, contado);
           cmd.execute();
           
           int idFactura = ultimoIdFactura();

@@ -56,6 +56,7 @@ public class BL_FacturaTest {
         double subtotal = 9999;
         double impuesto = 6666;
         int contado  = 0;
+        Date fecha = new Date(System.currentTimeMillis());
         ArrayList<BL_LineaFactura> blListaLineas = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
            blListaLineas.add(new BL_LineaFactura(i, "detalle#"+i, i*100, i*1000));
@@ -63,12 +64,14 @@ public class BL_FacturaTest {
         BL_Factura instance = new BL_Factura();
         boolean expResult = true;
         boolean result = instance.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, blListaLineas, 
-                subtotal, impuesto, contado);
+                subtotal, impuesto, contado, fecha);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         if(expResult != result){
         fail("The test case is a prototype.");
         }
     }
+
+    
     
 }

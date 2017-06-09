@@ -1110,7 +1110,7 @@ public final class Principal extends javax.swing.JFrame {
         if (!listaFactura.isEmpty()) {
             for (BL_Factura factura_temp : listaFactura) {
                 dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(),factura_temp.getNombreCliente(),factura_temp.getTelefonoCliente()
-                        ,factura_temp.getFecha(), factura_temp.getPrecioTotal()});
+                        ,factura_temp.getFechaExpiracion(), factura_temp.getPrecioTotal()});
             }
         }
         jt_aros1.setModel(dtmFacturas);
