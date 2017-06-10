@@ -4,6 +4,7 @@ import BL.BL_Aro;
 import BL.BL_Cliente;
 import BL.BL_Llanta;
 import BL.BL_Producto;
+import config.Mensajes;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,6 +37,7 @@ public class UI_Factura extends javax.swing.JDialog {
     private DateFormat df;
     private Calendar cal;
     private double libreImpVentas;
+    private BL_Producto productoNuevaLinea;
 
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -56,6 +59,8 @@ public class UI_Factura extends javax.swing.JDialog {
         formatoCBProductos();
         clienteNuevo(false);
         fechaVencimiento(15);
+        tb_linea_factura.getColumnModel().getColumn(0).setMinWidth(0);
+        tb_linea_factura.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     /**
@@ -204,9 +209,17 @@ public class UI_Factura extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cantidad", "Detalle", "Precio Unitario", "Precio Linea"
+                "id", "Cantidad", "Detalle", "Precio Unitario", "Precio Linea"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(tb_linea_factura);
 
         jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 1076, 300));
@@ -267,6 +280,11 @@ public class UI_Factura extends javax.swing.JDialog {
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 120, -1));
 
         cb_producto.setPreferredSize(new java.awt.Dimension(220, 32));
+        cb_producto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_productoActionPerformed(evt);
+            }
+        });
         jPanel3.add(cb_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 45, 770, -1));
 
         tf_precio.setPreferredSize(new java.awt.Dimension(220, 32));
@@ -375,17 +393,28 @@ public class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_cb_semanasActionPerformed
 
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
-        if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().isEmpty()) {
+        if (!tf_precio.getText().isEmpty() && productoNuevaLinea!=null) {
             agregarLineaFactura();
+        }else{
+            Mensajes.mensajeInfomracion("Faltan datos para agregar la linea", "Agregar Linea");
         }
     }//GEN-LAST:event_bt_agregar_lineaActionPerformed
+
+    private void cb_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_productoActionPerformed
+        Object obj_producto = cb_producto.getSelectedItem();
+        if(obj_producto instanceof BL_Producto){
+            productoNuevaLinea = (BL_Producto) obj_producto;
+        }else{
+            productoNuevaLinea = null;
+        }
+    }//GEN-LAST:event_cb_productoActionPerformed
 
     public void agregarLineaFactura() {
         String detalle = cb_producto.getSelectedItem().toString();
         double precio = Double.parseDouble(tf_precio.getText());
         int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
         double precioLinea = cantidad*precio;
-        ((DefaultTableModel)tb_linea_factura.getModel()).addRow(new Object[]{cantidad,detalle,precio,precioLinea});
+        ((DefaultTableModel)tb_linea_factura.getModel()).addRow(new Object[]{productoNuevaLinea.getIdProducto(), cantidad,productoNuevaLinea,precio,precioLinea});
         calcularTotales();
     }
     
