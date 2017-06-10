@@ -94,7 +94,7 @@ public class BL_LlantaTest {
     public void testEliminarLlanta() {
         System.out.println("eliminarLlanta");
         BL_Llanta instance = new BL_Llanta();
-        instance.setidLlanta(2);
+        instance.setIdProducto(2);
         boolean expResult = true;
         boolean result = instance.eliminarLlanta();
         assertEquals(expResult, result);

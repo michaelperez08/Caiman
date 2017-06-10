@@ -5,6 +5,7 @@ import BL.BL_Cliente;
 import BL.BL_Llanta;
 import BL.BL_Producto;
 import config.Mensajes;
+import config.Validacion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,11 +40,14 @@ public class UI_Factura extends javax.swing.JDialog {
     private Calendar cal;
     private double libreImpVentas;
     private BL_Producto productoNuevaLinea;
+    private int lineaSeleccionada;
 
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tb_linea_factura.getTableHeader().setReorderingAllowed(false);
     }
 
     public UI_Factura(java.awt.Frame parent, boolean modal, ArrayList<BL_Cliente> listaClientes, ArrayList<BL_Llanta> listaLlantas, ArrayList<BL_Aro> listaAros) {
@@ -61,6 +66,8 @@ public class UI_Factura extends javax.swing.JDialog {
         fechaVencimiento(15);
         tb_linea_factura.getColumnModel().getColumn(0).setMinWidth(0);
         tb_linea_factura.getColumnModel().getColumn(0).setMaxWidth(0);
+        tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tb_linea_factura.getTableHeader().setReorderingAllowed(false);
     }
 
     /**
@@ -72,6 +79,9 @@ public class UI_Factura extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pum_Lineas = new javax.swing.JPopupMenu();
+        jmi_eliminar = new javax.swing.JMenuItem();
+        jmi_modificar = new javax.swing.JMenuItem();
         jp_facturacion = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -108,6 +118,22 @@ public class UI_Factura extends javax.swing.JDialog {
         cb_semanas = new javax.swing.JComboBox<>();
         l_fechaVencimeinto = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+
+        jmi_eliminar.setText("Eliminar");
+        jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarActionPerformed(evt);
+            }
+        });
+        pum_Lineas.add(jmi_eliminar);
+
+        jmi_modificar.setText("Modificar");
+        jmi_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_modificarActionPerformed(evt);
+            }
+        });
+        pum_Lineas.add(jmi_modificar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -220,6 +246,7 @@ public class UI_Factura extends javax.swing.JDialog {
                 return types [columnIndex];
             }
         });
+        tb_linea_factura.setComponentPopupMenu(pum_Lineas);
         jScrollPane4.setViewportView(tb_linea_factura);
 
         jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 1076, 300));
@@ -231,7 +258,7 @@ public class UI_Factura extends javax.swing.JDialog {
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, -1));
 
         sp_cantidad.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        sp_cantidad.setModel(new javax.swing.SpinnerNumberModel(1, null, 100, 1));
+        sp_cantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
         sp_cantidad.setPreferredSize(new java.awt.Dimension(220, 32));
         jPanel3.add(sp_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 290, -1));
 
@@ -288,6 +315,11 @@ public class UI_Factura extends javax.swing.JDialog {
         jPanel3.add(cb_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 45, 770, -1));
 
         tf_precio.setPreferredSize(new java.awt.Dimension(220, 32));
+        tf_precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_precioKeyTyped(evt);
+            }
+        });
         jPanel3.add(tf_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 340, -1));
 
         jLabel13.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
@@ -393,13 +425,33 @@ public class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_cb_semanasActionPerformed
 
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
-        if (!tf_precio.getText().isEmpty() && productoNuevaLinea!=null) {
+        if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().isEmpty()) {
+            if(bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")){
             agregarLineaFactura();
+            } else {
+                modificarLinea(lineaSeleccionada);
+            }
         }else{
             Mensajes.mensajeInfomracion("Faltan datos para agregar la linea", "Agregar Linea");
         }
     }//GEN-LAST:event_bt_agregar_lineaActionPerformed
 
+    private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
+        // TODO add your handling code here:
+        eliminarLinea();
+    }//GEN-LAST:event_jmi_eliminarActionPerformed
+
+    private void jmi_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarActionPerformed
+        // TODO add your handling code here:
+        llenarCamposLinea();
+    }//GEN-LAST:event_jmi_modificarActionPerformed
+
+    private void tf_precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_precioKeyTyped
+        // TODO add your handling code here:
+        if(Validacion.soloNumeros(evt)){
+            Validacion.validarLongitud(tf_precio, evt, 13);
+        }
+    }//GEN-LAST:event_tf_precioKeyTyped
     private void cb_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_productoActionPerformed
         Object obj_producto = cb_producto.getSelectedItem();
         if(obj_producto instanceof BL_Producto){
@@ -416,6 +468,39 @@ public class UI_Factura extends javax.swing.JDialog {
         double precioLinea = cantidad*precio;
         ((DefaultTableModel)tb_linea_factura.getModel()).addRow(new Object[]{productoNuevaLinea.getIdProducto(), cantidad,productoNuevaLinea,precio,precioLinea});
         calcularTotales();
+        
+    }
+    
+    public void eliminarLinea(){
+        ((DefaultTableModel)tb_linea_factura.getModel()).removeRow(tb_linea_factura.getSelectedRow());
+        calcularTotales();
+    }
+    
+    public void modificarLinea(int fila){
+        
+        String detalle = cb_producto.getSelectedItem().toString();
+        double precio = Double.parseDouble(tf_precio.getText());
+        int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
+        double precioLinea = cantidad*precio;
+        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(cantidad, fila, 0);
+        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(detalle, fila, 1);
+        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(precio, fila, 2);
+        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 3);
+        calcularTotales();
+        limpiarCamposProducto();
+        bt_agregar_linea.setText("Agregar Linea");
+        tb_linea_factura.setCellSelectionEnabled(true);
+    }
+    
+    public void llenarCamposLinea(){
+        lineaSeleccionada = tb_linea_factura.getSelectedRow();
+        sp_cantidad.setValue(tb_linea_factura.getValueAt(lineaSeleccionada, 0));
+        filtrar_cb_producto(tb_linea_factura.getValueAt(lineaSeleccionada, 1)+"");
+        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 2)+"");
+        bt_agregar_linea.setText("Modificar");
+        tb_linea_factura.setCellSelectionEnabled(false);
+        
+        
     }
     
     public void calcularTotales(){
@@ -578,11 +663,14 @@ public class UI_Factura extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JMenuItem jmi_eliminar;
+    private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JPanel jp_facturacion;
     private javax.swing.JLabel l_fechaVencimeinto;
     private javax.swing.JLabel l_impVentas;
     private javax.swing.JLabel l_subTotal;
     private javax.swing.JLabel l_total;
+    private javax.swing.JPopupMenu pum_Lineas;
     private javax.swing.JRadioButton rb_cliente_nuevo;
     private javax.swing.JRadioButton rb_contado;
     private javax.swing.JRadioButton rb_credito;

@@ -103,8 +103,8 @@ public class BL_AroTest {
     @Test
     public void testEliminarAro() {
         System.out.println("eliminarAro");
-        BL_Aro instance = new BL_Aro();
-        instance.setidAro(4);
+         BL_Aro instance = new BL_Aro();
+        instance.setIdProducto(4);
         boolean expResult = true;
         boolean result = instance.eliminarAro();
         assertEquals(expResult, result);

@@ -22,7 +22,7 @@ public class BL_Factura {
     private String TelefonoCliente;
     private String DireccionCliente;
     private Double PrecioTotal;
-    private Date Fecha;
+    private Date FechaExpiracion;
     private Double Subtotal;
     private Boolean Contado;
     private Double ImpVenta;
@@ -34,7 +34,7 @@ public class BL_Factura {
         this.TelefonoCliente = TelefonoCliente;
         this.DireccionCliente = DireccionCliente;
         this.PrecioTotal = PrecioTotal;
-        this.Fecha = fecha;
+        this.FechaExpiracion = fecha;
         this.Subtotal = subtotal;
         this.ImpVenta = impventa;
         this.Contado = contado;
@@ -48,7 +48,7 @@ public class BL_Factura {
         this.TelefonoCliente = TelefonoCliente;
         this.DireccionCliente = DireccionCliente;
         this.PrecioTotal = PrecioTotal;
-        this.Fecha = fecha;
+        this.FechaExpiracion = fecha;
         this.Subtotal = subtotal;
         this.ImpVenta = impventa;
         this.Contado = contado;
@@ -99,12 +99,12 @@ public class BL_Factura {
         this.PrecioTotal = PrecioTotal;
     }
 
-    public Date getFecha() {
-        return Fecha;
+    public Date getFechaExpiracion() {
+        return FechaExpiracion;
     }
 
-    public void setFecha(Date fecha) {
-        this.Fecha = fecha;
+    public void setFechaExpiracion(Date fecha) {
+        this.FechaExpiracion = fecha;
     }
 
     public Double getSubtotal() {
@@ -136,14 +136,14 @@ public class BL_Factura {
     }
 
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion,
-            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, int contado) {
+            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, int contado, Date fechaExpiracion) {
         DAO_Factura daoFactura = new DAO_Factura();
         ArrayList<TO_LineaFactura> toListaLineas = new ArrayList<>();
         for (BL_LineaFactura blListaLinea : blListaLineas) {
             toListaLineas.add(new TO_LineaFactura(blListaLinea.getCantidad(), blListaLinea.getDetalle(),
                     blListaLinea.getPrecioUnitario(), blListaLinea.getPrecioTotalLinea()));
         }
-        return daoFactura.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, toListaLineas, subTotal, impVenta, contado);
+        return daoFactura.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, toListaLineas, subTotal, impVenta, contado, fechaExpiracion);
     }
 
     public ArrayList<BL_Factura> cargarFactura() {
