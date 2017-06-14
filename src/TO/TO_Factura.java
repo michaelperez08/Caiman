@@ -35,8 +35,7 @@ public ArrayList<TO_LineaFactura> ListaLineaFactura = new ArrayList();
         this.Subtotal = subtotal;
         this.ImpVenta = impventa;
         this.Contado = contado;
-        this.ListaLineaFactura = listaLineaFactura;
-        
+        this.ListaLineaFactura = listaLineaFactura; 
     }
     public TO_Factura( String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha,Double subtotal,Double impventa,Boolean contado, ArrayList<TO_LineaFactura> listaLineaFactura ) {
         

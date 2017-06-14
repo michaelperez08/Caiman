@@ -4,7 +4,7 @@ USE `LlantasyReencauchesGriegos`;
 --
 -- Host: localhost    Database: LlantasyReencauchesGriegos
 -- ------------------------------------------------------
--- Server version	5.7.18
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,9 +57,9 @@ CREATE TABLE `Cliente` (
   `Direccion_Simple` varchar(100) NOT NULL,
   `Direccion_Exacta` varchar(150) NOT NULL,
   `Cedula` varchar(25) NOT NULL,
-  `Telefonos` varchar(50) NOT NULL,
+  `Telefonos` varchar(45) NOT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
-INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207350735','24543624 87363723 '),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','','207450335','88996655'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','','207450335','55661100'),(5,'Oscar Perez Lopez','Tacares, grecia, Alajuela','','208750456','24447567 87896534 '),(7,'Juan Rodriguez','Sarchi, Alajuela, Costa Rica','haaayyy yaaa yyaaa, cantaa y no llores, por que llorando se alegra.','209840336','22222222 111111111 333333333 '),(8,'Cooporacion Industrial de Trasportes Patica','sdfsd','','2044450445','345234 '),(9,'Antonio Alavarez','Pital de San Carlos','Por la salchichoneria de los caballeros del sodiaco, cerca de la entrada al inframundo permidada por haya','2245678','3456543 3434455 '),(10,'Oscar Cubero Araya','Tacares, Grecia, Alajuela','350 metros de la Universidad de Costa Rica','254536544','(+506) 2454-3624 (+506) 5064-8736 ');
+INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207350735','24543624 87363723 '),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','','207450335','88996655'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','','207450335','55661100'),(5,'Oscar Perez Lopez','Tacares, grecia, Alajuela','','208750456','24447567 87896534 '),(7,'Juan Rodriguez','Sarchi, Alajuela, Costa Rica','Del parque 50 mts sur','209840336','22222222 111111111 333333333 '),(9,'Antonio Alavarez','Pital de San Carlos','Por la salchichoneria de los caballeros del sodiaco, cerca de la entrada al inframundo permidada por haya','2245678','3456543 3434455 ');
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,13 +84,13 @@ CREATE TABLE `Factura` (
   `NombreCliente` varchar(45) NOT NULL,
   `TelefonoCliente` varchar(35) DEFAULT NULL,
   `DireccionCliente` varchar(100) DEFAULT NULL,
-  `Fecha` date NOT NULL,
+  `FechaExpiracion` date NOT NULL,
   `SubTotal` double NOT NULL,
   `ImpVenta` double NOT NULL,
   `PrecioTotal` double NOT NULL,
   `Contado` tinyint(4) NOT NULL,
   PRIMARY KEY (`idFactura`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,6 +99,7 @@ CREATE TABLE `Factura` (
 
 LOCK TABLES `Factura` WRITE;
 /*!40000 ALTER TABLE `Factura` DISABLE KEYS */;
+INSERT INTO `Factura` VALUES (1,'Naruto','90909090','konoha','2017-06-09',9999,6666,77777,0),(2,'Alberto Ugalde Murillo','88996655','','2017-06-29',31000,4030,35030,0),(3,'Michael Perez Murillo','24543624 87363723 ','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','2017-06-29',1000,130,1130,0);
 /*!40000 ALTER TABLE `Factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +120,7 @@ CREATE TABLE `LineaFactura` (
   PRIMARY KEY (`idLineaFactura`),
   KEY `fk_LineaFactura_1_idx` (`idFactura`),
   CONSTRAINT `fk_LineaFactura_1` FOREIGN KEY (`idFactura`) REFERENCES `Factura` (`idFactura`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,6 +129,7 @@ CREATE TABLE `LineaFactura` (
 
 LOCK TABLES `LineaFactura` WRITE;
 /*!40000 ALTER TABLE `LineaFactura` DISABLE KEYS */;
+INSERT INTO `LineaFactura` VALUES (1,1,0,'detalle#0',0,0),(2,1,1,'detalle#1',100,1000),(3,1,2,'detalle#2',200,2000),(4,1,3,'detalle#3',300,3000),(5,1,4,'detalle#4',400,4000),(6,1,5,'detalle#5',500,5000),(7,1,6,'detalle#6',600,6000),(8,1,7,'detalle#7',700,7000),(9,1,8,'detalle#8',800,8000),(10,1,9,'detalle#9',900,9000),(11,2,3,'Aro 15x8 Horizon 25hY',10000,30000),(12,2,2,'Aro 15x8 BBS LK5',500,1000),(13,3,1,'Aro 15x8 Horizon 25hY',1000,1000);
 /*!40000 ALTER TABLE `LineaFactura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +175,7 @@ CREATE TABLE `Usuario` (
   `Contrasena` varchar(20) NOT NULL,
   `Tipo` varchar(15) NOT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,9 +184,39 @@ CREATE TABLE `Usuario` (
 
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` VALUES (1,'admin','admin','Estandar');
+INSERT INTO `Usuario` VALUES (1,'admin','admin','Estandar'),(2,'michael','mike9538','Administrador'),(6,'vic','1234','Estandar');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'LlantasyReencauchesGriegos'
+--
+
+--
+-- Dumping routines for database 'LlantasyReencauchesGriegos'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `InsertarFacturaNueva` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarFacturaNueva`(
+IN NombreCliente varchar(45),IN TelefonoCliente varchar(35),IN DireccionCliente varchar(100), IN PrecioTotal double, OUT idFactura int)
+BEGIN
+insert into Factura (NombreCliente,TelefonoCliente,DireccionCliente,PrecioTotal,Fecha) 
+	values (NombreCliente, TelefonoCliente,DireccionCliente,PrecioTotal,current_date());
+select last_insert_id() into idFactura;    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -195,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-07 11:33:45
+-- Dump completed on 2017-06-14 11:19:30
