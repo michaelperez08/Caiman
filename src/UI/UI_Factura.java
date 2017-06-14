@@ -410,7 +410,7 @@ public class UI_Factura extends javax.swing.JDialog {
         
         BL_Factura blfac = new BL_Factura(0, null, clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, 
                 fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos());
-        if(blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_exacta(), total, getListaProductos(), subTotal,
+        if(blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
                 impVentas, rb_contado.isSelected(), fechaExpiracion)){
             Mensajes.mensajeInfomracion("Sirviooo", "Factura Agregada");
         }else{
@@ -428,7 +428,7 @@ public class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_rb_cliente_nuevoActionPerformed
 
     private void rb_producto_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_producto_nuevoActionPerformed
-        if (rb_cliente_nuevo.isSelected()) {
+        if (rb_producto_nuevo.isSelected()) {
             productoNuevo(true);
             limpiarCamposProducto();
         } else {
@@ -444,7 +444,13 @@ public class UI_Factura extends javax.swing.JDialog {
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
         if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().isEmpty()) {
             if (bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")) {
-                agregarLineaFactura();
+                if(!rb_producto_nuevo.isSelected() && cb_producto.getSelectedItem() instanceof BL_Producto){
+                    agregarLineaFactura();
+                }else if(!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)){
+                    Mensajes.mensajeInfomracion("El producto seleccionado no se encunetra registrado", "Ingresar producto");
+                }else{
+                    agregarLineaFactura();
+                }
             } else {
                 modificarLinea(lineaSeleccionada);
             }
@@ -473,6 +479,7 @@ public class UI_Factura extends javax.swing.JDialog {
         Object obj_producto = cb_producto.getSelectedItem();
         if (obj_producto instanceof BL_Producto) {
             productoNuevaLinea = (BL_Producto) obj_producto;
+            sp_cantidad.setValue(((BL_Producto) obj_producto).getCantidad());
         } else {
             productoNuevaLinea = null;
         }
@@ -503,9 +510,18 @@ public class UI_Factura extends javax.swing.JDialog {
         double precio = Double.parseDouble(tf_precio.getText());
         int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
         double precioLinea = cantidad * precio;
-        ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{productoNuevaLinea.getIdProducto(), cantidad, productoNuevaLinea, precio, precioLinea});
+        Object detalle = cb_producto.getSelectedItem();
+        int id=0;
+        if(detalle instanceof BL_Producto){
+            id = ((BL_Producto) detalle).getIdProducto();
+        }
+        ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle.toString(), precio, precioLinea});
         calcularTotales();
         listaProductos.remove(productoNuevaLinea);
+    }
+    
+    public void getLineaIngresar(){
+        
     }
 
     public void eliminarLinea() {
@@ -587,8 +603,7 @@ public class UI_Factura extends javax.swing.JDialog {
     }
 
     public void productoNuevo(boolean b) {
-        tf_precio.setEditable(b);
-        sp_cantidad.setEnabled(b);
+        
     }
 
     public void formatoCBProductos() {
@@ -678,7 +693,6 @@ public class UI_Factura extends javax.swing.JDialog {
     }
 
     public void formatoSPCantidad() {
-        System.out.println("cacasss");
         ((JSpinner.DefaultEditor) sp_cantidad.getEditor()).getTextField().addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {

@@ -6,6 +6,7 @@
 package UI;
 
 import BL.BL_Cliente;
+import config.Mensajes;
 import config.Validacion;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -268,14 +269,13 @@ public class UI_Cliente extends javax.swing.JDialog {
                 tf_telefono.setText("");
                 bt_agregarTelefono.setText("Agregar Teléfono");
             } else {
-                if (!telefono.isEmpty()) {
+                if (telefonoVacio(tf_telefono.getText().substring(7,11))) {
                     dlm_telfonos.addElement(telefono);
                     jl_telefonos.setModel(dlm_telfonos);
                     tf_telefono.setText("506");
                 } else {
-                    JOptionPane.showMessageDialog(null, "No hay telefono que agregar", "Telefonos", JOptionPane.INFORMATION_MESSAGE);
+                    Mensajes.mensajeInfomracion("No hay telefono que agregar", "Telefonos");
                 }
-
             }
             maximoTelefonos();
     }//GEN-LAST:event_bt_agregarTelefonoActionPerformed
