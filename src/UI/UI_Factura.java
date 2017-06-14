@@ -45,11 +45,13 @@ public class UI_Factura extends javax.swing.JDialog {
     private BL_Producto productoNuevaLinea;
     private int lineaSeleccionada;
     private Date fechaExpiracion;
-
+    private DefaultTableModel dtmLineas;
+    
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setModeloTbLineasProducto();
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
     }
@@ -69,6 +71,7 @@ public class UI_Factura extends javax.swing.JDialog {
         formatoSPCantidad();
         clienteNuevo(false);
         fechaVencimiento(15);
+        setModeloTbLineasProducto();
         tb_linea_factura.getColumnModel().getColumn(0).setMinWidth(0);
         tb_linea_factura.getColumnModel().getColumn(0).setMaxWidth(0);
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -700,6 +703,19 @@ public class UI_Factura extends javax.swing.JDialog {
             }
             
         });
+    }
+    
+    public void setModeloTbLineasProducto(){
+    String[] nombreColumnas = {"Id", "Cantidad", "Detalle", "Precio Unitario", "Precio Linea","Producto Nuevo"};
+        dtmLineas = new DefaultTableModel(null, nombreColumnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tb_linea_factura.setModel(dtmLineas);
+        tb_linea_factura.getColumnModel().getColumn(5).setMinWidth(0);
+        tb_linea_factura.getColumnModel().getColumn(5).setMaxWidth(0);
     }
 
 
