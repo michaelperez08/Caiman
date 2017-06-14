@@ -2,6 +2,8 @@ package UI;
 
 import BL.BL_Aro;
 import BL.BL_Cliente;
+import BL.BL_Factura;
+import BL.BL_LineaFactura;
 import BL.BL_Llanta;
 import BL.BL_Producto;
 import config.Mensajes;
@@ -12,9 +14,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.ListSelectionModel;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +44,7 @@ public class UI_Factura extends javax.swing.JDialog {
     private double libreImpVentas;
     private BL_Producto productoNuevaLinea;
     private int lineaSeleccionada;
+    private Date fechaExpiracion;
 
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -62,6 +66,7 @@ public class UI_Factura extends javax.swing.JDialog {
         listaProductos.addAll(listaLlantas);
         formatoCBClientes();
         formatoCBProductos();
+        formatoSPCantidad();
         clienteNuevo(false);
         fechaVencimiento(15);
         tb_linea_factura.getColumnModel().getColumn(0).setMinWidth(0);
@@ -398,7 +403,19 @@ public class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_cb_nombre_clienteActionPerformed
 
     private void bt_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_imprimirActionPerformed
-        // TODO add your handling code here:
+        BL_Cliente clienteFactura = getClienteSeleccionado();
+        double subTotal = Double.parseDouble(l_subTotal.getText());
+        double impVentas = Double.parseDouble(l_impVentas.getText());
+        double total = Double.parseDouble(l_total.getText());
+        
+        BL_Factura blfac = new BL_Factura(0, null, clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, 
+                fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos());
+        if(blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_exacta(), total, getListaProductos(), subTotal,
+                impVentas, rb_contado.isSelected(), fechaExpiracion)){
+            Mensajes.mensajeInfomracion("Sirviooo", "Factura Agregada");
+        }else{
+            Mensajes.mensajeInfomracion("Noo Sirviooo", "Factura NO Agregada");
+        }
     }//GEN-LAST:event_bt_imprimirActionPerformed
 
     private void rb_cliente_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_cliente_nuevoActionPerformed
@@ -426,12 +443,12 @@ public class UI_Factura extends javax.swing.JDialog {
 
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
         if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().isEmpty()) {
-            if(bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")){
-            agregarLineaFactura();
+            if (bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")) {
+                agregarLineaFactura();
             } else {
                 modificarLinea(lineaSeleccionada);
             }
-        }else{
+        } else {
             Mensajes.mensajeInfomracion("Faltan datos para agregar la linea", "Agregar Linea");
         }
     }//GEN-LAST:event_bt_agregar_lineaActionPerformed
@@ -448,78 +465,97 @@ public class UI_Factura extends javax.swing.JDialog {
 
     private void tf_precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_precioKeyTyped
         // TODO add your handling code here:
-        if(Validacion.soloNumeros(evt)){
+        if (Validacion.soloNumeros(evt)) {
             Validacion.validarLongitud(tf_precio, evt, 13);
         }
     }//GEN-LAST:event_tf_precioKeyTyped
     private void cb_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_productoActionPerformed
         Object obj_producto = cb_producto.getSelectedItem();
-        if(obj_producto instanceof BL_Producto){
+        if (obj_producto instanceof BL_Producto) {
             productoNuevaLinea = (BL_Producto) obj_producto;
-        }else{
+        } else {
             productoNuevaLinea = null;
         }
     }//GEN-LAST:event_cb_productoActionPerformed
 
+    public BL_Cliente getClienteSeleccionado(){
+        if(rb_cliente_nuevo.isSelected()){
+            return new BL_Cliente(cb_nombre_cliente.getSelectedItem().toString(), tf_direccion.getText(), "", tf_cedula.getText(), tf_telefono.getText());
+        }else{
+            return cliente_seleccionado;
+        }
+    }
+    
+    public ArrayList<BL_LineaFactura> getListaProductos(){
+        ArrayList<BL_LineaFactura> listaLineasFactura= new ArrayList<BL_LineaFactura>();
+         for (int i = 0; i < tb_linea_factura.getRowCount(); i++) {
+             int idProducto = Integer.parseInt(tb_linea_factura.getValueAt(i, 0).toString());
+             int cantidad = Integer.parseInt(tb_linea_factura.getValueAt(i, 1).toString());
+             String detalleLinea = tb_linea_factura.getValueAt(i, 2).toString();
+             double pUnitario = Double.parseDouble(tb_linea_factura.getValueAt(i, 3).toString());
+             double pTotal = Double.parseDouble(tb_linea_factura.getValueAt(i, 4).toString());
+             listaLineasFactura.add(new BL_LineaFactura(idProducto, cantidad, detalleLinea, pUnitario, pTotal));
+        }
+        return listaLineasFactura;
+    }
+    
     public void agregarLineaFactura() {
+        double precio = Double.parseDouble(tf_precio.getText());
+        int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
+        double precioLinea = cantidad * precio;
+        ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{productoNuevaLinea.getIdProducto(), cantidad, productoNuevaLinea, precio, precioLinea});
+        calcularTotales();
+        listaProductos.remove(productoNuevaLinea);
+    }
+
+    public void eliminarLinea() {
+        ((DefaultTableModel) tb_linea_factura.getModel()).removeRow(tb_linea_factura.getSelectedRow());
+        calcularTotales();
+    }
+
+    public void modificarLinea(int fila) {
+
         String detalle = cb_producto.getSelectedItem().toString();
         double precio = Double.parseDouble(tf_precio.getText());
         int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
-        double precioLinea = cantidad*precio;
-        ((DefaultTableModel)tb_linea_factura.getModel()).addRow(new Object[]{productoNuevaLinea.getIdProducto(), cantidad,productoNuevaLinea,precio,precioLinea});
-        calcularTotales();
-        
-    }
-    
-    public void eliminarLinea(){
-        ((DefaultTableModel)tb_linea_factura.getModel()).removeRow(tb_linea_factura.getSelectedRow());
-        calcularTotales();
-    }
-    
-    public void modificarLinea(int fila){
-        
-        String detalle = cb_producto.getSelectedItem().toString();
-        double precio = Double.parseDouble(tf_precio.getText());
-        int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
-        double precioLinea = cantidad*precio;
-        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(cantidad, fila, 0);
-        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(detalle, fila, 1);
-        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(precio, fila, 2);
-        ((DefaultTableModel)tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 3);
+        double precioLinea = cantidad * precio;
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(cantidad, fila, 0);
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(detalle, fila, 1);
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precio, fila, 2);
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 3);
         calcularTotales();
         limpiarCamposProducto();
         bt_agregar_linea.setText("Agregar Linea");
         tb_linea_factura.setCellSelectionEnabled(true);
     }
-    
-    public void llenarCamposLinea(){
+
+    public void llenarCamposLinea() {
         lineaSeleccionada = tb_linea_factura.getSelectedRow();
         sp_cantidad.setValue(tb_linea_factura.getValueAt(lineaSeleccionada, 0));
-        filtrar_cb_producto(tb_linea_factura.getValueAt(lineaSeleccionada, 1)+"");
-        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 2)+"");
+        filtrar_cb_producto(tb_linea_factura.getValueAt(lineaSeleccionada, 1) + "");
+        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 2) + "");
         bt_agregar_linea.setText("Modificar");
         tb_linea_factura.setCellSelectionEnabled(false);
-        
-        
+
     }
-    
-    public void calcularTotales(){
+
+    public void calcularTotales() {
         double subTotal = getSubTotal();
-        double impVentas = (subTotal-libreImpVentas)*0.13;
-        double total = subTotal+impVentas;
-        l_subTotal.setText(subTotal+"");
-        l_impVentas.setText(impVentas+"");
-        l_total.setText(total+"");
+        double impVentas = (subTotal - libreImpVentas) * 0.13;
+        double total = subTotal + impVentas;
+        l_subTotal.setText(subTotal + "");
+        l_impVentas.setText(impVentas + "");
+        l_total.setText(total + "");
         limpiarCamposProducto();
     }
-    
-    public Double getSubTotal(){
+
+    public Double getSubTotal() {
         double subtotal = 0;
         libreImpVentas = 0;
         for (int i = 0; i < tb_linea_factura.getRowCount(); i++) {
-            subtotal+= Double.parseDouble(tb_linea_factura.getValueAt(i, 3).toString());
-            if(tb_linea_factura.getValueAt(i, 1).toString().toLowerCase().contains("agricola")){
-                libreImpVentas += Double.parseDouble(tb_linea_factura.getValueAt(i, 3).toString());
+            subtotal += Double.parseDouble(tb_linea_factura.getValueAt(i, 4).toString());
+            if (tb_linea_factura.getValueAt(i, 2).toString().toLowerCase().contains("agricola")) {
+                libreImpVentas += Double.parseDouble(tb_linea_factura.getValueAt(i, 4).toString());
             }
         }
         return subtotal;
@@ -636,8 +672,20 @@ public class UI_Factura extends javax.swing.JDialog {
 
     public void fechaVencimiento(int dias) {
         cal.add(Calendar.DAY_OF_YEAR, dias);
-        l_fechaVencimeinto.setText(df.format(cal.getTime()));
+        fechaExpiracion = cal.getTime();
+        l_fechaVencimeinto.setText(df.format(fechaExpiracion));
         cal.add(Calendar.DAY_OF_YEAR, -dias);
+    }
+
+    public void formatoSPCantidad() {
+        System.out.println("cacasss");
+        ((JSpinner.DefaultEditor) sp_cantidad.getEditor()).getTextField().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                Validacion.soloNumeros(e);
+            }
+            
+        });
     }
 
 

@@ -136,7 +136,7 @@ public class BL_Factura {
     }
 
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion,
-            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, int contado, Date fechaExpiracion) {
+            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, boolean contado, Date fechaExpiracion) {
         DAO_Factura daoFactura = new DAO_Factura();
         ArrayList<TO_LineaFactura> toListaLineas = new ArrayList<>();
         for (BL_LineaFactura blListaLinea : blListaLineas) {

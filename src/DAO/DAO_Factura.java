@@ -30,7 +30,7 @@ public class DAO_Factura {
     public ResultSet rs;
     
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion, 
-            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura,double subTotal, double impVenta, int contado, Date fechaExpiracion){
+            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura,double subTotal, double impVenta, boolean contado, Date fechaExpiracion){
         
          try {
           if(conexion == null || conexion.isClosed()){
@@ -46,7 +46,7 @@ public class DAO_Factura {
           cmd.setDouble(5, subTotal);
           cmd.setDouble(6, impVenta);
           cmd.setDouble(7, precioTotal);
-          cmd.setInt(8, contado);
+          cmd.setBoolean(8, contado);
           cmd.execute();
           
           int idFactura = ultimoIdFactura();
@@ -140,10 +140,11 @@ public ArrayList<TO_Factura> cargarFactura(){
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
             }
-            cmd = conexion.prepareStatement("SELECT * FROM Factura ORDER BY Factura.fecha DESC limit 50");
+            cmd = conexion.prepareStatement("SELECT * FROM Factura ORDER BY Factura.FechaExpiracion DESC limit 50");
             rs = cmd.executeQuery();
             while(rs.next()){
-                lista.add(new TO_Factura(rs.getInt("idFactura"),rs.getString("NombreCliente"),rs.getString("TelefonoCliente"),rs.getString("DireccionCliente"),rs.getDouble("PrecioTotal"), rs.getDate("Fecha"),rs.getDouble("SubTotal"),rs.getDouble("ImpVenta"),rs.getBoolean("Contado"),daoLinea.cargarLineasFacturaId(rs.getInt("idFactura"))));
+                lista.add(new TO_Factura(rs.getInt("idFactura"),rs.getString("NombreCliente"),rs.getString("TelefonoCliente"),rs.getString("DireccionCliente"),
+                        rs.getDouble("PrecioTotal"), rs.getDate("FechaExpiracion"),rs.getDouble("SubTotal"),rs.getDouble("ImpVenta"),rs.getBoolean("Contado"),daoLinea.cargarLineasFacturaId(rs.getInt("idFactura"))));
             }
             
         
