@@ -110,9 +110,10 @@ public class BL_Llanta extends BL_Producto{
         return listaBlLlantas;
     }
     
-    public boolean actualizarCantidad(){
+    @Override
+    public boolean actualizarCantidad(int cantidad){
         DAO_Llanta daoLlanta = new DAO_Llanta();
-        return daoLlanta.actualizarCantidad(this.idProducto, this.cantidad);
+        return daoLlanta.actualizarCantidad(this.idProducto, this.cantidad-cantidad);
     }
 
     @Override

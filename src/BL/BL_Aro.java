@@ -84,10 +84,10 @@ public class BL_Aro extends BL_Producto{
         DAO_Aro daoAro = new DAO_Aro();
         return daoAro.eliminarAro(idProducto);
     }
-    
-    public boolean actualizarCantidad(){
+    @Override
+    public boolean actualizarCantidad(int cantidad){
         DAO_Aro daoAro = new DAO_Aro();
-        return daoAro.actualizarCantidad(this.idProducto, this.cantidad);
+        return daoAro.actualizarCantidad(this.idProducto, this.cantidad-cantidad);
     }
 
     @Override
