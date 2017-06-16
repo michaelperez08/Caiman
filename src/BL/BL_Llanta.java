@@ -28,6 +28,16 @@ public class BL_Llanta extends BL_Producto{
        this.NumeroCapas = NumeroCapas;
        this.TipoLlanta = TipoLlanta;
    }
+   
+   public BL_Llanta(BL_Llanta llanta){
+       super(llanta.getCantidad(), llanta.getIdProducto());
+       this.NumeroLlanta = llanta.NumeroLlanta;
+       this.Marca = llanta.Marca;
+       this.Diseno = llanta.Diseno;
+       this.NumeroCapas = llanta.NumeroCapas;
+       this.TipoLlanta = llanta.TipoLlanta;
+   }
+   
    public BL_Llanta(String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
        super(Cantidad);
        this.NumeroLlanta = NumeroLlanta;

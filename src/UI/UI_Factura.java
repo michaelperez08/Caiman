@@ -517,13 +517,22 @@ public class UI_Factura extends javax.swing.JDialog {
         int id=0;
         if(detalle instanceof BL_Producto){
             id = ((BL_Producto) detalle).getIdProducto();
+            getProductoIngresado(detalle);
         }
         ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle.toString(), precio, precioLinea});
         calcularTotales();
         listaProductos.remove(productoNuevaLinea);
     }
     
-    public void getLineaIngresar(){
+    public void getProductoIngresado(Object producto){
+        BL_Producto productoLinea;
+        if(producto instanceof BL_Llanta){
+            producto = new BL_Llanta((BL_Llanta)producto);
+        }else if(producto instanceof BL_Aro){
+            producto = new BL_Aro((BL_Aro)producto);
+        }else{
+            Mensajes.mensajeError("No sirvio", "Error");
+        }
         
     }
 
