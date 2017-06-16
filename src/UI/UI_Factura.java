@@ -517,14 +517,15 @@ public class UI_Factura extends javax.swing.JDialog {
         int id=0;
         if(detalle instanceof BL_Producto){
             id = ((BL_Producto) detalle).getIdProducto();
-            getProductoIngresado(detalle);
+            Runnable run = () -> ((BL_Producto) detalle).setCantidad(cantidad);
+            //getProductoIngresado(detalle, );
         }
         ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle.toString(), precio, precioLinea});
         calcularTotales();
         listaProductos.remove(productoNuevaLinea);
     }
     
-    public void getProductoIngresado(Object producto){
+    public void getProductoIngresado(Object producto, Runnable run){
         BL_Producto productoLinea;
         if(producto instanceof BL_Llanta){
             producto = new BL_Llanta((BL_Llanta)producto);
@@ -533,7 +534,7 @@ public class UI_Factura extends javax.swing.JDialog {
         }else{
             Mensajes.mensajeError("No sirvio", "Error");
         }
-        
+        run.run();
     }
 
     public void eliminarLinea() {
