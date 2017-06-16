@@ -5,6 +5,9 @@
  */
 package BL;
 
+import DAO.DAO_Aro;
+import DAO.DAO_Llanta;
+
 /**
  *
  * @author michael
@@ -42,6 +45,9 @@ public abstract class BL_Producto {
         this.idProducto = idProducto;
     }
     
+    public boolean actualizarCantidad(int cantidad){
+        return false;
+    }
     
     
 }

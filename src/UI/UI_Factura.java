@@ -548,10 +548,10 @@ public class UI_Factura extends javax.swing.JDialog {
         double precio = Double.parseDouble(tf_precio.getText());
         int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
         double precioLinea = cantidad * precio;
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(cantidad, fila, 0);
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(detalle, fila, 1);
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precio, fila, 2);
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 3);
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(cantidad, fila, 1);
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(detalle, fila, 2);
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precio, fila, 3);
+        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 4);
         calcularTotales();
         limpiarCamposProducto();
         bt_agregar_linea.setText("Agregar Linea");
@@ -560,9 +560,9 @@ public class UI_Factura extends javax.swing.JDialog {
 
     public void llenarCamposLinea() {
         lineaSeleccionada = tb_linea_factura.getSelectedRow();
-        sp_cantidad.setValue(tb_linea_factura.getValueAt(lineaSeleccionada, 0));
-        filtrar_cb_producto(tb_linea_factura.getValueAt(lineaSeleccionada, 1) + "");
-        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 2) + "");
+        sp_cantidad.setValue(tb_linea_factura.getValueAt(lineaSeleccionada, 1));
+        filtrar_cb_producto(tb_linea_factura.getValueAt(lineaSeleccionada, 2) + "");
+        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3) + "");
         bt_agregar_linea.setText("Modificar");
         tb_linea_factura.setCellSelectionEnabled(false);
 
