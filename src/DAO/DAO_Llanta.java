@@ -164,7 +164,36 @@ public class DAO_Llanta {
         }
         return false;
                 
-        
+    }
+    
+    public boolean actualizarCantidad(int idLlanta, int cantidad){
+        try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            
+            cmd = conexion.prepareStatement("UPDATE Llanta SET Cantidad=? WHERE idLlanta=?;");
+            cmd.setInt(1, cantidad);
+            cmd.setInt(2, idLlanta);
+            cmd.execute();
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+        }
+        return false;
     }
     
 }

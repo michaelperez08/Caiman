@@ -84,12 +84,17 @@ public class BL_Aro extends BL_Producto{
         DAO_Aro daoAro = new DAO_Aro();
         return daoAro.eliminarAro(idProducto);
     }
+    
+    public boolean actualizarCantidad(){
+        DAO_Aro daoAro = new DAO_Aro();
+        return daoAro.actualizarCantidad(this.idProducto, this.cantidad);
+    }
 
     @Override
     public String toString() {
         return "Aro " + NumeroAro +" "+ Marca +" "+ Codigo;
     }
     
-    
+   
     
 }

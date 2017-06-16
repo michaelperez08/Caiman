@@ -154,5 +154,36 @@ public class DAO_Aro {
         }
         return false;
     }
+    
+    public boolean actualizarCantidad(int idAro, int cantidad){
+        try {
+                if (conexion == null || conexion.isClosed()) {
+                    conexion = daoConexion.nuevaConexion();
+                }
+            
+            cmd = conexion.prepareStatement("UPDATE Aro SET Cantidad=? WHERE idAro=?;");
+            cmd.setInt(1, cantidad);
+            cmd.setInt(2, idAro);
+            cmd.execute();
+            if(cmd.getUpdateCount()>0){
+                return true;
+            }else{
+                return false;
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+        }
+        return false;
+    }
+    
 
 }
