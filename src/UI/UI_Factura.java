@@ -747,7 +747,7 @@ public class UI_Factura extends javax.swing.JDialog {
         BL_Cliente cl = new BL_Cliente(facturaVer.getNombreCliente(), facturaVer.getDireccionCliente(), 
                 facturaVer.getCedulaCliente(), facturaVer.getTelefonoCliente());
 
-        
+        bloquearElementos();
         tf_direccion.setText(facturaVer.getDireccionCliente());
         tf_cedula.setText(facturaVer.getCedulaCliente());
         tf_telefono.setText(facturaVer.getTelefonoCliente());
@@ -756,6 +756,23 @@ public class UI_Factura extends javax.swing.JDialog {
         }
         l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion()+"");
         calcularTotales();
+    }
+    
+    public void bloquearElementos(){
+        cb_semanas.setEnabled(false);
+        cb_producto.setEnabled(false);
+        cb_nombre_cliente.setEnabled(false);
+        tf_cedula.setEditable(false);
+        tf_precio.setEditable(false);
+        tf_direccion.setEditable(false);
+        tf_telefono.setEditable(false);
+        sp_cantidad.setEnabled(false);
+        bt_agregar_linea.setEnabled(false);
+        bt_imprimir.setEnabled(false);
+        rb_cliente_nuevo.setEnabled(false);
+        rb_contado.setEnabled(false);
+        rb_credito.setEnabled(false);
+        rb_producto_nuevo.setEnabled(false);
     }
 
 
