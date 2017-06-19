@@ -743,8 +743,9 @@ public class UI_Factura extends javax.swing.JDialog {
     }
     
     public void cargarFactura(BL_Factura facturaVer){
-        cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
         
+        cb_nombre_cliente.addItem(facturaVer.getNombreCliente());
+        cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
         tf_direccion.setText(facturaVer.getDireccionCliente());
         tf_cedula.setText(facturaVer.getCedulaCliente());
         tf_telefono.setText(facturaVer.getTelefonoCliente());
@@ -752,7 +753,31 @@ public class UI_Factura extends javax.swing.JDialog {
             ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{tempLinea.getId(), tempLinea.getCantidad(), tempLinea.getDetalle(), tempLinea.getPrecioUnitario(), tempLinea.getPrecioTotalLinea()});
         }
         l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion()+"");
+        if(facturaVer.getContado()){
+            rb_contado.setSelected(true);
+            rb_credito.setEnabled(false);
+        }else{
+            rb_credito.setSelected(true);
+            rb_contado.setEnabled(false);
+        }
         calcularTotales();
+        bloquearElementos();
+    }
+    
+    public void bloquearElementos(){
+        cb_semanas.setEnabled(false);
+        cb_producto.setEnabled(false);
+        cb_nombre_cliente.setEditable(false);
+        tf_cedula.setEditable(false);
+        tf_precio.setEnabled(false);
+        tf_direccion.setEditable(false);
+        tf_telefono.setEditable(false);
+        sp_cantidad.setEnabled(false);
+        bt_agregar_linea.setEnabled(false);
+        bt_imprimir.setEnabled(false);
+        rb_cliente_nuevo.setEnabled(false);
+        rb_producto_nuevo.setEnabled(false);
+        quitarFlechaCB(cb_nombre_cliente);
     }
 
 

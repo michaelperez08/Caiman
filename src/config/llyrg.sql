@@ -31,7 +31,7 @@ CREATE TABLE `Aro` (
   `Codigo` varchar(10) DEFAULT NULL,
   `Cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`idAro`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `Aro` (
 
 LOCK TABLES `Aro` WRITE;
 /*!40000 ALTER TABLE `Aro` DISABLE KEYS */;
-INSERT INTO `Aro` VALUES (1,'Horizon','15x8','25hY',4),(2,'Horizon','14','LK8',5),(3,'BBS','20','KJB4',6),(4,'BBS','15x8','LK5',4),(5,'Horizon','15','KJ5',6);
+INSERT INTO `Aro` VALUES (1,'Horizon','15x8','25hY',2),(2,'Horizon','14','LK8',5),(3,'brigstone','15','b15',4),(5,'Horizon','15','KJ5',6),(6,'PruebaBLIngresar','26','PBLIn',2);
 /*!40000 ALTER TABLE `Aro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,8 +89,9 @@ CREATE TABLE `Factura` (
   `ImpVenta` double NOT NULL,
   `PrecioTotal` double NOT NULL,
   `Contado` tinyint(4) NOT NULL,
+  `CedulaCliente` varchar(25) NOT NULL,
   PRIMARY KEY (`idFactura`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +100,7 @@ CREATE TABLE `Factura` (
 
 LOCK TABLES `Factura` WRITE;
 /*!40000 ALTER TABLE `Factura` DISABLE KEYS */;
-INSERT INTO `Factura` VALUES (1,'Naruto','90909090','konoha','2017-06-09',9999,6666,77777,0),(2,'Alberto Ugalde Murillo','88996655','','2017-06-29',31000,4030,35030,0),(3,'Michael Perez Murillo','24543624 87363723 ','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','2017-06-29',1000,130,1130,0);
+INSERT INTO `Factura` VALUES (1,'Naruto','90909090','konoha','2017-06-09',9999,6666,77777,0,''),(2,'Alberto Ugalde Murillo','88996655','','2017-06-29',31000,4030,35030,0,''),(3,'Michael Perez Murillo','24543624 87363723 ','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','2017-06-29',1000,130,1130,0,''),(4,'Victor Ugalde Quesada','55661100','','2017-06-29',25000,3250,28250,0,''),(5,'Antonio Alavarez','3456543 3434455 ','Pital de San Carlos','2017-07-01',60000,7800,67800,0,'2245678');
 /*!40000 ALTER TABLE `Factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +121,7 @@ CREATE TABLE `LineaFactura` (
   PRIMARY KEY (`idLineaFactura`),
   KEY `fk_LineaFactura_1_idx` (`idFactura`),
   CONSTRAINT `fk_LineaFactura_1` FOREIGN KEY (`idFactura`) REFERENCES `Factura` (`idFactura`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +130,7 @@ CREATE TABLE `LineaFactura` (
 
 LOCK TABLES `LineaFactura` WRITE;
 /*!40000 ALTER TABLE `LineaFactura` DISABLE KEYS */;
-INSERT INTO `LineaFactura` VALUES (1,1,0,'detalle#0',0,0),(2,1,1,'detalle#1',100,1000),(3,1,2,'detalle#2',200,2000),(4,1,3,'detalle#3',300,3000),(5,1,4,'detalle#4',400,4000),(6,1,5,'detalle#5',500,5000),(7,1,6,'detalle#6',600,6000),(8,1,7,'detalle#7',700,7000),(9,1,8,'detalle#8',800,8000),(10,1,9,'detalle#9',900,9000),(11,2,3,'Aro 15x8 Horizon 25hY',10000,30000),(12,2,2,'Aro 15x8 BBS LK5',500,1000),(13,3,1,'Aro 15x8 Horizon 25hY',1000,1000);
+INSERT INTO `LineaFactura` VALUES (1,1,0,'detalle#0',0,0),(2,1,1,'detalle#1',100,1000),(3,1,2,'detalle#2',200,2000),(4,1,3,'detalle#3',300,3000),(5,1,4,'detalle#4',400,4000),(6,1,5,'detalle#5',500,5000),(7,1,6,'detalle#6',600,6000),(8,1,7,'detalle#7',700,7000),(9,1,8,'detalle#8',800,8000),(10,1,9,'detalle#9',900,9000),(11,2,3,'Aro 15x8 Horizon 25hY',10000,30000),(12,2,2,'Aro 15x8 BBS LK5',500,1000),(13,3,1,'Aro 15x8 Horizon 25hY',1000,1000),(14,4,1,'Aro 20 BBS KJB4',10000,10000),(15,4,3,'Aro 15x8 BBS LK5',5000,15000),(16,5,1,'Aro 15x8 Horizon 25hY',10000,10000),(17,5,1,'Aro 26 PruebaBLIngresar PBLIn',50000,50000);
 /*!40000 ALTER TABLE `LineaFactura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,4 +228,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-14 11:19:30
+-- Dump completed on 2017-06-19 10:10:36
