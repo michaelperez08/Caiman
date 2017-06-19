@@ -47,6 +47,7 @@ public class UI_Factura extends javax.swing.JDialog {
     private int lineaSeleccionada;
     private Date fechaExpiracion;
     private DefaultTableModel dtmLineas;
+    public boolean actulizarLista;
 
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -55,6 +56,7 @@ public class UI_Factura extends javax.swing.JDialog {
         setModeloTbLineasProducto();
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
+        actulizarLista = false;
     }
 
     public UI_Factura(java.awt.Frame parent, boolean modal, ArrayList<BL_Cliente> listaClientes, ArrayList<BL_Llanta> listaLlantas, ArrayList<BL_Aro> listaAros) {
@@ -418,8 +420,11 @@ public class UI_Factura extends javax.swing.JDialog {
                     impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula())) {
                 Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
                 descontarCantidadProductosFactura();
+                actulizarLista = true;
+                  this.dispose();
             } else {
                 Mensajes.mensajeInfomracion("Noo Sirviooo", "Factura NO Agregada");
+                  
             }
         }else{
             Mensajes.mensajeInfomracion("No ha seleccionado cliente", "Factura");
