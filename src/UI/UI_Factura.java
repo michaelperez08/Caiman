@@ -425,23 +425,26 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     private void bt_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_imprimirActionPerformed
         BL_Cliente clienteFactura = getClienteSeleccionado();
-        if (cliente_seleccionado!=null && !rb_cliente_nuevo.isSelected()) {
-            double subTotal = Double.parseDouble(l_subTotal.getText());
-            double impVentas = Double.parseDouble(l_impVentas.getText());
-            double total = Double.parseDouble(l_total.getText());
-            BL_Factura blfac = new BL_Factura(0, "", clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
-                    fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
-            if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
-                    impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula())) {
-                Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
-                descontarCantidadProductosFactura();
-                actulizarLista = true;
-                  this.dispose();
+        if (clienteFactura != null) {
+            if (!l_subTotal.getText().isEmpty()) {
+                double subTotal = Double.parseDouble(l_subTotal.getText());
+                double impVentas = Double.parseDouble(l_impVentas.getText());
+                double total = Double.parseDouble(l_total.getText());
+                BL_Factura blfac = new BL_Factura(0, "", clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
+                        fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
+                if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
+                        impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula())) {
+                    Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
+                    descontarCantidadProductosFactura();
+                    actulizarLista = true;
+                    this.dispose();
+                } else {
+                    Mensajes.mensajeError("Problema al ingresar la factura\nSi el porblema persiste contacte al provedor del sistema", "Factura no Agregada");
+                }
             } else {
-                Mensajes.mensajeInfomracion("Noo Sirviooo", "Factura NO Agregada");
-                  
+                Mensajes.mensajeInfomracion("No ha ingresado ningun producto", "Imprimir");
             }
-        }else{
+        } else {
             Mensajes.mensajeInfomracion("No ha seleccionado cliente", "Factura");
         }
     }//GEN-LAST:event_bt_imprimirActionPerformed
@@ -527,7 +530,11 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     public BL_Cliente getClienteSeleccionado() {
         if (rb_cliente_nuevo.isSelected()) {
-            return new BL_Cliente(cb_nombre_cliente.getSelectedItem().toString(), tf_direccion.getText(), "", tf_cedula.getText(), tf_telefono.getText());
+            if (cb_nombre_cliente.getSelectedItem() != null && !cb_nombre_cliente.getSelectedItem().toString().isEmpty()) {
+                return new BL_Cliente(cb_nombre_cliente.getSelectedItem().toString(), tf_direccion.getText(), "", tf_cedula.getText(), tf_telefono.getText());
+            }else{
+                return null;
+            }
         } else {
             return cliente_seleccionado;
         }
@@ -773,9 +780,9 @@ public final class UI_Factura extends javax.swing.JDialog {
         tb_linea_factura.getColumnModel().getColumn(0).setMinWidth(0);
         tb_linea_factura.getColumnModel().getColumn(0).setMaxWidth(0);
     }
-    
-    public void cargarFactura(BL_Factura facturaVer){
-        
+
+    public void cargarFactura(BL_Factura facturaVer) {
+
         cb_nombre_cliente.addItem(facturaVer.getNombreCliente());
         cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
         tf_direccion.setText(facturaVer.getDireccionCliente());
@@ -784,19 +791,19 @@ public final class UI_Factura extends javax.swing.JDialog {
         for (BL_LineaFactura tempLinea : facturaVer.Retornar()) {
             ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{tempLinea.getId(), tempLinea.getCantidad(), tempLinea.getDetalle(), tempLinea.getPrecioUnitario(), tempLinea.getPrecioTotalLinea()});
         }
-        l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion()+"");
-        if(facturaVer.getContado()){
+        l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion() + "");
+        if (facturaVer.getContado()) {
             rb_contado.setSelected(true);
             rb_credito.setEnabled(false);
-        }else{
+        } else {
             rb_credito.setSelected(true);
             rb_contado.setEnabled(false);
         }
         calcularTotales();
         bloquearElementos();
     }
-    
-    public void bloquearElementos(){
+
+    public void bloquearElementos() {
         cb_semanas.setVisible(false);
         cb_producto.setEnabled(false);
         cb_nombre_cliente.setEditable(false);
