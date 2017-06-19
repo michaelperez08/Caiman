@@ -867,6 +867,9 @@ public final class Principal extends javax.swing.JFrame {
     private void bt_agregarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarFacturaActionPerformed
         UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled, listaClientes, listaLlantas, listaAros);
         uif.setVisible(true);
+        if (uif.actulizarLista) {
+            cargarFacturas();
+        }
     }//GEN-LAST:event_bt_agregarFacturaActionPerformed
 
     private void jt_facturasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_facturasMouseReleased
