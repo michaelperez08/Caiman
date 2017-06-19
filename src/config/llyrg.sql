@@ -4,7 +4,7 @@ USE `LlantasyReencauchesGriegos`;
 --
 -- Host: localhost    Database: LlantasyReencauchesGriegos
 -- ------------------------------------------------------
--- Server version	5.7.18-0ubuntu0.16.04.1
+-- Server version	5.7.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -54,10 +54,10 @@ DROP TABLE IF EXISTS `Cliente`;
 CREATE TABLE `Cliente` (
   `idCliente` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) NOT NULL,
-  `Direccion_Simple` varchar(100) NOT NULL,
-  `Direccion_Exacta` varchar(150) NOT NULL,
-  `Cedula` varchar(25) NOT NULL,
-  `Telefonos` varchar(45) NOT NULL,
+  `Direccion_Simple` varchar(100) DEFAULT NULL,
+  `Direccion_Exacta` varchar(150) DEFAULT NULL,
+  `Cedula` varchar(25) DEFAULT NULL,
+  `Telefonos` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`idCliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -68,7 +68,7 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
-INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207350735','24543624 87363723 '),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','','207450335','88996655'),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','','207450335','55661100'),(5,'Oscar Perez Lopez','Tacares, grecia, Alajuela','','208750456','24447567 87896534 '),(7,'Juan Rodriguez','Sarchi, Alajuela, Costa Rica','Del parque 50 mts sur','209840336','22222222 111111111 333333333 '),(9,'Antonio Alavarez','Pital de San Carlos','Por la salchichoneria de los caballeros del sodiaco, cerca de la entrada al inframundo permidada por haya','2245678','3456543 3434455 ');
+INSERT INTO `Cliente` VALUES (1,'Michael Perez Murillo','Alto Castro, Sarchi Sur, Valverde Vega','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207350735','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / '),(2,'Alberto Ugalde Murillo','Santa Gertrudis, Grecia, Alajuela','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207450335','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / '),(4,'Victor Ugalde Quesada','San Isidro, Poas, Alajuela','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','207450335','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / '),(5,'Oscar Perez Lopez','Tacares, grecia, Alajuela','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','208750456','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / '),(7,'Juan Rodriguez','Sarchi, Alajuela, Costa Rica','Del parque 50 mts sur','209840336','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / '),(9,'Antonio Alavarez','Pital de San Carlos','Por la salchichoneria de los caballeros del sodiaco, cerca de la entrada al inframundo permidada por haya','2245678','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / ');
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `Factura`;
 CREATE TABLE `Factura` (
   `idFactura` int(11) NOT NULL AUTO_INCREMENT,
   `NombreCliente` varchar(45) NOT NULL,
-  `TelefonoCliente` varchar(35) DEFAULT NULL,
+  `TelefonoCliente` varchar(60) DEFAULT NULL,
   `DireccionCliente` varchar(100) DEFAULT NULL,
   `FechaExpiracion` date NOT NULL,
   `SubTotal` double NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE `Factura` (
 
 LOCK TABLES `Factura` WRITE;
 /*!40000 ALTER TABLE `Factura` DISABLE KEYS */;
-INSERT INTO `Factura` VALUES (1,'Naruto','90909090','konoha','2017-06-09',9999,6666,77777,0,''),(2,'Alberto Ugalde Murillo','88996655','','2017-06-29',31000,4030,35030,0,''),(3,'Michael Perez Murillo','24543624 87363723 ','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','2017-06-29',1000,130,1130,0,''),(4,'Victor Ugalde Quesada','55661100','','2017-06-29',25000,3250,28250,0,''),(5,'Antonio Alavarez','3456543 3434455 ','Pital de San Carlos','2017-07-01',60000,7800,67800,0,'2245678');
+INSERT INTO `Factura` VALUES (1,'Naruto','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / ','konoha','2017-06-09',9999,6666,77777,0,'2074503624'),(2,'Alberto Ugalde Murillo','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / ','konoha','2017-06-29',31000,4030,35030,0,'2074503624'),(3,'Michael Perez Murillo','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / ','350 metros noreste de la escuela, despues del segundo muerto la segunda entrada a mano izquierda','2017-06-29',1000,130,1130,0,'2074503624'),(4,'Victor Ugalde Quesada','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / ','konoha','2017-06-29',25000,3250,28250,0,'2074503624'),(5,'Antonio Alavarez','(+889) 9665-5555 / (+506) 2454-3624 / (+506) 8766-3723 / ','Pital de San Carlos','2017-07-01',60000,7800,67800,0,'2074503624');
 /*!40000 ALTER TABLE `Factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,36 +188,6 @@ LOCK TABLES `Usuario` WRITE;
 INSERT INTO `Usuario` VALUES (1,'admin','admin','Estandar'),(2,'michael','mike9538','Administrador'),(6,'vic','1234','Estandar');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'LlantasyReencauchesGriegos'
---
-
---
--- Dumping routines for database 'LlantasyReencauchesGriegos'
---
-/*!50003 DROP PROCEDURE IF EXISTS `InsertarFacturaNueva` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarFacturaNueva`(
-IN NombreCliente varchar(45),IN TelefonoCliente varchar(35),IN DireccionCliente varchar(100), IN PrecioTotal double, OUT idFactura int)
-BEGIN
-insert into Factura (NombreCliente,TelefonoCliente,DireccionCliente,PrecioTotal,Fecha) 
-	values (NombreCliente, TelefonoCliente,DireccionCliente,PrecioTotal,current_date());
-select last_insert_id() into idFactura;    
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -228,4 +198,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-19 10:10:36
+-- Dump completed on 2017-06-19 10:42:49
