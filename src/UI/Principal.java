@@ -873,7 +873,9 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_agregarFacturaActionPerformed
 
     private void jt_facturasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_facturasMouseReleased
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            verFactura();
+        }
     }//GEN-LAST:event_jt_facturasMouseReleased
 
     private void tf_buscarFacturaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarFacturaKeyReleased
@@ -934,20 +936,23 @@ public final class Principal extends javax.swing.JFrame {
     public void menuitem_ver(){
        int tabseleccionado = panel_tabs.getSelectedIndex();
         if(tabseleccionado==1){
-            tabseleccionado = tb_productos.getSelectedIndex()+1;
+            tabseleccionado = tb_productos.getSelectedIndex()+4;
         }
         switch(tabseleccionado){
             case 0:
                 verCliente();
                 break;
-            case 1:
+            case 4:
                 verLlanta();
                 break;
             case 2:
-                verAro();
+                verFactura();
                 break;
             case 3:
                 verUsuario();
+                break;
+            case 5:
+                verAro();
                 break;
         }
     }
