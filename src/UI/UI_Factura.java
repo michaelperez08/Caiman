@@ -38,6 +38,7 @@ public class UI_Factura extends javax.swing.JDialog {
      */
     private ArrayList<BL_Cliente> listaClientes;
     private ArrayList<BL_Producto> listaProductos;
+    private ArrayList<BL_Producto> listaProductosFacturados;
     private BL_Cliente cliente_seleccionado;
     private DateFormat df;
     private Calendar cal;
@@ -46,7 +47,7 @@ public class UI_Factura extends javax.swing.JDialog {
     private int lineaSeleccionada;
     private Date fechaExpiracion;
     private DefaultTableModel dtmLineas;
-    
+
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -407,17 +408,21 @@ public class UI_Factura extends javax.swing.JDialog {
 
     private void bt_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_imprimirActionPerformed
         BL_Cliente clienteFactura = getClienteSeleccionado();
-        double subTotal = Double.parseDouble(l_subTotal.getText());
-        double impVentas = Double.parseDouble(l_impVentas.getText());
-        double total = Double.parseDouble(l_total.getText());
-        
-        BL_Factura blfac = new BL_Factura(0, null, clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, 
-                fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos(),clienteFactura.getCedula());
-        if(blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
-                impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula())){
-            Mensajes.mensajeInfomracion("Sirviooo", "Factura Agregada");
+        if (cliente_seleccionado!=null) {
+            double subTotal = Double.parseDouble(l_subTotal.getText());
+            double impVentas = Double.parseDouble(l_impVentas.getText());
+            double total = Double.parseDouble(l_total.getText());
+            BL_Factura blfac = new BL_Factura(0, "", clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
+                    fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
+            if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
+                    impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula())) {
+                Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
+                descontarCantidadProductosFactura();
+            } else {
+                Mensajes.mensajeInfomracion("Noo Sirviooo", "Factura NO Agregada");
+            }
         }else{
-            Mensajes.mensajeInfomracion("Noo Sirviooo", "Factura NO Agregada");
+            Mensajes.mensajeInfomracion("No ha seleccionado cliente", "Factura");
         }
     }//GEN-LAST:event_bt_imprimirActionPerformed
 
@@ -447,11 +452,11 @@ public class UI_Factura extends javax.swing.JDialog {
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
         if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().isEmpty()) {
             if (bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")) {
-                if(!rb_producto_nuevo.isSelected() && cb_producto.getSelectedItem() instanceof BL_Producto){
+                if (!rb_producto_nuevo.isSelected() && cb_producto.getSelectedItem() instanceof BL_Producto) {
                     agregarLineaFactura();
-                }else if(!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)){
+                } else if (!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)) {
                     Mensajes.mensajeInfomracion("El producto seleccionado no se encunetra registrado", "Ingresar producto");
-                }else{
+                } else {
                     agregarLineaFactura();
                 }
             } else {
@@ -488,43 +493,60 @@ public class UI_Factura extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cb_productoActionPerformed
 
-    public BL_Cliente getClienteSeleccionado(){
-        if(rb_cliente_nuevo.isSelected()){
+    public BL_Cliente getClienteSeleccionado() {
+        if (rb_cliente_nuevo.isSelected()) {
             return new BL_Cliente(cb_nombre_cliente.getSelectedItem().toString(), tf_direccion.getText(), "", tf_cedula.getText(), tf_telefono.getText());
-        }else{
+        } else {
             return cliente_seleccionado;
         }
     }
-    
-    public ArrayList<BL_LineaFactura> getListaProductos(){
-        ArrayList<BL_LineaFactura> listaLineasFactura= new ArrayList<BL_LineaFactura>();
-         for (int i = 0; i < tb_linea_factura.getRowCount(); i++) {
-             int idProducto = Integer.parseInt(tb_linea_factura.getValueAt(i, 0).toString());
-             int cantidad = Integer.parseInt(tb_linea_factura.getValueAt(i, 1).toString());
-             String detalleLinea = tb_linea_factura.getValueAt(i, 2).toString();
-             double pUnitario = Double.parseDouble(tb_linea_factura.getValueAt(i, 3).toString());
-             double pTotal = Double.parseDouble(tb_linea_factura.getValueAt(i, 4).toString());
-             listaLineasFactura.add(new BL_LineaFactura(idProducto, cantidad, detalleLinea, pUnitario, pTotal));
+
+    public void descontarCantidadProductosFactura() {
+        for (int i = 0; i < tb_linea_factura.getRowCount(); i++) {
+            if (!(Boolean) tb_linea_factura.getValueAt(i, 5)) {
+                BL_Producto producto = (BL_Producto) tb_linea_factura.getValueAt(i, 2);
+                int cantidadFacturada = Integer.parseInt(tb_linea_factura.getValueAt(i, 1).toString());
+                Runnable descontarCantidad = () -> producto.actualizarCantidad(cantidadFacturada);
+                ejecutarMetodoProducto(producto, descontarCantidad);
+            }
+        }
+    }
+
+    public ArrayList<BL_LineaFactura> getListaProductos() {
+        ArrayList<BL_LineaFactura> listaLineasFactura = new ArrayList<BL_LineaFactura>();
+        for (int i = 0; i < tb_linea_factura.getRowCount(); i++) {
+            String detalleLinea = tb_linea_factura.getValueAt(i, 2).toString();
+            int idProducto = Integer.parseInt(tb_linea_factura.getValueAt(i, 0).toString());
+            int cantidad = Integer.parseInt(tb_linea_factura.getValueAt(i, 1).toString());
+            double pUnitario = Double.parseDouble(tb_linea_factura.getValueAt(i, 3).toString());
+            double pTotal = Double.parseDouble(tb_linea_factura.getValueAt(i, 4).toString());
+            listaLineasFactura.add(new BL_LineaFactura(idProducto, cantidad, detalleLinea, pUnitario, pTotal));
+
         }
         return listaLineasFactura;
     }
-    
+
     public void agregarLineaFactura() {
         double precio = Double.parseDouble(tf_precio.getText());
         int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
         double precioLinea = cantidad * precio;
         Object detalle = cb_producto.getSelectedItem();
-        int id=0;
-        if(detalle instanceof BL_Producto){
+        int id = 0;
+        if (detalle instanceof BL_Producto) {
             id = ((BL_Producto) detalle).getIdProducto();
         }
-        ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle.toString(), precio, precioLinea});
+        ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle, precio, precioLinea, rb_producto_nuevo.isSelected()});
         calcularTotales();
         listaProductos.remove(productoNuevaLinea);
     }
-    
-    public void getLineaIngresar(){
-        
+
+    public void ejecutarMetodoProducto(Object producto, Runnable run) {
+        if (producto instanceof BL_Llanta) {
+            producto = new BL_Llanta((BL_Llanta) producto);
+        } else if (producto instanceof BL_Aro) {
+            producto = new BL_Aro((BL_Aro) producto);
+        }
+        run.run();
     }
 
     public void eliminarLinea() {
@@ -606,7 +628,7 @@ public class UI_Factura extends javax.swing.JDialog {
     }
 
     public void productoNuevo(boolean b) {
-        
+
     }
 
     public void formatoCBProductos() {
@@ -701,12 +723,12 @@ public class UI_Factura extends javax.swing.JDialog {
             public void keyTyped(KeyEvent e) {
                 Validacion.soloNumeros(e);
             }
-            
+
         });
     }
-    
-    public void setModeloTbLineasProducto(){
-    String[] nombreColumnas = {"Id", "Cantidad", "Detalle", "Precio Unitario", "Precio Linea","Producto Nuevo"};
+
+    public void setModeloTbLineasProducto() {
+        String[] nombreColumnas = {"Id", "Cantidad", "Detalle", "Precio Unitario", "Precio Linea", "Producto Nuevo"};
         dtmLineas = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {

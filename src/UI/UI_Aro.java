@@ -27,6 +27,7 @@ public class UI_Aro extends javax.swing.JDialog {
         actualizarLista=false;
         this.setLocationRelativeTo(null);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

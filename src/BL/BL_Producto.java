@@ -19,7 +19,7 @@ public abstract class BL_Producto {
 
     public BL_Producto(int cantidad, int idProducto) {
         this.cantidad = cantidad;
-        this.idProducto = cantidad;
+        this.idProducto = idProducto;
     }
     
     public BL_Producto(int cantidad) {

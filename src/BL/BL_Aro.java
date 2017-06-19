@@ -25,12 +25,22 @@ public class BL_Aro extends BL_Producto{
        this.Marca = Marca;
        this.Codigo = Codigo;
    }
+   
+   public BL_Aro(BL_Aro aro){
+       super(aro.getCantidad(), aro.getIdProducto());
+       this.NumeroAro = aro.NumeroAro;
+       this.Marca = aro.Marca;
+       this.Codigo = aro.Codigo;
+   }
+   
   public BL_Aro(String NumeroAro, String Marca,int Cantidad,String Codigo){
        super(Cantidad);
        this.NumeroAro = NumeroAro;
        this.Marca = Marca;
        this.Codigo = Codigo;
    }
+  
+  
    
    public BL_Aro(){
        
