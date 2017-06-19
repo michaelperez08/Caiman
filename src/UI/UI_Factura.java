@@ -743,10 +743,7 @@ public class UI_Factura extends javax.swing.JDialog {
     }
     
     public void cargarFactura(BL_Factura facturaVer){
-        //Nombre cliente
-        BL_Cliente cl = new BL_Cliente(facturaVer.getNombreCliente(), facturaVer.getDireccionCliente(), 
-                facturaVer.getCedulaCliente(), facturaVer.getTelefonoCliente());
-
+        cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
         
         tf_direccion.setText(facturaVer.getDireccionCliente());
         tf_cedula.setText(facturaVer.getCedulaCliente());

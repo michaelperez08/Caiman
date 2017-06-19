@@ -1190,12 +1190,6 @@ public final class Principal extends javax.swing.JFrame {
             facturaVer = listaFactura.get(numeroFila);
             uif.cargarFactura(facturaVer);
             uif.setVisible(true);
-//            BL_Cliente blCliente = new BL_Cliente();
-//            blCliente.setNombre(jt_facturas.getValueAt(fila, 1)+"");
-//            blCliente.setTelefonos(jt_facturas.getValueAt(fila, 2)+"");
-//            blCliente.setCedula(jt_facturas.getValueAt(fila, 5)+"");
-//            blCliente.setDireccion_simple(jt_facturas.getValueAt(fila, 6)+"");
-//            uif.cargarClienteSeleccionadoFactura(blCliente);
         }
     }
     
