@@ -759,7 +759,7 @@ public class UI_Factura extends javax.swing.JDialog {
     }
     
     public void bloquearElementos(){
-        cb_semanas.setEnabled(false);
+        cb_semanas.setVisible(false);
         cb_producto.setEnabled(false);
         cb_nombre_cliente.setEnabled(false);
         tf_cedula.setEditable(false);
@@ -773,6 +773,8 @@ public class UI_Factura extends javax.swing.JDialog {
         rb_contado.setEnabled(false);
         rb_credito.setEnabled(false);
         rb_producto_nuevo.setEnabled(false);
+        jmi_eliminar.setEnabled(false);
+        jmi_modificar.setEnabled(false);
     }
 
 
