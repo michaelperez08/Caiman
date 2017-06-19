@@ -67,7 +67,7 @@ public final class Principal extends javax.swing.JFrame {
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_usuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jt_aros1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jt_facturas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         resaltado=0;
     }
 
@@ -120,7 +120,7 @@ public final class Principal extends javax.swing.JFrame {
         bt_verFactura = new javax.swing.JButton();
         bt_agregarFactura = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jt_aros1 = new javax.swing.JTable();
+        jt_facturas = new javax.swing.JTable();
         tf_buscarFactura = new javax.swing.JTextField();
         jl_Buscar3 = new javax.swing.JLabel();
         jcb_filtroBusquedaFactura = new javax.swing.JComboBox();
@@ -490,8 +490,8 @@ public final class Principal extends javax.swing.JFrame {
 
         jScrollPane5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
 
-        jt_aros1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jt_aros1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_facturas.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jt_facturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -502,13 +502,13 @@ public final class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jt_aros1.setComponentPopupMenu(pum_tb);
-        jt_aros1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jt_facturas.setComponentPopupMenu(pum_tb);
+        jt_facturas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jt_aros1MouseReleased(evt);
+                jt_facturasMouseReleased(evt);
             }
         });
-        jScrollPane5.setViewportView(jt_aros1);
+        jScrollPane5.setViewportView(jt_facturas);
 
         jp_facturacion.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 620));
 
@@ -861,6 +861,7 @@ public final class Principal extends javax.swing.JFrame {
 
     private void bt_verFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verFacturaActionPerformed
         // TODO add your handling code here:
+        verFactura();
     }//GEN-LAST:event_bt_verFacturaActionPerformed
 
     private void bt_agregarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarFacturaActionPerformed
@@ -868,16 +869,16 @@ public final class Principal extends javax.swing.JFrame {
         uif.setVisible(true);
     }//GEN-LAST:event_bt_agregarFacturaActionPerformed
 
-    private void jt_aros1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_aros1MouseReleased
+    private void jt_facturasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_facturasMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jt_aros1MouseReleased
+    }//GEN-LAST:event_jt_facturasMouseReleased
 
     private void tf_buscarFacturaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarFacturaKeyReleased
            if (evt.getKeyCode() == KeyEvent.VK_F1) {
             //new AyudaF1().abrirAyuda();
         } else {
             filtrarFactura();
-            jt_aros1.setRowSorter(trsfiltroFactura);
+            jt_facturas.setRowSorter(trsfiltroFactura);
         }
     }//GEN-LAST:event_tf_buscarFacturaKeyReleased
 
@@ -1113,10 +1114,10 @@ public final class Principal extends javax.swing.JFrame {
                         ,factura_temp.getFechaExpiracion(), factura_temp.getPrecioTotal()});
             }
         }
-        jt_aros1.setModel(dtmFacturas);
-        jt_aros1.getColumnModel().getColumn(0).setMinWidth(0);
-        jt_aros1.getColumnModel().getColumn(0).setMaxWidth(0);
-        trsfiltroFactura = new TableRowSorter(jt_aros1.getModel());
+        jt_facturas.setModel(dtmFacturas);
+        jt_facturas.getColumnModel().getColumn(0).setMinWidth(0);
+        jt_facturas.getColumnModel().getColumn(0).setMaxWidth(0);
+        trsfiltroFactura = new TableRowSorter(jt_facturas.getModel());
                 
                 
     }
@@ -1180,6 +1181,24 @@ public final class Principal extends javax.swing.JFrame {
         }
     }
     
+    public void verFactura(){
+        BL_Factura facturaVer;
+        if(validarSeleccion('f')){
+            UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled);
+            int fila = jt_facturas.getSelectedRow();
+            int numeroFila = Integer.parseInt(""+ jt_facturas.getValueAt(fila, 0));
+            facturaVer = listaFactura.get(numeroFila);
+            uif.cargarFactura(facturaVer);
+            uif.setVisible(true);
+//            BL_Cliente blCliente = new BL_Cliente();
+//            blCliente.setNombre(jt_facturas.getValueAt(fila, 1)+"");
+//            blCliente.setTelefonos(jt_facturas.getValueAt(fila, 2)+"");
+//            blCliente.setCedula(jt_facturas.getValueAt(fila, 5)+"");
+//            blCliente.setDireccion_simple(jt_facturas.getValueAt(fila, 6)+"");
+//            uif.cargarClienteSeleccionadoFactura(blCliente);
+        }
+    }
+    
     public void cargarClienteSeleccionadoFactura(Object producto){
         
         System.out.println(producto);
@@ -1207,6 +1226,10 @@ public final class Principal extends javax.swing.JFrame {
             case 'u':
                 temp = jt_usuarios;
                 mensaje = "ningun usuario";
+                break;
+            case 'f':
+                temp = jt_facturas;
+                mensaje = "ninguna factura";
                 break;
         }
         filaSeleccionada = temp.getSelectedRow();
@@ -1341,8 +1364,8 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jp_facturacion;
     private javax.swing.JPanel jp_llantas;
     private javax.swing.JTable jt_aros;
-    private javax.swing.JTable jt_aros1;
     private javax.swing.JTable jt_clientes;
+    private javax.swing.JTable jt_facturas;
     private javax.swing.JTable jt_llantas;
     private javax.swing.JTable jt_usuarios;
     private javax.swing.JMenuItem mi_cerrar_sesion;

@@ -113,5 +113,22 @@ public class BL_AroTest {
         fail("The test case is a prototype.");
         }
     }
+
+    
+    @Test
+    public void testActualizarCantidad() {
+        System.out.println("actualizarCantidad");
+        int cantidad = 2;
+        BL_Aro instance = new BL_Aro();
+        instance.setIdProducto(1);
+        instance.setCantidad(4);
+        boolean expResult = false;
+        boolean result = instance.actualizarCantidad(cantidad);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+ 
     
 }

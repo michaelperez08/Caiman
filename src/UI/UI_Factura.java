@@ -412,9 +412,9 @@ public class UI_Factura extends javax.swing.JDialog {
         double total = Double.parseDouble(l_total.getText());
         
         BL_Factura blfac = new BL_Factura(0, null, clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, 
-                fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos());
+                fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos(),clienteFactura.getCedula());
         if(blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
-                impVentas, rb_contado.isSelected(), fechaExpiracion)){
+                impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula())){
             Mensajes.mensajeInfomracion("Sirviooo", "Factura Agregada");
         }else{
             Mensajes.mensajeInfomracion("Noo Sirviooo", "Factura NO Agregada");
@@ -716,6 +716,24 @@ public class UI_Factura extends javax.swing.JDialog {
         tb_linea_factura.setModel(dtmLineas);
         tb_linea_factura.getColumnModel().getColumn(5).setMinWidth(0);
         tb_linea_factura.getColumnModel().getColumn(5).setMaxWidth(0);
+        tb_linea_factura.getColumnModel().getColumn(0).setMinWidth(0);
+        tb_linea_factura.getColumnModel().getColumn(0).setMaxWidth(0);
+    }
+    
+    public void cargarFactura(BL_Factura facturaVer){
+        //Nombre cliente
+        BL_Cliente cl = new BL_Cliente(facturaVer.getNombreCliente(), facturaVer.getDireccionCliente(), 
+                facturaVer.getCedulaCliente(), facturaVer.getTelefonoCliente());
+
+        
+        tf_direccion.setText(facturaVer.getDireccionCliente());
+        tf_cedula.setText(facturaVer.getCedulaCliente());
+        tf_telefono.setText(facturaVer.getTelefonoCliente());
+        for (BL_LineaFactura tempLinea : facturaVer.Retornar()) {
+            ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{tempLinea.getId(), tempLinea.getCantidad(), tempLinea.getDetalle(), tempLinea.getPrecioUnitario(), tempLinea.getPrecioTotalLinea()});
+        }
+        l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion()+"");
+        calcularTotales();
     }
 
 

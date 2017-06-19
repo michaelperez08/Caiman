@@ -21,6 +21,7 @@ public class BL_Factura {
     private String NombreCliente;
     private String TelefonoCliente;
     private String DireccionCliente;
+    private String CedulaCliente;
     private Double PrecioTotal;
     private Date FechaExpiracion;
     private Double Subtotal;
@@ -28,7 +29,7 @@ public class BL_Factura {
     private Double ImpVenta;
     ArrayList<BL_LineaFactura> ListaLineaFactura = new ArrayList();
 
-    public BL_Factura(int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha, Double subtotal, Double impventa, Boolean contado, ArrayList<BL_LineaFactura> listaLineaFactura) {
+    public BL_Factura(int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha, Double subtotal, Double impventa, Boolean contado, ArrayList<BL_LineaFactura> listaLineaFactura, String cedulaCliente) {
         this.idFactura = idFactura;
         this.NombreCliente = NombreCliente;
         this.TelefonoCliente = TelefonoCliente;
@@ -39,10 +40,11 @@ public class BL_Factura {
         this.ImpVenta = impventa;
         this.Contado = contado;
         this.ListaLineaFactura = listaLineaFactura;
+        this.CedulaCliente = cedulaCliente;
 
     }
 
-    public BL_Factura(int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha, Double subtotal, Double impventa, Boolean contado) {
+    public BL_Factura(int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha, Double subtotal, Double impventa, Boolean contado, String cedulaCliente) {
 
         this.NombreCliente = NombreCliente;
         this.TelefonoCliente = TelefonoCliente;
@@ -52,7 +54,7 @@ public class BL_Factura {
         this.Subtotal = subtotal;
         this.ImpVenta = impventa;
         this.Contado = contado;
-
+        this.CedulaCliente = cedulaCliente;
     }
 
     public BL_Factura() {
@@ -131,19 +133,30 @@ public class BL_Factura {
         this.ImpVenta = ImpVenta;
     }
 
+    public String getCedulaCliente() {
+        return CedulaCliente;
+    }
+
+    public void setCedulaCliente(String CedulaCliente) {
+        this.CedulaCliente = CedulaCliente;
+    }
+    
+    
+
     public ArrayList<BL_LineaFactura> Retornar() {
         return this.ListaLineaFactura;
     }
 
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion,
-            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, boolean contado, Date fechaExpiracion) {
+            double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, 
+            boolean contado, Date fechaExpiracion, String cedulaCliente) {
         DAO_Factura daoFactura = new DAO_Factura();
         ArrayList<TO_LineaFactura> toListaLineas = new ArrayList<>();
         for (BL_LineaFactura blListaLinea : blListaLineas) {
             toListaLineas.add(new TO_LineaFactura(blListaLinea.getCantidad(), blListaLinea.getDetalle(),
                     blListaLinea.getPrecioUnitario(), blListaLinea.getPrecioTotalLinea()));
         }
-        return daoFactura.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, toListaLineas, subTotal, impVenta, contado, fechaExpiracion);
+        return daoFactura.ingresarFactura(nombreCliente, telefono, direccion, precioTotal, toListaLineas, subTotal, impVenta, contado, fechaExpiracion, cedulaCliente);
     }
 
     public ArrayList<BL_Factura> cargarFactura() {
@@ -155,7 +168,7 @@ public class BL_Factura {
 
         for (TO_Factura facturaTemp : listaToFactura) {
             listaBlFactura.add(new BL_Factura(facturaTemp.idFactura, facturaTemp.NombreCliente, facturaTemp.TelefonoCliente, facturaTemp.DireccionCliente,
-                    facturaTemp.PrecioTotal, facturaTemp.Fecha, facturaTemp.Subtotal, facturaTemp.ImpVenta, facturaTemp.Contado, listaBl_LineaFactura));
+                    facturaTemp.PrecioTotal, facturaTemp.Fecha, facturaTemp.Subtotal, facturaTemp.ImpVenta, facturaTemp.Contado, listaBl_LineaFactura, facturaTemp.CedulaCliente));
             listaBlFactura.get(listaBlFactura.size()-1).ListaLineaFactura = new ArrayList<BL_LineaFactura>();
             for (TO_LineaFactura toTempLineaFactura : facturaTemp.ListaLineaFactura) {    
                 listaBlFactura.get(listaBlFactura.size()-1).ListaLineaFactura.add(new BL_LineaFactura(toTempLineaFactura.getIdFactura(),0, 

@@ -30,7 +30,8 @@ public class DAO_Factura {
     public ResultSet rs;
     
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion, 
-            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura,double subTotal, double impVenta, boolean contado, Date fechaExpiracion){
+            double precioTotal, ArrayList<TO_LineaFactura> listaLineaFactura,double subTotal, double impVenta, 
+            boolean contado, Date fechaExpiracion, String cedulaCliente){
         
          try {
           if(conexion == null || conexion.isClosed()){
@@ -38,7 +39,7 @@ public class DAO_Factura {
           }
           
           cmd = conexion.prepareStatement("INSERT INTO Factura (NombreCliente, TelefonoCliente, DireccionCliente, "
-                  + "FechaExpiracion, SubTotal, ImpVenta, PrecioTotal, Contado) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+                  + "FechaExpiracion, SubTotal, ImpVenta, PrecioTotal, Contado, CedulaCliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
           cmd.setString(1, nombreCliente);
           cmd.setString(2, telefono);
           cmd.setString(3, direccion);
@@ -47,6 +48,7 @@ public class DAO_Factura {
           cmd.setDouble(6, impVenta);
           cmd.setDouble(7, precioTotal);
           cmd.setBoolean(8, contado);
+          cmd.setString(9,cedulaCliente);
           cmd.execute();
           
           int idFactura = ultimoIdFactura();
@@ -144,7 +146,8 @@ public ArrayList<TO_Factura> cargarFactura(){
             rs = cmd.executeQuery();
             while(rs.next()){
                 lista.add(new TO_Factura(rs.getInt("idFactura"),rs.getString("NombreCliente"),rs.getString("TelefonoCliente"),rs.getString("DireccionCliente"),
-                        rs.getDouble("PrecioTotal"), rs.getDate("FechaExpiracion"),rs.getDouble("SubTotal"),rs.getDouble("ImpVenta"),rs.getBoolean("Contado"),daoLinea.cargarLineasFacturaId(rs.getInt("idFactura"))));
+                        rs.getDouble("PrecioTotal"), rs.getDate("FechaExpiracion"),rs.getDouble("SubTotal"),
+                        rs.getDouble("ImpVenta"),rs.getBoolean("Contado"),daoLinea.cargarLineasFacturaId(rs.getInt("idFactura")), rs.getString("CedulaCliente")));
             }
             
         

@@ -37,6 +37,15 @@ public class BL_Cliente {
         this.Cedula = Cedula;
         this.Telefonos = Telefonos;
     }
+
+    public BL_Cliente(String Nombre, String direccion_simple, String Cedula, String Telefonos) {
+        this.Nombre = Nombre;
+        this.direccion_simple = direccion_simple;
+        this.Cedula = Cedula;
+        this.Telefonos = Telefonos;
+    }
+    
+    
     
     public BL_Cliente(){
 

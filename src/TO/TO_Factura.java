@@ -18,6 +18,7 @@ public int idFactura;
 public String NombreCliente;
 public String TelefonoCliente;
 public String DireccionCliente;
+public String CedulaCliente;
 public Double PrecioTotal;
 public Date Fecha;
 public Double Subtotal;
@@ -25,7 +26,9 @@ public Boolean Contado;
 public Double ImpVenta;
 public ArrayList<TO_LineaFactura> ListaLineaFactura = new ArrayList();
 
-   public TO_Factura(int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha,Double subtotal,Double impventa,Boolean contado, ArrayList<TO_LineaFactura> listaLineaFactura ) {
+   public TO_Factura(int idFactura, String NombreCliente, String TelefonoCliente, 
+           String DireccionCliente, Double PrecioTotal, Date fecha,Double subtotal,Double impventa,
+           Boolean contado, ArrayList<TO_LineaFactura> listaLineaFactura, String cedulaCliente ) {
         this.idFactura = idFactura;
         this.NombreCliente = NombreCliente;
         this.TelefonoCliente = TelefonoCliente;
@@ -35,9 +38,11 @@ public ArrayList<TO_LineaFactura> ListaLineaFactura = new ArrayList();
         this.Subtotal = subtotal;
         this.ImpVenta = impventa;
         this.Contado = contado;
-        this.ListaLineaFactura = listaLineaFactura; 
+        this.ListaLineaFactura = listaLineaFactura;
+        this.CedulaCliente = cedulaCliente;
     }
-    public TO_Factura( String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fecha,Double subtotal,Double impventa,Boolean contado, ArrayList<TO_LineaFactura> listaLineaFactura ) {
+    public TO_Factura( String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, 
+            Date fecha,Double subtotal,Double impventa,Boolean contado, ArrayList<TO_LineaFactura> listaLineaFactura, String cedulaCliente ) {
         
         this.NombreCliente = NombreCliente;
         this.TelefonoCliente = TelefonoCliente;
@@ -48,7 +53,7 @@ public ArrayList<TO_LineaFactura> ListaLineaFactura = new ArrayList();
         this.ImpVenta = impventa;
         this.Contado = contado;
         this.ListaLineaFactura = listaLineaFactura;
-        
+        this.CedulaCliente = cedulaCliente;
     }
 
     public TO_Factura() {
