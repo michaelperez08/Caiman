@@ -595,7 +595,7 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     public void modificarLinea(int fila) {
 
-        String detalle = cb_producto.getSelectedItem().toString();
+        Object detalle = cb_producto.getSelectedItem();         
         double precio = Double.parseDouble(tf_precio.getText());
         int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
         double precioLinea = cantidad * precio;
