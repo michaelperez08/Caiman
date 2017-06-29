@@ -10,9 +10,17 @@ import BL.BL_Cliente;
 import BL.BL_Factura;
 import BL.BL_Llanta;
 import BL.BL_Usuario;
-import java.awt.event.KeyAdapter;
+import config.Mensajes;
+import config.Validacion;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -26,10 +34,7 @@ import javax.swing.table.TableRowSorter;
  * @author michael
  */
 public final class Principal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Principal
-     */
+    
     private BL_Cliente cliente;
     private BL_Llanta llanta;
     private BL_Aro aro;
@@ -51,6 +56,7 @@ public final class Principal extends javax.swing.JFrame {
     private TableRowSorter trsfiltroAros;
     private TableRowSorter trsfiltroUsuarios;
     private TableRowSorter trsfiltroFactura;
+    private SimpleDateFormat sdf;
     int resaltado;
 
     public Principal() {
@@ -58,17 +64,27 @@ public final class Principal extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("../IMG/tire-icon.png")).getImage());
         setLocationRelativeTo(null);
         setResizable(false);
-        cargarClientes();
-        cargarLlantas();
-        cargarAros();
-        cargarUsuarios();
-        cargarFacturas();
+        sdf = new SimpleDateFormat("dd-MMM-yyyy");
+        cargarListaClientes();
+        cargarTablaClientes();
+        cargarListaLlantas();
+        cargarTablaLlantas();
+        cargarListaAros();
+        cargarTablaAros();
+        cargarListaUsuarios();
+        cargarTablaUsuarios();
+        cargarListaFacturas();
+        cargarTablaFacturas(listaFactura);
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_usuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_facturas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         resaltado=0;
+        dc_fecha_hasta.setMinDate(dc_fecha_desde.getSelectedDate());
+        dc_fecha_hasta.setMaxDate(Calendar.getInstance());
+        dc_fecha_desde.setMaxDate(dc_fecha_hasta.getSelectedDate());
+        mostrarBusquedaAvanzada(-70, false);
     }
 
     /**
@@ -117,16 +133,25 @@ public final class Principal extends javax.swing.JFrame {
         bt_eliminarAro = new javax.swing.JButton();
         jcb_filtroBusquedaAro = new javax.swing.JComboBox();
         jp_facturacion = new javax.swing.JPanel();
-        bt_verFactura = new javax.swing.JButton();
         bt_agregarFactura = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        jsp_facturas = new javax.swing.JScrollPane();
         jt_facturas = new javax.swing.JTable();
         tf_buscarFactura = new javax.swing.JTextField();
         jl_Buscar3 = new javax.swing.JLabel();
         jcb_filtroBusquedaFactura = new javax.swing.JComboBox();
+        bt_verFactura = new javax.swing.JButton();
+        rb_busquedaAvanzada = new javax.swing.JRadioButton();
+        p_busquedaAvanzada = new javax.swing.JPanel();
+        l_hasta = new javax.swing.JLabel();
+        l_desde = new javax.swing.JLabel();
+        dc_fecha_desde = new datechooser.beans.DateChooserCombo();
+        dc_fecha_hasta = new datechooser.beans.DateChooserCombo();
+        bt_busquedaAvanazada = new javax.swing.JButton();
+        cb_busquedaAvanzada = new javax.swing.JComboBox<>();
+        tf_busquedaAvanzada = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         tf_buscarCliente1 = new javax.swing.JTextField();
-        jl_Buscar4 = new javax.swing.JLabel();
+        jl_BuscarUsuairo = new javax.swing.JLabel();
         bt_modificarUsuario = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jt_usuarios = new javax.swing.JTable();
@@ -170,7 +195,7 @@ public final class Principal extends javax.swing.JFrame {
         panel_tabs.setMinimumSize(new java.awt.Dimension(1080, 720));
         panel_tabs.setPreferredSize(new java.awt.Dimension(1080, 720));
 
-        jp_clientes.setBackground(new java.awt.Color(51, 51, 51));
+        jp_clientes.setBackground(new java.awt.Color(255, 255, 255));
         jp_clientes.setForeground(new java.awt.Color(102, 102, 102));
         jp_clientes.setMaximumSize(new java.awt.Dimension(1080, 720));
         jp_clientes.setMinimumSize(new java.awt.Dimension(1080, 720));
@@ -178,9 +203,9 @@ public final class Principal extends javax.swing.JFrame {
         jp_clientes.setPreferredSize(new java.awt.Dimension(1080, 720));
         jp_clientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jl_Buscar.setBackground(new java.awt.Color(153, 153, 153));
+        jl_Buscar.setBackground(new java.awt.Color(0, 0, 0));
         jl_Buscar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar.setForeground(new java.awt.Color(204, 204, 204));
+        jl_Buscar.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar.setText("Buscar");
         jl_Buscar.setPreferredSize(new java.awt.Dimension(102, 33));
@@ -197,7 +222,9 @@ public final class Principal extends javax.swing.JFrame {
         });
         jp_clientes.add(tf_buscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, 946, 34));
 
+        bt_ver.setBackground(new java.awt.Color(0, 102, 204));
         bt_ver.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_ver.setForeground(new java.awt.Color(255, 255, 255));
         bt_ver.setText("Ver");
         bt_ver.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_ver.addActionListener(new java.awt.event.ActionListener() {
@@ -205,9 +232,11 @@ public final class Principal extends javax.swing.JFrame {
                 bt_verActionPerformed(evt);
             }
         });
-        jp_clientes.add(bt_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, 102, 33));
+        jp_clientes.add(bt_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, 102, 33));
 
+        bt_agregar.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregar.setForeground(new java.awt.Color(255, 255, 255));
         bt_agregar.setText("Agregar");
         bt_agregar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,18 +244,24 @@ public final class Principal extends javax.swing.JFrame {
                 bt_agregarActionPerformed(evt);
             }
         });
-        jp_clientes.add(bt_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
+        jp_clientes.add(bt_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 122, -1, -1));
 
+        bt_modificar.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_modificar.setForeground(new java.awt.Color(255, 255, 255));
         bt_modificar.setText("Modificar");
+        bt_modificar.setMaximumSize(new java.awt.Dimension(94, 33));
+        bt_modificar.setMinimumSize(new java.awt.Dimension(94, 33));
         bt_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarActionPerformed(evt);
             }
         });
-        jp_clientes.add(bt_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 172, -1, -1));
+        jp_clientes.add(bt_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
+        bt_eliminar.setBackground(new java.awt.Color(204, 0, 0));
         bt_eliminar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_eliminar.setForeground(new java.awt.Color(255, 255, 255));
         bt_eliminar.setText("Eliminar");
         bt_eliminar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +269,7 @@ public final class Principal extends javax.swing.JFrame {
                 bt_eliminarActionPerformed(evt);
             }
         });
-        jp_clientes.add(bt_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 222, -1, -1));
+        jp_clientes.add(bt_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, -1, -1));
 
         jt_clientes.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jt_clientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -257,11 +292,11 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jt_clientes);
 
-        jp_clientes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 620));
+        jp_clientes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 70, 946, 620));
 
         panel_tabs.addTab("Clientes", jp_clientes);
 
-        jp_llantas.setBackground(new java.awt.Color(51, 51, 51));
+        jp_llantas.setBackground(new java.awt.Color(255, 255, 255));
         jp_llantas.setMaximumSize(new java.awt.Dimension(1080, 720));
         jp_llantas.setMinimumSize(new java.awt.Dimension(1080, 720));
         jp_llantas.setPreferredSize(new java.awt.Dimension(1080, 720));
@@ -302,13 +337,15 @@ public final class Principal extends javax.swing.JFrame {
 
         jl_Buscar1.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar1.setForeground(new java.awt.Color(204, 204, 204));
+        jl_Buscar1.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar1.setText("Buscar");
         jl_Buscar1.setPreferredSize(new java.awt.Dimension(102, 33));
         jp_llantas.add(jl_Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 33));
 
+        bt_verLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_verLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_verLlanta.setForeground(new java.awt.Color(255, 255, 255));
         bt_verLlanta.setText("Ver");
         bt_verLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -316,9 +353,11 @@ public final class Principal extends javax.swing.JFrame {
                 bt_verLlantaActionPerformed(evt);
             }
         });
-        jp_llantas.add(bt_verLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, -1, -1));
+        jp_llantas.add(bt_verLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, -1, -1));
 
+        bt_agregarLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregarLlanta.setForeground(new java.awt.Color(255, 255, 255));
         bt_agregarLlanta.setText("Agregar");
         bt_agregarLlanta.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarLlanta.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -328,18 +367,22 @@ public final class Principal extends javax.swing.JFrame {
                 bt_agregarLlantaActionPerformed(evt);
             }
         });
-        jp_llantas.add(bt_agregarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
+        jp_llantas.add(bt_agregarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 122, -1, -1));
 
+        bt_modificarLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_modificarLlanta.setForeground(new java.awt.Color(255, 255, 255));
         bt_modificarLlanta.setText("Modificar");
         bt_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarLlantaActionPerformed(evt);
             }
         });
-        jp_llantas.add(bt_modificarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 172, -1, -1));
+        jp_llantas.add(bt_modificarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
+        bt_eliminarLlanta.setBackground(new java.awt.Color(204, 0, 0));
         bt_eliminarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_eliminarLlanta.setForeground(new java.awt.Color(255, 255, 255));
         bt_eliminarLlanta.setText("Eliminar");
         bt_eliminarLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -347,8 +390,9 @@ public final class Principal extends javax.swing.JFrame {
                 bt_eliminarLlantaActionPerformed(evt);
             }
         });
-        jp_llantas.add(bt_eliminarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 222, -1, -1));
+        jp_llantas.add(bt_eliminarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, -1, -1));
 
+        jcb_filtroBusquedaLlanta.setBackground(new java.awt.Color(255, 255, 255));
         jcb_filtroBusquedaLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jcb_filtroBusquedaLlanta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca" }));
         jcb_filtroBusquedaLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -360,7 +404,7 @@ public final class Principal extends javax.swing.JFrame {
 
         tb_productos.addTab("LLantas", jp_llantas);
 
-        jp_aros.setBackground(new java.awt.Color(51, 51, 51));
+        jp_aros.setBackground(new java.awt.Color(255, 255, 255));
         jp_aros.setMaximumSize(new java.awt.Dimension(1080, 720));
         jp_aros.setMinimumSize(new java.awt.Dimension(1080, 720));
         jp_aros.setPreferredSize(new java.awt.Dimension(1080, 720));
@@ -401,12 +445,14 @@ public final class Principal extends javax.swing.JFrame {
 
         jl_Buscar2.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar2.setForeground(new java.awt.Color(204, 204, 204));
+        jl_Buscar2.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar2.setText("Buscar");
         jp_aros.add(jl_Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 34));
 
+        bt_verAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_verAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_verAro.setForeground(new java.awt.Color(255, 255, 255));
         bt_verAro.setText("Ver");
         bt_verAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verAro.addActionListener(new java.awt.event.ActionListener() {
@@ -414,9 +460,11 @@ public final class Principal extends javax.swing.JFrame {
                 bt_verAroActionPerformed(evt);
             }
         });
-        jp_aros.add(bt_verAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, -1, -1));
+        jp_aros.add(bt_verAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, -1, -1));
 
+        bt_agregarAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregarAro.setForeground(new java.awt.Color(255, 255, 255));
         bt_agregarAro.setText("Agregar");
         bt_agregarAro.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarAro.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -426,18 +474,22 @@ public final class Principal extends javax.swing.JFrame {
                 bt_agregarAroActionPerformed(evt);
             }
         });
-        jp_aros.add(bt_agregarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
+        jp_aros.add(bt_agregarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 122, -1, -1));
 
+        bt_modificarAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_modificarAro.setForeground(new java.awt.Color(255, 255, 255));
         bt_modificarAro.setText("Modificar");
         bt_modificarAro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_modificarAroActionPerformed(evt);
             }
         });
-        jp_aros.add(bt_modificarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 172, -1, -1));
+        jp_aros.add(bt_modificarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
+        bt_eliminarAro.setBackground(new java.awt.Color(204, 0, 51));
         bt_eliminarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_eliminarAro.setForeground(new java.awt.Color(255, 255, 255));
         bt_eliminarAro.setText("Eliminar");
         bt_eliminarAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarAro.addActionListener(new java.awt.event.ActionListener() {
@@ -445,8 +497,9 @@ public final class Principal extends javax.swing.JFrame {
                 bt_eliminarAroActionPerformed(evt);
             }
         });
-        jp_aros.add(bt_eliminarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 222, -1, -1));
+        jp_aros.add(bt_eliminarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, -1, -1));
 
+        jcb_filtroBusquedaAro.setBackground(new java.awt.Color(255, 255, 255));
         jcb_filtroBusquedaAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jcb_filtroBusquedaAro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca", "Código" }));
         jcb_filtroBusquedaAro.addActionListener(new java.awt.event.ActionListener() {
@@ -460,23 +513,15 @@ public final class Principal extends javax.swing.JFrame {
 
         panel_tabs.addTab("Productos", tb_productos);
 
-        jp_facturacion.setBackground(new java.awt.Color(51, 51, 51));
+        jp_facturacion.setBackground(new java.awt.Color(255, 255, 255));
         jp_facturacion.setMaximumSize(new java.awt.Dimension(1080, 720));
         jp_facturacion.setMinimumSize(new java.awt.Dimension(1080, 720));
         jp_facturacion.setPreferredSize(new java.awt.Dimension(1080, 720));
-        jp_facturacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jp_facturacion.setLayout(null);
 
-        bt_verFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verFactura.setText("Ver");
-        bt_verFactura.setPreferredSize(new java.awt.Dimension(102, 33));
-        bt_verFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_verFacturaActionPerformed(evt);
-            }
-        });
-        jp_facturacion.add(bt_verFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 72, -1, -1));
-
+        bt_agregarFactura.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregarFactura.setForeground(new java.awt.Color(255, 255, 255));
         bt_agregarFactura.setText("Agregar");
         bt_agregarFactura.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarFactura.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -486,9 +531,10 @@ public final class Principal extends javax.swing.JFrame {
                 bt_agregarFacturaActionPerformed(evt);
             }
         });
-        jp_facturacion.add(bt_agregarFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 122, -1, -1));
+        jp_facturacion.add(bt_agregarFactura);
+        bt_agregarFactura.setBounds(10, 190, 102, 33);
 
-        jScrollPane5.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
+        jsp_facturas.setFont(new java.awt.Font("FreeSans", 1, 14)); // NOI18N
 
         jt_facturas.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jt_facturas.setModel(new javax.swing.table.DefaultTableModel(
@@ -499,7 +545,7 @@ public final class Principal extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "# Fac", "Cliente", "Telefono", "Fecha"
             }
         ));
         jt_facturas.setComponentPopupMenu(pum_tb);
@@ -508,204 +554,335 @@ public final class Principal extends javax.swing.JFrame {
                 jt_facturasMouseReleased(evt);
             }
         });
-        jScrollPane5.setViewportView(jt_facturas);
+        jsp_facturas.setViewportView(jt_facturas);
 
-        jp_facturacion.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 72, 946, 620));
+        jp_facturacion.add(jsp_facturas);
+        jsp_facturas.setBounds(126, 140, 950, 550);
 
         tf_buscarFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        tf_buscarFactura.setPreferredSize(new java.awt.Dimension(813, 34));
-        tf_buscarFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_buscarFacturaActionPerformed(evt);
-            }
-        });
+        tf_buscarFactura.setPreferredSize(new java.awt.Dimension(600, 34));
         tf_buscarFactura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_buscarFacturaKeyReleased(evt);
             }
         });
-        jp_facturacion.add(tf_buscarFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, -1, -1));
+        jp_facturacion.add(tf_buscarFactura);
+        tf_buscarFactura.setBounds(126, 20, 600, 34);
 
-        jl_Buscar3.setBackground(new java.awt.Color(153, 153, 153));
+        jl_Buscar3.setBackground(new java.awt.Color(255, 255, 255));
         jl_Buscar3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar3.setForeground(new java.awt.Color(204, 204, 204));
+        jl_Buscar3.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar3.setText("Buscar");
-        jp_facturacion.add(jl_Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 34));
+        jp_facturacion.add(jl_Buscar3);
+        jl_Buscar3.setBounds(6, 20, 102, 34);
 
+        jcb_filtroBusquedaFactura.setBackground(new java.awt.Color(255, 255, 255));
         jcb_filtroBusquedaFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jcb_filtroBusquedaFactura.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Telefono", "Fecha" }));
-        jcb_filtroBusquedaFactura.addActionListener(new java.awt.event.ActionListener() {
+        jcb_filtroBusquedaFactura.setForeground(new java.awt.Color(0, 0, 0));
+        jcb_filtroBusquedaFactura.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente", "# Factura", "Telefono", "Fecha" }));
+        jp_facturacion.add(jcb_filtroBusquedaFactura);
+        jcb_filtroBusquedaFactura.setBounds(740, 20, 121, 35);
+
+        bt_verFactura.setBackground(new java.awt.Color(0, 102, 204));
+        bt_verFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_verFactura.setForeground(new java.awt.Color(255, 255, 255));
+        bt_verFactura.setText("Ver");
+        bt_verFactura.setPreferredSize(new java.awt.Dimension(102, 33));
+        bt_verFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcb_filtroBusquedaFacturaActionPerformed(evt);
+                bt_verFacturaActionPerformed(evt);
             }
         });
-        jp_facturacion.add(jcb_filtroBusquedaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 19, 121, 35));
+        jp_facturacion.add(bt_verFactura);
+        bt_verFactura.setBounds(10, 140, 102, 33);
 
-        panel_tabs.addTab("Facturación", jp_facturacion);
-
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        tf_buscarCliente1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        tf_buscarCliente1.setForeground(new java.awt.Color(51, 51, 51));
-        tf_buscarCliente1.setPreferredSize(new java.awt.Dimension(946, 34));
-        tf_buscarCliente1.setSelectionColor(new java.awt.Color(153, 153, 153));
-        tf_buscarCliente1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_buscarCliente1KeyReleased(evt);
+        rb_busquedaAvanzada.setBackground(new java.awt.Color(255, 255, 255));
+        rb_busquedaAvanzada.setForeground(new java.awt.Color(0, 0, 0));
+        rb_busquedaAvanzada.setText("Busqueda Avanzada");
+        rb_busquedaAvanzada.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_busquedaAvanzadaItemStateChanged(evt);
             }
         });
+        jp_facturacion.add(rb_busquedaAvanzada);
+        rb_busquedaAvanzada.setBounds(880, 20, 190, 35);
 
-        jl_Buscar4.setBackground(new java.awt.Color(153, 153, 153));
-        jl_Buscar4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar4.setForeground(new java.awt.Color(204, 204, 204));
-        jl_Buscar4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jl_Buscar4.setText("Buscar");
-        jl_Buscar4.setPreferredSize(new java.awt.Dimension(102, 33));
+        p_busquedaAvanzada.setBackground(new java.awt.Color(255, 255, 255));
+        p_busquedaAvanzada.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bt_modificarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificarUsuario.setText("Modificar");
-        bt_modificarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_modificarUsuarioActionPerformed(evt);
-            }
-        });
+        l_hasta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        l_hasta.setForeground(new java.awt.Color(51, 51, 51));
+        l_hasta.setText("hasta el");
+        p_busquedaAvanzada.add(l_hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 70, 30));
 
-        jt_usuarios.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jt_usuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nombre", "Cedula", "Telefono"
-            }
-        ));
-        jt_usuarios.setComponentPopupMenu(pum_tb);
-        jt_usuarios.setGridColor(new java.awt.Color(51, 51, 51));
-        jt_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jt_usuariosMouseReleased(evt);
-            }
-        });
-        jScrollPane4.setViewportView(jt_usuarios);
+        l_desde.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        l_desde.setForeground(new java.awt.Color(51, 51, 51));
+        l_desde.setText("Desde el");
+        p_busquedaAvanzada.add(l_desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 72, 30));
 
-        bt_eliminarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminarUsuario.setText("Eliminar");
-        bt_eliminarUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
-        bt_eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_eliminarUsuarioActionPerformed(evt);
-            }
-        });
+        dc_fecha_desde.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
+            new datechooser.view.appearance.ViewAppearance("custom",
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(0, 0, 255),
+                    true,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(0, 0, 255),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(128, 128, 128),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.LabelPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(0, 0, 255),
+                    false,
+                    true,
+                    new datechooser.view.appearance.swing.LabelPainter()),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(255, 0, 0),
+                    false,
+                    false,
+                    new datechooser.view.appearance.swing.ButtonPainter()),
+                (datechooser.view.BackRenderer)null,
+                false,
+                true)));
+    dc_fecha_desde.setCalendarBackground(new java.awt.Color(255, 255, 255));
+    dc_fecha_desde.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
+        public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
+            dc_fecha_desdeOnSelectionChange(evt);
+        }
+    });
+    p_busquedaAvanzada.add(dc_fecha_desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 190, 30));
 
-        bt_verUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verUsuario.setText("Ver");
-        bt_verUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
-        bt_verUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_verUsuarioActionPerformed(evt);
-            }
-        });
+    dc_fecha_hasta.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
+        new datechooser.view.appearance.ViewAppearance("custom",
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(0, 0, 255),
+                true,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                new java.awt.Color(0, 0, 255),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                new java.awt.Color(128, 128, 128),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.LabelPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.LabelPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(255, 0, 0),
+                false,
+                false,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            (datechooser.view.BackRenderer)null,
+            false,
+            true)));
+dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
+    public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
+        dc_fecha_hastaOnSelectionChange(evt);
+    }
+    });
+    p_busquedaAvanzada.add(dc_fecha_hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 190, 30));
 
-        bt_agregarUsuairo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarUsuairo.setText("Agregar");
-        bt_agregarUsuairo.setPreferredSize(new java.awt.Dimension(102, 33));
-        bt_agregarUsuairo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_agregarUsuairoActionPerformed(evt);
-            }
-        });
+    bt_busquedaAvanazada.setBackground(new java.awt.Color(0, 102, 204));
+    bt_busquedaAvanazada.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    bt_busquedaAvanazada.setForeground(new java.awt.Color(255, 255, 255));
+    bt_busquedaAvanazada.setText("Buscar");
+    bt_busquedaAvanazada.setMaximumSize(new java.awt.Dimension(52, 34));
+    bt_busquedaAvanazada.setMinimumSize(new java.awt.Dimension(52, 34));
+    bt_busquedaAvanazada.setPreferredSize(new java.awt.Dimension(102, 33));
+    bt_busquedaAvanazada.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            bt_busquedaAvanazadaActionPerformed(evt);
+        }
+    });
+    p_busquedaAvanzada.add(bt_busquedaAvanazada, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 121, 30));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jl_Buscar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(tf_buscarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(bt_verUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(bt_agregarUsuairo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(bt_modificarUsuario)
-                                .addComponent(bt_eliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jl_Buscar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addComponent(tf_buscarCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(18, 18, 18)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(bt_verUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(17, 17, 17)
-                            .addComponent(bt_agregarUsuairo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(17, 17, 17)
-                            .addComponent(bt_modificarUsuario)
-                            .addGap(17, 17, 17)
-                            .addComponent(bt_eliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+    cb_busquedaAvanzada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "# Factura" }));
+    cb_busquedaAvanzada.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            cb_busquedaAvanzadaActionPerformed(evt);
+        }
+    });
+    p_busquedaAvanzada.add(cb_busquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, 30));
 
-        panel_tabs.addTab("Usuarios", jPanel2);
+    tf_busquedaAvanzada.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            tf_busquedaAvanzadaKeyTyped(evt);
+        }
+    });
+    p_busquedaAvanzada.add(tf_busquedaAvanzada, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, 240, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 1092, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-        );
+    jp_facturacion.add(p_busquedaAvanzada);
+    p_busquedaAvanzada.setBounds(0, 60, 1090, 70);
 
-        jMenu1.setText("Usuario");
+    panel_tabs.addTab("Facturación", jp_facturacion);
 
-        mi_cerrar_sesion.setText("Cerra Sesion");
-        mi_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mi_cerrar_sesionActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mi_cerrar_sesion);
+    jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+    jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jMenuBar1.add(jMenu1);
+    tf_buscarCliente1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    tf_buscarCliente1.setForeground(new java.awt.Color(51, 51, 51));
+    tf_buscarCliente1.setPreferredSize(new java.awt.Dimension(946, 34));
+    tf_buscarCliente1.setSelectionColor(new java.awt.Color(153, 153, 153));
+    tf_buscarCliente1.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            tf_buscarCliente1KeyReleased(evt);
+        }
+    });
+    jPanel2.add(tf_buscarCliente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 20, -1, -1));
 
-        setJMenuBar(jMenuBar1);
+    jl_BuscarUsuairo.setBackground(new java.awt.Color(255, 255, 255));
+    jl_BuscarUsuairo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    jl_BuscarUsuairo.setForeground(new java.awt.Color(0, 0, 0));
+    jl_BuscarUsuairo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jl_BuscarUsuairo.setText("Buscar");
+    jl_BuscarUsuairo.setPreferredSize(new java.awt.Dimension(102, 33));
+    jPanel2.add(jl_BuscarUsuairo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 20, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+    bt_modificarUsuario.setBackground(new java.awt.Color(0, 102, 204));
+    bt_modificarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    bt_modificarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+    bt_modificarUsuario.setText("Modificar");
+    bt_modificarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            bt_modificarUsuarioActionPerformed(evt);
+        }
+    });
+    jPanel2.add(bt_modificarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
-        pack();
+    jt_usuarios.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    jt_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null}
+        },
+        new String [] {
+            "ID", "Nombre", "Cedula", "Telefono"
+        }
+    ));
+    jt_usuarios.setComponentPopupMenu(pum_tb);
+    jt_usuarios.setGridColor(new java.awt.Color(51, 51, 51));
+    jt_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            jt_usuariosMouseReleased(evt);
+        }
+    });
+    jScrollPane4.setViewportView(jt_usuarios);
+
+    jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 70, 946, 620));
+
+    bt_eliminarUsuario.setBackground(new java.awt.Color(204, 0, 0));
+    bt_eliminarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    bt_eliminarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+    bt_eliminarUsuario.setText("Eliminar");
+    bt_eliminarUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
+    bt_eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            bt_eliminarUsuarioActionPerformed(evt);
+        }
+    });
+    jPanel2.add(bt_eliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, -1, -1));
+
+    bt_verUsuario.setBackground(new java.awt.Color(0, 102, 204));
+    bt_verUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    bt_verUsuario.setForeground(new java.awt.Color(255, 255, 255));
+    bt_verUsuario.setText("Ver");
+    bt_verUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
+    bt_verUsuario.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            bt_verUsuarioActionPerformed(evt);
+        }
+    });
+    jPanel2.add(bt_verUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, -1, -1));
+
+    bt_agregarUsuairo.setBackground(new java.awt.Color(0, 102, 204));
+    bt_agregarUsuairo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+    bt_agregarUsuairo.setForeground(new java.awt.Color(255, 255, 255));
+    bt_agregarUsuairo.setText("Agregar");
+    bt_agregarUsuairo.setPreferredSize(new java.awt.Dimension(102, 33));
+    bt_agregarUsuairo.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            bt_agregarUsuairoActionPerformed(evt);
+        }
+    });
+    jPanel2.add(bt_agregarUsuairo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 122, -1, -1));
+
+    panel_tabs.addTab("Usuarios", jPanel2);
+
+    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+    jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(
+        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 1092, Short.MAX_VALUE)
+    );
+    jPanel1Layout.setVerticalGroup(
+        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+    );
+
+    jMenu1.setText("Usuario");
+
+    mi_cerrar_sesion.setText("Cerra Sesion");
+    mi_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            mi_cerrar_sesionActionPerformed(evt);
+        }
+    });
+    jMenu1.add(mi_cerrar_sesion);
+
+    jMenuBar1.add(jMenu1);
+
+    setJMenuBar(jMenuBar1);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    );
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_buscarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarClienteKeyReleased
@@ -738,7 +915,8 @@ public final class Principal extends javax.swing.JFrame {
         UI_Cliente blc = new UI_Cliente(this, rootPaneCheckingEnabled);
         blc.setVisible(true);
         if (blc.actualizarLista) {
-            cargarClientes();
+            cargarListaClientes();
+            cargarTablaClientes();
         }
     }//GEN-LAST:event_bt_agregarActionPerformed
 
@@ -788,7 +966,8 @@ public final class Principal extends javax.swing.JFrame {
         UI_Llanta uil = new UI_Llanta(this, rootPaneCheckingEnabled);
         uil.setVisible(true);
         if (uil.actualizarLista) {
-            cargarLlantas();
+            cargarListaLlantas();
+            cargarTablaLlantas();
         }
     }//GEN-LAST:event_bt_agregarLlantaActionPerformed
 
@@ -843,7 +1022,8 @@ public final class Principal extends javax.swing.JFrame {
         UI_Aro iua = new UI_Aro(this, rootPaneCheckingEnabled);
         iua.setVisible(true);
         if (iua.actualizarLista) {
-            cargarAros();
+            cargarListaAros();
+            cargarTablaAros();
         }
     }//GEN-LAST:event_bt_agregarAroActionPerformed
 
@@ -859,16 +1039,12 @@ public final class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcb_filtroBusquedaAroActionPerformed
 
-    private void bt_verFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verFacturaActionPerformed
-        // TODO add your handling code here:
-        verFactura();
-    }//GEN-LAST:event_bt_verFacturaActionPerformed
-
     private void bt_agregarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarFacturaActionPerformed
         UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled, listaClientes, listaLlantas, listaAros);
         uif.setVisible(true);
         if (uif.actulizarLista) {
-            cargarFacturas();
+            cargarListaFacturas();
+            cargarTablaFacturas(listaFactura);
         }
     }//GEN-LAST:event_bt_agregarFacturaActionPerformed
 
@@ -887,12 +1063,8 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tf_buscarFacturaKeyReleased
 
-    private void jcb_filtroBusquedaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_filtroBusquedaFacturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcb_filtroBusquedaFacturaActionPerformed
-
     private void tf_buscarCliente1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarCliente1KeyReleased
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_tf_buscarCliente1KeyReleased
 
     private void bt_modificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarUsuarioActionPerformed
@@ -917,7 +1089,7 @@ public final class Principal extends javax.swing.JFrame {
         UI_Usuario iuu = new UI_Usuario(this, rootPaneCheckingEnabled);
         iuu.setVisible(true);
         if (iuu.actualizarLista) {
-            cargarUsuarios();
+            cargarTablaUsuarios();
         }
     }//GEN-LAST:event_bt_agregarUsuairoActionPerformed
 
@@ -928,10 +1100,89 @@ public final class Principal extends javax.swing.JFrame {
         li.setVisible(true);
     }//GEN-LAST:event_mi_cerrar_sesionActionPerformed
 
-    private void tf_buscarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_buscarFacturaActionPerformed
+    private void bt_verFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verFacturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_buscarFacturaActionPerformed
+    }//GEN-LAST:event_bt_verFacturaActionPerformed
 
+    private void rb_busquedaAvanzadaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_busquedaAvanzadaItemStateChanged
+        if(rb_busquedaAvanzada.isSelected()){
+            mostrarBusquedaAvanzada(70, true);
+        }else{
+            mostrarBusquedaAvanzada(-70, false);
+        }
+    }//GEN-LAST:event_rb_busquedaAvanzadaItemStateChanged
+
+    private void bt_busquedaAvanazadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_busquedaAvanazadaActionPerformed
+        BL_Factura blf;
+        if(cb_busquedaAvanzada.getSelectedItem().toString().equals("Cliente") && validarBusquedaFecha()){
+            String cliente = tf_busquedaAvanzada.getText().trim();
+            Date fechDesde = dc_fecha_desde.getSelectedDate().getTime();
+            Date fechHasta = dc_fecha_hasta.getSelectedDate().getTime();
+            blf = new BL_Factura();
+            cargarTablaBusqueda(blf.busquedaFacturaAvanzada(cliente, fechDesde, fechHasta, -1));
+        }else if(cb_busquedaAvanzada.getSelectedItem().toString().equals("# Factura")){
+            int idFactura = Integer.parseInt(tf_busquedaAvanzada.getText());
+            blf = new BL_Factura();
+            cargarTablaBusqueda(blf.busquedaFacturaAvanzada("", null, null, idFactura));
+        }
+    }//GEN-LAST:event_bt_busquedaAvanazadaActionPerformed
+
+    private void cb_busquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_busquedaAvanzadaActionPerformed
+        if(cb_busquedaAvanzada.getSelectedIndex()==1){
+            dc_fecha_desde.setEnabled(false);
+            dc_fecha_hasta.setEnabled(false);
+        }else{
+            dc_fecha_desde.setEnabled(true);
+            dc_fecha_hasta.setEnabled(true);
+        }
+    }//GEN-LAST:event_cb_busquedaAvanzadaActionPerformed
+
+    private void dc_fecha_desdeOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dc_fecha_desdeOnSelectionChange
+        dc_fecha_hasta.setMinDate(dc_fecha_desde.getSelectedDate());
+    }//GEN-LAST:event_dc_fecha_desdeOnSelectionChange
+
+    private void dc_fecha_hastaOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_dc_fecha_hastaOnSelectionChange
+        dc_fecha_desde.setMaxDate(dc_fecha_hasta.getSelectedDate());
+    }//GEN-LAST:event_dc_fecha_hastaOnSelectionChange
+
+    private void tf_busquedaAvanzadaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_busquedaAvanzadaKeyTyped
+        if(cb_busquedaAvanzada.getSelectedItem().toString().equals("# Factura")){
+            Validacion.soloNumeros(evt);
+        }
+    }//GEN-LAST:event_tf_busquedaAvanzadaKeyTyped
+    
+    public void cargarTablaBusqueda(ArrayList<BL_Factura> listaBusquedaFactura){
+        if(!listaBusquedaFactura.isEmpty()){
+            cargarTablaFacturas(listaBusquedaFactura);
+        }else{
+            Mensajes.mensajeInfomracion("No se obtuvieron resultados de la busqueda", "Busqueda Avanzada");
+        }
+    }
+    
+    public boolean validarBusquedaFecha(){
+        try {
+            //fufc = fecha ultima factura cargada en la tabla
+            Date fufc = sdf.parse(jt_facturas.getValueAt(jt_facturas.getRowCount()-1, 4).toString());
+            Date fechDesde = dc_fecha_desde.getSelectedDate().getTime();
+            if(fufc.before(fechDesde)){
+                Mensajes.mensajeInfomracion("Las facturas en ese rango de fecha ya estan cargadas\n"
+                        + "Puede utilizar el filtro de busqueda para encintrarla", "Busqueda Avanzada");
+                return false;
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+    
+    public void mostrarBusquedaAvanzada(int posicion, boolean mostrar){
+        int bajar = posicion; 
+        bt_agregarFactura.setLocation(bt_agregarFactura.getX(), bt_agregarFactura.getY()+bajar);
+        bt_verFactura.setLocation(bt_verFactura.getX(), bt_verFactura.getY()+bajar);
+        jsp_facturas.setSize(new Dimension(jsp_facturas.getWidth(), jsp_facturas.getHeight()-bajar));
+        jsp_facturas.setLocation(jsp_facturas.getX(), jsp_facturas.getY()+bajar);
+        p_busquedaAvanzada.setVisible(mostrar);
+    } 
     
     public void menuitem_ver(){
        int tabseleccionado = panel_tabs.getSelectedIndex();
@@ -961,7 +1212,6 @@ public final class Principal extends javax.swing.JFrame {
         String hilera = tf_buscarCliente.getText();
         trsfiltroCliente.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, 1));
     }
-    
     
     
     public void filtrarAros() {
@@ -1002,20 +1252,28 @@ public final class Principal extends javax.swing.JFrame {
         String filtro = jcb_filtroBusquedaFactura.getSelectedItem() + "";
         int fila = 0;
         switch (filtro) {
-            case "Telefono":
+            case "# Factura":
+                fila = 1;
+                break;
+            case "Cliente":
                 fila = 2;
                 break;
-            case "Fecha":
+            case "Telefono":
                 fila = 3;
+                break;
+            case "Fecha":
+                fila = 4;
                 break;
         }
         trsfiltroFactura.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
     }
-
-    public void cargarClientes() {
-        cliente = new BL_Cliente();
-        
+     
+     public void cargarListaClientes(){
+         cliente = new BL_Cliente();
         listaClientes = cliente.cargarClientes();
+     }
+
+    public void cargarTablaClientes() {
         String[] nombreColumnas = {"numeroFila", "Nombre", "Dirección", "Teléfono(s)"};
         dtmClientes = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1037,10 +1295,12 @@ public final class Principal extends javax.swing.JFrame {
     }
     
     
-
-    public void cargarLlantas() {
+    public void cargarListaLlantas(){
         llanta = new BL_Llanta();
         listaLlantas = llanta.cargarLlantas();
+    }
+
+    public void cargarTablaLlantas() {
         String[] nombreColumnas = {"numeroFila", "Numero Llanta", "Marca", "Diseño", "Capas", "Cantidad", "TipoLlanta"};
         dtmLlantas = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1063,9 +1323,12 @@ public final class Principal extends javax.swing.JFrame {
         
     }
     
-    public void cargarAros() {
+    public void cargarListaAros(){
         aro = new BL_Aro();
         listaAros = aro.cargarAros();
+    }
+    
+    public void cargarTablaAros() {
         String[] nombreColumnas = {"numeroFila", "Numero Aro", "Marca", "Codigo","Cantidad (Juegos)"};
         dtmAros = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1085,9 +1348,12 @@ public final class Principal extends javax.swing.JFrame {
         trsfiltroAros = new TableRowSorter(jt_aros.getModel());
     }
     
-    public void cargarUsuarios() {
+    public void cargarListaUsuarios(){
         usuario = new BL_Usuario();
         listaUsuarios = usuario.cargarUsuarios();
+    }
+    
+    public void cargarTablaUsuarios() {
         String[] nombreColumnas = {"id", "Nombre", "Tipo"};
         dtmUsuarios = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1106,29 +1372,35 @@ public final class Principal extends javax.swing.JFrame {
         trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
     }
 
-    public void cargarFacturas(){
+    public void cargarListaFacturas(){
         factura = new BL_Factura();
         listaFactura = factura.cargarFactura();
-        String[] nombreColumnas = {"Id de Factura","Nombre del cliente" ,"Telefono","Fecha","Precio Total"};
+    }
+    
+    public void cargarTablaFacturas(ArrayList<BL_Factura> listaFactTabla){
+        String[] nombreColumnas = {"#lista","# Factura","Nombre del cliente" ,"Telefono","Facturada el","Precio Total"};
         dtmFacturas = new DefaultTableModel(null, nombreColumnas){
          @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        if (!listaFactura.isEmpty()) {
-            for (BL_Factura factura_temp : listaFactura) {
-                dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(),factura_temp.getNombreCliente(),factura_temp.getTelefonoCliente()
-                        ,factura_temp.getFechaExpiracion(), factura_temp.getPrecioTotal()});
+        if (!listaFactTabla.isEmpty()) {
+            for (BL_Factura factura_temp : listaFactTabla) {
+                dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(), factura_temp.getIdFactura(),factura_temp.getNombreCliente(),factura_temp.getTelefonoCliente()
+                        ,sdf.format(factura_temp.getFechaFactura()), factura_temp.getPrecioTotal()});
             }
         }
         jt_facturas.setModel(dtmFacturas);
+        trsfiltroFactura = new TableRowSorter(jt_facturas.getModel());
         jt_facturas.getColumnModel().getColumn(0).setMinWidth(0);
         jt_facturas.getColumnModel().getColumn(0).setMaxWidth(0);
-        trsfiltroFactura = new TableRowSorter(jt_facturas.getModel());
-                
-                
+        jt_facturas.getColumnModel().getColumn(1).setMinWidth(100);
+        jt_facturas.getColumnModel().getColumn(1).setMaxWidth(100);
+        jt_facturas.getColumnModel().getColumn(4).setMinWidth(120);
+        jt_facturas.getColumnModel().getColumn(4).setMaxWidth(120);
     }
+    
     public void verCliente() {
         BL_Cliente clienteVer;
         if (validarSeleccion('c')) {
@@ -1139,7 +1411,7 @@ public final class Principal extends javax.swing.JFrame {
             uic.cargarCliente(clienteVer);
             uic.setVisible(true);
             if (uic.actualizarLista) {
-                cargarClientes();
+                cargarTablaClientes();
             }
         }
     }
@@ -1154,7 +1426,7 @@ public final class Principal extends javax.swing.JFrame {
             uill.cargarLlanta(llantaVer);
             uill.setVisible(true);
             if (uill.actualizarLista) {
-                cargarLlantas();
+                cargarTablaLlantas();
             }
         }
     }
@@ -1169,7 +1441,7 @@ public final class Principal extends javax.swing.JFrame {
             uia.cargarAro(aroVer);
             uia.setVisible(true);
             if (uia.actualizarLista) {
-                cargarAros();
+                cargarTablaAros();
             }
         }
     }
@@ -1184,7 +1456,7 @@ public final class Principal extends javax.swing.JFrame {
             uiu.cargarUsuarioEditar(usuarioVer);
             uiu.setVisible(true);
             if (uiu.actualizarLista) {
-                cargarUsuarios();
+                cargarTablaUsuarios();
             }
         }
     }
@@ -1254,7 +1526,7 @@ public final class Principal extends javax.swing.JFrame {
             if (confirmacion == JOptionPane.YES_OPTION) {
                 if (blCliente.eliminarCliente()) {
                     JOptionPane.showMessageDialog(null, "Cliente Elimiado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                    cargarClientes();
+                    cargarTablaClientes();
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el cliente", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -1273,7 +1545,7 @@ public final class Principal extends javax.swing.JFrame {
             if (confirmacion == JOptionPane.YES_OPTION) {
                 if (blLanta.eliminarLlanta()) {
                     JOptionPane.showMessageDialog(null, "Llanta Elimiada con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                    cargarLlantas();
+                    cargarTablaLlantas();
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -1291,7 +1563,7 @@ public final class Principal extends javax.swing.JFrame {
             if(confirmacion == JOptionPane.YES_OPTION){
                 if(blAro.eliminarAro()){
                    JOptionPane.showMessageDialog(null, "Aro Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                    cargarAros();
+                    cargarTablaAros();
                 } else {
                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el aro", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                  }
@@ -1309,7 +1581,7 @@ public final class Principal extends javax.swing.JFrame {
             if(confirmacion == JOptionPane.YES_OPTION){
                 if(blusuairo.eliminarUsuario()){
                    JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                    cargarUsuarios();
+                    cargarTablaUsuarios();
                 } else {
                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el Usuairo", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                  }
@@ -1328,6 +1600,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_agregarFactura;
     private javax.swing.JButton bt_agregarLlanta;
     private javax.swing.JButton bt_agregarUsuairo;
+    private javax.swing.JButton bt_busquedaAvanazada;
     private javax.swing.JButton bt_eliminar;
     private javax.swing.JButton bt_eliminarAro;
     private javax.swing.JButton bt_eliminarLlanta;
@@ -1341,6 +1614,9 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_verFactura;
     private javax.swing.JButton bt_verLlanta;
     private javax.swing.JButton bt_verUsuario;
+    private javax.swing.JComboBox<String> cb_busquedaAvanzada;
+    private datechooser.beans.DateChooserCombo dc_fecha_desde;
+    private datechooser.beans.DateChooserCombo dc_fecha_hasta;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -1349,7 +1625,6 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JComboBox jcb_filtroBusquedaAro;
     private javax.swing.JComboBox jcb_filtroBusquedaFactura;
     private javax.swing.JComboBox jcb_filtroBusquedaLlanta;
@@ -1357,7 +1632,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jl_Buscar1;
     private javax.swing.JLabel jl_Buscar2;
     private javax.swing.JLabel jl_Buscar3;
-    private javax.swing.JLabel jl_Buscar4;
+    private javax.swing.JLabel jl_BuscarUsuairo;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JMenuItem jmi_ver;
@@ -1365,19 +1640,25 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jp_clientes;
     private javax.swing.JPanel jp_facturacion;
     private javax.swing.JPanel jp_llantas;
+    private javax.swing.JScrollPane jsp_facturas;
     private javax.swing.JTable jt_aros;
     private javax.swing.JTable jt_clientes;
     private javax.swing.JTable jt_facturas;
     private javax.swing.JTable jt_llantas;
     private javax.swing.JTable jt_usuarios;
+    private javax.swing.JLabel l_desde;
+    private javax.swing.JLabel l_hasta;
     private javax.swing.JMenuItem mi_cerrar_sesion;
+    private javax.swing.JPanel p_busquedaAvanzada;
     private javax.swing.JTabbedPane panel_tabs;
     private javax.swing.JPopupMenu pum_tb;
+    private javax.swing.JRadioButton rb_busquedaAvanzada;
     private javax.swing.JTabbedPane tb_productos;
     private javax.swing.JTextField tf_buscarAro;
     private javax.swing.JTextField tf_buscarCliente;
     private javax.swing.JTextField tf_buscarCliente1;
     private javax.swing.JTextField tf_buscarFactura;
     private javax.swing.JTextField tf_buscarLlantas;
+    private javax.swing.JTextField tf_busquedaAvanzada;
     // End of variables declaration//GEN-END:variables
 }

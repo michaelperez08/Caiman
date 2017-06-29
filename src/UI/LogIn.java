@@ -97,7 +97,7 @@ public class LogIn extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tf_contrasena.setBackground(new java.awt.Color(204, 204, 204));
         tf_contrasena.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
@@ -111,13 +111,13 @@ public class LogIn extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Contraseña");
 
-        bt_logIn.setBackground(new java.awt.Color(51, 51, 51));
+        bt_logIn.setBackground(new java.awt.Color(0, 51, 255));
         bt_logIn.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_logIn.setForeground(new java.awt.Color(204, 204, 204));
+        bt_logIn.setForeground(new java.awt.Color(0, 0, 0));
         bt_logIn.setText("Aceptar");
         bt_logIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +126,7 @@ public class LogIn extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Usuario");
         jLabel2.setPreferredSize(new java.awt.Dimension(91, 17));

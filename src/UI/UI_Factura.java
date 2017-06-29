@@ -57,12 +57,13 @@ public final class UI_Factura extends javax.swing.JDialog {
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
         actulizarLista = false;
+        l_fechaFactura.setVisible(false);
     }
 
     public UI_Factura(java.awt.Frame parent, boolean modal, ArrayList<BL_Cliente> listaClientes, ArrayList<BL_Llanta> listaLlantas, ArrayList<BL_Aro> listaAros) {
         super(parent, modal);
         initComponents();
-        df = new SimpleDateFormat("dd/MM/yyyy");
+        df = new SimpleDateFormat("dd-MM-yyyy");
         cal = Calendar.getInstance();
         setLocationRelativeTo(null);
         this.listaClientes = listaClientes;
@@ -79,6 +80,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         tb_linea_factura.getColumnModel().getColumn(0).setMaxWidth(0);
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
+        rb_contado.setSelected(true);
     }
 
     /**
@@ -123,12 +125,14 @@ public final class UI_Factura extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         l_subTotal = new javax.swing.JLabel();
         l_impVentas = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         bt_imprimir = new javax.swing.JButton();
         rb_contado = new javax.swing.JRadioButton();
         rb_credito = new javax.swing.JRadioButton();
         cb_semanas = new javax.swing.JComboBox<>();
-        l_fechaVencimeinto = new javax.swing.JLabel();
+        l_fechaFactura = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        l_fechaVencimeinto = new javax.swing.JLabel();
 
         jmi_eliminar.setText("Eliminar");
         jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -150,30 +154,30 @@ public final class UI_Factura extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jp_facturacion.setBackground(new java.awt.Color(51, 51, 51));
+        jp_facturacion.setBackground(new java.awt.Color(255, 255, 255));
         jp_facturacion.setMaximumSize(new java.awt.Dimension(1080, 720));
         jp_facturacion.setMinimumSize(new java.awt.Dimension(1080, 720));
         jp_facturacion.setPreferredSize(new java.awt.Dimension(1080, 720));
         jp_facturacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Cedula");
         jLabel1.setPreferredSize(new java.awt.Dimension(75, 32));
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre");
         jLabel2.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Telefono");
         jLabel3.setPreferredSize(new java.awt.Dimension(75, 32));
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
@@ -187,7 +191,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         jPanel2.add(tf_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 290, -1));
 
         jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Direccion");
         jLabel4.setPreferredSize(new java.awt.Dimension(75, 32));
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
@@ -201,13 +205,14 @@ public final class UI_Factura extends javax.swing.JDialog {
         jPanel2.add(tf_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 340, -1));
 
         jLabel6.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Cliente");
         jLabel6.setPreferredSize(new java.awt.Dimension(142, 32));
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 9, -1, -1));
 
+        rb_cliente_nuevo.setBackground(new java.awt.Color(255, 255, 255));
         rb_cliente_nuevo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_cliente_nuevo.setForeground(new java.awt.Color(204, 204, 204));
+        rb_cliente_nuevo.setForeground(new java.awt.Color(0, 0, 0));
         rb_cliente_nuevo.setText("Cliente Nuevo");
         rb_cliente_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
         rb_cliente_nuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -240,18 +245,18 @@ public final class UI_Factura extends javax.swing.JDialog {
 
         jp_facturacion.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 1078, 130));
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Producto");
         jLabel5.setPreferredSize(new java.awt.Dimension(75, 32));
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Agregar Linea");
         jLabel7.setPreferredSize(new java.awt.Dimension(142, 32));
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, -1, -1));
@@ -278,7 +283,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 1076, 300));
 
         jLabel8.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cantidad");
         jLabel8.setPreferredSize(new java.awt.Dimension(75, 32));
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, -1));
@@ -288,7 +293,9 @@ public final class UI_Factura extends javax.swing.JDialog {
         sp_cantidad.setPreferredSize(new java.awt.Dimension(220, 32));
         jPanel3.add(sp_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 290, -1));
 
+        bt_agregar_linea.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregar_linea.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_agregar_linea.setForeground(new java.awt.Color(255, 255, 255));
         bt_agregar_linea.setText("Agregar Linea");
         bt_agregar_linea.setPreferredSize(new java.awt.Dimension(160, 32));
         bt_agregar_linea.addActionListener(new java.awt.event.ActionListener() {
@@ -299,13 +306,14 @@ public final class UI_Factura extends javax.swing.JDialog {
         jPanel3.add(bt_agregar_linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Precio");
         jLabel9.setPreferredSize(new java.awt.Dimension(75, 32));
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
+        rb_producto_nuevo.setBackground(new java.awt.Color(255, 255, 255));
         rb_producto_nuevo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_producto_nuevo.setForeground(new java.awt.Color(204, 204, 204));
+        rb_producto_nuevo.setForeground(new java.awt.Color(0, 0, 0));
         rb_producto_nuevo.setText("Producto Nuevo");
         rb_producto_nuevo.setPreferredSize(new java.awt.Dimension(160, 32));
         rb_producto_nuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -316,21 +324,21 @@ public final class UI_Factura extends javax.swing.JDialog {
         jPanel3.add(rb_producto_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Total:");
         jLabel10.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 50, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 60, -1));
 
         l_total.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        l_total.setForeground(new java.awt.Color(204, 204, 204));
+        l_total.setForeground(new java.awt.Color(0, 0, 0));
         l_total.setPreferredSize(new java.awt.Dimension(220, 20));
         jPanel3.add(l_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, 90, -1));
 
         jLabel12.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Imp. Ventas:");
         jLabel12.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 120, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 130, -1));
 
         cb_producto.setPreferredSize(new java.awt.Dimension(220, 32));
         cb_producto.addActionListener(new java.awt.event.ActionListener() {
@@ -349,24 +357,29 @@ public final class UI_Factura extends javax.swing.JDialog {
         jPanel3.add(tf_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 340, -1));
 
         jLabel13.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Sub Total:");
         jLabel13.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 90, -1));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 100, -1));
 
         l_subTotal.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        l_subTotal.setForeground(new java.awt.Color(204, 204, 204));
+        l_subTotal.setForeground(new java.awt.Color(0, 0, 0));
         l_subTotal.setPreferredSize(new java.awt.Dimension(220, 20));
         jPanel3.add(l_subTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 90, -1));
 
         l_impVentas.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
-        l_impVentas.setForeground(new java.awt.Color(204, 204, 204));
+        l_impVentas.setForeground(new java.awt.Color(0, 0, 0));
         l_impVentas.setPreferredSize(new java.awt.Dimension(220, 20));
         jPanel3.add(l_impVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 90, -1));
 
+        jButton1.setText("...");
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 45, 30, 30));
+
         jp_facturacion.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 166, -1, 500));
 
+        bt_imprimir.setBackground(new java.awt.Color(0, 102, 204));
         bt_imprimir.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        bt_imprimir.setForeground(new java.awt.Color(255, 255, 255));
         bt_imprimir.setText("Imprimir");
         bt_imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,16 +388,30 @@ public final class UI_Factura extends javax.swing.JDialog {
         });
         jp_facturacion.add(bt_imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 680, -1, -1));
 
+        rb_contado.setBackground(new java.awt.Color(255, 255, 255));
         rb_contado.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_contado.setForeground(new java.awt.Color(204, 204, 204));
+        rb_contado.setForeground(new java.awt.Color(0, 0, 0));
         rb_contado.setText("Contado");
+        rb_contado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_contadoItemStateChanged(evt);
+            }
+        });
         jp_facturacion.add(rb_contado, new org.netbeans.lib.awtextra.AbsoluteConstraints(974, 6, -1, -1));
 
+        rb_credito.setBackground(new java.awt.Color(255, 255, 255));
         rb_credito.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        rb_credito.setForeground(new java.awt.Color(204, 204, 204));
+        rb_credito.setForeground(new java.awt.Color(0, 0, 0));
         rb_credito.setText("Credito");
+        rb_credito.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_creditoItemStateChanged(evt);
+            }
+        });
         jp_facturacion.add(rb_credito, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 6, -1, -1));
 
+        cb_semanas.setBackground(new java.awt.Color(255, 255, 255));
+        cb_semanas.setForeground(new java.awt.Color(0, 0, 0));
         cb_semanas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 dias", "30 dias", "45 dias", "60 dias", "75 dias", "90 dias" }));
         cb_semanas.setPreferredSize(new java.awt.Dimension(190, 28));
         cb_semanas.addActionListener(new java.awt.event.ActionListener() {
@@ -394,18 +421,24 @@ public final class UI_Factura extends javax.swing.JDialog {
         });
         jp_facturacion.add(cb_semanas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 6, -1, -1));
 
+        l_fechaFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        l_fechaFactura.setForeground(new java.awt.Color(0, 0, 0));
+        l_fechaFactura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l_fechaFactura.setPreferredSize(new java.awt.Dimension(175, 28));
+        jp_facturacion.add(l_fechaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 6, 220, -1));
+
+        jLabel15.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setText("Fecha de Vencimiento: ");
+        jLabel15.setPreferredSize(new java.awt.Dimension(175, 28));
+        jp_facturacion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 190, -1));
+
         l_fechaVencimeinto.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        l_fechaVencimeinto.setForeground(new java.awt.Color(204, 204, 204));
+        l_fechaVencimeinto.setForeground(new java.awt.Color(0, 0, 0));
         l_fechaVencimeinto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         l_fechaVencimeinto.setText("00/00/0000");
         l_fechaVencimeinto.setPreferredSize(new java.awt.Dimension(175, 28));
         jp_facturacion.add(l_fechaVencimeinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 6, 110, -1));
-
-        jLabel15.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel15.setText("Fecha de Vencimiento: ");
-        jLabel15.setPreferredSize(new java.awt.Dimension(175, 28));
-        jp_facturacion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 190, -1));
 
         getContentPane().add(jp_facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 730));
 
@@ -431,9 +464,9 @@ public final class UI_Factura extends javax.swing.JDialog {
                 double impVentas = Double.parseDouble(l_impVentas.getText());
                 double total = Double.parseDouble(l_total.getText());
                 BL_Factura blfac = new BL_Factura(0, "", clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
-                        fechaExpiracion, subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
+                        fechaExpiracion, cal.getTime(), subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
                 if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
-                        impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula())) {
+                        impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula(), cal.getTime())) {
                     Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
                     descontarCantidadProductosFactura();
                     actulizarLista = true;
@@ -475,9 +508,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
         if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().isEmpty()) {
             if (bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")) {
-                if (!rb_producto_nuevo.isSelected() && cb_producto.getSelectedItem() instanceof BL_Producto) {
-                    agregarLineaFactura();
-                } else if (!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)) {
+                if (!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)) {
                     Mensajes.mensajeInfomracion("El producto seleccionado no se encunetra registrado", "Ingresar producto");
                 } else {
                     agregarLineaFactura();
@@ -527,6 +558,18 @@ public final class UI_Factura extends javax.swing.JDialog {
     private void tf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyTyped
         Validacion.validarLongitud(tf_telefono, evt, 60);
     }//GEN-LAST:event_tf_telefonoKeyTyped
+
+    private void rb_creditoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_creditoItemStateChanged
+        if(rb_credito.isSelected()){
+            rb_contado.setSelected(false);
+        }
+    }//GEN-LAST:event_rb_creditoItemStateChanged
+
+    private void rb_contadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_contadoItemStateChanged
+        if(rb_contado.isSelected()){
+            rb_credito.setSelected(false);
+        }
+    }//GEN-LAST:event_rb_contadoItemStateChanged
 
     public BL_Cliente getClienteSeleccionado() {
         if (rb_cliente_nuevo.isSelected()) {
@@ -642,7 +685,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void formatoCBClientes() {
-        quitarFlechaCB(cb_nombre_cliente);
+        //quitarFlechaCB(cb_nombre_cliente);
         cb_nombre_cliente.setEditable(true);
         cb_nombre_cliente.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             @Override
@@ -671,7 +714,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void formatoCBProductos() {
-        quitarFlechaCB(cb_producto);
+        //quitarFlechaCB(cb_producto);
         cb_producto.setEditable(true);
         cb_producto.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             @Override
@@ -788,10 +831,12 @@ public final class UI_Factura extends javax.swing.JDialog {
         tf_direccion.setText(facturaVer.getDireccionCliente());
         tf_cedula.setText(facturaVer.getCedulaCliente());
         tf_telefono.setText(facturaVer.getTelefonoCliente());
+        l_fechaFactura.setText("Facturada el "+facturaVer.getFechaFactura());
+        l_fechaFactura.setVisible(true);
         for (BL_LineaFactura tempLinea : facturaVer.Retornar()) {
             ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{tempLinea.getId(), tempLinea.getCantidad(), tempLinea.getDetalle(), tempLinea.getPrecioUnitario(), tempLinea.getPrecioTotalLinea()});
         }
-        l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion() + "");
+        l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion().toString());
         if (facturaVer.getContado()) {
             rb_contado.setSelected(true);
             rb_credito.setEnabled(false);
@@ -816,7 +861,6 @@ public final class UI_Factura extends javax.swing.JDialog {
         bt_imprimir.setEnabled(false);
         rb_cliente_nuevo.setEnabled(false);
         rb_producto_nuevo.setEnabled(false);
-        quitarFlechaCB(cb_nombre_cliente);
         jmi_eliminar.setEnabled(false);
         jmi_modificar.setEnabled(false);
     }
@@ -828,6 +872,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     private javax.swing.JComboBox cb_nombre_cliente;
     private javax.swing.JComboBox cb_producto;
     private javax.swing.JComboBox<String> cb_semanas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -847,6 +892,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JPanel jp_facturacion;
+    private javax.swing.JLabel l_fechaFactura;
     private javax.swing.JLabel l_fechaVencimeinto;
     private javax.swing.JLabel l_impVentas;
     private javax.swing.JLabel l_subTotal;

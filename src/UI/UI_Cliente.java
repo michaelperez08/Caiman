@@ -71,12 +71,12 @@ public class UI_Cliente extends javax.swing.JDialog {
         pum_telefonos.add(jmi_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Ingresar Usuario");
+        setTitle("Nuevo Cliente");
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jl_nombre.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jl_nombre.setForeground(new java.awt.Color(204, 204, 204));
+        jl_nombre.setForeground(new java.awt.Color(0, 0, 0));
         jl_nombre.setText("Nombre");
 
         tf_nombre.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
@@ -89,7 +89,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         });
 
         bl_direccion.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        bl_direccion.setForeground(new java.awt.Color(204, 204, 204));
+        bl_direccion.setForeground(new java.awt.Color(0, 0, 0));
         bl_direccion.setText("Dirección");
 
         tf_direccion.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
@@ -102,12 +102,12 @@ public class UI_Cliente extends javax.swing.JDialog {
         });
 
         lb_telefono.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_telefono.setForeground(new java.awt.Color(204, 204, 204));
+        lb_telefono.setForeground(new java.awt.Color(0, 0, 0));
         lb_telefono.setText("Teléfono");
 
-        bt_ingresarCliente.setBackground(new java.awt.Color(51, 51, 51));
+        bt_ingresarCliente.setBackground(new java.awt.Color(0, 102, 204));
         bt_ingresarCliente.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_ingresarCliente.setForeground(new java.awt.Color(204, 204, 204));
+        bt_ingresarCliente.setForeground(new java.awt.Color(0, 0, 0));
         bt_ingresarCliente.setText("Ingresar Cliente");
         bt_ingresarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,9 +115,8 @@ public class UI_Cliente extends javax.swing.JDialog {
             }
         });
 
-        bt_agregarTelefono.setBackground(new java.awt.Color(51, 51, 51));
         bt_agregarTelefono.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        bt_agregarTelefono.setForeground(new java.awt.Color(204, 204, 204));
+        bt_agregarTelefono.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregarTelefono.setText("Agregar Teléfono");
         bt_agregarTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +125,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         });
 
         jl_nombre1.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jl_nombre1.setForeground(new java.awt.Color(204, 204, 204));
+        jl_nombre1.setForeground(new java.awt.Color(0, 0, 0));
         jl_nombre1.setText("Cedula");
 
         tf_cedula.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
@@ -149,7 +148,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jl_telefonos);
 
         lb_telefono1.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_telefono1.setForeground(new java.awt.Color(204, 204, 204));
+        lb_telefono1.setForeground(new java.awt.Color(0, 0, 0));
         lb_telefono1.setText("Direccion Exacta");
 
         ta_direccionexacta.setColumns(20);
@@ -202,9 +201,7 @@ public class UI_Cliente extends javax.swing.JDialog {
                                         .addComponent(bt_agregarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(tf_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(bt_ingresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(bt_ingresarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,9 +369,10 @@ public class UI_Cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_ta_direccionexactaKeyTyped
 
     private void tf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyTyped
-        System.out.println(tf_telefono.getText().substring(7,11));
-        if(!telefonoVacio(tf_telefono.getText().substring(7,11))){
-            bt_agregarTelefono.setText("Agregar Teléfono");
+        if(!telefonoVacio(tf_telefono.getText().substring(1,4))){
+            if(jl_telefonos.getModel().getSize()<3){
+                bt_agregarTelefono.setText("Agregar Teléfono");
+            }
         }
         if(!telefonoVacio(tf_telefono.getText().substring(2, 5))){
             tf_telefono.setText("506");
