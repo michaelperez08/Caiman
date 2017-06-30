@@ -9,6 +9,7 @@ package UI;
  *
  * @author michael
  */
+import HE.Exepciones;
 import javax.swing.UIManager;
 import config.ConfBD;
 import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
@@ -22,7 +23,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
+    public static void main(String[] args) throws UnsupportedLookAndFeelException, Exepciones{
         try {
             // TODO code application logic here
 //        try {

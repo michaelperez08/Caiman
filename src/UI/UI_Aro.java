@@ -52,22 +52,22 @@ public class UI_Aro extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingresar Aro");
 
-        pn_IngresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
+        pn_IngresarLlanta.setBackground(new java.awt.Color(255, 255, 255));
 
         lb_numeroAro.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_numeroAro.setForeground(new java.awt.Color(255, 255, 255));
+        lb_numeroAro.setForeground(new java.awt.Color(0, 0, 0));
         lb_numeroAro.setText("Número de Aro");
 
         lb_marca.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_marca.setForeground(new java.awt.Color(255, 255, 255));
+        lb_marca.setForeground(new java.awt.Color(0, 0, 0));
         lb_marca.setText("Marca");
 
         lb_codigo.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_codigo.setForeground(new java.awt.Color(255, 255, 255));
+        lb_codigo.setForeground(new java.awt.Color(0, 0, 0));
         lb_codigo.setText("Código");
 
         lb_cantidad.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_cantidad.setForeground(new java.awt.Color(255, 255, 255));
+        lb_cantidad.setForeground(new java.awt.Color(0, 0, 0));
         lb_cantidad.setText("Cantidad (Juegos)");
 
         tf_marca.setForeground(new java.awt.Color(51, 51, 51));
@@ -98,7 +98,7 @@ public class UI_Aro extends javax.swing.JDialog {
             }
         });
 
-        bt_ingresarAro.setBackground(new java.awt.Color(51, 51, 51));
+        bt_ingresarAro.setBackground(new java.awt.Color(0, 51, 204));
         bt_ingresarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         bt_ingresarAro.setForeground(new java.awt.Color(204, 204, 204));
         bt_ingresarAro.setText("Ingresar Aro");

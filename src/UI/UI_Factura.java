@@ -6,8 +6,10 @@ import BL.BL_Factura;
 import BL.BL_LineaFactura;
 import BL.BL_Llanta;
 import BL.BL_Producto;
+import HE.Exepciones;
 import config.Mensajes;
 import config.Validacion;
+import java.awt.Event;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
@@ -15,10 +17,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JSpinner;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -48,6 +55,8 @@ public final class UI_Factura extends javax.swing.JDialog {
     private Date fechaExpiracion;
     private DefaultTableModel dtmLineas;
     public boolean actulizarLista;
+    private HashMap<String, Integer> hm_ceduCliente;
+    private int cantidadMaxima;
 
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -58,6 +67,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
         actulizarLista = false;
         l_fechaFactura.setVisible(false);
+        cantidadMaxima = 0;
     }
 
     public UI_Factura(java.awt.Frame parent, boolean modal, ArrayList<BL_Cliente> listaClientes, ArrayList<BL_Llanta> listaLlantas, ArrayList<BL_Aro> listaAros) {
@@ -72,6 +82,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         listaProductos.addAll(listaLlantas);
         formatoCBClientes();
         formatoCBProductos();
+        formatoCBCedula();
         formatoSPCantidad();
         clienteNuevo(false);
         fechaVencimiento(15);
@@ -81,6 +92,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
         rb_contado.setSelected(true);
+        agregarListenerSpinnerCantidad();
     }
 
     /**
@@ -100,13 +112,13 @@ public final class UI_Factura extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tf_cedula = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tf_direccion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         rb_cliente_nuevo = new javax.swing.JRadioButton();
         cb_nombre_cliente = new javax.swing.JComboBox();
         tf_telefono = new javax.swing.JFormattedTextField();
+        cb_cedula = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -125,7 +137,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         l_subTotal = new javax.swing.JLabel();
         l_impVentas = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bt_SeleccionarProducto = new javax.swing.JButton();
         bt_imprimir = new javax.swing.JButton();
         rb_contado = new javax.swing.JRadioButton();
         rb_credito = new javax.swing.JRadioButton();
@@ -168,27 +180,19 @@ public final class UI_Factura extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Cedula");
         jLabel1.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre");
         jLabel2.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Telefono");
         jLabel3.setPreferredSize(new java.awt.Dimension(75, 32));
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
-
-        tf_cedula.setPreferredSize(new java.awt.Dimension(220, 32));
-        tf_cedula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_cedulaKeyTyped(evt);
-            }
-        });
-        jPanel2.add(tf_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 290, -1));
 
         jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -228,7 +232,7 @@ public final class UI_Factura extends javax.swing.JDialog {
                 cb_nombre_clienteActionPerformed(evt);
             }
         });
-        jPanel2.add(cb_nombre_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 340, -1));
+        jPanel2.add(cb_nombre_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 290, -1));
 
         try {
             tf_telefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(+###) ####-####")));
@@ -242,6 +246,13 @@ public final class UI_Factura extends javax.swing.JDialog {
             }
         });
         jPanel2.add(tf_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 290, -1));
+
+        cb_cedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_cedulaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cb_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 340, 32));
 
         jp_facturacion.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 1078, 130));
 
@@ -372,8 +383,15 @@ public final class UI_Factura extends javax.swing.JDialog {
         l_impVentas.setPreferredSize(new java.awt.Dimension(220, 20));
         jPanel3.add(l_impVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 90, -1));
 
-        jButton1.setText("...");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 45, 30, 30));
+        bt_SeleccionarProducto.setBackground(new java.awt.Color(0, 102, 204));
+        bt_SeleccionarProducto.setForeground(new java.awt.Color(0, 0, 0));
+        bt_SeleccionarProducto.setText("...");
+        bt_SeleccionarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_SeleccionarProductoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(bt_SeleccionarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 45, 30, 30));
 
         jp_facturacion.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 166, -1, 500));
 
@@ -513,7 +531,7 @@ public final class UI_Factura extends javax.swing.JDialog {
                 } else {
                     agregarLineaFactura();
                 }
-            } else {
+            } else {//modificar linea
                 modificarLinea(lineaSeleccionada);
             }
         } else {
@@ -541,15 +559,13 @@ public final class UI_Factura extends javax.swing.JDialog {
         Object obj_producto = cb_producto.getSelectedItem();
         if (obj_producto instanceof BL_Producto) {
             productoNuevaLinea = (BL_Producto) obj_producto;
-            sp_cantidad.setValue(((BL_Producto) obj_producto).getCantidad());
+            int cantidad = ((BL_Producto) obj_producto).getCantidad();
+            cantidadMaxima = cantidad;
+            sp_cantidad.setValue(cantidad);
         } else {
             productoNuevaLinea = null;
         }
     }//GEN-LAST:event_cb_productoActionPerformed
-
-    private void tf_cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cedulaKeyTyped
-        Validacion.validarLongitud(tf_cedula, evt, 25);
-    }//GEN-LAST:event_tf_cedulaKeyTyped
 
     private void tf_direccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_direccionKeyTyped
         Validacion.validarLongitud(tf_direccion, evt, 100);
@@ -560,22 +576,66 @@ public final class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_telefonoKeyTyped
 
     private void rb_creditoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_creditoItemStateChanged
-        if(rb_credito.isSelected()){
+        if (rb_credito.isSelected()) {
             rb_contado.setSelected(false);
         }
     }//GEN-LAST:event_rb_creditoItemStateChanged
 
     private void rb_contadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_contadoItemStateChanged
-        if(rb_contado.isSelected()){
+        if (rb_contado.isSelected()) {
             rb_credito.setSelected(false);
         }
     }//GEN-LAST:event_rb_contadoItemStateChanged
 
+    private void cb_cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_cedulaActionPerformed
+        try {
+            Integer posicionLista = hm_ceduCliente.get(cb_cedula.getSelectedItem().toString());
+            if (posicionLista != null) {
+                cliente_seleccionado = listaClientes.get(posicionLista);
+                cargarClienteSeleccionadoFactura(cliente_seleccionado);
+            }
+        } catch (ClassCastException | NullPointerException e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_cb_cedulaActionPerformed
+
+    private void bt_SeleccionarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_SeleccionarProductoActionPerformed
+        UI_BuscarProducto bp = new UI_BuscarProducto((JFrame) this.getParent(), rootPaneCheckingEnabled, listaProductos);
+        bp.setVisible(true);
+        BL_Producto ps = bp.getProductoSeleccionado();
+        if (ps != null) {
+            cb_producto.setSelectedItem(ps);
+        }
+    }//GEN-LAST:event_bt_SeleccionarProductoActionPerformed
+
+    public void agregarListenerSpinnerCantidad() {
+        sp_cantidad.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int cantidad = (Integer) sp_cantidad.getValue();
+                if (cantidad > 0 && cantidad > cantidadMaxima) {
+                    sp_cantidad.setValue(cantidadMaxima);
+                } else if (cantidad == 0) {
+                    sp_cantidad.setValue(0);
+                }
+            }
+        });
+    }
+
+    public boolean hayEnInventario() {
+        if (cantidadMaxima == 0) {
+            Mensajes.mensajeInfomracion("El poroducto no se encunetra en el inventario \nPor lo tanto no se puede añadir a la factura", "Producto Agotado");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public BL_Cliente getClienteSeleccionado() {
         if (rb_cliente_nuevo.isSelected()) {
             if (cb_nombre_cliente.getSelectedItem() != null && !cb_nombre_cliente.getSelectedItem().toString().isEmpty()) {
-                return new BL_Cliente(cb_nombre_cliente.getSelectedItem().toString(), tf_direccion.getText(), "", tf_cedula.getText(), tf_telefono.getText());
-            }else{
+                return new BL_Cliente(cb_nombre_cliente.getSelectedItem().toString(), tf_direccion.getText(), "", cb_cedula.getSelectedItem().toString(), tf_telefono.getText());
+            } else {
                 return null;
             }
         } else {
@@ -609,17 +669,19 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void agregarLineaFactura() {
-        double precio = Double.parseDouble(tf_precio.getText());
-        int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
-        double precioLinea = cantidad * precio;
-        Object detalle = cb_producto.getSelectedItem();
-        int id = 0;
-        if (detalle instanceof BL_Producto) {
-            id = ((BL_Producto) detalle).getIdProducto();
+        if (hayEnInventario()) {
+            double precio = Double.parseDouble(tf_precio.getText());
+            int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
+            double precioLinea = cantidad * precio;
+            Object detalle = cb_producto.getSelectedItem();
+            int id = 0;
+            if (detalle instanceof BL_Producto) {
+                id = ((BL_Producto) detalle).getIdProducto();
+            }
+            ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle, precio, precioLinea, rb_producto_nuevo.isSelected()});
+            calcularTotales();
+            listaProductos.remove(productoNuevaLinea);
         }
-        ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle, precio, precioLinea, rb_producto_nuevo.isSelected()});
-        calcularTotales();
-        listaProductos.remove(productoNuevaLinea);
     }
 
     public void ejecutarMetodoProducto(Object producto, Runnable run) {
@@ -638,7 +700,7 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     public void modificarLinea(int fila) {
 
-        Object detalle = cb_producto.getSelectedItem();         
+        Object detalle = cb_producto.getSelectedItem();
         double precio = Double.parseDouble(tf_precio.getText());
         int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
         double precioLinea = cantidad * precio;
@@ -685,7 +747,6 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void formatoCBClientes() {
-        //quitarFlechaCB(cb_nombre_cliente);
         cb_nombre_cliente.setEditable(true);
         cb_nombre_cliente.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             @Override
@@ -703,8 +764,54 @@ public final class UI_Factura extends javax.swing.JDialog {
         });
     }
 
+    public void filtrar_cb_clientes(String texto_digitado) {
+        cb_nombre_cliente.removeAllItems();
+        for (BL_Cliente cliente_temp : listaClientes) {
+            if (cliente_temp.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())) {
+                cb_nombre_cliente.addItem(cliente_temp);
+            }
+        }
+        if (!cb_nombre_cliente.isPopupVisible()) {
+            cb_nombre_cliente.showPopup();
+        }
+        cb_nombre_cliente.getEditor().setItem(texto_digitado);
+    }
+
+    public void formatoCBCedula() {
+        cb_cedula.setEditable(true);
+        cb_cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int tecla = e.getKeyCode();
+                if (!rb_cliente_nuevo.isSelected()) {
+                    if ((tecla >= 65 && tecla <= 90) || (tecla >= 97 && tecla <= 122) || tecla == KeyEvent.VK_BACK_SPACE) {
+                        filtrar_cb_cedula(cb_cedula.getEditor().getItem() + "");
+                    } else if (tecla == KeyEvent.VK_ENTER && cliente_seleccionado != null) {
+                        cargarClienteSeleccionadoFactura(cliente_seleccionado);
+                    }
+                }
+            }
+
+        });
+    }
+
+    public void filtrar_cb_cedula(String texto_digitado) {
+        cb_cedula.removeAllItems();
+        hm_ceduCliente = new HashMap<>();
+        for (int i = 0; i < listaClientes.size(); i++) {
+            if (listaClientes.get(i).getCedula().toLowerCase().contains(texto_digitado.toLowerCase())) {
+                cb_cedula.addItem(listaClientes.get(i).getCedula());
+                hm_ceduCliente.put(listaClientes.get(i).getCedula(), i);
+            }
+        }
+        if (!cb_cedula.isPopupVisible()) {
+            cb_cedula.showPopup();
+        }
+        cb_cedula.getEditor().setItem(texto_digitado);
+    }
+
     public void clienteNuevo(boolean b) {
-        tf_cedula.setEditable(b);
+        //cb_cedula.setEditable(b);
         tf_direccion.setEditable(b);
         tf_telefono.setEditable(b);
     }
@@ -731,22 +838,9 @@ public final class UI_Factura extends javax.swing.JDialog {
         });
     }
 
-    public void filtrar_cb_clientes(String texto_digitado) {
-        cb_nombre_cliente.removeAllItems();
-        for (BL_Cliente cliente_temp : listaClientes) {
-            if (cliente_temp.getNombre().toLowerCase().contains(texto_digitado.toLowerCase())) {
-                cb_nombre_cliente.addItem(cliente_temp);
-            }
-        }
-        if (!cb_nombre_cliente.isPopupVisible()) {
-            cb_nombre_cliente.showPopup();
-        }
-        cb_nombre_cliente.getEditor().setItem(texto_digitado);
-    }
-
     public void cargarClienteSeleccionadoFactura(BL_Cliente cliente) {
         cb_nombre_cliente.getEditor().setItem(cliente.getNombre());
-        tf_cedula.setText(cliente.getCedula());
+        cb_cedula.getEditor().setItem(cliente.getCedula());
         tf_telefono.setText(cliente.getTelefonos());
         tf_direccion.setText(cliente.getDireccion_simple());
     }
@@ -766,7 +860,7 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     public void limpiarCamposCliente() {
         cb_nombre_cliente.removeAllItems();
-        tf_cedula.setText("");
+        cb_cedula.removeAllItems();
         tf_direccion.setText("");
         tf_telefono.setText("");
     }
@@ -828,10 +922,11 @@ public final class UI_Factura extends javax.swing.JDialog {
 
         cb_nombre_cliente.addItem(facturaVer.getNombreCliente());
         cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
+        cb_cedula.addItem(facturaVer.getCedulaCliente());
+        cb_cedula.getEditor().setItem(facturaVer.getCedulaCliente());
         tf_direccion.setText(facturaVer.getDireccionCliente());
-        tf_cedula.setText(facturaVer.getCedulaCliente());
         tf_telefono.setText(facturaVer.getTelefonoCliente());
-        l_fechaFactura.setText("Facturada el "+facturaVer.getFechaFactura());
+        l_fechaFactura.setText("Facturada el " + facturaVer.getFechaFactura());
         l_fechaFactura.setVisible(true);
         for (BL_LineaFactura tempLinea : facturaVer.Retornar()) {
             ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{tempLinea.getId(), tempLinea.getCantidad(), tempLinea.getDetalle(), tempLinea.getPrecioUnitario(), tempLinea.getPrecioTotalLinea()});
@@ -852,7 +947,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         cb_semanas.setVisible(false);
         cb_producto.setEnabled(false);
         cb_nombre_cliente.setEditable(false);
-        tf_cedula.setEditable(false);
+        cb_cedula.setEditable(false);
         tf_precio.setEnabled(false);
         tf_direccion.setEditable(false);
         tf_telefono.setEditable(false);
@@ -867,12 +962,13 @@ public final class UI_Factura extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_SeleccionarProducto;
     private javax.swing.JButton bt_agregar_linea;
     private javax.swing.JButton bt_imprimir;
+    private javax.swing.JComboBox<String> cb_cedula;
     private javax.swing.JComboBox cb_nombre_cliente;
     private javax.swing.JComboBox cb_producto;
     private javax.swing.JComboBox<String> cb_semanas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -904,7 +1000,6 @@ public final class UI_Factura extends javax.swing.JDialog {
     private javax.swing.JRadioButton rb_producto_nuevo;
     private javax.swing.JSpinner sp_cantidad;
     private javax.swing.JTable tb_linea_factura;
-    private javax.swing.JTextField tf_cedula;
     private javax.swing.JTextField tf_direccion;
     private javax.swing.JFormattedTextField tf_precio;
     private javax.swing.JFormattedTextField tf_telefono;

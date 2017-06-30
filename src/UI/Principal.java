@@ -10,8 +10,10 @@ import BL.BL_Cliente;
 import BL.BL_Factura;
 import BL.BL_Llanta;
 import BL.BL_Usuario;
+import HE.Exepciones;
 import config.Mensajes;
 import config.Validacion;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
@@ -59,7 +61,7 @@ public final class Principal extends javax.swing.JFrame {
     private SimpleDateFormat sdf;
     int resaltado;
 
-    public Principal() {
+    public Principal() throws Exepciones{
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../IMG/tire-icon.png")).getImage());
         setLocationRelativeTo(null);
@@ -85,6 +87,7 @@ public final class Principal extends javax.swing.JFrame {
         dc_fecha_hasta.setMaxDate(Calendar.getInstance());
         dc_fecha_desde.setMaxDate(dc_fecha_hasta.getSelectedDate());
         mostrarBusquedaAvanzada(-70, false);
+        inmovilizarColumnas();
     }
 
     /**
@@ -1094,8 +1097,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_bt_agregarUsuairoActionPerformed
 
     private void mi_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_cerrar_sesionActionPerformed
-        LogIn li = new LogIn(this, rootPaneCheckingEnabled);
-        LogIn.bl_usuairo = null;
+        UI_LogIn li = new UI_LogIn(this, rootPaneCheckingEnabled);
+        UI_LogIn.bl_usuairo = null;
         this.dispose();
         li.setVisible(true);
     }//GEN-LAST:event_mi_cerrar_sesionActionPerformed
@@ -1109,6 +1112,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             mostrarBusquedaAvanzada(70, true);
         }else{
             mostrarBusquedaAvanzada(-70, false);
+            cargarTablaFacturas(listaFactura);
         }
     }//GEN-LAST:event_rb_busquedaAvanzadaItemStateChanged
 
@@ -1169,8 +1173,9 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                         + "Puede utilizar el filtro de busqueda para encintrarla", "Busqueda Avanzada");
                 return false;
             }
-        } catch (ParseException ex) {
+        } catch (ParseException ex ) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
         }
         return true;
     }
@@ -1269,7 +1274,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }
      
      public void cargarListaClientes(){
-         cliente = new BL_Cliente();
+        cliente = new BL_Cliente();
         listaClientes = cliente.cargarClientes();
      }
 
@@ -1290,7 +1295,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_clientes.setModel(dtmClientes);
         jt_clientes.getColumnModel().getColumn(0).setMinWidth(0);
         jt_clientes.getColumnModel().getColumn(0).setMaxWidth(0);
-        //((DefaultTableCellRenderer)jt_clientes.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
     }
     
@@ -1320,7 +1324,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_llantas.getColumnModel().getColumn(6).setMinWidth(0);
         jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
         trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
-        
     }
     
     public void cargarListaAros(){
@@ -1391,6 +1394,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                         ,sdf.format(factura_temp.getFechaFactura()), factura_temp.getPrecioTotal()});
             }
         }
+        
         jt_facturas.setModel(dtmFacturas);
         trsfiltroFactura = new TableRowSorter(jt_facturas.getModel());
         jt_facturas.getColumnModel().getColumn(0).setMinWidth(0);
@@ -1589,6 +1593,13 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         }
     }
     
+    public void inmovilizarColumnas(){
+        jt_clientes.getTableHeader().setReorderingAllowed(false);
+        jt_llantas.getTableHeader().setReorderingAllowed(false);
+        jt_aros.getTableHeader().setReorderingAllowed(false);
+        jt_facturas.getTableHeader().setReorderingAllowed(false);
+        jt_usuarios.getTableHeader().setReorderingAllowed(false);
+    }
     //cargar clientes en el campo nombre cliente de factura
     
     

@@ -19,6 +19,7 @@ public class Exepciones extends Exception{
 
     public Exepciones(Throwable cause) {
         super(cause);
+        RegistrarError(cause);
     }
     
     

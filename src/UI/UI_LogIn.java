@@ -9,33 +9,29 @@ package UI;
  *
  * @author michael
  */
-
 import BL.*;
-import javax.swing.ImageIcon;
+import HE.Exepciones;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import config.ConfBD;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
 
-public class LogIn extends javax.swing.JDialog {
+public class UI_LogIn extends javax.swing.JDialog {
 
     /**
-     * Creates new form LogIn
+     * Creates new form UI_LogIn
      */
-    
     public static BL_Usuario bl_usuairo;
-    
-    public LogIn(java.awt.Frame parent, boolean modal) {
+
+    public UI_LogIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
     }
-    
+
     public boolean iniciarLogIn() {
         BL_Usuario blu = new BL_Usuario();
         int cantUsu = blu.getCantidadUsuarios();
@@ -49,7 +45,7 @@ public class LogIn extends javax.swing.JDialog {
         }
         return true;
     }
-    
+
     public void probarConeccion() {
         if (new DAO.DAO_Conexion().probarConeccion()) {
             desbloquerLogIn();
@@ -59,13 +55,13 @@ public class LogIn extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "No hay conexion con la Base de Datos", "Nueva Conexion", JOptionPane.ERROR_MESSAGE);
         }
     }
- 
+
     public void bloquerLogIn() {
         tf_usuario.setEnabled(false);
         tf_contrasena.setEnabled(false);
         bt_logIn.setEnabled(false);
     }
- 
+
     public void desbloquerLogIn() {/*
         tf_usuario.setEnabled(true);
         jpf_contraseña.setEnabled(true);
@@ -206,32 +202,38 @@ public class LogIn extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
-        // TODO add your handling code here:
-        logIn();
+        try {
+            // TODO add your handling code here:
+            logIn();
+        } catch (Exepciones ex) {
+            Logger.getLogger(UI_LogIn.class.getName()).log(Level.SEVERE, null, ex);
+            Exepciones.RegistrarError(ex);
+        }
     }//GEN-LAST:event_bt_logInActionPerformed
 
-    
+
     private void tf_contrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_contrasenaKeyReleased
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-                {
-                    logIn();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                logIn();
+            } catch (Exepciones ex) {
+                Logger.getLogger(UI_LogIn.class.getName()).log(Level.SEVERE, null, ex);
+                Exepciones.RegistrarError(ex);
+            }
+        }
     }//GEN-LAST:event_tf_contrasenaKeyReleased
 
     private void tf_usuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_usuarioKeyReleased
         // TODO add your handling code here:
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-                {
-                    tf_contrasena.requestFocusInWindow();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tf_contrasena.requestFocusInWindow();
+        }
     }//GEN-LAST:event_tf_usuarioKeyReleased
 
     /**
      * @param args the command line arguments
      */
-
-    
     private boolean guardarUsuario() {
         JTextField username = new JTextField();
         JTextField password = new JPasswordField();
@@ -243,21 +245,21 @@ public class LogIn extends javax.swing.JDialog {
             "Repetir Contraseña:", password2
         };
         boolean continuar = false;
- 
+
         do {
             int option = JOptionPane.showConfirmDialog(null, message, "Login", JOptionPane.OK_CANCEL_OPTION);
- 
+
             if (option == JOptionPane.OK_OPTION) {
- 
+
                 if (username.getText().trim().equals("") || password.getText().trim().equals("")
                         || password2.getText().trim().equals("") || username.getText().length() > 45
                         || password.getText().length() > 45 || password2.getText().length() > 45) {
- 
+
                     JOptionPane.showMessageDialog(null, "Todos los campos deben tener entre 1 y 45 caracteres", "Campos no validos", JOptionPane.INFORMATION_MESSAGE);
                     username.setText("");
                     password.setText("");
                     password2.setText("");
- 
+
                 } else {
                     if (password.getText().trim().equals(password2.getText().trim())) {
                         BL_Usuario blu = new BL_Usuario();
@@ -272,13 +274,13 @@ public class LogIn extends javax.swing.JDialog {
                 return false;
             }
         } while (!continuar);
- 
+
         return true;
     }
-    
-    private void logIn(){
+
+    private void logIn() throws Exepciones {
         if (tf_usuario.getText().trim().isEmpty() || tf_contrasena.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña vacios", "ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña vacios", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             bl_usuairo = new BL_Usuario(tf_usuario.getText(), new String(tf_contrasena.getPassword()), "Administrador").LogIn();
             if (bl_usuairo != null) {
@@ -286,7 +288,7 @@ public class LogIn extends javax.swing.JDialog {
                 p.setVisible(true);
                 this.setVisible(false);
             } else {
-                 JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña incorrectos", "ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Campo de usuario o conraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

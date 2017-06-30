@@ -25,6 +25,7 @@ public class UI_Usuario extends javax.swing.JDialog {
     public UI_Usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -51,6 +52,7 @@ public class UI_Usuario extends javax.swing.JDialog {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Nuevo Usuario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pn_IngresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
