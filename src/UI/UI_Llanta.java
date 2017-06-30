@@ -53,30 +53,30 @@ public class UI_Llanta extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingresar Llanta");
 
-        pn_IngresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
+        pn_IngresarLlanta.setBackground(new java.awt.Color(255, 255, 255));
 
         lb_numeroLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_numeroLlanta.setForeground(new java.awt.Color(255, 255, 255));
+        lb_numeroLlanta.setForeground(new java.awt.Color(0, 0, 0));
         lb_numeroLlanta.setText("Número de Llanta");
 
         lb_marca.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_marca.setForeground(new java.awt.Color(255, 255, 255));
+        lb_marca.setForeground(new java.awt.Color(0, 0, 0));
         lb_marca.setText("Marca");
 
         lb_diseno.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_diseno.setForeground(new java.awt.Color(255, 255, 255));
+        lb_diseno.setForeground(new java.awt.Color(0, 0, 0));
         lb_diseno.setText("Diseño");
 
         lb_numeroCapas.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_numeroCapas.setForeground(new java.awt.Color(255, 255, 255));
+        lb_numeroCapas.setForeground(new java.awt.Color(0, 0, 0));
         lb_numeroCapas.setText("Capas");
 
         lb_cantidad.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_cantidad.setForeground(new java.awt.Color(255, 255, 255));
+        lb_cantidad.setForeground(new java.awt.Color(0, 0, 0));
         lb_cantidad.setText("Cantidad de Llantas");
 
         lb_tipoLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_tipoLlanta.setForeground(new java.awt.Color(255, 255, 255));
+        lb_tipoLlanta.setForeground(new java.awt.Color(0, 0, 0));
         lb_tipoLlanta.setText("Tipo de Llanta:");
 
         tf_marca.setForeground(new java.awt.Color(51, 51, 51));
@@ -119,9 +119,9 @@ public class UI_Llanta extends javax.swing.JDialog {
             }
         });
 
-        bt_ingresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
+        bt_ingresarLlanta.setBackground(new java.awt.Color(0, 0, 204));
         bt_ingresarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_ingresarLlanta.setForeground(new java.awt.Color(204, 204, 204));
+        bt_ingresarLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_ingresarLlanta.setText("Ingresar Llanta");
         bt_ingresarLlanta.setPreferredSize(new java.awt.Dimension(148, 32));
         bt_ingresarLlanta.addActionListener(new java.awt.event.ActionListener() {
