@@ -62,7 +62,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setModeloTbLineasProducto();
+        fomratoTablaLineaFactura();
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
         actulizarLista = false;
@@ -86,7 +86,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         formatoSPCantidad();
         clienteNuevo(false);
         fechaVencimiento(15);
-        setModeloTbLineasProducto();
+        fomratoTablaLineaFactura();
         tb_linea_factura.getColumnModel().getColumn(0).setMinWidth(0);
         tb_linea_factura.getColumnModel().getColumn(0).setMaxWidth(0);
         tb_linea_factura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -511,10 +511,7 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     private void rb_producto_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_producto_nuevoActionPerformed
         if (rb_producto_nuevo.isSelected()) {
-            productoNuevo(true);
             limpiarCamposProducto();
-        } else {
-            productoNuevo(false);
         }
     }//GEN-LAST:event_rb_producto_nuevoActionPerformed
 
@@ -524,15 +521,15 @@ public final class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_cb_semanasActionPerformed
 
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
-        if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().isEmpty()) {
-            if (bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")) {
-                if (!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)) {
-                    Mensajes.mensajeInfomracion("El producto seleccionado no se encunetra registrado", "Ingresar producto");
-                } else {
+        if (!tf_precio.getText().isEmpty() && !cb_producto.getSelectedItem().toString().trim().isEmpty()) {
+            if (!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)) {
+                Mensajes.mensajeInfomracion("El producto seleccionado no se encunetra registrado", "Ingresar producto");
+            } else {
+                if (bt_agregar_linea.getText().equalsIgnoreCase("Agregar Linea")) {
                     agregarLineaFactura();
+                } else {//modificar linea
+                    modificarLinea(lineaSeleccionada);
                 }
-            } else {//modificar linea
-                modificarLinea(lineaSeleccionada);
             }
         } else {
             Mensajes.mensajeInfomracion("Faltan datos para agregar la linea", "Agregar Linea");
@@ -612,18 +609,24 @@ public final class UI_Factura extends javax.swing.JDialog {
         sp_cantidad.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                int cantidad = (Integer) sp_cantidad.getValue();
-                if (cantidad > 0 && cantidad > cantidadMaxima) {
-                    sp_cantidad.setValue(cantidadMaxima);
-                } else if (cantidad == 0) {
-                    sp_cantidad.setValue(0);
-                }
+                validarCantidadMaxima();
             }
         });
     }
 
+    public void validarCantidadMaxima() {
+        if (!rb_producto_nuevo.isSelected()) {
+            int cantidad = (Integer) sp_cantidad.getValue();
+            if (cantidad > 0 && cantidad > cantidadMaxima) {
+                sp_cantidad.setValue(cantidadMaxima);
+            } else if (cantidad == 0) {
+                sp_cantidad.setValue(0);
+            }
+        }
+    }
+
     public boolean hayEnInventario() {
-        if (cantidadMaxima == 0) {
+        if (cantidadMaxima == 0 && !rb_producto_nuevo.isSelected()) {
             Mensajes.mensajeInfomracion("El poroducto no se encunetra en el inventario \nPor lo tanto no se puede añadir a la factura", "Producto Agotado");
             return false;
         } else {
@@ -680,7 +683,6 @@ public final class UI_Factura extends javax.swing.JDialog {
             }
             ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle, precio, precioLinea, rb_producto_nuevo.isSelected()});
             calcularTotales();
-            listaProductos.remove(productoNuevaLinea);
         }
     }
 
@@ -699,29 +701,40 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void modificarLinea(int fila) {
-
-        Object detalle = cb_producto.getSelectedItem();
-        double precio = Double.parseDouble(tf_precio.getText());
-        int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
-        double precioLinea = cantidad * precio;
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(cantidad, fila, 1);
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(detalle, fila, 2);
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precio, fila, 3);
-        ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 4);
-        calcularTotales();
-        limpiarCamposProducto();
-        bt_agregar_linea.setText("Agregar Linea");
-        tb_linea_factura.setCellSelectionEnabled(true);
+        if (hayEnInventario()) {
+            Object detalle = cb_producto.getSelectedItem();
+            double precio = Double.parseDouble(tf_precio.getText());
+            int cantidad = Integer.parseInt(sp_cantidad.getValue().toString());
+            double precioLinea = cantidad * precio;
+            int id = 0;
+            if (detalle instanceof BL_Producto) {
+                id = ((BL_Producto) detalle).getIdProducto();
+            }
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(id, fila, 0);
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(cantidad, fila, 1);
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(detalle, fila, 2);
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precio, fila, 3);
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 4);
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(rb_producto_nuevo.isSelected(), fila, 5);
+            calcularTotales();
+            limpiarCamposProducto();
+            bt_agregar_linea.setText("Agregar Linea");
+            tb_linea_factura.setCellSelectionEnabled(true);
+        }
     }
 
     public void llenarCamposLinea() {
+        rb_producto_nuevo.setSelected((Boolean) tb_linea_factura.getValueAt(lineaSeleccionada, 5));
         lineaSeleccionada = tb_linea_factura.getSelectedRow();
-        sp_cantidad.setValue(tb_linea_factura.getValueAt(lineaSeleccionada, 1));
-        filtrar_cb_producto(tb_linea_factura.getValueAt(lineaSeleccionada, 2) + "");
-        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3) + "");
+        Object producto = tb_linea_factura.getValueAt(lineaSeleccionada, 2).toString();
+        cb_producto.addItem(producto);
+        cb_producto.setSelectedItem(producto);
+        int cantidadLinea = Integer.parseInt(tb_linea_factura.getValueAt(lineaSeleccionada, 1).toString());
+        sp_cantidad.setValue(cantidadLinea);
+        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3).toString());
         bt_agregar_linea.setText("Modificar");
         tb_linea_factura.setCellSelectionEnabled(false);
-
+        
     }
 
     public void calcularTotales() {
@@ -816,10 +829,6 @@ public final class UI_Factura extends javax.swing.JDialog {
         tf_telefono.setEditable(b);
     }
 
-    public void productoNuevo(boolean b) {
-
-    }
-
     public void formatoCBProductos() {
         //quitarFlechaCB(cb_producto);
         cb_producto.setEditable(true);
@@ -898,12 +907,12 @@ public final class UI_Factura extends javax.swing.JDialog {
             @Override
             public void keyTyped(KeyEvent e) {
                 Validacion.soloNumeros(e);
+                validarCantidadMaxima();
             }
-
         });
     }
 
-    public void setModeloTbLineasProducto() {
+    public void fomratoTablaLineaFactura() {
         String[] nombreColumnas = {"Id", "Cantidad", "Detalle", "Precio Unitario", "Precio Linea", "Producto Nuevo"};
         dtmLineas = new DefaultTableModel(null, nombreColumnas) {
             @Override
