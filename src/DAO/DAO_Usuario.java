@@ -39,7 +39,7 @@ public class DAO_Usuario {
 
             rs = cmd.executeQuery();
             while (rs.next()) {
-                usuario = new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario"));
+                usuario = new TO_Usuario(rs.getInt("idUsuario"), rs.getString("NombreUsuario"),rs.getString("Tipo"));
                 conexion.close();
                 return usuario;
             }

@@ -38,7 +38,14 @@ public class BL_Usuario {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
     }
+
+    public BL_Usuario(int idUsuario, String NombreUsuario, String tipoUsuario) {
+        this.idUsuario = idUsuario;
+        this.NombreUsuario = NombreUsuario;
+        this.tipoUsuario = tipoUsuario;
+    }
  
+    
     public BL_Usuario() {
     }
  
@@ -79,7 +86,7 @@ public class BL_Usuario {
         DAO_Usuario daou = new DAO_Usuario();
         TO_Usuario tou = daou.checkLogIn(this.NombreUsuario, this.Contrasena);
         if (tou != null) {
-            return new BL_Usuario(tou.getIdUsuario(), tou.getNombreUsuario());
+            return new BL_Usuario(tou.getIdUsuario(), tou.getNombreUsuario(),tou.getTipoUsuario());
         } else {
             return null;
         }

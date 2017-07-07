@@ -33,6 +33,14 @@ public class TO_Usuario {
         this.idUsuario = idUsuario;
         this.NombreUsuario = NombreUsuario;
     }
+
+    public TO_Usuario(int idUsuario, String NombreUsuario, String tipoUsuario) {
+        this.idUsuario = idUsuario;
+        this.NombreUsuario = NombreUsuario;
+        this.tipoUsuario = tipoUsuario;
+    }
+    
+    
  
     public TO_Usuario() {
     }

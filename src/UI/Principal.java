@@ -1104,7 +1104,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_mi_cerrar_sesionActionPerformed
 
     private void bt_verFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verFacturaActionPerformed
-        // TODO add your handling code here:
+        verFactura();
     }//GEN-LAST:event_bt_verFacturaActionPerformed
 
     private void rb_busquedaAvanzadaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_busquedaAvanzadaItemStateChanged
@@ -1602,7 +1602,9 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }
     //cargar clientes en el campo nombre cliente de factura
     
-    
+    public void bloquearAdministracionUsuarios(){
+        panel_tabs.setEnabledAt(3, false);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -16,6 +16,7 @@ import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main {
@@ -26,17 +27,17 @@ public class Main {
     public static void main(String[] args) throws UnsupportedLookAndFeelException, Exepciones{
         try {
             // TODO code application logic here
-//        try {
-//            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//               
-//        } catch (Exception e) {
-//            
-//        }
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+               
+        } catch (Exception e) {
+            
+        }
 
             UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
         } catch (ParseException ex) {
@@ -45,17 +46,17 @@ public class Main {
 
 
         ConfBD confdb = new ConfBD();
-        /*LogIn login = new LogIn(null, true);
+        UI_LogIn login = new UI_LogIn(null, true);
          if(login.iniciarLogIn()) {
          login.setVisible(true);
          } else {
          System.exit(0);
          }
-         */
-        //LogIn li = new LogIn(null, true);
-        //li.setVisible(true);
-        Principal p = new Principal();
-        p.setVisible(true);
+         
+//        LogIn li = new LogIn(null, true);
+//        li.setVisible(true);
+        //Principal p = new Principal();
+        //p.setVisible(true);
 
     }
 

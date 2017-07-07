@@ -284,7 +284,12 @@ public class UI_LogIn extends javax.swing.JDialog {
         } else {
             bl_usuairo = new BL_Usuario(tf_usuario.getText(), new String(tf_contrasena.getPassword()), "Administrador").LogIn();
             if (bl_usuairo != null) {
+                this.setVisible(false);
                 Principal p = new Principal();
+                
+                if(bl_usuairo.getTipoUsuario().equalsIgnoreCase("Estandar")){
+                    p.bloquearAdministracionUsuarios();
+                }
                 p.setVisible(true);
                 this.setVisible(false);
             } else {
