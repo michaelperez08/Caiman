@@ -167,6 +167,11 @@ public class UI_Cliente extends javax.swing.JDialog {
             ex.printStackTrace();
         }
         tf_telefono.setPreferredSize(new java.awt.Dimension(259, 31));
+        tf_telefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_telefonoFocusGained(evt);
+            }
+        });
         tf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_telefonoKeyTyped(evt);
@@ -379,6 +384,14 @@ public class UI_Cliente extends javax.swing.JDialog {
             maximoTelefonos();
         }
     }//GEN-LAST:event_tf_telefonoKeyTyped
+
+    private void tf_telefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_telefonoFocusGained
+        // TODO add your handling code here:
+       
+       if( tf_telefono.getText().trim().length()==12){
+        tf_telefono.setCaretPosition(6);
+       }
+    }//GEN-LAST:event_tf_telefonoFocusGained
 
     
     public String concatenarTelefonos() {
