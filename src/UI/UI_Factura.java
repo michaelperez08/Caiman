@@ -145,6 +145,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         l_fechaFactura = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         l_fechaVencimeinto = new javax.swing.JLabel();
+        l_numeroFactura = new javax.swing.JLabel();
 
         jmi_eliminar.setText("Eliminar");
         jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -437,26 +438,29 @@ public final class UI_Factura extends javax.swing.JDialog {
                 cb_semanasActionPerformed(evt);
             }
         });
-        jp_facturacion.add(cb_semanas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 6, -1, -1));
+        jp_facturacion.add(cb_semanas, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 6, -1, -1));
 
         l_fechaFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         l_fechaFactura.setForeground(new java.awt.Color(0, 0, 0));
         l_fechaFactura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         l_fechaFactura.setPreferredSize(new java.awt.Dimension(175, 28));
-        jp_facturacion.add(l_fechaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 6, 220, -1));
+        jp_facturacion.add(l_fechaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 6, 220, -1));
 
         jLabel15.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Fecha de Vencimiento: ");
         jLabel15.setPreferredSize(new java.awt.Dimension(175, 28));
-        jp_facturacion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 190, -1));
+        jp_facturacion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 6, 190, -1));
 
         l_fechaVencimeinto.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         l_fechaVencimeinto.setForeground(new java.awt.Color(0, 0, 0));
         l_fechaVencimeinto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         l_fechaVencimeinto.setText("00/00/0000");
         l_fechaVencimeinto.setPreferredSize(new java.awt.Dimension(175, 28));
-        jp_facturacion.add(l_fechaVencimeinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 6, 110, -1));
+        jp_facturacion.add(l_fechaVencimeinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 6, 110, -1));
+
+        l_numeroFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        jp_facturacion.add(l_numeroFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 6, 130, 28));
 
         getContentPane().add(jp_facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 730));
 
@@ -734,7 +738,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3).toString());
         bt_agregar_linea.setText("Modificar");
         tb_linea_factura.setCellSelectionEnabled(false);
-        
+
     }
 
     public void calcularTotales() {
@@ -795,12 +799,14 @@ public final class UI_Factura extends javax.swing.JDialog {
         cb_cedula.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                int tecla = e.getKeyCode();
-                if (!rb_cliente_nuevo.isSelected()) {
-                    if ((tecla >= 65 && tecla <= 90) || (tecla >= 97 && tecla <= 122) || tecla == KeyEvent.VK_BACK_SPACE) {
-                        filtrar_cb_cedula(cb_cedula.getEditor().getItem() + "");
-                    } else if (tecla == KeyEvent.VK_ENTER && cliente_seleccionado != null) {
-                        cargarClienteSeleccionadoFactura(cliente_seleccionado);
+                if (Validacion.soloNumeros(e)) {
+                    int tecla = e.getKeyCode();
+                    if (!rb_cliente_nuevo.isSelected()) {
+                        if ((tecla >= 65 && tecla <= 90) || (tecla >= 97 && tecla <= 122) || tecla == KeyEvent.VK_BACK_SPACE) {
+                            filtrar_cb_cedula(cb_cedula.getEditor().getItem() + "");
+                        } else if (tecla == KeyEvent.VK_ENTER && cliente_seleccionado != null) {
+                            cargarClienteSeleccionadoFactura(cliente_seleccionado);
+                        }
                     }
                 }
             }
@@ -928,7 +934,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void cargarFactura(BL_Factura facturaVer) {
-
+        l_numeroFactura.setText("Factura " + BL_Factura.formatearIDFactura(facturaVer.getIdFactura()));
         cb_nombre_cliente.addItem(facturaVer.getNombreCliente());
         cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
         cb_cedula.addItem(facturaVer.getCedulaCliente());
@@ -1000,6 +1006,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     private javax.swing.JLabel l_fechaFactura;
     private javax.swing.JLabel l_fechaVencimeinto;
     private javax.swing.JLabel l_impVentas;
+    private javax.swing.JLabel l_numeroFactura;
     private javax.swing.JLabel l_subTotal;
     private javax.swing.JLabel l_total;
     private javax.swing.JPopupMenu pum_Lineas;
