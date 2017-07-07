@@ -36,7 +36,7 @@ import javax.swing.table.TableRowSorter;
  * @author michael
  */
 public final class Principal extends javax.swing.JFrame {
-    
+
     private BL_Cliente cliente;
     private BL_Llanta llanta;
     private BL_Aro aro;
@@ -61,7 +61,7 @@ public final class Principal extends javax.swing.JFrame {
     private SimpleDateFormat sdf;
     int resaltado;
 
-    public Principal() throws Exepciones{
+    public Principal() throws Exepciones {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../IMG/tire-icon.png")).getImage());
         setLocationRelativeTo(null);
@@ -82,7 +82,7 @@ public final class Principal extends javax.swing.JFrame {
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_usuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_facturas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        resaltado=0;
+        resaltado = 0;
         dc_fecha_hasta.setMinDate(dc_fecha_desde.getSelectedDate());
         dc_fecha_hasta.setMaxDate(Calendar.getInstance());
         dc_fecha_desde.setMaxDate(dc_fecha_hasta.getSelectedDate());
@@ -227,7 +227,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_ver.setBackground(new java.awt.Color(0, 102, 204));
         bt_ver.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_ver.setForeground(new java.awt.Color(255, 255, 255));
+        bt_ver.setForeground(new java.awt.Color(0, 0, 0));
         bt_ver.setText("Ver");
         bt_ver.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_ver.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +239,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregar.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregar.setForeground(new java.awt.Color(255, 255, 255));
+        bt_agregar.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregar.setText("Agregar");
         bt_agregar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -251,7 +251,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_modificar.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificar.setForeground(new java.awt.Color(255, 255, 255));
+        bt_modificar.setForeground(new java.awt.Color(0, 0, 0));
         bt_modificar.setText("Modificar");
         bt_modificar.setMaximumSize(new java.awt.Dimension(94, 33));
         bt_modificar.setMinimumSize(new java.awt.Dimension(94, 33));
@@ -264,7 +264,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_eliminar.setBackground(new java.awt.Color(204, 0, 0));
         bt_eliminar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        bt_eliminar.setForeground(new java.awt.Color(0, 0, 0));
         bt_eliminar.setText("Eliminar");
         bt_eliminar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -348,7 +348,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_verLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_verLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verLlanta.setForeground(new java.awt.Color(255, 255, 255));
+        bt_verLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_verLlanta.setText("Ver");
         bt_verLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -360,7 +360,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregarLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarLlanta.setForeground(new java.awt.Color(255, 255, 255));
+        bt_agregarLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregarLlanta.setText("Agregar");
         bt_agregarLlanta.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarLlanta.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -374,7 +374,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_modificarLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificarLlanta.setForeground(new java.awt.Color(255, 255, 255));
+        bt_modificarLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_modificarLlanta.setText("Modificar");
         bt_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,7 +385,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_eliminarLlanta.setBackground(new java.awt.Color(204, 0, 0));
         bt_eliminarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminarLlanta.setForeground(new java.awt.Color(255, 255, 255));
+        bt_eliminarLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_eliminarLlanta.setText("Eliminar");
         bt_eliminarLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -455,7 +455,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_verAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_verAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verAro.setForeground(new java.awt.Color(255, 255, 255));
+        bt_verAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_verAro.setText("Ver");
         bt_verAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verAro.addActionListener(new java.awt.event.ActionListener() {
@@ -467,7 +467,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregarAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarAro.setForeground(new java.awt.Color(255, 255, 255));
+        bt_agregarAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregarAro.setText("Agregar");
         bt_agregarAro.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarAro.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -481,7 +481,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_modificarAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificarAro.setForeground(new java.awt.Color(255, 255, 255));
+        bt_modificarAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_modificarAro.setText("Modificar");
         bt_modificarAro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -492,7 +492,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_eliminarAro.setBackground(new java.awt.Color(204, 0, 51));
         bt_eliminarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminarAro.setForeground(new java.awt.Color(255, 255, 255));
+        bt_eliminarAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_eliminarAro.setText("Eliminar");
         bt_eliminarAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarAro.addActionListener(new java.awt.event.ActionListener() {
@@ -524,7 +524,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregarFactura.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarFactura.setForeground(new java.awt.Color(255, 255, 255));
+        bt_agregarFactura.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregarFactura.setText("Agregar");
         bt_agregarFactura.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarFactura.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -589,7 +589,7 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_verFactura.setBackground(new java.awt.Color(0, 102, 204));
         bt_verFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verFactura.setForeground(new java.awt.Color(255, 255, 255));
+        bt_verFactura.setForeground(new java.awt.Color(0, 0, 0));
         bt_verFactura.setText("Ver");
         bt_verFactura.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verFactura.addActionListener(new java.awt.event.ActionListener() {
@@ -779,7 +779,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_modificarUsuario.setBackground(new java.awt.Color(0, 102, 204));
     bt_modificarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_modificarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+    bt_modificarUsuario.setForeground(new java.awt.Color(0, 0, 0));
     bt_modificarUsuario.setText("Modificar");
     bt_modificarUsuario.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -813,7 +813,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_eliminarUsuario.setBackground(new java.awt.Color(204, 0, 0));
     bt_eliminarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_eliminarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+    bt_eliminarUsuario.setForeground(new java.awt.Color(0, 0, 0));
     bt_eliminarUsuario.setText("Eliminar");
     bt_eliminarUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
     bt_eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -825,7 +825,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_verUsuario.setBackground(new java.awt.Color(0, 102, 204));
     bt_verUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_verUsuario.setForeground(new java.awt.Color(255, 255, 255));
+    bt_verUsuario.setForeground(new java.awt.Color(0, 0, 0));
     bt_verUsuario.setText("Ver");
     bt_verUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
     bt_verUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -837,7 +837,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_agregarUsuairo.setBackground(new java.awt.Color(0, 102, 204));
     bt_agregarUsuairo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_agregarUsuairo.setForeground(new java.awt.Color(255, 255, 255));
+    bt_agregarUsuairo.setForeground(new java.awt.Color(0, 0, 0));
     bt_agregarUsuairo.setText("Agregar");
     bt_agregarUsuairo.setPreferredSize(new java.awt.Dimension(102, 33));
     bt_agregarUsuairo.addActionListener(new java.awt.event.ActionListener() {
@@ -931,10 +931,10 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
         // TODO add your handling code here:
         int tabseleccionado = panel_tabs.getSelectedIndex();
-        if(tabseleccionado==1){
-            tabseleccionado = tb_productos.getSelectedIndex()+1;
+        if (tabseleccionado == 1) {
+            tabseleccionado = tb_productos.getSelectedIndex() + 1;
         }
-        switch(tabseleccionado){
+        switch (tabseleccionado) {
             case 0:
                 eliminarCliente();
                 break;
@@ -1058,7 +1058,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_jt_facturasMouseReleased
 
     private void tf_buscarFacturaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarFacturaKeyReleased
-           if (evt.getKeyCode() == KeyEvent.VK_F1) {
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
             //new AyudaF1().abrirAyuda();
         } else {
             filtrarFactura();
@@ -1067,7 +1067,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_tf_buscarFacturaKeyReleased
 
     private void tf_buscarCliente1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarCliente1KeyReleased
-        
+
     }//GEN-LAST:event_tf_buscarCliente1KeyReleased
 
     private void bt_modificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarUsuarioActionPerformed
@@ -1108,9 +1108,9 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_bt_verFacturaActionPerformed
 
     private void rb_busquedaAvanzadaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_busquedaAvanzadaItemStateChanged
-        if(rb_busquedaAvanzada.isSelected()){
+        if (rb_busquedaAvanzada.isSelected()) {
             mostrarBusquedaAvanzada(70, true);
-        }else{
+        } else {
             mostrarBusquedaAvanzada(-70, false);
             cargarTablaFacturas(listaFactura);
         }
@@ -1118,13 +1118,13 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     private void bt_busquedaAvanazadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_busquedaAvanazadaActionPerformed
         BL_Factura blf;
-        if(cb_busquedaAvanzada.getSelectedItem().toString().equals("Cliente") && validarBusquedaFecha()){
+        if (cb_busquedaAvanzada.getSelectedItem().toString().equals("Cliente") && validarBusquedaFecha()) {
             String cliente = tf_busquedaAvanzada.getText().trim();
             Date fechDesde = dc_fecha_desde.getSelectedDate().getTime();
             Date fechHasta = dc_fecha_hasta.getSelectedDate().getTime();
             blf = new BL_Factura();
             cargarTablaBusqueda(blf.busquedaFacturaAvanzada(cliente, fechDesde, fechHasta, -1));
-        }else if(cb_busquedaAvanzada.getSelectedItem().toString().equals("# Factura")){
+        } else if (cb_busquedaAvanzada.getSelectedItem().toString().equals("# Factura")) {
             int idFactura = Integer.parseInt(tf_busquedaAvanzada.getText());
             blf = new BL_Factura();
             cargarTablaBusqueda(blf.busquedaFacturaAvanzada("", null, null, idFactura));
@@ -1132,10 +1132,10 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_bt_busquedaAvanazadaActionPerformed
 
     private void cb_busquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_busquedaAvanzadaActionPerformed
-        if(cb_busquedaAvanzada.getSelectedIndex()==1){
+        if (cb_busquedaAvanzada.getSelectedIndex() == 1) {
             dc_fecha_desde.setEnabled(false);
             dc_fecha_hasta.setEnabled(false);
-        }else{
+        } else {
             dc_fecha_desde.setEnabled(true);
             dc_fecha_hasta.setEnabled(true);
         }
@@ -1150,51 +1150,51 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_dc_fecha_hastaOnSelectionChange
 
     private void tf_busquedaAvanzadaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_busquedaAvanzadaKeyTyped
-        if(cb_busquedaAvanzada.getSelectedItem().toString().equals("# Factura")){
+        if (cb_busquedaAvanzada.getSelectedItem().toString().equals("# Factura")) {
             Validacion.soloNumeros(evt);
         }
     }//GEN-LAST:event_tf_busquedaAvanzadaKeyTyped
-    
-    public void cargarTablaBusqueda(ArrayList<BL_Factura> listaBusquedaFactura){
-        if(!listaBusquedaFactura.isEmpty()){
+
+    public void cargarTablaBusqueda(ArrayList<BL_Factura> listaBusquedaFactura) {
+        if (!listaBusquedaFactura.isEmpty()) {
             cargarTablaFacturas(listaBusquedaFactura);
-        }else{
+        } else {
             Mensajes.mensajeInfomracion("No se obtuvieron resultados de la busqueda", "Busqueda Avanzada");
         }
     }
-    
-    public boolean validarBusquedaFecha(){
+
+    public boolean validarBusquedaFecha() {
         try {
             //fufc = fecha ultima factura cargada en la tabla
-            Date fufc = sdf.parse(jt_facturas.getValueAt(jt_facturas.getRowCount()-1, 4).toString());
+            Date fufc = sdf.parse(jt_facturas.getValueAt(jt_facturas.getRowCount() - 1, 4).toString());
             Date fechDesde = dc_fecha_desde.getSelectedDate().getTime();
-            if(fufc.before(fechDesde)){
+            if (fufc.before(fechDesde)) {
                 Mensajes.mensajeInfomracion("Las facturas en ese rango de fecha ya estan cargadas\n"
                         + "Puede utilizar el filtro de busqueda para encintrarla", "Busqueda Avanzada");
                 return false;
             }
-        } catch (ParseException ex ) {
+        } catch (ParseException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             HE.Exepciones.RegistrarError(ex);
         }
         return true;
     }
-    
-    public void mostrarBusquedaAvanzada(int posicion, boolean mostrar){
-        int bajar = posicion; 
-        bt_agregarFactura.setLocation(bt_agregarFactura.getX(), bt_agregarFactura.getY()+bajar);
-        bt_verFactura.setLocation(bt_verFactura.getX(), bt_verFactura.getY()+bajar);
-        jsp_facturas.setSize(new Dimension(jsp_facturas.getWidth(), jsp_facturas.getHeight()-bajar));
-        jsp_facturas.setLocation(jsp_facturas.getX(), jsp_facturas.getY()+bajar);
+
+    public void mostrarBusquedaAvanzada(int posicion, boolean mostrar) {
+        int bajar = posicion;
+        bt_agregarFactura.setLocation(bt_agregarFactura.getX(), bt_agregarFactura.getY() + bajar);
+        bt_verFactura.setLocation(bt_verFactura.getX(), bt_verFactura.getY() + bajar);
+        jsp_facturas.setSize(new Dimension(jsp_facturas.getWidth(), jsp_facturas.getHeight() - bajar));
+        jsp_facturas.setLocation(jsp_facturas.getX(), jsp_facturas.getY() + bajar);
         p_busquedaAvanzada.setVisible(mostrar);
-    } 
-    
-    public void menuitem_ver(){
-       int tabseleccionado = panel_tabs.getSelectedIndex();
-        if(tabseleccionado==1){
-            tabseleccionado = tb_productos.getSelectedIndex()+4;
+    }
+
+    public void menuitem_ver() {
+        int tabseleccionado = panel_tabs.getSelectedIndex();
+        if (tabseleccionado == 1) {
+            tabseleccionado = tb_productos.getSelectedIndex() + 4;
         }
-        switch(tabseleccionado){
+        switch (tabseleccionado) {
             case 0:
                 verCliente();
                 break;
@@ -1215,10 +1215,9 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     public void filtrarClientes() {
         String hilera = tf_buscarCliente.getText();
-        trsfiltroCliente.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, 1));
+        trsfiltroCliente.setRowFilter(RowFilter.regexFilter("(?i)" + hilera, 1));
     }
-    
-    
+
     public void filtrarAros() {
         String hilera = tf_buscarAro.getText();
         String filtro = jcb_filtroBusquedaAro.getSelectedItem() + "";
@@ -1234,7 +1233,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 fila = 3;
                 break;
         }
-        trsfiltroAros.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
+        trsfiltroAros.setRowFilter(RowFilter.regexFilter("(?i)" + hilera, fila));
     }
 
     public void filtrarLlantas() {
@@ -1249,10 +1248,10 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 fila = 1;
                 break;
         }
-        trsfiltroLlantas.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
+        trsfiltroLlantas.setRowFilter(RowFilter.regexFilter("(?i)" + hilera, fila));
     }
-    
-     public void filtrarFactura() {
+
+    public void filtrarFactura() {
         String hilera = tf_buscarFactura.getText();
         String filtro = jcb_filtroBusquedaFactura.getSelectedItem() + "";
         int fila = 0;
@@ -1270,13 +1269,13 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 fila = 4;
                 break;
         }
-        trsfiltroFactura.setRowFilter(RowFilter.regexFilter("(?i)"+hilera, fila));
+        trsfiltroFactura.setRowFilter(RowFilter.regexFilter("(?i)" + hilera, fila));
     }
-     
-     public void cargarListaClientes(){
+
+    public void cargarListaClientes() {
         cliente = new BL_Cliente();
         listaClientes = cliente.cargarClientes();
-     }
+    }
 
     public void cargarTablaClientes() {
         String[] nombreColumnas = {"numeroFila", "Nombre", "Dirección", "Teléfono(s)"};
@@ -1297,9 +1296,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_clientes.getColumnModel().getColumn(0).setMaxWidth(0);
         trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
     }
-    
-    
-    public void cargarListaLlantas(){
+
+    public void cargarListaLlantas() {
         llanta = new BL_Llanta();
         listaLlantas = llanta.cargarLlantas();
     }
@@ -1325,14 +1323,14 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
         trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
     }
-    
-    public void cargarListaAros(){
+
+    public void cargarListaAros() {
         aro = new BL_Aro();
         listaAros = aro.cargarAros();
     }
-    
+
     public void cargarTablaAros() {
-        String[] nombreColumnas = {"numeroFila", "Numero Aro", "Marca", "Codigo","Cantidad (Juegos)"};
+        String[] nombreColumnas = {"numeroFila", "Numero Aro", "Marca", "Codigo", "Cantidad (Juegos)"};
         dtmAros = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -1341,7 +1339,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         };
         if (!listaAros.isEmpty()) {
             for (BL_Aro aro_temp : listaAros) {
-                dtmAros.addRow(new Object[]{dtmAros.getRowCount(), aro_temp.getNumeroAro(), aro_temp.getMarca(), 
+                dtmAros.addRow(new Object[]{dtmAros.getRowCount(), aro_temp.getNumeroAro(), aro_temp.getMarca(),
                     aro_temp.getCodigo(), aro_temp.getCantidad()});
             }
         }
@@ -1350,12 +1348,12 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_aros.getColumnModel().getColumn(0).setMaxWidth(0);
         trsfiltroAros = new TableRowSorter(jt_aros.getModel());
     }
-    
-    public void cargarListaUsuarios(){
+
+    public void cargarListaUsuarios() {
         usuario = new BL_Usuario();
         listaUsuarios = usuario.cargarUsuarios();
     }
-    
+
     public void cargarTablaUsuarios() {
         String[] nombreColumnas = {"id", "Nombre", "Tipo"};
         dtmUsuarios = new DefaultTableModel(null, nombreColumnas) {
@@ -1375,26 +1373,26 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
     }
 
-    public void cargarListaFacturas(){
+    public void cargarListaFacturas() {
         factura = new BL_Factura();
         listaFactura = factura.cargarFactura();
     }
-    
-    public void cargarTablaFacturas(ArrayList<BL_Factura> listaFactTabla){
-        String[] nombreColumnas = {"#lista","# Factura","Nombre del cliente" ,"Telefono","Facturada el","Precio Total"};
-        dtmFacturas = new DefaultTableModel(null, nombreColumnas){
-         @Override
+
+    public void cargarTablaFacturas(ArrayList<BL_Factura> listaFactTabla) {
+        String[] nombreColumnas = {"#lista", "# Factura", "Nombre del cliente", "Telefono", "Facturada el", "Precio Total"};
+        dtmFacturas = new DefaultTableModel(null, nombreColumnas) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         if (!listaFactTabla.isEmpty()) {
             for (BL_Factura factura_temp : listaFactTabla) {
-                dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(), factura_temp.getIdFactura(),factura_temp.getNombreCliente(),factura_temp.getTelefonoCliente()
-                        ,sdf.format(factura_temp.getFechaFactura()), factura_temp.getPrecioTotal()});
+                dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(), BL_Factura.formatearIDFactura(factura_temp.getIdFactura()), factura_temp.getNombreCliente(), factura_temp.getTelefonoCliente(),
+                     sdf.format(factura_temp.getFechaFactura()), factura_temp.getPrecioTotal()});
             }
         }
-        
+
         jt_facturas.setModel(dtmFacturas);
         trsfiltroFactura = new TableRowSorter(jt_facturas.getModel());
         jt_facturas.getColumnModel().getColumn(0).setMinWidth(0);
@@ -1404,7 +1402,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_facturas.getColumnModel().getColumn(4).setMinWidth(120);
         jt_facturas.getColumnModel().getColumn(4).setMaxWidth(120);
     }
-    
+
     public void verCliente() {
         BL_Cliente clienteVer;
         if (validarSeleccion('c')) {
@@ -1434,7 +1432,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             }
         }
     }
-    
+
     public void verAro() {
         BL_Aro aroVer;
         if (validarSeleccion('a')) {
@@ -1449,7 +1447,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             }
         }
     }
-    
+
     public void verUsuario() {
         BL_Usuario usuarioVer;
         if (validarSeleccion('u')) {
@@ -1464,39 +1462,40 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             }
         }
     }
-    
-    public void verFactura(){
+
+    public void verFactura() {
         BL_Factura facturaVer;
-        if(validarSeleccion('f')){
+        if (validarSeleccion('f')) {
             UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled);
             int fila = jt_facturas.getSelectedRow();
-            int numeroFila = Integer.parseInt(""+ jt_facturas.getValueAt(fila, 0));
+            int numeroFila = Integer.parseInt("" + jt_facturas.getValueAt(fila, 0));
             facturaVer = listaFactura.get(numeroFila);
             uif.cargarFactura(facturaVer);
             uif.setVisible(true);
         }
     }
-    
-    public void cargarClienteSeleccionadoFactura(Object producto){
-        
+
+    public void cargarClienteSeleccionadoFactura(Object producto) {
+
         System.out.println(producto);
-        
+
     }
 
     public boolean validarSeleccion(char t) {
         JTable temp = null;
-        String mensaje="";
-        switch(t){
+        String mensaje = "";
+        switch (t) {
             case 'c':
                 temp = jt_clientes;
                 mensaje = "ningun cliente";
-;               break;
-                
+                ;
+                break;
+
             case 'l':
                 temp = jt_llantas;
                 mensaje = "ninguna llanta";
                 break;
-                
+
             case 'a':
                 temp = jt_aros;
                 mensaje = "ningun aro";
@@ -1514,7 +1513,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         if (filaSeleccionada >= 0) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "No ha seleccionado "+mensaje, "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No ha seleccionado " + mensaje, "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
     }
@@ -1530,6 +1529,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             if (confirmacion == JOptionPane.YES_OPTION) {
                 if (blCliente.eliminarCliente()) {
                     JOptionPane.showMessageDialog(null, "Cliente Elimiado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarListaClientes();
                     cargarTablaClientes();
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el cliente", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
@@ -1537,7 +1537,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             }
         }
     }
-    
 
     private void eliminarLlanta() {
         BL_Llanta blLanta;
@@ -1549,6 +1548,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             if (confirmacion == JOptionPane.YES_OPTION) {
                 if (blLanta.eliminarLlanta()) {
                     JOptionPane.showMessageDialog(null, "Llanta Elimiada con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarListaLlantas();
                     cargarTablaLlantas();
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
@@ -1556,44 +1556,46 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             }
         }
     }
-    
+
     private void eliminarAro() {
         BL_Aro blAro;
-        if (validarSeleccion('a')){
+        if (validarSeleccion('a')) {
             int fila = jt_aros.getSelectedRow();
             int numeroFila = Integer.parseInt("" + jt_aros.getValueAt(fila, 0));
             blAro = listaAros.get(numeroFila);
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la aro " + blAro.getMarca()+ " " + blAro.getNumeroAro() +" "+ blAro.getCodigo()+ "?", "Alerta", JOptionPane.YES_NO_OPTION);
-            if(confirmacion == JOptionPane.YES_OPTION){
-                if(blAro.eliminarAro()){
-                   JOptionPane.showMessageDialog(null, "Aro Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la aro " + blAro.getMarca() + " " + blAro.getNumeroAro() + " " + blAro.getCodigo() + "?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                if (blAro.eliminarAro()) {
+                    JOptionPane.showMessageDialog(null, "Aro Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarListaAros();
                     cargarTablaAros();
                 } else {
-                   JOptionPane.showMessageDialog(null, "Fallo al eliminar el aro", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                 }
+                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el aro", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
     }
-    
+
     private void eliminarUsuario() {
         BL_Usuario blusuairo;
-        if (validarSeleccion('u')){
+        if (validarSeleccion('u')) {
             int fila = jt_usuarios.getSelectedRow();
             int numeroFila = Integer.parseInt("" + jt_usuarios.getValueAt(fila, 0));
             blusuairo = listaUsuarios.get(numeroFila);
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el usuario " + blusuairo.getNombreUsuario()+ "?", "Alerta", JOptionPane.YES_NO_OPTION);
-            if(confirmacion == JOptionPane.YES_OPTION){
-                if(blusuairo.eliminarUsuario()){
-                   JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el usuario " + blusuairo.getNombreUsuario() + "?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                if (blusuairo.eliminarUsuario()) {
+                    JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    cargarListaUsuarios();
                     cargarTablaUsuarios();
                 } else {
-                   JOptionPane.showMessageDialog(null, "Fallo al eliminar el Usuairo", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                 }
+                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el Usuairo", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
     }
-    
-    public void inmovilizarColumnas(){
+
+    public void inmovilizarColumnas() {
         jt_clientes.getTableHeader().setReorderingAllowed(false);
         jt_llantas.getTableHeader().setReorderingAllowed(false);
         jt_aros.getTableHeader().setReorderingAllowed(false);

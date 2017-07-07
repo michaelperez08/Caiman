@@ -219,5 +219,9 @@ public class BL_Factura {
             return null;
         }
     }
+    
+    public static String formatearIDFactura(int id){
+        return ("00000" + id).substring(String.valueOf(id).length());
+    }
 
 }

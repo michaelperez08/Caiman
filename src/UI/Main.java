@@ -9,6 +9,7 @@ package UI;
  *
  * @author michael
  */
+import BL.BL_Imprimir;
 import HE.Exepciones;
 import javax.swing.UIManager;
 import config.ConfBD;
@@ -57,6 +58,9 @@ public class Main {
 //        li.setVisible(true);
         //Principal p = new Principal();
         //p.setVisible(true);
+
+        //BL_Imprimir bli = new BL_Imprimir();
+        //bli.imprimir();
 
     }
 
