@@ -8,6 +8,7 @@ package BL;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -34,24 +35,40 @@ public class BL_Imprimir implements Printable {
         g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
         // Now we perform our rendering
-        graphics.drawString("Hello world!", 100, 100);
-
+        //graphics.drawString("Hello world!", j, i);
+        for (int i = 0; i < 450; i+=20) {
+            for (int j = 0; j < 400; j+=20) {
+                System.out.println((i+j)/20+"=("+(j)+", "+i+") ");
+            }
+        }
         // tell the caller that this page is part
         // of the printed document
         return PAGE_EXISTS;
     }
 
     public void imprimir() {
-        PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPrintable(this);
-        boolean ok = job.printDialog();
-        if (ok) {
-            try {
-                job.print();
-            } catch (PrinterException ex) {
-                /* The job did not successfully complete */
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        PageFormat format = pj.getPageFormat(null);
+        Paper paper = format.getPaper();
+//Remove borders from the paper
+        paper.setImageableArea(0.0, 0.0, format.getPaper().getWidth(), format.getPaper().getHeight());
+        format.setPaper(paper);
+        pj.setPrintable(this, format);
+        for (int i = 0; i < 400; i+=20) {
+            for (int j = 0; j < 600; j+=20) {
+                System.out.print((i+j)/20+"=("+(j)+", "+i+") ");
             }
+            System.out.println("\n");
         }
+//        boolean ok = pj.printDialog();
+//        if (ok) {
+//            try {
+//                pj.print();
+//            } catch (PrinterException ex) {
+//                /* The job did not successfully complete */
+//            }
+//        }
+        
     }
 
 }

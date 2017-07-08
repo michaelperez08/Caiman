@@ -938,9 +938,7 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     public void cargarFactura(BL_Factura facturaVer) {
         l_numeroFactura.setText("Factura " + BL_Factura.formatearIDFactura(facturaVer.getIdFactura()));
-        BL_Cliente cliente = new BL_Cliente();
-        cliente.setNombre(facturaVer.getNombreCliente());
-        cb_nombre_cliente.addItem(cliente);
+        cb_nombre_cliente.addItem(facturaVer.getNombreCliente());
         cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
         cb_cedula.addItem(facturaVer.getCedulaCliente());
         cb_cedula.getEditor().setItem(facturaVer.getCedulaCliente());
@@ -962,6 +960,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         calcularTotales();
         bloquearElementos();
     }
+
 
     public void bloquearElementos() {
         cb_semanas.setVisible(false);

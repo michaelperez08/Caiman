@@ -59,8 +59,9 @@ public class Main {
         //Principal p = new Principal();
         //p.setVisible(true);
 
-        //BL_Imprimir bli = new BL_Imprimir();
-        //bli.imprimir();
+        BL_Imprimir bli = new BL_Imprimir();
+        bli.imprimir();
+        
 
     }
 
