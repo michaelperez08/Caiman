@@ -96,6 +96,11 @@ public class UI_Usuario extends javax.swing.JDialog {
 
         cb_tipoUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         cb_tipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estandar", "Administrador" }));
+        cb_tipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tipoUsuarioActionPerformed(evt);
+            }
+        });
         pn_IngresarLlanta.add(cb_tipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 136, 258, 32));
 
         pf_contrasena.setPreferredSize(new java.awt.Dimension(258, 31));
@@ -164,6 +169,10 @@ public class UI_Usuario extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_bt_ingresarUsuarioActionPerformed
+
+    private void cb_tipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tipoUsuarioActionPerformed
 
     public void limpiarCampos(){
         tf_nombre.setText("");
