@@ -218,7 +218,6 @@ public final class Principal extends javax.swing.JFrame {
 
         jl_Buscar.setBackground(new java.awt.Color(0, 0, 0));
         jl_Buscar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar.setText("Buscar");
         jl_Buscar.setPreferredSize(new java.awt.Dimension(102, 33));
@@ -237,7 +236,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_ver.setBackground(new java.awt.Color(0, 102, 204));
         bt_ver.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_ver.setForeground(new java.awt.Color(0, 0, 0));
         bt_ver.setText("Ver");
         bt_ver.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_ver.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +247,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregar.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregar.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregar.setText("Agregar");
         bt_agregar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +258,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_modificar.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificar.setForeground(new java.awt.Color(0, 0, 0));
         bt_modificar.setText("Modificar");
         bt_modificar.setMaximumSize(new java.awt.Dimension(94, 33));
         bt_modificar.setMinimumSize(new java.awt.Dimension(94, 33));
@@ -274,7 +270,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_eliminar.setBackground(new java.awt.Color(204, 0, 0));
         bt_eliminar.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminar.setForeground(new java.awt.Color(0, 0, 0));
         bt_eliminar.setText("Eliminar");
         bt_eliminar.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -350,7 +345,6 @@ public final class Principal extends javax.swing.JFrame {
 
         jl_Buscar1.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar1.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar1.setText("Buscar");
         jl_Buscar1.setPreferredSize(new java.awt.Dimension(102, 33));
@@ -358,7 +352,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_verLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_verLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_verLlanta.setText("Ver");
         bt_verLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -370,7 +363,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregarLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregarLlanta.setText("Agregar");
         bt_agregarLlanta.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarLlanta.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -384,7 +376,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_modificarLlanta.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificarLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_modificarLlanta.setText("Modificar");
         bt_modificarLlanta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -395,7 +386,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_eliminarLlanta.setBackground(new java.awt.Color(204, 0, 0));
         bt_eliminarLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminarLlanta.setForeground(new java.awt.Color(0, 0, 0));
         bt_eliminarLlanta.setText("Eliminar");
         bt_eliminarLlanta.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +395,6 @@ public final class Principal extends javax.swing.JFrame {
         });
         jp_llantas.add(bt_eliminarLlanta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, -1, -1));
 
-        jcb_filtroBusquedaLlanta.setBackground(new java.awt.Color(255, 255, 255));
         jcb_filtroBusquedaLlanta.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jcb_filtroBusquedaLlanta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca" }));
         jcb_filtroBusquedaLlanta.addActionListener(new java.awt.event.ActionListener() {
@@ -458,14 +447,12 @@ public final class Principal extends javax.swing.JFrame {
 
         jl_Buscar2.setBackground(new java.awt.Color(153, 153, 153));
         jl_Buscar2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar2.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar2.setText("Buscar");
         jp_aros.add(jl_Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, 102, 34));
 
         bt_verAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_verAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_verAro.setText("Ver");
         bt_verAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verAro.addActionListener(new java.awt.event.ActionListener() {
@@ -477,7 +464,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregarAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregarAro.setText("Agregar");
         bt_agregarAro.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarAro.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -491,7 +477,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_modificarAro.setBackground(new java.awt.Color(0, 102, 204));
         bt_modificarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_modificarAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_modificarAro.setText("Modificar");
         bt_modificarAro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -502,7 +487,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_eliminarAro.setBackground(new java.awt.Color(204, 0, 51));
         bt_eliminarAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_eliminarAro.setForeground(new java.awt.Color(0, 0, 0));
         bt_eliminarAro.setText("Eliminar");
         bt_eliminarAro.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_eliminarAro.addActionListener(new java.awt.event.ActionListener() {
@@ -512,7 +496,6 @@ public final class Principal extends javax.swing.JFrame {
         });
         jp_aros.add(bt_eliminarAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 222, -1, -1));
 
-        jcb_filtroBusquedaAro.setBackground(new java.awt.Color(255, 255, 255));
         jcb_filtroBusquedaAro.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jcb_filtroBusquedaAro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Número", "Marca", "Código" }));
         jcb_filtroBusquedaAro.addActionListener(new java.awt.event.ActionListener() {
@@ -534,7 +517,6 @@ public final class Principal extends javax.swing.JFrame {
 
         bt_agregarFactura.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregarFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregarFactura.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregarFactura.setText("Agregar");
         bt_agregarFactura.setMaximumSize(new java.awt.Dimension(52, 34));
         bt_agregarFactura.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -584,22 +566,18 @@ public final class Principal extends javax.swing.JFrame {
 
         jl_Buscar3.setBackground(new java.awt.Color(255, 255, 255));
         jl_Buscar3.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jl_Buscar3.setForeground(new java.awt.Color(0, 0, 0));
         jl_Buscar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_Buscar3.setText("Buscar");
         jp_facturacion.add(jl_Buscar3);
         jl_Buscar3.setBounds(6, 20, 102, 34);
 
-        jcb_filtroBusquedaFactura.setBackground(new java.awt.Color(255, 255, 255));
         jcb_filtroBusquedaFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        jcb_filtroBusquedaFactura.setForeground(new java.awt.Color(0, 0, 0));
         jcb_filtroBusquedaFactura.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente", "# Factura", "Telefono", "Fecha" }));
         jp_facturacion.add(jcb_filtroBusquedaFactura);
         jcb_filtroBusquedaFactura.setBounds(740, 20, 121, 35);
 
         bt_verFactura.setBackground(new java.awt.Color(0, 102, 204));
         bt_verFactura.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_verFactura.setForeground(new java.awt.Color(0, 0, 0));
         bt_verFactura.setText("Ver");
         bt_verFactura.setPreferredSize(new java.awt.Dimension(102, 33));
         bt_verFactura.addActionListener(new java.awt.event.ActionListener() {
@@ -611,8 +589,7 @@ public final class Principal extends javax.swing.JFrame {
         bt_verFactura.setBounds(10, 140, 102, 33);
 
         rb_busquedaAvanzada.setBackground(new java.awt.Color(255, 255, 255));
-        rb_busquedaAvanzada.setForeground(new java.awt.Color(0, 0, 0));
-        rb_busquedaAvanzada.setText("Busqueda Avanzada");
+        rb_busquedaAvanzada.setText("Búsqueda Avanzada");
         rb_busquedaAvanzada.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rb_busquedaAvanzadaItemStateChanged(evt);
@@ -637,13 +614,13 @@ public final class Principal extends javax.swing.JFrame {
         dc_fecha_desde.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
@@ -661,13 +638,13 @@ public final class Principal extends javax.swing.JFrame {
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(187, 187, 187),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(255, 0, 0),
                     false,
                     false,
@@ -686,13 +663,13 @@ public final class Principal extends javax.swing.JFrame {
     dc_fecha_hasta.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
         new datechooser.view.appearance.ViewAppearance("custom",
             new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(0, 0, 0),
                 new java.awt.Color(0, 0, 255),
                 false,
                 true,
                 new datechooser.view.appearance.swing.ButtonPainter()),
             new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(0, 0, 0),
                 new java.awt.Color(0, 0, 255),
                 true,
                 true,
@@ -710,13 +687,13 @@ public final class Principal extends javax.swing.JFrame {
                 true,
                 new datechooser.view.appearance.swing.LabelPainter()),
             new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(0, 0, 0),
                 new java.awt.Color(0, 0, 255),
                 false,
                 true,
                 new datechooser.view.appearance.swing.LabelPainter()),
             new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
-                new java.awt.Color(187, 187, 187),
+                new java.awt.Color(0, 0, 0),
                 new java.awt.Color(255, 0, 0),
                 false,
                 false,
@@ -781,7 +758,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     jl_BuscarUsuairo.setBackground(new java.awt.Color(255, 255, 255));
     jl_BuscarUsuairo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    jl_BuscarUsuairo.setForeground(new java.awt.Color(0, 0, 0));
     jl_BuscarUsuairo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jl_BuscarUsuairo.setText("Buscar");
     jl_BuscarUsuairo.setPreferredSize(new java.awt.Dimension(102, 33));
@@ -789,7 +765,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_modificarUsuario.setBackground(new java.awt.Color(0, 102, 204));
     bt_modificarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_modificarUsuario.setForeground(new java.awt.Color(0, 0, 0));
     bt_modificarUsuario.setText("Modificar");
     bt_modificarUsuario.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -823,7 +798,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_eliminarUsuario.setBackground(new java.awt.Color(204, 0, 0));
     bt_eliminarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_eliminarUsuario.setForeground(new java.awt.Color(0, 0, 0));
     bt_eliminarUsuario.setText("Eliminar");
     bt_eliminarUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
     bt_eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -835,7 +809,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_verUsuario.setBackground(new java.awt.Color(0, 102, 204));
     bt_verUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_verUsuario.setForeground(new java.awt.Color(0, 0, 0));
     bt_verUsuario.setText("Ver");
     bt_verUsuario.setPreferredSize(new java.awt.Dimension(102, 33));
     bt_verUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -847,7 +820,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_agregarUsuairo.setBackground(new java.awt.Color(0, 102, 204));
     bt_agregarUsuairo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_agregarUsuairo.setForeground(new java.awt.Color(0, 0, 0));
     bt_agregarUsuairo.setText("Agregar");
     bt_agregarUsuairo.setPreferredSize(new java.awt.Dimension(102, 33));
     bt_agregarUsuairo.addActionListener(new java.awt.event.ActionListener() {
@@ -1077,7 +1049,12 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_tf_buscarFacturaKeyReleased
 
     private void tf_buscarCliente1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_buscarCliente1KeyReleased
-
+ if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            //new AyudaF1().abrirAyuda();
+        } else {
+            filtrarUsuarios();
+            jt_usuarios.setRowSorter(trsfiltroUsuarios);
+        }
     }//GEN-LAST:event_tf_buscarCliente1KeyReleased
 
     private void bt_modificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modificarUsuarioActionPerformed
@@ -1102,6 +1079,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         UI_Usuario iuu = new UI_Usuario(this, rootPaneCheckingEnabled);
         iuu.setVisible(true);
         if (iuu.actualizarLista) {
+            cargarListaUsuarios();
             cargarTablaUsuarios();
         }
     }//GEN-LAST:event_bt_agregarUsuairoActionPerformed
@@ -1182,7 +1160,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         if (!listaBusquedaFactura.isEmpty()) {
             cargarTablaFacturas(listaBusquedaFactura);
         } else {
-            Mensajes.mensajeInfomracion("No se obtuvieron resultados de la busqueda", "Busqueda Avanzada");
+            Mensajes.mensajeInfomracion("No se obtuvieron resultados de la búsqueda", "Búsqueda Avanzada");
         }
     }
 
@@ -1193,7 +1171,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             Date fechDesde = dc_fecha_desde.getSelectedDate().getTime();
             if (fufc.before(fechDesde)) {
                 Mensajes.mensajeInfomracion("Las facturas en ese rango de fecha ya estan cargadas\n"
-                        + "Puede utilizar el filtro de busqueda para encintrarla", "Busqueda Avanzada");
+                        + "Puede utilizar el filtro de busqueda para encontrarla", "Búsqueda Avanzada");
                 return false;
             }
         } catch (ParseException ex) {
@@ -1241,6 +1219,10 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         trsfiltroCliente.setRowFilter(RowFilter.regexFilter("(?i)" + hilera, 1));
     }
 
+      public void filtrarUsuarios() {
+        String hilera = tf_buscarCliente1.getText();
+        trsfiltroUsuarios.setRowFilter(RowFilter.regexFilter("(?i)" + hilera, 1));
+    }
     public void filtrarAros() {
         String hilera = tf_buscarAro.getText();
         String filtro = jcb_filtroBusquedaAro.getSelectedItem() + "";
