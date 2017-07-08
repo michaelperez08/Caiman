@@ -516,6 +516,9 @@ public final class UI_Factura extends javax.swing.JDialog {
     private void rb_producto_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_producto_nuevoActionPerformed
         if (rb_producto_nuevo.isSelected()) {
             limpiarCamposProducto();
+            bt_SeleccionarProducto.setEnabled(false);
+        }else {
+            bt_SeleccionarProducto.setEnabled(true);
         }
     }//GEN-LAST:event_rb_producto_nuevoActionPerformed
 
@@ -935,7 +938,9 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     public void cargarFactura(BL_Factura facturaVer) {
         l_numeroFactura.setText("Factura " + BL_Factura.formatearIDFactura(facturaVer.getIdFactura()));
-        cb_nombre_cliente.addItem(facturaVer.getNombreCliente());
+        BL_Cliente cliente = new BL_Cliente();
+        cliente.setNombre(facturaVer.getNombreCliente());
+        cb_nombre_cliente.addItem(cliente);
         cb_nombre_cliente.getEditor().setItem(facturaVer.getNombreCliente());
         cb_cedula.addItem(facturaVer.getCedulaCliente());
         cb_cedula.getEditor().setItem(facturaVer.getCedulaCliente());
@@ -973,6 +978,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         rb_producto_nuevo.setEnabled(false);
         jmi_eliminar.setEnabled(false);
         jmi_modificar.setEnabled(false);
+        bt_SeleccionarProducto.setEnabled(false);
     }
 
 
