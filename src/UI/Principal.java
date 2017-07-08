@@ -165,6 +165,16 @@ public final class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mi_cerrar_sesion = new javax.swing.JMenuItem();
 
+        pum_tb.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                pum_tbPopupMenuWillBecomeVisible(evt);
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
         jmi_ver.setText("Ver");
         jmi_ver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1154,6 +1164,19 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             Validacion.soloNumeros(evt);
         }
     }//GEN-LAST:event_tf_busquedaAvanzadaKeyTyped
+
+    private void pum_tbPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_pum_tbPopupMenuWillBecomeVisible
+        // TODO add your handling code here:
+        if(panel_tabs.getSelectedIndex() == 2){
+            pum_tb.remove(jmi_eliminar);
+            pum_tb.remove(jmi_modificar);
+        } else {
+            if(pum_tb.getComponentCount() == 1){
+                pum_tb.add(jmi_eliminar);
+                pum_tb.add(jmi_modificar);
+            }
+        }
+    }//GEN-LAST:event_pum_tbPopupMenuWillBecomeVisible
 
     public void cargarTablaBusqueda(ArrayList<BL_Factura> listaBusquedaFactura) {
         if (!listaBusquedaFactura.isEmpty()) {
