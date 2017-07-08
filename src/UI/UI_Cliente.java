@@ -71,7 +71,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         pum_telefonos.add(jmi_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nuevo Cliente");
+        setTitle("Cliente");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -444,6 +444,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         tf_telefono.setEnabled(true);
         bt_agregarTelefono.setEnabled(true);
         dlm_telfonos.clear();
+        activ_desa_NuevoTelefono(true);
     }
 
     public boolean esNumero(String numero) {
