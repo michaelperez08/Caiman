@@ -303,11 +303,10 @@ public class UI_Cliente extends javax.swing.JDialog {
         String telefonos = concatenarTelefonos();
         boolean consultaExitosa;
 
-        if (nombre.isEmpty() || cedula.isEmpty() || direccion_simple.isEmpty() || direccion_exacta.isEmpty()) {
+        if (nombre.isEmpty() || direccion_simple.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            if (esNumero(cedula)) {
-                Double.parseDouble(cedula);
+            if (cedula.isEmpty() || (!cedula.isEmpty() && esNumero(cedula))) {
                 BL_Cliente cliente = new BL_Cliente();
                 if (bt_ingresarCliente.getText().equals("Ingresar Cliente")) {// ingresar cliente nuevo
                     consultaExitosa = cliente.insertarCliente(nombre, direccion_simple, direccion_exacta, cedula, concatenarTelefonos());
