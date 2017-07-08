@@ -55,26 +55,22 @@ public class UI_Usuario extends javax.swing.JDialog {
         setTitle("Nuevo Usuario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pn_IngresarLlanta.setBackground(new java.awt.Color(51, 51, 51));
+        pn_IngresarLlanta.setBackground(new java.awt.Color(255, 255, 255));
         pn_IngresarLlanta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lb_numeroAro.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_numeroAro.setForeground(new java.awt.Color(255, 255, 255));
         lb_numeroAro.setText("Nombre del usuario");
         pn_IngresarLlanta.add(lb_numeroAro, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 148, 31));
 
         lb_marca.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_marca.setForeground(new java.awt.Color(255, 255, 255));
         lb_marca.setText("Contraseña");
         pn_IngresarLlanta.add(lb_marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 49, 148, 32));
 
         lb_codigo.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_codigo.setForeground(new java.awt.Color(255, 255, 255));
         lb_codigo.setText("Tipo");
         pn_IngresarLlanta.add(lb_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 136, 148, 32));
 
         lb_cantidad.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        lb_cantidad.setForeground(new java.awt.Color(255, 255, 255));
         lb_cantidad.setText("Confirmar contraseña");
         pn_IngresarLlanta.add(lb_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 93, -1, 32));
 
@@ -87,9 +83,8 @@ public class UI_Usuario extends javax.swing.JDialog {
         });
         pn_IngresarLlanta.add(tf_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 6, 258, 31));
 
-        bt_ingresarUsuario.setBackground(new java.awt.Color(51, 51, 51));
+        bt_ingresarUsuario.setBackground(new java.awt.Color(0, 0, 204));
         bt_ingresarUsuario.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_ingresarUsuario.setForeground(new java.awt.Color(204, 204, 204));
         bt_ingresarUsuario.setText("Ingresar Usuario");
         bt_ingresarUsuario.setPreferredSize(new java.awt.Dimension(148, 32));
         bt_ingresarUsuario.addActionListener(new java.awt.event.ActionListener() {
