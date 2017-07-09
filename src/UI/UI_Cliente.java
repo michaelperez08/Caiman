@@ -176,9 +176,6 @@ public class UI_Cliente extends javax.swing.JDialog {
             }
         });
         tf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tf_telefonoKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_telefonoKeyReleased(evt);
             }
@@ -269,7 +266,7 @@ public class UI_Cliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_agregarTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarTelefonoActionPerformed
-        if(telefonoActual!=null && telefonoActual.substring(12,16).trim().length()+telefonoActual.substring(7,11).length()==8){}
+        if (telefonoActual != null && (telefonoActual.substring(12, 16).trim().length() + telefonoActual.substring(7, 11).length()) == 8) {
             if (bt_agregarTelefono.getText().equals("Modificar Teléfono")) {
                 int telefonoSeleccionado = jl_telefonos.getSelectedIndex();
                 dlm_telfonos.setElementAt(telefonoActual, telefonoSeleccionado);
@@ -277,7 +274,7 @@ public class UI_Cliente extends javax.swing.JDialog {
                 tf_telefono.setText("");
                 bt_agregarTelefono.setText("Agregar Teléfono");
             } else {
-                if (telefonoVacio(tf_telefono.getText().substring(7,11))) {
+                if (telefonoValido(tf_telefono.getText().substring(7, 11))) {
                     dlm_telfonos.addElement(telefonoActual);
                     jl_telefonos.setModel(dlm_telfonos);
                     tf_telefono.setText("506");
@@ -285,7 +282,11 @@ public class UI_Cliente extends javax.swing.JDialog {
                     Mensajes.mensajeInfomracion("No hay telefono que agregar", "Telefonos");
                 }
             }
-            maximoTelefonos();
+        } else {
+            tf_telefono.setText(telefonoActual);
+            Mensajes.mensajeInfomracion("Por favor ingreser un formato valido de telefono", "Agregar telefono");
+        }
+        maximoTelefonos();
     }//GEN-LAST:event_bt_agregarTelefonoActionPerformed
 
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
@@ -365,7 +366,7 @@ public class UI_Cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_nombreKeyTyped
 
     private void tf_cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cedulaKeyTyped
-        if(Validacion.soloNumeros(evt)){
+        if (Validacion.soloNumeros(evt)) {
             Validacion.validarLongitud(tf_cedula, evt, 25);
         }
     }//GEN-LAST:event_tf_cedulaKeyTyped
@@ -378,33 +379,22 @@ public class UI_Cliente extends javax.swing.JDialog {
         Validacion.validarLongitud(ta_direccionexacta, evt, 150);
     }//GEN-LAST:event_ta_direccionexactaKeyTyped
 
-    private void tf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyTyped
-        telefonoActual = tf_telefono.getText();
-        if(!telefonoVacio(tf_telefono.getText().substring(2, 5))){
-            //tf_telefono.setText("506");
-            //maximoTelefonos();
-        }
-        System.out.println(telefonoActual.substring(12,16));
-        System.out.println(telefonoActual.substring(7,11));
-    }//GEN-LAST:event_tf_telefonoKeyTyped
-
     private void tf_telefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_telefonoFocusGained
         // TODO add your handling code here:
-       
-       if( tf_telefono.getText().trim().length()==12){
-        tf_telefono.setCaretPosition(6);
-       }
+        telefonoActual = tf_telefono.getText();
+        if (tf_telefono.getText().trim().length() == 12) {
+            tf_telefono.setCaretPosition(6);
+        }
     }//GEN-LAST:event_tf_telefonoFocusGained
 
     private void tf_telefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyReleased
-        telefonoActual = tf_telefono.getText();
-        if(!telefonoVacio(telefonoActual.substring(1,4)) && evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
-                bt_agregarTelefono.setText("Agregar Teléfono");
-                maximoTelefonos();
+        if (!telefonoValido(telefonoActual.substring(2, 5)) && evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            bt_agregarTelefono.setText("Agregar Teléfono");
+            maximoTelefonos();
         }
+        telefonoActual = tf_telefono.getText();
     }//GEN-LAST:event_tf_telefonoKeyReleased
 
-    
     public String concatenarTelefonos() {
         String telefonos = "";
         for (int i = 0; i < dlm_telfonos.getSize(); i++) {
@@ -421,17 +411,18 @@ public class UI_Cliente extends javax.swing.JDialog {
         }
         return dlm_temp;
     }
-    
-    public void maximoTelefonos(){
-         if(jl_telefonos.getModel().getSize()==3){
-             activ_desa_NuevoTelefono(false);
-         }
+
+    public void maximoTelefonos() {
+        if (jl_telefonos.getModel().getSize() == 3) {
+            activ_desa_NuevoTelefono(false);
+        }
     }
-    
-    public void activ_desa_NuevoTelefono(boolean b){
+
+    public void activ_desa_NuevoTelefono(boolean b) {
         tf_telefono.setEditable(b);
         bt_agregarTelefono.setEnabled(b);
     }
+
     public void cargarCliente(BL_Cliente cliente) {
         clienteAMostrar = cliente;
         tf_nombre.setText(clienteAMostrar.getNombre());
@@ -442,7 +433,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         jl_telefonos.setModel(dlm_telfonos);
         bt_ingresarCliente.setText("Modificar Cliente");
         bt_agregarTelefono.setText("Modificar Teléfono");
-        tf_telefono.setText(dlm_telfonos.getElementAt(0)+"");
+        tf_telefono.setText(dlm_telfonos.getElementAt(0) + "");
         jl_telefonos.setSelectedIndex(0);
     }
 
@@ -467,8 +458,8 @@ public class UI_Cliente extends javax.swing.JDialog {
             return false;
         }
     }
-    
-    public boolean telefonoVacio(String numero) {
+
+    public boolean telefonoValido(String numero) {
         try {
             Double.parseDouble(numero);
             return true;

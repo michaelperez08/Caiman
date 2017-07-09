@@ -518,7 +518,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         if (rb_producto_nuevo.isSelected()) {
             limpiarCamposProducto();
             bt_SeleccionarProducto.setEnabled(false);
-        }else {
+        } else {
             bt_SeleccionarProducto.setEnabled(true);
         }
     }//GEN-LAST:event_rb_producto_nuevoActionPerformed
@@ -545,12 +545,12 @@ public final class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_bt_agregar_lineaActionPerformed
 
     private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
-        // TODO add your handling code here:
-        eliminarLinea();
+        if (!editandoLinea()) {
+            eliminarLinea();
+        }
     }//GEN-LAST:event_jmi_eliminarActionPerformed
 
     private void jmi_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarActionPerformed
-        // TODO add your handling code here:
         llenarCamposLinea();
     }//GEN-LAST:event_jmi_modificarActionPerformed
 
@@ -704,8 +704,10 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void eliminarLinea() {
-        ((DefaultTableModel) tb_linea_factura.getModel()).removeRow(tb_linea_factura.getSelectedRow());
-        calcularTotales();
+        if (lineaSeleccionada()) {
+            ((DefaultTableModel) tb_linea_factura.getModel()).removeRow(tb_linea_factura.getSelectedRow());
+            calcularTotales();
+        }
     }
 
     public void modificarLinea(int fila) {
@@ -732,16 +734,18 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void llenarCamposLinea() {
-        rb_producto_nuevo.setSelected((Boolean) tb_linea_factura.getValueAt(lineaSeleccionada, 5));
-        lineaSeleccionada = tb_linea_factura.getSelectedRow();
-        Object producto = tb_linea_factura.getValueAt(lineaSeleccionada, 2).toString();
-        cb_producto.addItem(producto);
-        cb_producto.setSelectedItem(producto);
-        int cantidadLinea = Integer.parseInt(tb_linea_factura.getValueAt(lineaSeleccionada, 1).toString());
-        sp_cantidad.setValue(cantidadLinea);
-        tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3).toString());
-        bt_agregar_linea.setText("Modificar");
-        tb_linea_factura.setCellSelectionEnabled(false);
+        if (lineaSeleccionada()) {
+            rb_producto_nuevo.setSelected((Boolean) tb_linea_factura.getValueAt(lineaSeleccionada, 5));
+            lineaSeleccionada = tb_linea_factura.getSelectedRow();
+            Object producto = tb_linea_factura.getValueAt(lineaSeleccionada, 2);
+            cb_producto.addItem(producto);
+            cb_producto.setSelectedItem(producto);
+            int cantidadLinea = Integer.parseInt(tb_linea_factura.getValueAt(lineaSeleccionada, 1).toString());
+            sp_cantidad.setValue(cantidadLinea);
+            tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3).toString());
+            bt_agregar_linea.setText("Modificar");
+            tb_linea_factura.setCellSelectionEnabled(false);
+        }
 
     }
 
@@ -962,7 +966,6 @@ public final class UI_Factura extends javax.swing.JDialog {
         bloquearElementos();
     }
 
-
     public void bloquearElementos() {
         cb_semanas.setVisible(false);
         cb_producto.setEnabled(false);
@@ -1026,4 +1029,22 @@ public final class UI_Factura extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField tf_precio;
     private javax.swing.JFormattedTextField tf_telefono;
     // End of variables declaration//GEN-END:variables
+
+    private boolean lineaSeleccionada() {
+        if (tb_linea_factura.getSelectedRow() >= 0) {
+            return true;
+        } else {
+            Mensajes.mensajeInfomracion("No ha seleccionado ninguna linea", "Factura");
+            return false;
+        }
+    }
+
+    private boolean editandoLinea() {
+        if (bt_agregar_linea.getText().equals("Modificar")) {
+            Mensajes.mensajeInfomracion("Debe terminar de editar la linea antes de realizar cualquier accion", "Factura");
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
