@@ -40,4 +40,12 @@ public class ManejoDirecctorios {
         }
     }
     
+    public static String getNombreArchivoAyuda(){
+        if (os.equals("linux")) {
+            return "/help.chm";
+        }else{
+            return "\\help.chm";
+        }
+    }
+    
 }

@@ -25,44 +25,41 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws UnsupportedLookAndFeelException, Exepciones{
+    public static void main(String[] args) throws UnsupportedLookAndFeelException, Exepciones {
         try {
             // TODO code application logic here
-        try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            try {
+                for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
                 }
+
+            } catch (Exception e) {
+
             }
-               
-        } catch (Exception e) {
-            
-        }
 
             UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
         } catch (ParseException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
         ConfBD confdb = new ConfBD();
         UI_LogIn login = new UI_LogIn(null, true);
-         if(login.iniciarLogIn()) {
-         login.setVisible(true);
-         } else {
-         System.exit(0);
-         }
-         
+        if (login.iniciarLogIn()) {
+            login.setVisible(true);
+        } else {
+            System.exit(0);
+        }
+
 //        LogIn li = new LogIn(null, true);
 //        li.setVisible(true);
 //        Principal p = new Principal();
 //        p.setVisible(true);
-
 //        BL_Imprimir bli = new BL_Imprimir();
 //        bli.imprimir();
 //        
-
     }
 
 }

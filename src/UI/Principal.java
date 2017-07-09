@@ -861,6 +861,11 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     m_ayuda.setText("Ayuda");
 
     mi_verAyuda.setText("Ver Ayuda");
+    mi_verAyuda.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            mi_verAyudaActionPerformed(evt);
+        }
+    });
     m_ayuda.add(mi_verAyuda);
 
     jMenuBar1.add(m_ayuda);
@@ -1170,6 +1175,11 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             }
         }
     }//GEN-LAST:event_pum_tbPopupMenuWillBecomeVisible
+
+    private void mi_verAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_verAyudaActionPerformed
+        Ayuda ayuda = Ayuda.getInstance();
+        ayuda.abrirAyuda();
+    }//GEN-LAST:event_mi_verAyudaActionPerformed
 
     public void cargarTablaBusqueda(ArrayList<BL_Factura> listaBusquedaFactura) {
         if (!listaBusquedaFactura.isEmpty()) {

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package UI;
+
+import config.ManejoDirecctorios;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,16 +13,31 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author alberto
  */
 public class Ayuda {
-     public void abrirAyuda() {
-        String direcCarp = getDirectoriosPorSO()[0];
-        String archivoCHM = getDirectoriosPorSO()[1];
+    
+    private static Ayuda instancia;
+
+    private Ayuda() {
+
+    }
+    
+    public static Ayuda getInstance(){
+        if(instancia==null){
+            instancia = new Ayuda();
+        }
+        return instancia;
+    }
+
+    public void abrirAyuda() {
+        String direcCarp = ManejoDirecctorios.getDirectoriosPorSO();
+        String archivoCHM = ManejoDirecctorios.getNombreArchivoAyuda();
         InputStream is = null;
-        File helpchm = new File(direcCarp+archivoCHM);
+        File helpchm = new File(direcCarp + archivoCHM);
         if (helpchm.exists()) {
             ejecutarComando(helpchm);
         } else {
@@ -33,34 +50,24 @@ public class Ayuda {
             }
         }
     }
-    
-    public void ejecutarComando(File file){
+
+    public void ejecutarComando(File file) {
         String os = System.getProperty("os.name");
         String url = file.getAbsolutePath();
-            if (os.equals("Linux")) {
-                String comnado = "chmsee " + URLparaLinux(url);
-                try {
-                    Runtime.getRuntime().exec(new String[]{"bash", "-c", comnado});
-                    //file.delete();
-                } catch (IOException ex) {
-                    Logger.getLogger(UI_LogIn.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {try {
-                    Runtime.getRuntime().exec("hh.exe " + URLparaWindows(url));
-                } catch (IOException ex) {
-                    Logger.getLogger(UI_LogIn.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (os.equals("Linux")) {
+            String comnado = "chmsee " + URLparaLinux(url);
+            try {
+                Runtime.getRuntime().exec(new String[]{"bash", "-c", comnado});
+                //file.delete();
+            } catch (IOException ex) {
+                Logger.getLogger(Ayuda.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }
-
-    public String[] getDirectoriosPorSO() {
-        String os = System.getProperty("os.name").toLowerCase();
-        String[] direccWind = {System.getProperty("user.home") + "\\.expDig", "\\help.chm"};
-        String[] direccLinux = {System.getProperty("user.home") + "/.expDig", "/help.chm"};
-        if (os.equals("linux")) {
-            return direccLinux;
         } else {
-            return direccWind;
+            try {
+                Runtime.getRuntime().exec("hh.exe " + URLparaWindows(url));
+            } catch (IOException ex) {
+                Logger.getLogger(Ayuda.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
