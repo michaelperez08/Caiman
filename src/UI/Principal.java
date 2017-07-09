@@ -63,7 +63,7 @@ public final class Principal extends javax.swing.JFrame {
 
     public Principal() throws Exepciones {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("../IMG/tire-icon.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("tire-icon.png")).getImage());
         setLocationRelativeTo(null);
         setResizable(false);
         sdf = new SimpleDateFormat("dd-MMM-yyyy");
@@ -88,6 +88,7 @@ public final class Principal extends javax.swing.JFrame {
         dc_fecha_desde.setMaxDate(dc_fecha_hasta.getSelectedDate());
         mostrarBusquedaAvanzada(-70, false);
         inmovilizarColumnas();
+        cargarUsuarioLogeado();
     }
 
     /**
@@ -162,8 +163,10 @@ public final class Principal extends javax.swing.JFrame {
         bt_verUsuario = new javax.swing.JButton();
         bt_agregarUsuairo = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        m_usuario = new javax.swing.JMenu();
         mi_cerrar_sesion = new javax.swing.JMenuItem();
+        m_ayuda = new javax.swing.JMenu();
+        mi_verAyuda = new javax.swing.JMenuItem();
 
         pum_tb.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
@@ -843,7 +846,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         .addComponent(panel_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
     );
 
-    jMenu1.setText("Usuario");
+    m_usuario.setText("Usuario");
 
     mi_cerrar_sesion.setText("Cerra Sesion");
     mi_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
@@ -851,9 +854,16 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             mi_cerrar_sesionActionPerformed(evt);
         }
     });
-    jMenu1.add(mi_cerrar_sesion);
+    m_usuario.add(mi_cerrar_sesion);
 
-    jMenuBar1.add(jMenu1);
+    jMenuBar1.add(m_usuario);
+
+    m_ayuda.setText("Ayuda");
+
+    mi_verAyuda.setText("Ver Ayuda");
+    m_ayuda.add(mi_verAyuda);
+
+    jMenuBar1.add(m_ayuda);
 
     setJMenuBar(jMenuBar1);
 
@@ -1665,7 +1675,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     private javax.swing.JComboBox<String> cb_busquedaAvanzada;
     private datechooser.beans.DateChooserCombo dc_fecha_desde;
     private datechooser.beans.DateChooserCombo dc_fecha_hasta;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1696,7 +1705,10 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     private javax.swing.JTable jt_usuarios;
     private javax.swing.JLabel l_desde;
     private javax.swing.JLabel l_hasta;
+    private javax.swing.JMenu m_ayuda;
+    private javax.swing.JMenu m_usuario;
     private javax.swing.JMenuItem mi_cerrar_sesion;
+    private javax.swing.JMenuItem mi_verAyuda;
     private javax.swing.JPanel p_busquedaAvanzada;
     private javax.swing.JTabbedPane panel_tabs;
     private javax.swing.JPopupMenu pum_tb;
@@ -1709,5 +1721,12 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     private javax.swing.JTextField tf_buscarLlantas;
     private javax.swing.JTextField tf_busquedaAvanzada;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarUsuarioLogeado() {
+        BL_Usuario usuarioLogeado = UI_LogIn.bl_usuairo;
+        if (usuarioLogeado != null) {
+            m_usuario.setText(usuarioLogeado.getNombreUsuario());
+        }
+    }
     //---------------Llantas------------------*
 }

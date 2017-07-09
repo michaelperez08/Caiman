@@ -180,9 +180,9 @@ public final class UI_Factura extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Cedula");
+        jLabel1.setText("Cédula");
         jLabel1.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 85, -1));
 
         jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -198,9 +198,9 @@ public final class UI_Factura extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Direccion");
+        jLabel4.setText("Dirección");
         jLabel4.setPreferredSize(new java.awt.Dimension(75, 32));
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 85, -1));
 
         tf_direccion.setPreferredSize(new java.awt.Dimension(220, 32));
         tf_direccion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -208,7 +208,7 @@ public final class UI_Factura extends javax.swing.JDialog {
                 tf_direccionKeyTyped(evt);
             }
         });
-        jPanel2.add(tf_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 340, -1));
+        jPanel2.add(tf_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 340, -1));
 
         jLabel6.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -254,7 +254,7 @@ public final class UI_Factura extends javax.swing.JDialog {
                 cb_cedulaActionPerformed(evt);
             }
         });
-        jPanel2.add(cb_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 340, 32));
+        jPanel2.add(cb_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 340, 32));
 
         jp_facturacion.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 1078, 130));
 
