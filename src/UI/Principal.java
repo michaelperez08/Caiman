@@ -983,9 +983,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         if (evt.getClickCount() == 2) {
             verLlanta();
         }
-        int fila = jt_llantas.getSelectedRow();
-        int numeroFila = Integer.parseInt("" + jt_llantas.getValueAt(fila, 0));
-        System.out.println("fila=" + fila + " numerofila=" + numeroFila);
     }//GEN-LAST:event_jt_llantasMouseReleased
 
     private void jt_arosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_arosMouseReleased
@@ -1563,11 +1560,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 if (blCliente.eliminarCliente()) {
                     JOptionPane.showMessageDialog(null, "Cliente Elimiado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                     cargarListaClientes();
-                    jt_clientes.setRowSorter(null);
-                    removerFilaClienteEliminado(numeroFila);
-                    trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
-                    filtrarClientes();
-                    jt_clientes.setRowSorter(trsfiltroCliente);
+                    cargarTablaClientes();
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el cliente", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -1586,11 +1579,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 if (blLanta.eliminarLlanta()) {
                     JOptionPane.showMessageDialog(null, "Llanta Elimiada con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                     cargarListaLlantas();
-                    jt_llantas.setRowSorter(null);
-                    removerFilaLlantaEliminada(numeroFila);
-                    trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
-                    filtrarLlantas();
-                    jt_llantas.setRowSorter(trsfiltroLlantas);
+                    cargarTablaLlantas();
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el llanta", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -1609,11 +1598,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 if (blAro.eliminarAro()) {
                     JOptionPane.showMessageDialog(null, "Aro Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                     cargarListaAros();
-                    jt_aros.setRowSorter(null);
-                    removerFilaAroEliminado(numeroFila);
-                    trsfiltroAros = new TableRowSorter(jt_aros.getModel());
-                    filtrarAros();
-                    jt_aros.setRowSorter(trsfiltroAros);
+                    cargarTablaAros();
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo al eliminar el aro", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -1632,8 +1617,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 if (blusuairo.eliminarUsuario()) {
                     JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
                     cargarListaUsuarios();
-                    jt_usuarios.setRowSorter(null);
-                    removerFilaUsuarioEliminado(numeroFila);
+                    cargarTablaUsuarios();
                     trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
                     filtrarUsuarios();
                     jt_usuarios.setRowSorter(trsfiltroUsuarios);
@@ -1726,47 +1710,4 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     private javax.swing.JTextField tf_busquedaAvanzada;
     // End of variables declaration//GEN-END:variables
     //---------------Llantas------------------*
-    private void removerFilaLlantaEliminada(int rowPosition) {
-        ((DefaultTableModel) jt_llantas.getModel()).removeRow(rowPosition);
-    }
-
-    private void cargarFilaLlantaAñadida(BL_Llanta nuevaLLanta, int index) {
-        ((DefaultTableModel) jt_llantas.getModel()).addRow(new Object[]{index, nuevaLLanta.getNumeroLlanta(), nuevaLLanta.getMarca(), nuevaLLanta.getDiseno(), nuevaLLanta.getNumeroCapas(),
-            nuevaLLanta.getCantidad(), nuevaLLanta.getTipoLlanta()});
-    }
-
-    //*----------Clientes----------------------------------------------------------*
-    private void removerFilaClienteEliminado(int rowPosition) {
-        ((DefaultTableModel) jt_clientes.getModel()).removeRow(rowPosition);
-    }
-
-    private void cargarFilaClienteAñadido(BL_Cliente nuevoCliente, int index) {
-        ((DefaultTableModel) jt_clientes.getModel()).addRow(new Object[]{index, nuevoCliente.getNombre(), nuevoCliente.getDireccion_simple(),
-            nuevoCliente.getTelefonos()});
-    }
-
-    //*-------Aros-------------------------------------------------------------------*
-    private void removerFilaAroEliminado(int rowPosition) {
-        ((DefaultTableModel) jt_aros.getModel()).removeRow(rowPosition);
-    }
-
-    private void cargarFilaAroAñadido(BL_Aro nuevoAro, int index) {
-        ((DefaultTableModel) jt_aros.getModel()).addRow(new Object[]{index, nuevoAro.getNumeroAro(), nuevoAro.getMarca(), nuevoAro.getCodigo(), nuevoAro.getCantidad()});
-    }
-
-    //------------Usuarios----------------------------------------------------------------
-    private void removerFilaUsuarioEliminado(int rowPosition) {
-        ((DefaultTableModel) jt_usuarios.getModel()).removeRow(rowPosition);
-    }
-
-    private void cargarFilaUsuarioAñadido(BL_Usuario nuevoUsuario, int index) {
-        ((DefaultTableModel) jt_usuarios.getModel()).addRow(new Object[]{index, nuevoUsuario.getIdUsuario(), nuevoUsuario.getNombreUsuario(),
-            nuevoUsuario.getTipoUsuario()});
-    }
-
-    //-----------Facturas--------------------------------------------------------------------
-    private void cargarLineaFacturaAñadida(BL_Factura nuevaFactura, int index) {
-        ((DefaultTableModel) jt_facturas.getModel()).addRow(new Object[]{index, BL_Factura.formatearIDFactura(nuevaFactura.getIdFactura()),
-            nuevaFactura.getNombreCliente(), nuevaFactura.getTelefonoCliente(), sdf.format(nuevaFactura.getFechaFactura()), nuevaFactura.getPrecioTotal()});
-    }
 }
