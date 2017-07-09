@@ -902,11 +902,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         blc.setVisible(true);
         if (blc.actualizarLista && blc.clienteAñadir != null) {
             cargarListaClientes();
-            jt_clientes.setRowSorter(null);
             cargarTablaClientes();
-            trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
-            filtrarClientes();
-            jt_clientes.setRowSorter(trsfiltroCliente);
         }
     }//GEN-LAST:event_bt_agregarActionPerformed
 
@@ -957,11 +953,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         uil.setVisible(true);
         if (uil.actualizarLista) {
             cargarListaLlantas();
-            jt_llantas.setRowSorter(null);
             cargarTablaLlantas();
-            trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
-            filtrarLlantas();
-            jt_llantas.setRowSorter(trsfiltroLlantas);
         }
     }//GEN-LAST:event_bt_agregarLlantaActionPerformed
 
@@ -1020,11 +1012,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         iua.setVisible(true);
         if (iua.actualizarLista) {
             cargarListaAros();
-            jt_aros.setRowSorter(null);
             cargarTablaAros();
-            trsfiltroAros = new TableRowSorter(jt_aros.getModel());
-            filtrarAros();
-            jt_aros.setRowSorter(trsfiltroAros);
         }
     }//GEN-LAST:event_bt_agregarAroActionPerformed
 
@@ -1045,11 +1033,11 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         uif.setVisible(true);
         if (uif.actulizarLista) {
             cargarListaFacturas();
-            jt_facturas.setRowSorter(null);
             cargarTablaFacturas(listaFactura);
-            trsfiltroFactura = new TableRowSorter(jt_facturas.getModel());
-            filtrarFactura();
-            jt_facturas.setRowSorter(trsfiltroFactura);
+            cargarListaLlantas();
+            cargarTablaLlantas();
+            cargarListaAros();
+            cargarTablaAros();
         }
     }//GEN-LAST:event_bt_agregarFacturaActionPerformed
 
@@ -1100,11 +1088,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         iuu.setVisible(true);
         if (iuu.actualizarLista) {
             cargarListaUsuarios();
-            jt_usuarios.setRowSorter(null);
             cargarTablaUsuarios();
-            trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
-            filtrarUsuarios();
-            jt_usuarios.setRowSorter(trsfiltroUsuarios);
         }
     }//GEN-LAST:event_bt_agregarUsuairoActionPerformed
 
@@ -1308,6 +1292,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }
 
     public void cargarTablaClientes() {
+        jt_clientes.setRowSorter(null);
         String[] nombreColumnas = {"numeroFila", "Nombre", "Dirección", "Teléfono(s)"};
         dtmClientes = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1325,6 +1310,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_clientes.getColumnModel().getColumn(0).setMinWidth(0);
         jt_clientes.getColumnModel().getColumn(0).setMaxWidth(0);
         trsfiltroCliente = new TableRowSorter(jt_clientes.getModel());
+        filtrarClientes();
+        jt_clientes.setRowSorter(trsfiltroCliente);
     }
 
     public void cargarListaLlantas() {
@@ -1333,6 +1320,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }
 
     public void cargarTablaLlantas() {
+        jt_llantas.setRowSorter(null);
         String[] nombreColumnas = {"numeroFila", "Numero Llanta", "Marca", "Diseño", "Capas", "Cantidad", "TipoLlanta"};
         dtmLlantas = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1352,6 +1340,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_llantas.getColumnModel().getColumn(6).setMinWidth(0);
         jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
         trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
+        filtrarLlantas();
+        jt_llantas.setRowSorter(trsfiltroLlantas);
     }
 
     public void cargarListaAros() {
@@ -1360,6 +1350,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }
 
     public void cargarTablaAros() {
+        jt_aros.setRowSorter(null);
         String[] nombreColumnas = {"numeroFila", "Numero Aro", "Marca", "Codigo", "Cantidad (Juegos)"};
         dtmAros = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1377,6 +1368,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_aros.getColumnModel().getColumn(0).setMinWidth(0);
         jt_aros.getColumnModel().getColumn(0).setMaxWidth(0);
         trsfiltroAros = new TableRowSorter(jt_aros.getModel());
+        filtrarAros();
+        jt_aros.setRowSorter(trsfiltroAros);
     }
 
     public void cargarListaUsuarios() {
@@ -1385,6 +1378,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }
 
     public void cargarTablaUsuarios() {
+        jt_usuarios.setRowSorter(null);
         String[] nombreColumnas = {"id", "Nombre", "Tipo"};
         dtmUsuarios = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1401,6 +1395,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_usuarios.getColumnModel().getColumn(0).setMinWidth(0);
         jt_usuarios.getColumnModel().getColumn(0).setMaxWidth(0);
         trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
+        filtrarUsuarios();
+        jt_usuarios.setRowSorter(trsfiltroUsuarios);
     }
 
     public void cargarListaFacturas() {
@@ -1409,6 +1405,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }
 
     public void cargarTablaFacturas(ArrayList<BL_Factura> listaFactTabla) {
+        jt_facturas.setRowSorter(null);
         String[] nombreColumnas = {"#lista", "# Factura", "Nombre del cliente", "Telefono", "Facturada el", "Precio Total"};
         dtmFacturas = new DefaultTableModel(null, nombreColumnas) {
             @Override
@@ -1431,6 +1428,9 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_facturas.getColumnModel().getColumn(1).setMaxWidth(100);
         jt_facturas.getColumnModel().getColumn(4).setMinWidth(120);
         jt_facturas.getColumnModel().getColumn(4).setMaxWidth(120);
+        trsfiltroFactura = new TableRowSorter(jt_facturas.getModel());
+        filtrarFactura();
+        jt_facturas.setRowSorter(trsfiltroFactura);
     }
 
     public void verCliente() {
