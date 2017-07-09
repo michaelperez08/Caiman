@@ -714,7 +714,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     bt_busquedaAvanazada.setBackground(new java.awt.Color(0, 102, 204));
     bt_busquedaAvanazada.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-    bt_busquedaAvanazada.setForeground(new java.awt.Color(255, 255, 255));
+    bt_busquedaAvanazada.setForeground(new java.awt.Color(0, 0, 0));
     bt_busquedaAvanazada.setText("Buscar");
     bt_busquedaAvanazada.setMaximumSize(new java.awt.Dimension(52, 34));
     bt_busquedaAvanazada.setMinimumSize(new java.awt.Dimension(52, 34));
@@ -1632,18 +1632,22 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             int fila = jt_usuarios.getSelectedRow();
             int numeroFila = Integer.parseInt("" + jt_usuarios.getValueAt(fila, 0));
             blusuairo = listaUsuarios.get(numeroFila);
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el usuario " + blusuairo.getNombreUsuario() + "?", "Alerta", JOptionPane.YES_NO_OPTION);
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                if (blusuairo.eliminarUsuario()) {
-                    JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
-                    cargarListaUsuarios();
-                    cargarTablaUsuarios();
-                    trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
-                    filtrarUsuarios();
-                    jt_usuarios.setRowSorter(trsfiltroUsuarios);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Fallo al eliminar el Usuairo", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+            if (blusuairo.getIdUsuario() != UI_LogIn.bl_usuairo.getIdUsuario()) {
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el usuario " + blusuairo.getNombreUsuario() + "?", "Alerta", JOptionPane.YES_NO_OPTION);
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    if (blusuairo.eliminarUsuario()) {
+                        JOptionPane.showMessageDialog(null, "Usuario Eliminado con exito", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                        cargarListaUsuarios();
+                        cargarTablaUsuarios();
+                        trsfiltroUsuarios = new TableRowSorter(jt_usuarios.getModel());
+                        filtrarUsuarios();
+                        jt_usuarios.setRowSorter(trsfiltroUsuarios);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Fallo al eliminar el Usuairo", "Llantas y reencauches Griegos", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
+            } else {
+                Mensajes.mensajeInfomracion("No se puede eliminar el usuario logeado actualmente", "Usuarios");
             }
         }
     }

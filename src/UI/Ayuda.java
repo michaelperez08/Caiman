@@ -64,7 +64,7 @@ public class Ayuda {
             }
         } else {
             try {
-                Runtime.getRuntime().exec("hh.exe " + URLparaWindows(url));
+                Runtime.getRuntime().exec("hh mk:@MSITStore: " + URLparaWindows(url));
             } catch (IOException ex) {
                 Logger.getLogger(Ayuda.class.getName()).log(Level.SEVERE, null, ex);
             }

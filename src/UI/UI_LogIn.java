@@ -85,9 +85,6 @@ public class UI_LogIn extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         tf_usuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         jLabel3.setText("jLabel3");
 
@@ -175,15 +172,6 @@ public class UI_LogIn extends javax.swing.JDialog {
                 .addComponent(bt_logIn)
                 .addContainerGap())
         );
-
-        jMenu1.setText("Conexión");
-
-        jMenuItem1.setText("Probar Conexión");
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,9 +292,6 @@ public class UI_LogIn extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField tf_contrasena;
     private javax.swing.JTextField tf_usuario;

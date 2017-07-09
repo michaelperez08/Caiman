@@ -308,7 +308,7 @@ public final class UI_Factura extends javax.swing.JDialog {
 
         bt_agregar_linea.setBackground(new java.awt.Color(0, 102, 204));
         bt_agregar_linea.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_agregar_linea.setForeground(new java.awt.Color(255, 255, 255));
+        bt_agregar_linea.setForeground(new java.awt.Color(0, 0, 0));
         bt_agregar_linea.setText("Agregar Linea");
         bt_agregar_linea.setPreferredSize(new java.awt.Dimension(160, 32));
         bt_agregar_linea.addActionListener(new java.awt.event.ActionListener() {
@@ -399,7 +399,7 @@ public final class UI_Factura extends javax.swing.JDialog {
 
         bt_imprimir.setBackground(new java.awt.Color(0, 102, 204));
         bt_imprimir.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
-        bt_imprimir.setForeground(new java.awt.Color(255, 255, 255));
+        bt_imprimir.setForeground(new java.awt.Color(0, 0, 0));
         bt_imprimir.setText("Imprimir");
         bt_imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
