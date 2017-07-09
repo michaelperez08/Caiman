@@ -8,6 +8,7 @@ package UI;
 import BL.BL_Cliente;
 import config.Mensajes;
 import config.Validacion;
+import java.awt.event.KeyEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -23,6 +24,8 @@ public class UI_Cliente extends javax.swing.JDialog {
     public DefaultListModel dlm_telfonos;
     public BL_Cliente clienteAMostrar;
     public boolean actualizarLista;
+    private String telefonoActual;
+    public BL_Cliente clienteAñadir;
 
     public UI_Cliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -176,6 +179,9 @@ public class UI_Cliente extends javax.swing.JDialog {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tf_telefonoKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_telefonoKeyReleased(evt);
+            }
         });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -263,16 +269,16 @@ public class UI_Cliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_agregarTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarTelefonoActionPerformed
-        String telefono = tf_telefono.getText().trim();
+        if(telefonoActual!=null && telefonoActual.substring(12,16).trim().length()+telefonoActual.substring(7,11).length()==8){}
             if (bt_agregarTelefono.getText().equals("Modificar Teléfono")) {
                 int telefonoSeleccionado = jl_telefonos.getSelectedIndex();
-                dlm_telfonos.setElementAt(telefono, telefonoSeleccionado);
+                dlm_telfonos.setElementAt(telefonoActual, telefonoSeleccionado);
                 jl_telefonos.setModel(dlm_telfonos);
                 tf_telefono.setText("");
                 bt_agregarTelefono.setText("Agregar Teléfono");
             } else {
                 if (telefonoVacio(tf_telefono.getText().substring(7,11))) {
-                    dlm_telfonos.addElement(telefono);
+                    dlm_telfonos.addElement(telefonoActual);
                     jl_telefonos.setModel(dlm_telfonos);
                     tf_telefono.setText("506");
                 } else {
@@ -307,9 +313,9 @@ public class UI_Cliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (cedula.isEmpty() || (!cedula.isEmpty() && esNumero(cedula))) {
-                BL_Cliente cliente = new BL_Cliente();
+                clienteAñadir = new BL_Cliente(nombre, direccion_simple, direccion_exacta, cedula, concatenarTelefonos());
                 if (bt_ingresarCliente.getText().equals("Ingresar Cliente")) {// ingresar cliente nuevo
-                    consultaExitosa = cliente.insertarCliente(nombre, direccion_simple, direccion_exacta, cedula, concatenarTelefonos());
+                    consultaExitosa = clienteAñadir.insertarCliente(nombre, direccion_simple, direccion_exacta, cedula, concatenarTelefonos());
                     if (consultaExitosa) {
                         actualizarLista = true;
                         JOptionPane.showMessageDialog(null, "Cliente Añadido", "Cliente Ingresado", JOptionPane.INFORMATION_MESSAGE);
@@ -330,7 +336,7 @@ public class UI_Cliente extends javax.swing.JDialog {
                     clienteAMostrar.setDireccion_exacta(direccion_exacta);
                     clienteAMostrar.setCedula(cedula);
                     clienteAMostrar.setTelefonos(telefonos);
-                    consultaExitosa = cliente.modificarCliente(clienteAMostrar.getIdCliente(), clienteAMostrar.getNombre(),
+                    consultaExitosa = clienteAñadir.modificarCliente(clienteAMostrar.getIdCliente(), clienteAMostrar.getNombre(),
                             clienteAMostrar.getDireccion_simple(), clienteAMostrar.getDireccion_exacta(), clienteAMostrar.getCedula(), clienteAMostrar.getTelefonos());
                     if (consultaExitosa) {
                         actualizarLista = true;
@@ -373,15 +379,13 @@ public class UI_Cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_ta_direccionexactaKeyTyped
 
     private void tf_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyTyped
-        if(!telefonoVacio(tf_telefono.getText().substring(1,4))){
-            if(jl_telefonos.getModel().getSize()<3){
-                bt_agregarTelefono.setText("Agregar Teléfono");
-            }
-        }
+        telefonoActual = tf_telefono.getText();
         if(!telefonoVacio(tf_telefono.getText().substring(2, 5))){
-            tf_telefono.setText("506");
-            maximoTelefonos();
+            //tf_telefono.setText("506");
+            //maximoTelefonos();
         }
+        System.out.println(telefonoActual.substring(12,16));
+        System.out.println(telefonoActual.substring(7,11));
     }//GEN-LAST:event_tf_telefonoKeyTyped
 
     private void tf_telefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_telefonoFocusGained
@@ -391,6 +395,14 @@ public class UI_Cliente extends javax.swing.JDialog {
         tf_telefono.setCaretPosition(6);
        }
     }//GEN-LAST:event_tf_telefonoFocusGained
+
+    private void tf_telefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyReleased
+        telefonoActual = tf_telefono.getText();
+        if(!telefonoVacio(telefonoActual.substring(1,4)) && evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+                bt_agregarTelefono.setText("Agregar Teléfono");
+                maximoTelefonos();
+        }
+    }//GEN-LAST:event_tf_telefonoKeyReleased
 
     
     public String concatenarTelefonos() {

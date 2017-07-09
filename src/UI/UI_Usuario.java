@@ -52,7 +52,7 @@ public class UI_Usuario extends javax.swing.JDialog {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nuevo Usuario");
+        setTitle("Usuario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pn_IngresarLlanta.setBackground(new java.awt.Color(255, 255, 255));

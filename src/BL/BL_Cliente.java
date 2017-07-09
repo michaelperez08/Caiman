@@ -131,6 +131,4 @@ public class BL_Cliente {
         return Nombre;
     }
     
-    
-    
 }

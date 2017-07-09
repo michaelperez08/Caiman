@@ -51,7 +51,7 @@ public class UI_Llanta extends javax.swing.JDialog {
         cb_tipoLlanta = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Ingresar Llanta");
+        setTitle("Llanta");
 
         pn_IngresarLlanta.setBackground(new java.awt.Color(255, 255, 255));
 

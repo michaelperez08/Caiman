@@ -46,7 +46,7 @@ public class Main {
         }
 
 
-//        ConfBD confdb = new ConfBD();
+        ConfBD confdb = new ConfBD();
 //        UI_LogIn login = new UI_LogIn(null, true);
 //         if(login.iniciarLogIn()) {
 //         login.setVisible(true);

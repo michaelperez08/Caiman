@@ -164,6 +164,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         pum_Lineas.add(jmi_modificar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Factura");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

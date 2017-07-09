@@ -50,7 +50,7 @@ public class UI_Aro extends javax.swing.JDialog {
         bt_ingresarAro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Ingresar Aro");
+        setTitle("Aro");
 
         pn_IngresarLlanta.setBackground(new java.awt.Color(255, 255, 255));
 
