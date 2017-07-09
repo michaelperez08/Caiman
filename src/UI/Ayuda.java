@@ -64,7 +64,7 @@ public class Ayuda {
             }
         } else {
             try {
-                Runtime.getRuntime().exec("hh mk:@MSITStore: " + URLparaWindows(url));
+                Runtime.getRuntime().exec("HH.EXE ms-its:" + file.getAbsolutePath());
             } catch (IOException ex) {
                 Logger.getLogger(Ayuda.class.getName()).log(Level.SEVERE, null, ex);
             }
