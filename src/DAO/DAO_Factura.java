@@ -141,7 +141,7 @@ public class DAO_Factura {
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
             }
-            cmd = conexion.prepareStatement("SELECT * FROM Factura ORDER BY Factura.idFactura DESC limit 50");
+            cmd = conexion.prepareStatement("SELECT * FROM Factura ORDER BY Factura.idFactura DESC limit 30");
             rs = cmd.executeQuery();
             while (rs.next()) {
                 lista.add(new TO_Factura(rs.getInt("idFactura"), rs.getString("NombreCliente"), rs.getString("TelefonoCliente"), rs.getString("DireccionCliente"),

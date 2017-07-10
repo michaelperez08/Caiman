@@ -46,17 +46,17 @@ public class Main {
         }
 
         ConfBD confdb = new ConfBD();
-        UI_LogIn login = new UI_LogIn(null, true);
-        if (login.iniciarLogIn()) {
-            login.setVisible(true);
-        } else {
-            System.exit(0);
-        }
+//        UI_LogIn login = new UI_LogIn(null, true);
+//        if (login.iniciarLogIn()) {
+//            login.setVisible(true);
+//        } else {
+//            System.exit(0);
+//        }
 
 //        LogIn li = new LogIn(null, true);
 //        li.setVisible(true);
-//        Principal p = new Principal();
-//        p.setVisible(true);
+        Principal p = new Principal();
+        p.setVisible(true);
 //        BL_Imprimir bli = new BL_Imprimir();
 //        bli.imprimir();
 //        

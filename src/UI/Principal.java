@@ -76,7 +76,7 @@ public final class Principal extends javax.swing.JFrame {
         cargarListaUsuarios();
         cargarTablaUsuarios();
         cargarListaFacturas();
-        cargarTablaFacturas(listaFactura);
+        cargarTablaFacturas();
         jt_clientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_llantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jt_aros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -1045,7 +1045,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         uif.setVisible(true);
         if (uif.actulizarLista) {
             cargarListaFacturas();
-            cargarTablaFacturas(listaFactura);
+            cargarTablaFacturas();
             cargarListaLlantas();
             cargarTablaLlantas();
             cargarListaAros();
@@ -1120,7 +1120,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
             mostrarBusquedaAvanzada(70, true);
         } else {
             mostrarBusquedaAvanzada(-70, false);
-            cargarTablaFacturas(listaFactura);
+            cargarListaFacturas();
+            cargarTablaFacturas();
         }
     }//GEN-LAST:event_rb_busquedaAvanzadaItemStateChanged
 
@@ -1183,7 +1184,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     public void cargarTablaBusqueda(ArrayList<BL_Factura> listaBusquedaFactura) {
         if (!listaBusquedaFactura.isEmpty()) {
-            cargarTablaFacturas(listaBusquedaFactura);
+            listaFactura = listaBusquedaFactura;
+            cargarTablaFacturas();
         } else {
             Mensajes.mensajeInfomracion("No se obtuvieron resultados de la búsqueda", "Búsqueda Avanzada");
         }
@@ -1421,7 +1423,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         listaFactura = factura.cargarFactura();
     }
 
-    public void cargarTablaFacturas(ArrayList<BL_Factura> listaFactTabla) {
+    public void cargarTablaFacturas() {
         jt_facturas.setRowSorter(null);
         String[] nombreColumnas = {"#lista", "# Factura", "Nombre del cliente", "Telefono", "Facturada el", "Precio Total"};
         dtmFacturas = new DefaultTableModel(null, nombreColumnas) {
@@ -1430,8 +1432,8 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 return false;
             }
         };
-        if (!listaFactTabla.isEmpty()) {
-            for (BL_Factura factura_temp : listaFactTabla) {
+        if (!listaFactura.isEmpty()) {
+            for (BL_Factura factura_temp : listaFactura) {
                 dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(), BL_Factura.formatearIDFactura(factura_temp.getIdFactura()), factura_temp.getNombreCliente(), factura_temp.getTelefonoCliente(),
                     sdf.format(factura_temp.getFechaFactura()), factura_temp.getPrecioTotal()});
             }
