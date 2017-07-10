@@ -1041,7 +1041,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_jcb_filtroBusquedaAroActionPerformed
 
     private void bt_agregarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarFacturaActionPerformed
-        UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled, listaClientes, listaLlantas, listaAros);
+        UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled, listaClientes, listaLlantas, listaAros, (listaFactura.get(0).getIdFactura())+1);
         uif.setVisible(true);
         if (uif.actulizarLista) {
             cargarListaFacturas();

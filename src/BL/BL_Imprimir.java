@@ -12,6 +12,8 @@ import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -19,31 +21,67 @@ import java.awt.print.PrinterJob;
  */
 public class BL_Imprimir implements Printable {
 
+    private BL_Factura factura;
+    SimpleDateFormat df;
+    
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        // We have only one page, and 'page'
-        // is zero-based
+        
+        df = new SimpleDateFormat("dd-MM-yyyy");
+        
         if (pageIndex > 0) {
             return NO_SUCH_PAGE;
         }
 
-        // User (0,0) is typically outside the
-        // imageable area, so we must translate
-        // by the X and Y values in the PageFormat
-        // to avoid clipping.
+        
         Graphics2D g2d = (Graphics2D) graphics;
         g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+        
+        Calendar calendario = Calendar.getInstance();  
+        calendario.setTime(factura.getFechaFactura());
+        
+        graphics.drawString(String.valueOf(calendario.get(Calendar.DAY_OF_MONTH)), 420, 60); // Dia factura
+        graphics.drawString(String.valueOf(calendario.get(Calendar.MONTH)+1), 480, 60);  // Mes Factura
+        graphics.drawString(String.valueOf(calendario.get(Calendar.YEAR)), 540, 60);  // Año Factura
+        graphics.drawString(factura.getNombreCliente(), 80, 80);  // Nombre Cliente
+        graphics.drawString(factura.getDireccionCliente(), 80, 100);  // Direccion
 
-        // Now we perform our rendering
-        //graphics.drawString("Hello world!", j, i);
-        for (int i = 0; i < 450; i+=20) {
-            for (int j = 0; j < 400; j+=20) {
-                System.out.println((i+j)/20+"=("+(j)+", "+i+") ");
+        graphics.drawString(df.format(factura.getFechaExpiracion()), 440, 100);  // Fecha Vencimiento
+        graphics.drawString(factura.getTelefonoCliente(), 440, 80);  // Telefono
+       
+        graphics.drawString(String.valueOf(factura.getSubtotal()), 520, 280);  // Subtotal
+        graphics.drawString(String.valueOf(factura.getImpVenta()), 520, 300);  // Imp Ventas
+        graphics.drawString(String.valueOf(factura.getPrecioTotal()), 520, 320);  // Total
+        
+        int i=0;
+        for (BL_LineaFactura linea : factura.getListaLineaFactura()) {
+            graphics.drawString(String.valueOf(linea.getCantidad()), 40, 140+(i*20));  // Cantidad
+            graphics.drawString(linea.getDetalle(), 80, 140+(i*20));  // Detalle
+            graphics.drawString(String.valueOf(linea.getPrecioUnitario()), 420, 140+(i*20));  // Precio Unitario
+            graphics.drawString(String.valueOf(linea.getPrecioTotalLinea()), 520, 140+(i*20));  // Precio Linea
+            i++;
+        }
+        
+        return PAGE_EXISTS;
+    }
+    
+    public void imprimirFactura(BL_Factura factura) {
+        this.factura = factura;
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        PageFormat format = pj.getPageFormat(null);
+        Paper paper = format.getPaper();
+        paper.setImageableArea(0.0, 0.0, format.getPaper().getWidth(), format.getPaper().getHeight());
+        format.setPaper(paper);
+        pj.setPrintable(this, format);
+        
+        boolean ok = pj.printDialog();
+        if (ok) {
+            try {
+                pj.print();
+            } catch (PrinterException ex) {
+                
             }
         }
-        // tell the caller that this page is part
-        // of the printed document
-        return PAGE_EXISTS;
     }
 
     public void imprimir() {
@@ -54,20 +92,20 @@ public class BL_Imprimir implements Printable {
         paper.setImageableArea(0.0, 0.0, format.getPaper().getWidth(), format.getPaper().getHeight());
         format.setPaper(paper);
         pj.setPrintable(this, format);
-        for (int i = 0; i < 400; i+=20) {
-            for (int j = 0; j < 600; j+=20) {
-                System.out.print((i+j)/20+"=("+(j)+", "+i+") ");
-            }
-            System.out.println("\n");
-        }
-//        boolean ok = pj.printDialog();
-//        if (ok) {
-//            try {
-//                pj.print();
-//            } catch (PrinterException ex) {
-//                /* The job did not successfully complete */
+//        for (int i = 0; i < 400; i+=20) {
+//            for (int j = 0; j < 600; j+=20) {
+//                System.out.print((i+j)/20+"=("+(j)+", "+i+") ");
 //            }
+//            System.out.println("\n");
 //        }
+        boolean ok = pj.printDialog();
+        if (ok) {
+            try {
+                pj.print();
+            } catch (PrinterException ex) {
+                /* The job did not successfully complete */
+            }
+        }
         
     }
 

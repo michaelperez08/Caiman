@@ -156,9 +156,15 @@ public class BL_Factura {
     public void setFechaFactura(Date FechaFactura) {
         this.FechaFactura = FechaFactura;
     }
-    
-    
 
+    public ArrayList<BL_LineaFactura> getListaLineaFactura() {
+        return ListaLineaFactura;
+    }
+
+    public void setListaLineaFactura(ArrayList<BL_LineaFactura> ListaLineaFactura) {
+        this.ListaLineaFactura = ListaLineaFactura;
+    }
+    
     public boolean ingresarFactura(String nombreCliente, String telefono, String direccion,
             double precioTotal, ArrayList<BL_LineaFactura> blListaLineas, double subTotal, double impVenta, 
             boolean contado, Date fechaExpiracion, String cedulaCliente, Date fechaFactura) {

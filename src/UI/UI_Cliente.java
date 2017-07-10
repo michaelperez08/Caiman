@@ -311,7 +311,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         boolean consultaExitosa;
 
         if (nombre.isEmpty() || direccion_simple.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe ingresar como minimo el nombre del cliente y la direccion", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (cedula.isEmpty() || (!cedula.isEmpty() && esNumero(cedula))) {
                 clienteAñadir = new BL_Cliente(nombre, direccion_simple, direccion_exacta, cedula, concatenarTelefonos());

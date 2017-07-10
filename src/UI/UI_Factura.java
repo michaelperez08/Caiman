@@ -6,6 +6,7 @@ import BL.BL_Factura;
 import BL.BL_LineaFactura;
 import BL.BL_Llanta;
 import BL.BL_Producto;
+import BL.BL_Imprimir;
 import HE.Exepciones;
 import config.Mensajes;
 import config.Validacion;
@@ -57,6 +58,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     public boolean actulizarLista;
     private HashMap<String, Integer> hm_ceduCliente;
     private int cantidadMaxima;
+    private int numeroFactura;
 
     public UI_Factura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -70,7 +72,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         cantidadMaxima = 0;
     }
 
-    public UI_Factura(java.awt.Frame parent, boolean modal, ArrayList<BL_Cliente> listaClientes, ArrayList<BL_Llanta> listaLlantas, ArrayList<BL_Aro> listaAros) {
+    public UI_Factura(java.awt.Frame parent, boolean modal, ArrayList<BL_Cliente> listaClientes, ArrayList<BL_Llanta> listaLlantas, ArrayList<BL_Aro> listaAros, int numeroSiguienteFactura) {
         super(parent, modal);
         initComponents();
         df = new SimpleDateFormat("dd-MM-yyyy");
@@ -93,6 +95,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         tb_linea_factura.getTableHeader().setReorderingAllowed(false);
         rb_contado.setSelected(true);
         agregarListenerSpinnerCantidad();
+        numeroFactura = numeroSiguienteFactura;
     }
 
     /**
@@ -340,18 +343,18 @@ public final class UI_Factura extends javax.swing.JDialog {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Total:");
         jLabel10.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 60, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 470, 60, -1));
 
         l_total.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
         l_total.setForeground(new java.awt.Color(0, 0, 0));
         l_total.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(l_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, 90, -1));
+        jPanel3.add(l_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 470, 220, -1));
 
         jLabel12.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Imp. Ventas:");
         jLabel12.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 130, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, 130, -1));
 
         cb_producto.setPreferredSize(new java.awt.Dimension(220, 32));
         cb_producto.addActionListener(new java.awt.event.ActionListener() {
@@ -378,12 +381,12 @@ public final class UI_Factura extends javax.swing.JDialog {
         l_subTotal.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
         l_subTotal.setForeground(new java.awt.Color(0, 0, 0));
         l_subTotal.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(l_subTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 90, -1));
+        jPanel3.add(l_subTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, 170, -1));
 
         l_impVentas.setFont(new java.awt.Font("DejaVu Sans", 1, 16)); // NOI18N
         l_impVentas.setForeground(new java.awt.Color(0, 0, 0));
         l_impVentas.setPreferredSize(new java.awt.Dimension(220, 20));
-        jPanel3.add(l_impVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 90, -1));
+        jPanel3.add(l_impVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, 160, -1));
 
         bt_SeleccionarProducto.setBackground(new java.awt.Color(0, 102, 204));
         bt_SeleccionarProducto.setForeground(new java.awt.Color(0, 0, 0));
@@ -486,13 +489,19 @@ public final class UI_Factura extends javax.swing.JDialog {
                 double subTotal = Double.parseDouble(l_subTotal.getText());
                 double impVentas = Double.parseDouble(l_impVentas.getText());
                 double total = Double.parseDouble(l_total.getText());
-                BL_Factura blfac = new BL_Factura(0, "", clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
+                
+                //int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fechaExpiracion, Date fechaFactura, 
+            //Double subtotal, Double impventa, Boolean contado, ArrayList<BL_LineaFactura> listaLineaFactura, String cedulaCliente
+                
+                BL_Factura blfac = new BL_Factura(numeroFactura, clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
                         fechaExpiracion, cal.getTime(), subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
                 if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
                         impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula(), cal.getTime())) {
-                    Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
                     descontarCantidadProductosFactura();
                     actulizarLista = true;
+                    BL_Imprimir imprimir = new BL_Imprimir();
+                    imprimir.imprimirFactura(blfac);
+                    Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
                     this.dispose();
                 } else {
                     Mensajes.mensajeError("Problema al ingresar la factura\nSi el porblema persiste contacte al provedor del sistema", "Factura no Agregada");
@@ -745,6 +754,7 @@ public final class UI_Factura extends javax.swing.JDialog {
             tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3).toString());
             bt_agregar_linea.setText("Modificar");
             tb_linea_factura.setCellSelectionEnabled(false);
+            rb_producto_nuevo.setSelected((Boolean)tb_linea_factura.getValueAt(lineaSeleccionada, 5));
         }
 
     }
