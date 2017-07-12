@@ -17,10 +17,10 @@ public class BL_Llanta extends BL_Producto{
     private String NumeroLlanta;
     private String Marca;
     private String Diseno;
-    private int NumeroCapas;
+    private String NumeroCapas;
     private String TipoLlanta;
     
-   public BL_Llanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+   public BL_Llanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,String NumeroCapas,int Cantidad,String TipoLlanta){
        super(Cantidad, idLlanta);
        this.NumeroLlanta = NumeroLlanta;
        this.Marca = Marca;
@@ -38,7 +38,7 @@ public class BL_Llanta extends BL_Producto{
        this.TipoLlanta = llanta.TipoLlanta;
    }
    
-   public BL_Llanta(String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+   public BL_Llanta(String NumeroLlanta, String Marca,String Diseno,String NumeroCapas,int Cantidad,String TipoLlanta){
        super(Cantidad);
        this.NumeroLlanta = NumeroLlanta;
        this.Marca = Marca;
@@ -75,11 +75,11 @@ public class BL_Llanta extends BL_Producto{
         this.Diseno = Diseno;
     }
     
-    public int getNumeroCapas() {
+    public String getNumeroCapas() {
         return NumeroCapas;
     }
 
-    public void setNumeroCapas(int NumeroCapas) {
+    public void setNumeroCapas(String NumeroCapas) {
         this.NumeroCapas= NumeroCapas;
     }
     
@@ -91,12 +91,12 @@ public class BL_Llanta extends BL_Producto{
         this.TipoLlanta = TipoLlanta;
     }
    
-    public boolean IngresarLlanta(String numeroLlanta, String marca,String diseno,int numeroCapas,int cantidad,String tipoLlanta){
+    public boolean IngresarLlanta(String numeroLlanta, String marca,String diseno,String numeroCapas,int cantidad,String tipoLlanta){
         DAO_Llanta daoLlanta = new DAO_Llanta();
         return daoLlanta.ingresarLLanta(numeroLlanta, marca, diseno, numeroCapas, cantidad, tipoLlanta);
     }
     
-    public boolean modificarLlanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+    public boolean modificarLlanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,String NumeroCapas,int Cantidad,String TipoLlanta){
         DAO_Llanta daoLlanta = new DAO_Llanta();
         return daoLlanta.modificarLlanta(idLlanta, NumeroLlanta, Marca, Diseno, NumeroCapas, Cantidad, TipoLlanta);
         
@@ -128,7 +128,11 @@ public class BL_Llanta extends BL_Producto{
 
     @Override
     public String toString() {
-        return "Llanta "+ TipoLlanta +" "+ NumeroLlanta +" "+ Marca +" "+ Diseno;
+        String tipo_detalle = "";
+        if(TipoLlanta.equals("Agricola") || TipoLlanta.equals("Industrial")){
+            tipo_detalle = TipoLlanta;
+        }
+        return "Llanta "+ tipo_detalle +" "+ NumeroLlanta +" "+ Marca +" "+ Diseno;
     }
     
     

@@ -50,7 +50,7 @@ public class BL_LlantaTest {
         String numeroLlanta = "12";
         String marca = "Pireli";
         String diseno = "Angosta";
-        int numeroCapas = 12;
+        String numeroCapas = "12";
         int cantidad = 3;
         String tipoLlanta = "Agricola";
         BL_Llanta instance = new BL_Llanta();
@@ -74,7 +74,7 @@ public class BL_LlantaTest {
         String NumeroLlanta = "1454G";
         String Marca = "Miclelin";
         String Diseno = "Redonda";
-        int NumeroCapas = 5;
+        String NumeroCapas = "5";
         int Cantidad = 4;
         String TipoLlanta = "Agricola";
         BL_Llanta instance = new BL_Llanta();

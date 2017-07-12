@@ -49,7 +49,7 @@ public class DAO_LlantaTest {
         String numeroLlanta = "Fire1454";
         String marca = "Firestone";
         String diseno = "Delgada";
-        int numeroCapas = 4;
+        String numeroCapas = "4";
         int cantidad = 2;
         String tipoLlanta = "Agricola";
         DAO_Llanta instance = new DAO_Llanta();
@@ -138,7 +138,7 @@ public class DAO_LlantaTest {
         String numeroLlanta = "12";
         String marca = "Pireli";
         String diseno = "Negra";
-        int numeroCapas = 8;
+        String numeroCapas = "4";
         int cantidad = 6;
         String tipoLlanta = "Hola";
         DAO_Llanta instance = new DAO_Llanta();

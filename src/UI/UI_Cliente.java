@@ -433,7 +433,9 @@ public class UI_Cliente extends javax.swing.JDialog {
         jl_telefonos.setModel(dlm_telfonos);
         bt_ingresarCliente.setText("Modificar Cliente");
         bt_agregarTelefono.setText("Modificar Teléfono");
-        tf_telefono.setText(dlm_telfonos.getElementAt(0) + "");
+        if (!dlm_telfonos.isEmpty()) {
+            tf_telefono.setText(dlm_telfonos.getElementAt(0) + "");
+        }
         jl_telefonos.setSelectedIndex(0);
     }
 

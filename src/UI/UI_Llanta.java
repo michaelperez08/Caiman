@@ -14,15 +14,17 @@ import javax.swing.JOptionPane;
  * @author victor
  */
 public class UI_Llanta extends javax.swing.JDialog {
+
     public BL_Llanta llantaAMostrar;
     public boolean actualizarLista;
+
     /**
      * Creates new form UI_Llanta
      */
     public UI_Llanta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        actualizarLista=false;
+        actualizarLista = false;
         this.setLocationRelativeTo(null);
     }
 
@@ -131,7 +133,7 @@ public class UI_Llanta extends javax.swing.JDialog {
         });
 
         cb_tipoLlanta.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        cb_tipoLlanta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Industrial", "Agricola" }));
+        cb_tipoLlanta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Camión", "Carro", "Industrial", "Agricola" }));
         cb_tipoLlanta.setToolTipText("");
 
         javax.swing.GroupLayout pn_IngresarLlantaLayout = new javax.swing.GroupLayout(pn_IngresarLlanta);
@@ -214,24 +216,23 @@ public class UI_Llanta extends javax.swing.JDialog {
         String diseno = tf_diseno.getText().trim();
         String numeroCapas = tf_numeroCapas.getText().trim();
         String cantidad = tf_cantidad.getText().trim();
-        String tipoLlanta = (String)cb_tipoLlanta.getSelectedItem();
+        String tipoLlanta = (String) cb_tipoLlanta.getSelectedItem();
         boolean consultaExitosa;
 
-        if (numeroLlanta.isEmpty() || marca.isEmpty() || diseno.isEmpty()|| numeroCapas.isEmpty() || cantidad.isEmpty()) {
+        if (numeroLlanta.isEmpty() || marca.isEmpty() || diseno.isEmpty() || cantidad.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Faltan Datos", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            if (esNumero(numeroCapas) && esNumero(cantidad)) {
-                int numeroCapas2 = Integer.parseInt(numeroCapas);
+            if (esNumero(cantidad)) {
                 int cantidad2 = Integer.parseInt(cantidad);
                 BL_Llanta llanta = new BL_Llanta();
                 if (bt_ingresarLlanta.getText().equals("Ingresar Llanta")) {// ingresar Llanta nuevo
-                    consultaExitosa = llanta.IngresarLlanta(numeroLlanta, marca, diseno, numeroCapas2, cantidad2, tipoLlanta);
+                    consultaExitosa = llanta.IngresarLlanta(numeroLlanta, marca, diseno, numeroCapas, cantidad2, tipoLlanta);
                     if (consultaExitosa) {
                         actualizarLista = true;
                         JOptionPane.showMessageDialog(null, "Llanta Añadida", "Llanta Ingresada", JOptionPane.INFORMATION_MESSAGE);
                         Object[] opciones = {"Si", "No"};
                         int n = JOptionPane.showOptionDialog(null, "Desea ingresar otra llanta?", "Llanta Nueva",
-                            JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+                                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
                         if (n == 1) {
                             this.dispose();
                         } else {
@@ -244,13 +245,13 @@ public class UI_Llanta extends javax.swing.JDialog {
                     llantaAMostrar.setNumeroLlantas(numeroLlanta);
                     llantaAMostrar.setMarca(marca);
                     llantaAMostrar.setDiseno(diseno);
-                    llantaAMostrar.setNumeroCapas(numeroCapas2);
+                    llantaAMostrar.setNumeroCapas(numeroCapas);
                     llantaAMostrar.setCantidad(cantidad2);
                     llantaAMostrar.setTipoLlanta(tipoLlanta);
                     consultaExitosa = llantaAMostrar.modificarLlanta(llantaAMostrar.getIdProducto(), llantaAMostrar.getNumeroLlanta(),
-                            llantaAMostrar.getMarca(), llantaAMostrar.getDiseno(), llantaAMostrar.getNumeroCapas(),llantaAMostrar.getCantidad(), llantaAMostrar.getTipoLlanta());
+                            llantaAMostrar.getMarca(), llantaAMostrar.getDiseno(), llantaAMostrar.getNumeroCapas(), llantaAMostrar.getCantidad(), llantaAMostrar.getTipoLlanta());
                     if (consultaExitosa) {
-                        actualizarLista=true;
+                        actualizarLista = true;
                         JOptionPane.showMessageDialog(null, "Llanta Actualizada con exito", "Llanta Actualizada", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
                     } else {
@@ -273,26 +274,28 @@ public class UI_Llanta extends javax.swing.JDialog {
             return false;
         }
     }
-    
-     public void cargarLlanta(BL_Llanta llanta) {
+
+    public void cargarLlanta(BL_Llanta llanta) {
         llantaAMostrar = llanta;
         tf_numeroLlanta.setText(llantaAMostrar.getNumeroLlanta());
         tf_marca.setText(llantaAMostrar.getMarca());
         tf_diseno.setText(llantaAMostrar.getDiseno());
-        tf_numeroCapas.setText(String.valueOf( llantaAMostrar.getNumeroCapas()));
+        tf_numeroCapas.setText(String.valueOf(llantaAMostrar.getNumeroCapas()));
         tf_cantidad.setText(String.valueOf(llantaAMostrar.getCantidad()));
-        if(llantaAMostrar.getTipoLlanta().equals("Normal")){
-        cb_tipoLlanta.setSelectedIndex(0);
-                }else{
-            if(llantaAMostrar.getTipoLlanta().equals("Industrial")){
-            cb_tipoLlanta.setSelectedIndex(1);    
-            }else{
-             cb_tipoLlanta.setSelectedIndex(2);   
-        }
-        
-    }
+//        if (llantaAMostrar.getTipoLlanta().equals("Camión")) {
+//            cb_tipoLlanta.setSelectedIndex(0);
+//        } else {
+//            if (llantaAMostrar.getTipoLlanta().equals("Industrial")) {
+//                cb_tipoLlanta.setSelectedIndex(1);
+//            } else {
+//                cb_tipoLlanta.setSelectedIndex(2);
+//            }
+//
+//        }
+cb_tipoLlanta.setSelectedItem(llantaAMostrar.getTipoLlanta());
         bt_ingresarLlanta.setText("Modificar Llanta");
-  }
+    }
+
     public void limpiarCampos() {
         tf_numeroLlanta.setText("");
         tf_marca.setText("");
@@ -300,7 +303,7 @@ public class UI_Llanta extends javax.swing.JDialog {
         tf_numeroCapas.setText("");
         tf_cantidad.setText("");
     }
-    
+
     private void tf_marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_marcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_marcaActionPerformed
@@ -318,13 +321,13 @@ public class UI_Llanta extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_disenoKeyTyped
 
     private void tf_numeroCapasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numeroCapasKeyTyped
-        if(Validacion.soloNumeros(evt)){
+        if (Validacion.soloNumeros(evt)) {
             Validacion.validarLongitud(tf_numeroCapas, evt, 9);
         }
     }//GEN-LAST:event_tf_numeroCapasKeyTyped
 
     private void tf_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cantidadKeyTyped
-        if(Validacion.soloNumeros(evt)){
+        if (Validacion.soloNumeros(evt)) {
             Validacion.validarLongitud(tf_cantidad, evt, 9);
         }
     }//GEN-LAST:event_tf_cantidadKeyTyped

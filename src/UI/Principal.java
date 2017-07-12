@@ -1356,8 +1356,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_llantas.setModel(dtmLlantas);
         jt_llantas.getColumnModel().getColumn(0).setMinWidth(0);
         jt_llantas.getColumnModel().getColumn(0).setMaxWidth(0);
-        jt_llantas.getColumnModel().getColumn(6).setMinWidth(0);
-        jt_llantas.getColumnModel().getColumn(6).setMaxWidth(0);
         trsfiltroLlantas = new TableRowSorter(jt_llantas.getModel());
         filtrarLlantas();
         jt_llantas.setRowSorter(trsfiltroLlantas);

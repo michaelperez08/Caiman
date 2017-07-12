@@ -25,7 +25,7 @@ public class DAO_Llanta {
     private ResultSet rs;
     private TO_Llanta llanta;
     
-    public boolean ingresarLLanta(String numeroLlanta, String marca,String diseno,int numeroCapas,int cantidad,String tipoLlanta){
+    public boolean ingresarLLanta(String numeroLlanta, String marca,String diseno,String numeroCapas,int cantidad,String tipoLlanta){
         
       try {
           if(conexion == null || conexion.isClosed()){
@@ -38,7 +38,7 @@ public class DAO_Llanta {
       cmd.setString(1,numeroLlanta);
       cmd.setString(2,marca);
       cmd.setString(3,diseno);
-      cmd.setInt(4,numeroCapas);
+      cmd.setString(4,numeroCapas);
       cmd.setInt(5,cantidad);
       cmd.setString(6,tipoLlanta);
       cmd.execute();
@@ -112,7 +112,7 @@ public class DAO_Llanta {
             
             while (rs.next()) {                
                 llantas.add(new TO_Llanta(rs.getInt("idLlanta"), rs.getString("NumeroLlanta"), rs.getString("Marca"),
-                        rs.getString("Diseno"), rs.getInt("NumeroCapas"), rs.getInt("Cantidad"), rs.getString("TipoLlanta")));
+                        rs.getString("Diseno"), rs.getString("NumeroCapas"), rs.getInt("Cantidad"), rs.getString("TipoLlanta")));
             }
             
         } catch (Exception ex) {
@@ -130,7 +130,7 @@ public class DAO_Llanta {
         return llantas;
     }
     
-    public boolean modificarLlanta(int idLlanta,String numeroLlanta,String marca,String diseno, int numeroCapas, int cantidad, String tipoLlanta ){
+    public boolean modificarLlanta(int idLlanta,String numeroLlanta,String marca,String diseno, String numeroCapas, int cantidad, String tipoLlanta ){
         try {
             if(conexion == null || conexion.isClosed()){
                 conexion = daoConexion.nuevaConexion();
@@ -139,7 +139,7 @@ public class DAO_Llanta {
            cmd.setString(1, numeroLlanta);
            cmd.setString(2,marca);
            cmd.setString(3, diseno);
-           cmd.setInt(4, numeroCapas);
+           cmd.setString(4, numeroCapas);
            cmd.setInt(5, cantidad);
            cmd.setString(6, tipoLlanta);
            cmd.setInt(7, idLlanta);

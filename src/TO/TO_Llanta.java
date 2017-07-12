@@ -14,11 +14,11 @@ public class TO_Llanta {
     public String NumeroLlanta;
     public String Marca;
     public String Diseno;
-    public int NumeroCapas;
+    public String NumeroCapas;
     public int Cantidad;
     public String TipoLlanta;
     
-   public TO_Llanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+   public TO_Llanta(int idLlanta,String NumeroLlanta, String Marca,String Diseno,String NumeroCapas,int Cantidad,String TipoLlanta){
        this.idLlanta = idLlanta;
        this.NumeroLlanta = NumeroLlanta;
        this.Marca = Marca;
@@ -27,7 +27,7 @@ public class TO_Llanta {
        this.Cantidad = Cantidad;
        this.TipoLlanta = TipoLlanta;
    }
-   public TO_Llanta(String NumeroLlanta, String Marca,String Diseno,int NumeroCapas,int Cantidad,String TipoLlanta){
+   public TO_Llanta(String NumeroLlanta, String Marca,String Diseno,String NumeroCapas,int Cantidad,String TipoLlanta){
        this.NumeroLlanta = NumeroLlanta;
        this.Marca = Marca;
        this.Diseno = Diseno;
@@ -72,11 +72,11 @@ public class TO_Llanta {
         this.Diseno = Diseno;
     }
     
-    public int getNumeroCapas() {
+    public String getNumeroCapas() {
         return NumeroCapas;
     }
 
-    public void setNumeroCapas(int NumeroCapas) {
+    public void setNumeroCapas(String NumeroCapas) {
         this.NumeroCapas= NumeroCapas;
     }
     
