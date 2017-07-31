@@ -492,9 +492,6 @@ public final class UI_Factura extends javax.swing.JDialog {
                 Double impVentas = BL_Formatos.getDoubleValue(l_impVentas.getText().trim());
                 Double total = BL_Formatos.getDoubleValue(l_total.getText().trim());
                 
-                //int idFactura, String NombreCliente, String TelefonoCliente, String DireccionCliente, Double PrecioTotal, Date fechaExpiracion, Date fechaFactura, 
-            //Double subtotal, Double impventa, Boolean contado, ArrayList<BL_LineaFactura> listaLineaFactura, String cedulaCliente
-                
                 BL_Factura blfac = new BL_Factura(numeroFactura, clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
                         fechaExpiracion, cal.getTime(), subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
                 if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
@@ -777,8 +774,6 @@ public final class UI_Factura extends javax.swing.JDialog {
         libreImpVentas = 0;
         for (int i = 0; i < tb_linea_factura.getRowCount(); i++) {
             subtotal += BL_Formatos.getDoubleValue(tb_linea_factura.getValueAt(i, 4).toString().trim());
-            //System.out.println(String.format("%1$,12.2f", subtotal));
-            //System.out.println(BL_Formatos.fomratoPrecio(subtotal));
             if (tb_linea_factura.getValueAt(i, 2).toString().toLowerCase().contains("agricola")) {
                 libreImpVentas += BL_Formatos.getDoubleValue(tb_linea_factura.getValueAt(i, 4).toString());
             }

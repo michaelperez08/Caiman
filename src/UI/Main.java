@@ -47,28 +47,12 @@ public class Main {
         }
 
         ConfBD confdb = new ConfBD();
-//        UI_LogIn login = new UI_LogIn(null, true);
-//        if (login.iniciarLogIn()) {
-//            login.setVisible(true);
-//        } else {
-//            System.exit(0);
-//        }
-
-//        LogIn li = new LogIn(null, true);
-//        li.setVisible(true);
-        Principal p = new Principal();
-        p.setVisible(true);
-//        BL_Imprimir bli = new BL_Imprimir();
-//        bli.imprimir();
-
-// String fonts[] = 
-//      GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-//
-//    for ( int i = 0; i < fonts.length; i++ )
-//    {
-//      System.out.println(fonts[i]);
-//    }
-//        
+        UI_LogIn login = new UI_LogIn(null, true);
+        if (login.iniciarLogIn()) {
+            login.setVisible(true);
+        } else {
+            System.exit(0);
+        }
     }
 
 }

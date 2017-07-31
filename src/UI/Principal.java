@@ -1527,12 +1527,6 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         }
     }
 
-    public void cargarClienteSeleccionadoFactura(Object producto) {
-
-        System.out.println(producto);
-
-    }
-
     public boolean validarSeleccion(char t) {
         JTable temp = null;
         String mensaje = "";
