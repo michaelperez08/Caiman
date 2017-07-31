@@ -5,6 +5,7 @@
  */
 package config;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
@@ -27,6 +28,16 @@ public class Validacion {
     public static boolean soloNumeros(java.awt.event.KeyEvent evt){
         int codigo = evt.getKeyChar();
         if(codigo<=47 || codigo>=58){
+            evt.consume();
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public static boolean soloNumerosConDecimales(java.awt.event.KeyEvent evt){
+       int codigo = evt.getKeyChar();
+        if((codigo<=47 || codigo>=58) && codigo != 46){ //46 es el codigo ascii del punto (.).
             evt.consume();
             return false;
         }else{

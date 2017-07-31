@@ -5,6 +5,7 @@
  */
 package BL;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -14,6 +15,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  *
@@ -23,6 +25,7 @@ public class BL_Imprimir implements Printable {
 
     private BL_Factura factura;
     SimpleDateFormat df;
+    String os = System.getProperty("os.name").toLowerCase();
     
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
@@ -36,29 +39,34 @@ public class BL_Imprimir implements Printable {
         
         Graphics2D g2d = (Graphics2D) graphics;
         g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+        if (os.equals("linux")) {
+            g2d.setFont(new Font("Droid Sans Mono", Font.PLAIN, 10));
+        }else{
+            g2d.setFont(new Font("Monaco", Font.PLAIN, 10));
+        }
         
-        Calendar calendario = Calendar.getInstance();  
+        Calendar calendario = Calendar.getInstance();
         calendario.setTime(factura.getFechaFactura());
         
-        graphics.drawString(String.valueOf(calendario.get(Calendar.DAY_OF_MONTH)), 420, 60); // Dia factura
-        graphics.drawString(String.valueOf(calendario.get(Calendar.MONTH)+1), 480, 60);  // Mes Factura
-        graphics.drawString(String.valueOf(calendario.get(Calendar.YEAR)), 540, 60);  // Año Factura
-        graphics.drawString(factura.getNombreCliente(), 80, 80);  // Nombre Cliente
-        graphics.drawString(factura.getDireccionCliente(), 80, 100);  // Direccion
+        graphics.drawString(String.valueOf(calendario.get(Calendar.DAY_OF_MONTH)), 430, 50); // Dia factura
+        graphics.drawString(String.valueOf(calendario.get(Calendar.MONTH)+1), 490, 50);  // Mes Factura
+        graphics.drawString(String.valueOf(calendario.get(Calendar.YEAR)), 545, 50);  // Año Factura
+        graphics.drawString(factura.getNombreCliente(), 80, 70);  // Nombre Cliente
+        graphics.drawString(factura.getDireccionCliente(), 80, 85);  // Direccion
 
-        graphics.drawString(df.format(factura.getFechaExpiracion()), 440, 100);  // Fecha Vencimiento
-        graphics.drawString(factura.getTelefonoCliente(), 440, 80);  // Telefono
+        graphics.drawString(df.format(factura.getFechaExpiracion()), 450, 85);  // Fecha Vencimiento
+        graphics.drawString(factura.getTelefonoCliente(), 440, 70);  // Telefono
        
-        graphics.drawString(String.valueOf(factura.getSubtotal()), 520, 280);  // Subtotal
-        graphics.drawString(String.valueOf(factura.getImpVenta()), 520, 300);  // Imp Ventas
-        graphics.drawString(String.valueOf(factura.getPrecioTotal()), 520, 320);  // Total
+        graphics.drawString(String.valueOf(String.format(Locale.ROOT,"%1$,12.2f", factura.getSubtotal())), 500, 265);  // Subtotal
+        graphics.drawString(String.valueOf(String.format(Locale.ROOT,"%1$,12.2f", factura.getImpVenta())), 500, 285);  // Imp Ventas
+        graphics.drawString(String.valueOf(String.format(Locale.ROOT,"%1$,12.2f", factura.getPrecioTotal())), 500, 305);  // Total
         
         int i=0;
         for (BL_LineaFactura linea : factura.getListaLineaFactura()) {
-            graphics.drawString(String.valueOf(linea.getCantidad()), 40, 140+(i*20));  // Cantidad
-            graphics.drawString(linea.getDetalle(), 80, 140+(i*20));  // Detalle
-            graphics.drawString(String.valueOf(linea.getPrecioUnitario()), 420, 140+(i*20));  // Precio Unitario
-            graphics.drawString(String.valueOf(linea.getPrecioTotalLinea()), 520, 140+(i*20));  // Precio Linea
+            graphics.drawString(String.valueOf(linea.getCantidad()), 40, 130+(i*20));  // Cantidad
+            graphics.drawString(linea.getDetalle(), 90, 130+(i*20));  // Detalle
+            graphics.drawString(String.valueOf(String.format(Locale.ROOT,"%1$,12.2f", linea.getPrecioUnitario())), 410, 130+(i*20));  // Precio Unitario
+            graphics.drawString(String.valueOf(String.format(Locale.ROOT,"%1$,12.2f", linea.getPrecioTotalLinea())), 500, 130+(i*20));  // Precio Linea
             i++;
         }
         

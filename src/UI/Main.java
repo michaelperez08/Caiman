@@ -14,6 +14,7 @@ import HE.Exepciones;
 import javax.swing.UIManager;
 import config.ConfBD;
 import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
+import java.awt.GraphicsEnvironment;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +60,14 @@ public class Main {
         p.setVisible(true);
 //        BL_Imprimir bli = new BL_Imprimir();
 //        bli.imprimir();
+
+// String fonts[] = 
+//      GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+//
+//    for ( int i = 0; i < fonts.length; i++ )
+//    {
+//      System.out.println(fonts[i]);
+//    }
 //        
     }
 

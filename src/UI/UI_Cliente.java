@@ -34,7 +34,6 @@ public class UI_Cliente extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         dlm_telfonos = new DefaultListModel();
         ta_direccionexacta.setLineWrap(true);
-        tf_telefono.setText("506");
     }
 
     /**
@@ -165,7 +164,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         jScrollPane2.setViewportView(ta_direccionexacta);
 
         try {
-            tf_telefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(+###) ####-####")));
+            tf_telefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -266,7 +265,7 @@ public class UI_Cliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_agregarTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarTelefonoActionPerformed
-        if (telefonoActual != null && (telefonoActual.substring(12, 16).trim().length() + telefonoActual.substring(7, 11).length()) == 8) {
+        if (telefonoActual != null && (telefonoActual.substring(0, 4).trim().length() + telefonoActual.substring(5, 9).length()) == 8) {
             if (bt_agregarTelefono.getText().equals("Modificar Teléfono")) {
                 int telefonoSeleccionado = jl_telefonos.getSelectedIndex();
                 dlm_telfonos.setElementAt(telefonoActual, telefonoSeleccionado);
@@ -274,10 +273,10 @@ public class UI_Cliente extends javax.swing.JDialog {
                 tf_telefono.setText("");
                 bt_agregarTelefono.setText("Agregar Teléfono");
             } else {
-                if (telefonoValido(tf_telefono.getText().substring(7, 11))) {
+                if (telefonoValido(tf_telefono.getText().substring(0, 4))) {
                     dlm_telfonos.addElement(telefonoActual);
                     jl_telefonos.setModel(dlm_telfonos);
-                    tf_telefono.setText("506");
+                    tf_telefono.setText("");
                 } else {
                     Mensajes.mensajeInfomracion("No hay telefono que agregar", "Telefonos");
                 }
@@ -382,13 +381,13 @@ public class UI_Cliente extends javax.swing.JDialog {
     private void tf_telefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_telefonoFocusGained
         // TODO add your handling code here:
         telefonoActual = tf_telefono.getText();
-        if (tf_telefono.getText().trim().length() == 12) {
-            tf_telefono.setCaretPosition(6);
-        }
+        int posicionCursor = tf_telefono.getText().trim().length();
+        tf_telefono.setCaretPosition(posicionCursor);
+
     }//GEN-LAST:event_tf_telefonoFocusGained
 
     private void tf_telefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_telefonoKeyReleased
-        if (!telefonoValido(telefonoActual.substring(2, 5)) && evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+        if (!telefonoValido(telefonoActual.substring(0, 4)) && evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             bt_agregarTelefono.setText("Agregar Teléfono");
             maximoTelefonos();
         }
@@ -407,7 +406,9 @@ public class UI_Cliente extends javax.swing.JDialog {
         DefaultListModel dlm_temp = new DefaultListModel();
         String[] partTele = telefonos.split(" / ");
         for (String telefono : partTele) {
-            dlm_temp.addElement(telefono);
+            if (!telefono.isEmpty()) {
+                dlm_temp.addElement(telefono);
+            }
         }
         return dlm_temp;
     }
@@ -432,9 +433,9 @@ public class UI_Cliente extends javax.swing.JDialog {
         dlm_telfonos = separarTelefonos(clienteAMostrar.getTelefonos());
         jl_telefonos.setModel(dlm_telfonos);
         bt_ingresarCliente.setText("Modificar Cliente");
-        bt_agregarTelefono.setText("Modificar Teléfono");
         if (!dlm_telfonos.isEmpty()) {
-            tf_telefono.setText(dlm_telfonos.getElementAt(0) + "");
+            tf_telefono.setText(dlm_telfonos.getElementAt(0).toString());
+            bt_agregarTelefono.setText("Modificar Teléfono");
         }
         jl_telefonos.setSelectedIndex(0);
     }
@@ -444,7 +445,7 @@ public class UI_Cliente extends javax.swing.JDialog {
         tf_direccion.setText("");
         tf_nombre.setText("");
         ta_direccionexacta.setText("");
-        tf_telefono.setText("506");
+        tf_telefono.setText("");
         tf_telefono.setEnabled(true);
         bt_agregarTelefono.setEnabled(true);
         dlm_telfonos.clear();

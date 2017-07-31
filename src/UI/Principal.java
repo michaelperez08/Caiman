@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -1433,7 +1434,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         if (!listaFactura.isEmpty()) {
             for (BL_Factura factura_temp : listaFactura) {
                 dtmFacturas.addRow(new Object[]{dtmFacturas.getRowCount(), BL_Factura.formatearIDFactura(factura_temp.getIdFactura()), factura_temp.getNombreCliente(), factura_temp.getTelefonoCliente(),
-                    sdf.format(factura_temp.getFechaFactura()), factura_temp.getPrecioTotal()});
+                    sdf.format(factura_temp.getFechaFactura()), String.format("%1$,12.2f",factura_temp.getPrecioTotal())});
             }
         }
 
