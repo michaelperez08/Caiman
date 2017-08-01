@@ -14,6 +14,7 @@ import HE.Exepciones;
 import config.Mensajes;
 import config.Validacion;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
@@ -29,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -64,7 +66,7 @@ public final class Principal extends javax.swing.JFrame {
 
     public Principal() throws Exepciones {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("tire-icon.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("Llantas y Reencauches Griegos.png")).getImage());
         setLocationRelativeTo(null);
         setResizable(false);
         sdf = new SimpleDateFormat("dd-MMM-yyyy");
@@ -1341,12 +1343,14 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     public void cargarTablaLlantas() {
         jt_llantas.setRowSorter(null);
+        resaltarProductosAgotados(jt_llantas, 5);
         String[] nombreColumnas = {"numeroFila", "Numero Llanta", "Marca", "Diseño", "Capas", "Cantidad", "TipoLlanta"};
         dtmLlantas = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
+            
         };
         if (!listaLlantas.isEmpty()) {
             for (BL_Llanta llanta_temp : listaLlantas) {
@@ -1361,6 +1365,24 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         filtrarLlantas();
         jt_llantas.setRowSorter(trsfiltroLlantas);
     }
+    
+    public void resaltarProductosAgotados(JTable tabla, int columna){
+        tabla.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                int cantidad = Integer.parseInt(tabla.getValueAt(row, columna).toString());
+                if(cantidad==0){
+                    //setBackground(Color.RED);
+                    setForeground(Color.RED);
+                }else{
+                    setBackground(tabla.getBackground());
+                    setForeground(tabla.getForeground());
+                }
+                return this;
+            }     
+        });
+    }
 
     public void cargarListaAros() {
         aro = new BL_Aro();
@@ -1369,6 +1391,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
 
     public void cargarTablaAros() {
         jt_aros.setRowSorter(null);
+        resaltarProductosAgotados(jt_aros, 4);
         String[] nombreColumnas = {"numeroFila", "Numero Aro", "Marca", "Codigo", "Cantidad (Juegos)"};
         dtmAros = new DefaultTableModel(null, nombreColumnas) {
             @Override
