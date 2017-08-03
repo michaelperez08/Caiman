@@ -45,6 +45,11 @@ public class BL_Imprimir implements Printable {
             g2d.setFont(new Font("Monaco", Font.PLAIN, 10));
         }
         
+        String fechaExpiracion = "";
+        if(factura.getFechaExpiracion()!=null){
+            fechaExpiracion = df.format(factura.getFechaExpiracion());
+        }
+        
         Calendar calendario = Calendar.getInstance();
         calendario.setTime(factura.getFechaFactura());
         
@@ -54,7 +59,7 @@ public class BL_Imprimir implements Printable {
         graphics.drawString(factura.getNombreCliente(), 80, 70);  // Nombre Cliente
         graphics.drawString(factura.getDireccionCliente(), 80, 85);  // Direccion
 
-        graphics.drawString(df.format(factura.getFechaExpiracion()), 450, 85);  // Fecha Vencimiento
+        graphics.drawString(fechaExpiracion, 450, 85);  // Fecha Vencimiento
         graphics.drawString(factura.getTelefonoCliente(), 440, 70);  // Telefono
        
         graphics.drawString(String.valueOf(String.format(Locale.ROOT,"%1$,12.2f", factura.getSubtotal())), 500, 265);  // Subtotal

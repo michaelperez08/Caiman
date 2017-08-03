@@ -1344,7 +1344,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     public void cargarTablaLlantas() {
         jt_llantas.setRowSorter(null);
         resaltarProductosAgotados(jt_llantas, 5);
-        String[] nombreColumnas = {"numeroFila", "Numero Llanta", "Marca", "Diseño", "Capas", "Cantidad", "TipoLlanta"};
+        String[] nombreColumnas = {"numeroFila", "Numero Llanta", "Marca", "Diseño", "Capas", "Cantidad", "Tipo Llanta"};
         dtmLlantas = new DefaultTableModel(null, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -1757,7 +1757,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     private void cargarUsuarioLogeado() {
         BL_Usuario usuarioLogeado = UI_LogIn.bl_usuairo;
         if (usuarioLogeado != null) {
-            m_usuario.setText(usuarioLogeado.getNombreUsuario());
+            m_usuario.setText(usuarioLogeado.getNombreUsuario().toUpperCase());
         }
     }
     //---------------Llantas------------------*

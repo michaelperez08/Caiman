@@ -132,7 +132,7 @@ public class BL_Llanta extends BL_Producto{
         if(TipoLlanta.equals("Agricola") || TipoLlanta.equals("Industrial")){
             tipo_detalle = TipoLlanta;
         }
-        return "Llanta "+ tipo_detalle +" "+ NumeroLlanta +" "+ Marca +" "+ Diseno;
+        return "Llantas "+ tipo_detalle +" "+ NumeroLlanta +" "+ Marca +" "+ Diseno;
     }
     
     

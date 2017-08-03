@@ -241,7 +241,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         jPanel2.add(cb_nombre_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 290, -1));
 
         try {
-            tf_telefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(+###) ####-####")));
+            tf_telefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -276,7 +276,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Agregar Linea");
         jLabel7.setPreferredSize(new java.awt.Dimension(142, 32));
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, -1, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 10, 160, -1));
 
         tb_linea_factura.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 12)); // NOI18N
         tb_linea_factura.setModel(new javax.swing.table.DefaultTableModel(
@@ -591,12 +591,17 @@ public final class UI_Factura extends javax.swing.JDialog {
     private void rb_creditoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_creditoItemStateChanged
         if (rb_credito.isSelected()) {
             rb_contado.setSelected(false);
+            fechaVencimiento(15);
+            cb_semanas.setEnabled(true);
         }
     }//GEN-LAST:event_rb_creditoItemStateChanged
 
     private void rb_contadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_contadoItemStateChanged
         if (rb_contado.isSelected()) {
             rb_credito.setSelected(false);
+            l_fechaVencimeinto.setText("");
+            cb_semanas.setEnabled(false);
+            fechaExpiracion = null;
         }
     }//GEN-LAST:event_rb_contadoItemStateChanged
 
@@ -703,13 +708,13 @@ public final class UI_Factura extends javax.swing.JDialog {
         }
     }
 
-    public void ejecutarMetodoProducto(Object producto, Runnable run) {
+    public void ejecutarMetodoProducto(Object producto, Runnable runable) {
         if (producto instanceof BL_Llanta) {
             producto = new BL_Llanta((BL_Llanta) producto);
         } else if (producto instanceof BL_Aro) {
             producto = new BL_Aro((BL_Aro) producto);
         }
-        run.run();
+        runable.run();
     }
 
     public void eliminarLinea() {
@@ -775,7 +780,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         for (int i = 0; i < tb_linea_factura.getRowCount(); i++) {
             subtotal += BL_Formatos.getDoubleValue(tb_linea_factura.getValueAt(i, 4).toString().trim());
             if (tb_linea_factura.getValueAt(i, 2).toString().toLowerCase().contains("agricola")) {
-                libreImpVentas += BL_Formatos.getDoubleValue(tb_linea_factura.getValueAt(i, 4).toString());
+                libreImpVentas += BL_Formatos.getDoubleValue(tb_linea_factura.getValueAt(i, 4).toString().trim());
             }
         }
         return subtotal;
