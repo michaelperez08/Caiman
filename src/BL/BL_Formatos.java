@@ -30,6 +30,7 @@ public class BL_Formatos {
 
     public static Double getDoubleValue(String valor) {
         double d = 0.0;
+        valor = valor.trim();
         NumberFormat format = NumberFormat.getInstance(Locale.US);
         Number number;
         try {
