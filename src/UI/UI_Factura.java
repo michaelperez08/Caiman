@@ -737,8 +737,8 @@ public final class UI_Factura extends javax.swing.JDialog {
             ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(id, fila, 0);
             ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(cantidad, fila, 1);
             ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(detalle, fila, 2);
-            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precio, fila, 3);
-            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(precioLinea, fila, 4);
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(String.format("%1$,12.2f", precio), fila, 3);
+            ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(String.format("%1$,12.2f", precioLinea), fila, 4);
             ((DefaultTableModel) tb_linea_factura.getModel()).setValueAt(rb_producto_nuevo.isSelected(), fila, 5);
             calcularTotales();
             limpiarCamposProducto();

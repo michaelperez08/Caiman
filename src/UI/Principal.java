@@ -1366,7 +1366,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
         jt_llantas.setRowSorter(trsfiltroLlantas);
     }
     
-    public void resaltarProductosAgotados(JTable tabla, int columna){
+    public static void resaltarProductosAgotados(JTable tabla, int columna){
         tabla.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

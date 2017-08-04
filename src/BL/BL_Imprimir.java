@@ -40,7 +40,7 @@ public class BL_Imprimir implements Printable {
         Graphics2D g2d = (Graphics2D) graphics;
         g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
         if (os.equals("linux")) {
-            g2d.setFont(new Font("Droid Sans Mono", Font.PLAIN, 10));
+            g2d.setFont(new Font("Source Code Pro Light", Font.PLAIN, 10));
         }else{
             g2d.setFont(new Font("Monaco", Font.PLAIN, 10));
         }

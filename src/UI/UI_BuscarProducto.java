@@ -40,8 +40,9 @@ public class UI_BuscarProducto extends javax.swing.JDialog {
     }
 
     public void cargarTablaClientes() {
+        Principal.resaltarProductosAgotados(tb_productos, 2);
         if (listaProductos != null) {
-            String[] nombreColumnas = {"# Lista", "Producto"};
+            String[] nombreColumnas = {"# Lista", "Producto", "Cantidad"};
             dtm_productos = new DefaultTableModel(null, nombreColumnas) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
@@ -50,12 +51,14 @@ public class UI_BuscarProducto extends javax.swing.JDialog {
             };
             if (!listaProductos.isEmpty()) {
                 for (BL_Producto producto_temp : listaProductos) {
-                    dtm_productos.addRow(new Object[]{dtm_productos.getRowCount(), producto_temp});
+                    dtm_productos.addRow(new Object[]{dtm_productos.getRowCount(), producto_temp, producto_temp.getCantidad()});
                 }
             }
             tb_productos.setModel(dtm_productos);
             tb_productos.getColumnModel().getColumn(0).setMinWidth(0);
             tb_productos.getColumnModel().getColumn(0).setMaxWidth(0);
+            tb_productos.getColumnModel().getColumn(2).setMinWidth(0);
+            tb_productos.getColumnModel().getColumn(2).setMaxWidth(0);
             trsfiltroProductos = new TableRowSorter(tb_productos.getModel());
         }
     }
@@ -152,11 +155,10 @@ public class UI_BuscarProducto extends javax.swing.JDialog {
             seleccionarProducto();
         }
     }//GEN-LAST:event_tb_productosMouseReleased
-    
+
     /**
      * @param args the command line arguments
      */
-
     public BL_Producto getProductoSeleccionado() {
         return productoSeleccionado;
     }
@@ -176,13 +178,13 @@ public class UI_BuscarProducto extends javax.swing.JDialog {
 
     private void seleccionarProducto() {
         int rowSelected = tb_productos.getSelectedRow();
-        if(rowSelected>=0){
+        if (rowSelected >= 0) {
             Object obProduc = tb_productos.getValueAt(rowSelected, 1);
-            if(obProduc instanceof BL_Producto){
+            if (obProduc instanceof BL_Producto) {
                 productoSeleccionado = (BL_Producto) obProduc;
                 this.dispose();
             }
-        }else{
+        } else {
             Mensajes.mensajeInfomracion("No ha seleccionado ningun produucto", "Productos");
         }
     }

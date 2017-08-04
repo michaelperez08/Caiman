@@ -37,13 +37,18 @@ public class DAO_Factura {
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
             }
+            
+            java.sql.Date expiracion = null;
+            if (fechaExpiracion != null) {
+                expiracion = new java.sql.Date(fechaFactura.getTime());
+            }
 
             cmd = conexion.prepareStatement("INSERT INTO Factura (NombreCliente, TelefonoCliente, DireccionCliente, "
                     + "FechaExpiracion, SubTotal, ImpVenta, PrecioTotal, Contado, CedulaCliente, FechaFactura) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             cmd.setString(1, nombreCliente);
             cmd.setString(2, telefono);
             cmd.setString(3, direccion);
-            cmd.setDate(4, new java.sql.Date(fechaExpiracion.getTime()));
+            cmd.setDate(4, expiracion);
             cmd.setDouble(5, subTotal);
             cmd.setDouble(6, impVenta);
             cmd.setDouble(7, precioTotal);
@@ -206,8 +211,8 @@ public class DAO_Factura {
     public void insertarParametros(PreparedStatement cmd_temp, String parametros, String cliente, Date desde, Date hasta, int id) {
         try {
             switch (parametros) {
-                case "CF": 
-                    cmd_temp.setString(1, "%"+cliente+"%");
+                case "CF":
+                    cmd_temp.setString(1, "%" + cliente + "%");
                     cmd_temp.setDate(2, new java.sql.Date(desde.getTime()));
                     cmd_temp.setDate(3, new java.sql.Date(hasta.getTime()));
                     break;
@@ -216,7 +221,7 @@ public class DAO_Factura {
                     cmd_temp.setDate(1, new java.sql.Date(desde.getTime()));
                     cmd_temp.setDate(2, new java.sql.Date(hasta.getTime()));
                     break;
-                    
+
                 case "N":
                     cmd_temp.setInt(1, id);
                     break;

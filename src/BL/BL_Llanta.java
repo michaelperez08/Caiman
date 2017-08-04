@@ -129,10 +129,14 @@ public class BL_Llanta extends BL_Producto{
     @Override
     public String toString() {
         String tipo_detalle = "";
+        String capas = "";
+        if(!NumeroCapas.isEmpty()){
+            capas = NumeroCapas + "ply";
+        }
         if(TipoLlanta.equals("Agricola") || TipoLlanta.equals("Industrial")){
             tipo_detalle = TipoLlanta;
         }
-        return "Llantas "+ tipo_detalle +" "+ NumeroLlanta +" "+ Marca +" "+ Diseno;
+        return "Llantas "+ tipo_detalle +" "+ NumeroLlanta +" "+ Marca +" "+ Diseno+" "+capas;
     }
     
     
