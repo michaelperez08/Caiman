@@ -97,6 +97,7 @@ public final class UI_Factura extends javax.swing.JDialog {
         rb_contado.setSelected(true);
         agregarListenerSpinnerCantidad();
         numeroFactura = numeroSiguienteFactura;
+        l_numeroFactura.setText(BL_Factura.formatearIDFactura(numeroSiguienteFactura));
     }
 
     /**
@@ -491,19 +492,20 @@ public final class UI_Factura extends javax.swing.JDialog {
                 Double subTotal = BL_Formatos.getDoubleValue(l_subTotal.getText().trim());
                 Double impVentas = BL_Formatos.getDoubleValue(l_impVentas.getText().trim());
                 Double total = BL_Formatos.getDoubleValue(l_total.getText().trim());
-                
+
                 BL_Factura blfac = new BL_Factura(numeroFactura, clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total,
                         fechaExpiracion, cal.getTime(), subTotal, impVentas, rb_contado.isSelected(), getListaProductos(), clienteFactura.getCedula());
-                if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
-                        impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula(), cal.getTime())) {
-                    descontarCantidadProductosFactura();
-                    actulizarLista = true;
-                    BL_Imprimir imprimir = new BL_Imprimir();
-                    imprimir.imprimirFactura(blfac);
-                    Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
-                    this.dispose();
-                } else {
-                    Mensajes.mensajeError("Problema al ingresar la factura\nSi el porblema persiste contacte al provedor del sistema", "Factura no Agregada");
+                BL_Imprimir imprimir = new BL_Imprimir();
+                if (imprimir.imprimirFactura(blfac)) {
+                    if (blfac.ingresarFactura(clienteFactura.getNombre(), clienteFactura.getTelefonos(), clienteFactura.getDireccion_simple(), total, getListaProductos(), subTotal,
+                            impVentas, rb_contado.isSelected(), fechaExpiracion, clienteFactura.getCedula(), cal.getTime())) {
+                        descontarCantidadProductosFactura();
+                        actulizarLista = true;
+                        Mensajes.mensajeInfomracion("Factura Impresa y agregada", "Factura Agregada");
+                        this.dispose();
+                    } else {
+                        Mensajes.mensajeError("Problema al ingresar la factura\nSi el porblema persiste contacte al provedor del sistema", "Factura no Agregada");
+                    }
                 }
             } else {
                 Mensajes.mensajeInfomracion("No ha ingresado ningun producto", "Imprimir");
@@ -537,7 +539,7 @@ public final class UI_Factura extends javax.swing.JDialog {
     }//GEN-LAST:event_cb_semanasActionPerformed
 
     private void bt_agregar_lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregar_lineaActionPerformed
-        if (!tf_precio.getText().isEmpty() && cb_producto.getSelectedItem()!= null && !cb_producto.getSelectedItem().toString().trim().isEmpty()) {
+        if (!tf_precio.getText().isEmpty() && cb_producto.getSelectedItem() != null && !cb_producto.getSelectedItem().toString().trim().isEmpty()) {
             if (!rb_producto_nuevo.isSelected() && !(cb_producto.getSelectedItem() instanceof BL_Producto)) {
                 Mensajes.mensajeInfomracion("El producto seleccionado no se encunetra registrado", "Ingresar producto");
             } else {
@@ -702,7 +704,7 @@ public final class UI_Factura extends javax.swing.JDialog {
             if (detalle instanceof BL_Producto) {
                 id = ((BL_Producto) detalle).getIdProducto();
             }
-            ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle, 
+            ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{id, cantidad, detalle,
                 String.format("%1$,12.2f", precio), String.format("%1$,12.2f", precioLinea), rb_producto_nuevo.isSelected()});
             calcularTotales();
         }
@@ -759,7 +761,7 @@ public final class UI_Factura extends javax.swing.JDialog {
             tf_precio.setText(tb_linea_factura.getValueAt(lineaSeleccionada, 3).toString().trim());
             bt_agregar_linea.setText("Modificar");
             tb_linea_factura.setCellSelectionEnabled(false);
-            rb_producto_nuevo.setSelected((Boolean)tb_linea_factura.getValueAt(lineaSeleccionada, 5));
+            rb_producto_nuevo.setSelected((Boolean) tb_linea_factura.getValueAt(lineaSeleccionada, 5));
         }
 
     }
@@ -768,9 +770,9 @@ public final class UI_Factura extends javax.swing.JDialog {
         double subTotal = getSubTotal();
         double impVentas = (subTotal - libreImpVentas) * 0.13;
         double total = subTotal + impVentas;
-        l_subTotal.setText(String.format("%1$,12.2f",subTotal));
-        l_impVentas.setText(String.format("%1$,12.2f",impVentas));
-        l_total.setText(String.format("%1$,12.2f",total));
+        l_subTotal.setText(String.format("%1$,12.2f", subTotal));
+        l_impVentas.setText(String.format("%1$,12.2f", impVentas));
+        l_total.setText(String.format("%1$,12.2f", total));
         limpiarCamposProducto();
     }
 
@@ -898,7 +900,9 @@ public final class UI_Factura extends javax.swing.JDialog {
 
     public void limpiarCamposCliente() {
         cb_nombre_cliente.removeAllItems();
+        cb_nombre_cliente.addItem("");
         cb_cedula.removeAllItems();
+        cb_cedula.addItem("");
         tf_direccion.setText("");
         tf_telefono.setText("");
     }
@@ -925,10 +929,12 @@ public final class UI_Factura extends javax.swing.JDialog {
     }
 
     public void fechaVencimiento(int dias) {
-        cal.add(Calendar.DAY_OF_YEAR, dias);
-        fechaExpiracion = cal.getTime();
-        l_fechaVencimeinto.setText(df.format(fechaExpiracion));
-        cal.add(Calendar.DAY_OF_YEAR, -dias);
+        if (cal != null) {
+            cal.add(Calendar.DAY_OF_YEAR, dias);
+            fechaExpiracion = cal.getTime();
+            l_fechaVencimeinto.setText(df.format(fechaExpiracion));
+            cal.add(Calendar.DAY_OF_YEAR, -dias);
+        }
     }
 
     public void formatoSPCantidad() {
@@ -969,7 +975,11 @@ public final class UI_Factura extends javax.swing.JDialog {
         for (BL_LineaFactura tempLinea : facturaVer.Retornar()) {
             ((DefaultTableModel) tb_linea_factura.getModel()).addRow(new Object[]{tempLinea.getId(), tempLinea.getCantidad(), tempLinea.getDetalle(), tempLinea.getPrecioUnitario(), tempLinea.getPrecioTotalLinea()});
         }
-        l_fechaVencimeinto.setText(facturaVer.getFechaExpiracion().toString());
+        String fechaExpiracion = "";
+        if (facturaVer.getFechaExpiracion() != null) {
+            fechaExpiracion += facturaVer.getFechaExpiracion().toString();
+        }
+        l_fechaVencimeinto.setText(fechaExpiracion);
         if (facturaVer.getContado()) {
             rb_contado.setSelected(true);
             rb_credito.setEnabled(false);

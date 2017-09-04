@@ -229,5 +229,10 @@ public class BL_Factura {
     public static String formatearIDFactura(int id){
         return ("00000" + id).substring(String.valueOf(id).length());
     }
+    
+    public static int getNextid(){
+        DAO_Factura daofac = new DAO_Factura();
+        return daofac.getNextidFactura();
+    }
 
 }

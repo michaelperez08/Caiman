@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import TO.TO_Aro;
 import TO.TO_Factura;
 import TO.TO_LineaFactura;
 import java.sql.Connection;
@@ -37,7 +38,7 @@ public class DAO_Factura {
             if (conexion == null || conexion.isClosed()) {
                 conexion = daoConexion.nuevaConexion();
             }
-            
+
             java.sql.Date expiracion = null;
             if (fechaExpiracion != null) {
                 expiracion = new java.sql.Date(fechaFactura.getTime());
@@ -229,6 +230,38 @@ public class DAO_Factura {
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Factura.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public int getNextidFactura() {
+        int nextid = 0;
+        try {
+
+            if (conexion == null || conexion.isClosed()) {
+                conexion = daoConexion.nuevaConexion();
+            }
+
+            cmd = conexion.prepareStatement("SELECT AUTO_INCREMENT\n"
+                    + "FROM information_schema.TABLES\n"
+                    + "WHERE TABLE_SCHEMA = \"LlantasyReencauchesGriegos\"\n"
+                    + "AND TABLE_NAME = \"Factura\"");
+            rs = cmd.executeQuery();
+
+            while (rs.next()) {
+                nextid = rs.getInt("AUTO_INCREMENT");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+            HE.Exepciones.RegistrarError(ex);
+        } finally {
+            try {
+                cmd.close();
+                conexion.close();
+            } catch (Exception ex) {
+                Logger.getLogger(DAO_Aro.class.getName()).log(Level.SEVERE, null, ex);
+                HE.Exepciones.RegistrarError(ex);
+            }
+        }
+        return nextid;
     }
 
 }
