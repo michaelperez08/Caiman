@@ -72,7 +72,7 @@ public class DAO_Aro {
                 }
             
             
-          cmd = conexion.prepareStatement("SELECT * FROM Aro order by NumeroAro;");
+          cmd = conexion.prepareStatement("SELECT * FROM Aro;");
           rs = cmd.executeQuery();
           
             while (rs.next()) {                

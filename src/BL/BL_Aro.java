@@ -102,7 +102,7 @@ public class BL_Aro extends BL_Producto{
 
     @Override
     public String toString() {
-        return "Aros " + NumeroAro +" "+ Marca +" "+ Codigo;
+        return "Aro " + NumeroAro +" "+ Marca +" "+ Codigo;
     }
     
    

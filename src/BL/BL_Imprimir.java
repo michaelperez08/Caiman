@@ -78,7 +78,7 @@ public class BL_Imprimir implements Printable {
         return PAGE_EXISTS;
     }
     
-    public boolean imprimirFactura(BL_Factura factura) {
+    public void imprimirFactura(BL_Factura factura) {
         this.factura = factura;
         PrinterJob pj = PrinterJob.getPrinterJob();
         PageFormat format = pj.getPageFormat(null);
@@ -95,7 +95,6 @@ public class BL_Imprimir implements Printable {
                 
             }
         }
-        return ok;
     }
 
     public void imprimir() {

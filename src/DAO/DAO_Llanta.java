@@ -107,7 +107,7 @@ public class DAO_Llanta {
                 Logger.getLogger(DAO_Llanta.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            cmd = conexion.prepareStatement("select * from Llanta order by NumeroLlanta;");
+            cmd = conexion.prepareStatement("select * from Llanta;");
             rs = cmd.executeQuery();
             
             while (rs.next()) {                

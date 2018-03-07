@@ -1044,8 +1044,7 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
     }//GEN-LAST:event_jcb_filtroBusquedaAroActionPerformed
 
     private void bt_agregarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarFacturaActionPerformed
-        
-        UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled, listaClientes, listaLlantas, listaAros, BL_Factura.getNextid());
+        UI_Factura uif = new UI_Factura(this, rootPaneCheckingEnabled, listaClientes, listaLlantas, listaAros, (listaFactura.get(0).getIdFactura())+1);
         uif.setVisible(true);
         if (uif.actulizarLista) {
             cargarListaFacturas();
@@ -1374,8 +1373,10 @@ dc_fecha_hasta.addSelectionChangedListener(new datechooser.events.SelectionChang
                 super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 int cantidad = Integer.parseInt(tabla.getValueAt(row, columna).toString());
                 if(cantidad==0){
+                    //setBackground(Color.RED);
                     setForeground(Color.RED);
                 }else{
+                    setBackground(tabla.getBackground());
                     setForeground(tabla.getForeground());
                 }
                 return this;
